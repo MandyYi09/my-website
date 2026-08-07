@@ -7,7 +7,9 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
 </head>
+
 
 <body>
     <div id="wrapper">
@@ -22,16 +24,25 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
+                                <a class="nav-link" href="about.html">About</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Pricing</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="test.html">test</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="samples.html">samples</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="projects.html">projects</a>
                             </li>
                         </ul>
                     </div>
@@ -40,23 +51,27 @@
         </div>
 
 
-
+        <div id="section-effect" class="section"></div>
 
 
         <div id="section-2" class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-9">
+                        <h1>section1</h1>
+                        <p>explaination for section1</p>
+                    </div>
+                    <div class="col-3">
                         <div class="card">
-                            <img src="assets/images/projects/walkerCard.png" class="card-img-top" alt="...">
+                            <img src="assets/images/projects/handsCard.png" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">Walker</h5>
-                                <p class="card-text">Exploring randomness through a single walking line algorythem</p>
-                                <a href="https://mandyyi09.github.io/walker/" class="btn btn-primary">View Walker</a>
+                                <h5 class="card-title">Camera AI Controll</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card’s content.</p>
+                                <a href="https://mandyyi09.github.io/ai-hands/" class="btn btn-primary">view project</a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-4">
+                        <div id="section-effect2"></div>
                         <div class="card">
                             <img src="assets/images/projects/handsCard.png" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -67,20 +82,77 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-effect"></div>
+
+        <div id="section-3" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <img src="https:/picsum.photos/400/300" alt="">
+                        <img src="https:/picsum.photos/400/300" alt="">
+                    </div>
                     <div class="col-4">
-                        <div class="card">
-                            <img src="https://picsum.photos/400/300" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card’s content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
+                        <h1>section2</h1>
+                        <p>explaination for section2</p>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <div id="section-effect"></div>
+
+        <div id="section-4" class="section">
+            <div class="container">
+                <div class="row">
+                    <h1>section3</h1>
+                    <p>explaination for section3</p>
+                    <img src="https:/picsum.photos/400/300" alt="">
+                    <div id="section-effect2"></div>
+                    <img src="https:/picsum.photos/400/300" alt="">
+                    <div id="section-effect2"></div>
+                    <img src="https:/picsum.photos/400/300" alt="">
+                    <div id="section-effect2"></div>
+                    <img src="https:/picsum.photos/400/300" alt="">
+                    <div id="section-effect2"></div>
+                    <img src="https:/picsum.photos/400/300" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="section-5" class="section"></div>
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
+        <!-- Swiper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js"></script>
+        <script>
+            var swiper = new Swiper('.mySwiper', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                autoplay: true,
+                slidesPerView: 'auto',
+                coverflowEffect: {
+                    rotate: 20,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        </script>
     </div>
 
 </body>
