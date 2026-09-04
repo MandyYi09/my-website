@@ -1,0 +1,1578 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Visual Stories</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css">
+
+    <!-- PhotoSwipe CSS -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        /* ----------------------------- */
+        /* GENERAL */
+        /* ----------------------------- */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: "DM Sans", sans-serif;
+
+            background: #f7f5f2;
+
+            color: #1f1f1f;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+
+
+        /* ----------------------------- */
+        /* NAVBAR */
+        /* ----------------------------- */
+
+        .custom-navbar {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            width: 100%;
+
+            z-index: 1000;
+
+            padding: 18px 0;
+
+            background: rgba(247, 245, 242, 0.75);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+            transition:
+                transform 0.35s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+
+            will-change: transform;
+        }
+
+
+        /* Headroom visible */
+
+        .headroom--pinned {
+            transform: translateY(0);
+        }
+
+
+        /* Headroom hidden */
+
+        .headroom--unpinned {
+            transform: translateY(-100%);
+        }
+
+
+        /* Navbar when page is at the top */
+
+        .headroom--top {
+            background: rgba(247, 245, 242, 0.65);
+
+            box-shadow: none;
+        }
+
+
+        /* Navbar after scrolling */
+
+        .headroom--not-top {
+            background: rgba(247, 245, 242, 0.95);
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.07);
+        }
+
+
+        .navbar-brand {
+            font-family: "Playfair Display", serif;
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            color: #171717;
+        }
+
+
+        .navbar-brand:hover {
+            color: #171717;
+        }
+
+
+        .navbar-nav {
+            gap: 12px;
+        }
+
+
+        .nav-link {
+            font-size: 15px;
+
+            color: #666;
+
+            transition: color 0.2s;
+        }
+
+
+        .nav-link:hover {
+            color: #111;
+        }
+
+
+        .nav-link.active {
+            color: #111 !important;
+
+            font-weight: 600;
+        }
+
+
+
+        /* ----------------------------- */
+        /* HERO */
+        /* ----------------------------- */
+
+        #section-hero {
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(177, 202, 188, 0.55),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at 10% 80%,
+                    rgba(230, 199, 173, 0.5),
+                    transparent 38%
+                ),
+
+                #f7f5f2;
+        }
+
+
+        .hero-wrapper {
+            width: 100%;
+
+            padding: 140px 20px 100px;
+        }
+
+
+        .hero-badge {
+            display: inline-block;
+
+            padding: 9px 16px;
+
+            margin-bottom: 26px;
+
+            background: rgba(255, 255, 255, 0.7);
+
+            border: 1px solid rgba(0, 0, 0, 0.08);
+
+            border-radius: 999px;
+
+            font-size: 12px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            color: #555;
+        }
+
+
+        .hero-title {
+            max-width: 950px;
+
+            margin: auto;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(60px, 8vw, 120px);
+
+            line-height: 0.95;
+
+            letter-spacing: -4px;
+        }
+
+
+        .hero-title span {
+            color: #667b70;
+
+            font-style: italic;
+        }
+
+
+        .hero-text {
+            max-width: 620px;
+
+            margin: 32px auto;
+
+            font-size: 18px;
+
+            line-height: 1.75;
+
+            color: #676767;
+        }
+
+
+        .hero-buttons {
+            margin-top: 36px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .btn-main {
+            padding: 14px 28px;
+
+            border: none;
+
+            border-radius: 999px;
+
+            background: #1f1f1f;
+
+            color: white;
+
+            text-decoration: none;
+
+            transition:
+                transform 0.25s,
+                background 0.25s;
+        }
+
+
+        .btn-main:hover {
+            background: #3c3c3c;
+
+            color: white;
+
+            transform: translateY(-3px);
+        }
+
+
+        .btn-secondary-custom {
+            padding: 14px 28px;
+
+            border: 1px solid #aaa;
+
+            border-radius: 999px;
+
+            background: rgba(255, 255, 255, 0.4);
+
+            color: #222;
+
+            text-decoration: none;
+
+            transition:
+                transform 0.25s,
+                background 0.25s;
+        }
+
+
+        .btn-secondary-custom:hover {
+            background: white;
+
+            color: #111;
+
+            transform: translateY(-3px);
+        }
+
+
+
+        /* ----------------------------- */
+        /* SECTION TITLES */
+        /* ----------------------------- */
+
+        .section-label {
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: #777;
+        }
+
+
+        .section-title {
+            margin-top: 10px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(42px, 5vw, 66px);
+        }
+
+
+
+        /* ----------------------------- */
+        /* SWIPER SECTION */
+        /* ----------------------------- */
+
+        #section-swiper1 {
+            padding: 115px 0 90px;
+
+            background: #171717;
+
+            color: white;
+
+            overflow: hidden;
+        }
+
+
+        .swiper-heading {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 0 40px 45px;
+        }
+
+
+        #section-swiper1 .section-label {
+            color: #888;
+        }
+
+
+        #section-swiper1 .section-title {
+            color: white;
+        }
+
+
+        .swiper {
+            width: 100%;
+
+            height: 540px;
+
+            padding-top: 15px;
+
+            padding-bottom: 60px;
+        }
+
+
+        .swiper-slide {
+            position: relative;
+
+            width: 360px;
+
+            height: 440px;
+
+            overflow: hidden;
+
+            border-radius: 24px;
+
+            background: #333;
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+
+        .swiper-slide img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: transform 0.5s ease;
+        }
+
+
+        .swiper-slide:hover img {
+            transform: scale(1.06);
+        }
+
+
+        .slide-overlay {
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            padding: 80px 26px 28px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(0, 0, 0, 0.85)
+                );
+        }
+
+
+        .slide-overlay h3 {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 28px;
+        }
+
+
+        .slide-overlay p {
+            margin: 6px 0 0;
+
+            font-size: 13px;
+
+            opacity: 0.75;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            color: #111;
+
+            transition:
+                transform 0.2s,
+                background 0.2s;
+        }
+
+
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
+            background: white;
+
+            transform: scale(1.05);
+        }
+
+
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+
+        .swiper-pagination-bullet {
+            background: white;
+
+            opacity: 0.45;
+        }
+
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+
+
+
+        /* ----------------------------- */
+        /* PHOTO GALLERY */
+        /* ----------------------------- */
+
+        #section-photos {
+            padding: 120px 40px;
+
+            background: #f7f5f2;
+        }
+
+
+        .photos-heading {
+            max-width: 1200px;
+
+            margin: auto auto 55px;
+        }
+
+
+        .gallery-description {
+            max-width: 530px;
+
+            margin-top: 18px;
+
+            color: #777;
+
+            line-height: 1.7;
+        }
+
+
+        .photo-gallery {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(12, 1fr);
+
+            gap: 22px;
+        }
+
+
+        .photo-gallery a {
+            position: relative;
+
+            display: block;
+
+            overflow: hidden;
+
+            border-radius: 22px;
+
+            background: #ddd;
+        }
+
+
+        .photo-gallery a:nth-child(1) {
+            grid-column: span 7;
+        }
+
+
+        .photo-gallery a:nth-child(2) {
+            grid-column: span 5;
+        }
+
+
+        .photo-gallery a:nth-child(3) {
+            grid-column: span 4;
+        }
+
+
+        .photo-gallery a:nth-child(4) {
+            grid-column: span 8;
+        }
+
+
+        .photo-gallery a:nth-child(5) {
+            grid-column: span 6;
+        }
+
+
+        .photo-gallery a:nth-child(6) {
+            grid-column: span 6;
+        }
+
+
+        .photo-gallery img {
+            width: 100%;
+
+            height: 430px;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform 0.5s ease,
+                filter 0.5s ease;
+        }
+
+
+        .photo-gallery a:nth-child(3) img,
+        .photo-gallery a:nth-child(4) img {
+            height: 350px;
+        }
+
+
+        .photo-gallery a:hover img {
+            transform: scale(1.045);
+
+            filter: brightness(0.78);
+        }
+
+
+        .photo-hover {
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            opacity: 0;
+
+            color: white;
+
+            font-size: 14px;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            transition: opacity 0.3s ease;
+        }
+
+
+        .photo-gallery a:hover .photo-hover {
+            opacity: 1;
+        }
+
+
+
+        /* ----------------------------- */
+        /* FOOTER */
+        /* ----------------------------- */
+
+        footer {
+            padding: 75px 30px;
+
+            background: #171717;
+
+            color: #888;
+
+            text-align: center;
+        }
+
+
+        .footer-logo {
+            margin-bottom: 12px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 30px;
+
+            color: white;
+        }
+
+
+        footer p {
+            margin: 0;
+
+            font-size: 14px;
+        }
+
+
+
+
+
+
+    #section-effect {
+        height: 50vh;
+        background-image: url(https://picsum.photos/1000/600);
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+
+
+
+        /* ----------------------------- */
+        /* RESPONSIVE */
+        /* ----------------------------- */
+
+        @media (max-width: 900px) {
+
+            .hero-title {
+                letter-spacing: -2px;
+            }
+
+
+            .photo-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+
+
+            .photo-gallery a {
+                grid-column: auto !important;
+            }
+
+
+            .photo-gallery img {
+                height: 340px !important;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .custom-navbar {
+                padding: 12px 0;
+            }
+
+
+            .hero-wrapper {
+                padding: 120px 20px 80px;
+            }
+
+
+            .hero-title {
+                font-size: 58px;
+
+                letter-spacing: -2px;
+            }
+
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+
+            .hero-buttons {
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+
+            .btn-main,
+            .btn-secondary-custom {
+                width: 220px;
+            }
+
+
+            .swiper-heading {
+                padding-left: 22px;
+
+                padding-right: 22px;
+            }
+
+
+            .swiper {
+                height: 480px;
+            }
+
+
+            .swiper-slide {
+                height: 390px;
+            }
+
+
+            #section-photos {
+                padding: 85px 20px;
+            }
+
+
+            .photo-gallery {
+                grid-template-columns: 1fr;
+            }
+
+
+            .photo-gallery img {
+                height: 370px !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================= -->
+    <!-- NAVBAR -->
+    <!-- ================================= -->
+
+    <nav
+        id="main-navbar"
+        class="navbar navbar-expand-lg custom-navbar">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand"
+                href="#section-hero">
+
+                Mandy.
+
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse justify-content-end"
+                id="navbarNav">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            href="#section-hero">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="#section-swiper1">
+
+                            Stories
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="#section-photos">
+
+                            Gallery
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="about.html">
+
+                            About
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ================================= -->
+    <!-- HERO -->
+    <!-- ================================= -->
+
+    <section id="section-hero">
+
+        <div class="container hero-wrapper text-center">
+
+
+            <div class="hero-badge">
+
+                Photography · Stories · Places
+
+            </div>
+
+
+            <h1 class="hero-title">
+
+                Moments worth
+
+                <span>
+                    remembering.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-text">
+
+                A visual collection of places, details, and quiet moments.
+                Explore stories through photographs and discover the beauty
+                hidden in everyday scenes.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#section-photos"
+                    class="btn-main">
+
+                    Explore Gallery
+
+                </a>
+
+
+                <a
+                    href="#section-swiper1"
+                    class="btn-secondary-custom">
+
+                    Featured Stories
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- SWIPER -->
+    <!-- ================================= -->
+
+    <section id="section-swiper1">
+
+
+        <div class="swiper-heading">
+
+            <div class="section-label">
+
+                Featured
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                Visual stories
+
+            </h2>
+
+        </div>
+
+
+
+        <div class="swiper">
+
+
+            <div class="swiper-wrapper">
+
+
+                <!-- SLIDE 1 -->
+
+                <div class="swiper-slide">
+
+                    <img
+                        src="https://picsum.photos/id/1015/900/1100"
+                        alt="Mountain landscape">
+
+
+                    <div class="slide-overlay">
+
+                        <h3>
+                            Into the Wild
+                        </h3>
+
+                        <p>
+                            Mountains · Landscape
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 2 -->
+
+                <div class="swiper-slide">
+
+                    <img
+                        src="https://picsum.photos/id/1016/900/1100"
+                        alt="Landscape">
+
+
+                    <div class="slide-overlay">
+
+                        <h3>
+                            Quiet Horizons
+                        </h3>
+
+                        <p>
+                            Travel · Nature
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 3 -->
+
+                <div class="swiper-slide">
+
+                    <img
+                        src="https://picsum.photos/id/1018/900/1100"
+                        alt="Forest landscape">
+
+
+                    <div class="slide-overlay">
+
+                        <h3>
+                            Lost in Green
+                        </h3>
+
+                        <p>
+                            Forest · Exploration
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 4 -->
+
+                <div class="swiper-slide">
+
+                    <img
+                        src="https://picsum.photos/id/1020/900/1100"
+                        alt="Nature photograph">
+
+
+                    <div class="slide-overlay">
+
+                        <h3>
+                            Wild Encounters
+                        </h3>
+
+                        <p>
+                            Wildlife · Portrait
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 5 -->
+
+                <div class="swiper-slide">
+
+                    <img
+                        src="https://picsum.photos/id/1024/900/1100"
+                        alt="Dog photograph">
+
+
+                    <div class="slide-overlay">
+
+                        <h3>
+                            Small Moments
+                        </h3>
+
+                        <p>
+                            Life · Everyday
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDE 6 -->
+
+                <div class="swiper-slide">
+
+                    <img
+                        src="https://picsum.photos/id/1025/900/1100"
+                        alt="Landscape photograph">
+
+
+                    <div class="slide-overlay">
+
+                        <h3>
+                            Open Roads
+                        </h3>
+
+                        <p>
+                            Journey · Adventure
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Pagination -->
+
+            <div class="swiper-pagination"></div>
+
+
+
+            <!-- Navigation -->
+
+            <div class="swiper-button-prev"></div>
+
+            <div class="swiper-button-next"></div>
+
+
+        </div>
+
+    </section>
+
+
+
+
+    <div id="section-effect" class="section">
+
+    </div>
+
+
+
+    <!-- ================================= -->
+    <!-- PHOTOSWIPE GALLERY -->
+    <!-- ================================= -->
+
+    <section id="section-photos">
+
+
+        <div class="photos-heading">
+
+
+            <div class="section-label">
+
+                Collection
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                Selected photographs
+
+            </h2>
+
+
+            <p class="gallery-description">
+
+                A collection of landscapes, places, and everyday scenes.
+                Click any image to open the full-screen PhotoSwipe gallery.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div
+            class="photo-gallery"
+            id="my-gallery">
+
+
+            <!-- PHOTO 1 -->
+
+            <a
+                href="https://picsum.photos/id/10/1400/900"
+                data-pswp-width="1400"
+                data-pswp-height="900">
+
+                <img
+                    src="https://picsum.photos/id/10/900/600"
+                    alt="Landscape photograph">
+
+
+                <div class="photo-hover">
+
+                    View Photo
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PHOTO 2 -->
+
+            <a
+                href="https://picsum.photos/id/20/1400/900"
+                data-pswp-width="1400"
+                data-pswp-height="900">
+
+                <img
+                    src="https://picsum.photos/id/20/900/600"
+                    alt="Landscape photograph">
+
+
+                <div class="photo-hover">
+
+                    View Photo
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PHOTO 3 -->
+
+            <a
+                href="https://picsum.photos/id/30/1400/900"
+                data-pswp-width="1400"
+                data-pswp-height="900">
+
+                <img
+                    src="https://picsum.photos/id/30/900/600"
+                    alt="Nature photograph">
+
+
+                <div class="photo-hover">
+
+                    View Photo
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PHOTO 4 -->
+
+            <a
+                href="https://picsum.photos/id/40/1400/900"
+                data-pswp-width="1400"
+                data-pswp-height="900">
+
+                <img
+                    src="https://picsum.photos/id/40/900/600"
+                    alt="Travel photograph">
+
+
+                <div class="photo-hover">
+
+                    View Photo
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PHOTO 5 -->
+
+            <a
+                href="https://picsum.photos/id/50/1400/900"
+                data-pswp-width="1400"
+                data-pswp-height="900">
+
+                <img
+                    src="https://picsum.photos/id/50/900/600"
+                    alt="City photograph">
+
+
+                <div class="photo-hover">
+
+                    View Photo
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PHOTO 6 -->
+
+            <a
+                href="https://picsum.photos/id/60/1400/900"
+                data-pswp-width="1400"
+                data-pswp-height="900">
+
+                <img
+                    src="https://picsum.photos/id/60/900/600"
+                    alt="Landscape photograph">
+
+
+                <div class="photo-hover">
+
+                    View Photo
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- FOOTER -->
+    <!-- ================================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+
+            Mandy.
+
+        </div>
+
+
+        <p>
+
+            A small collection of beautiful moments.
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================================= -->
+    <!-- BOOTSTRAP JS -->
+    <!-- ================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous">
+    </script>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous">
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- SWIPER JS -->
+    <!-- ================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js">
+    </script>
+
+
+    <script>
+
+        const swiper = new Swiper(".swiper", {
+
+            slidesPerView: 1.2,
+
+            spaceBetween: 20,
+
+            centeredSlides: true,
+
+            loop: true,
+
+            effect: "coverflow",
+
+
+            coverflowEffect: {
+
+                rotate: 0,
+
+                stretch: 0,
+
+                depth: 120,
+
+                modifier: 1,
+
+                slideShadows: false
+
+            },
+
+
+            breakpoints: {
+
+                700: {
+
+                    slidesPerView: 2.2
+
+                },
+
+
+                1100: {
+
+                    slidesPerView: 3.5
+
+                }
+
+            },
+
+
+            navigation: {
+
+                nextEl: ".swiper-button-next",
+
+                prevEl: ".swiper-button-prev"
+
+            },
+
+
+            pagination: {
+
+                el: ".swiper-pagination",
+
+                clickable: true
+
+            },
+
+
+            keyboard: true
+
+        });
+
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- HEADROOM JS -->
+    <!-- ================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/headroom.js@0.12.0/dist/headroom.min.js">
+    </script>
+
+
+    <script>
+
+        const navbar = document.querySelector("#main-navbar");
+
+
+        const headroom = new Headroom(navbar, {
+
+            offset: 100,
+
+
+            tolerance: {
+
+                up: 5,
+
+                down: 10
+
+            }
+
+        });
+
+
+        headroom.init();
+
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- PHOTOSWIPE JS -->
+    <!-- ================================= -->
+
+    <script type="module">
+
+        import PhotoSwipeLightbox from
+        "https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.js";
+
+
+        const lightbox = new PhotoSwipeLightbox({
+
+            gallery: "#my-gallery",
+
+            children: "a",
+
+
+            pswpModule: () =>
+
+                import(
+                    "https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.js"
+                )
+
+        });
+
+
+        lightbox.init();
+
+    </script>
+
+
+</body>
+
+</html>

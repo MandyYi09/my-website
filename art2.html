@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aqua Organic Voronoi</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.min.js"></script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #04161c;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+
+let sites = [];
+
+let siteCount = 50;
+
+let palette = [
+  [165, 60, 92],
+  [170, 70, 95],
+  [176, 75, 100],
+  [182, 78, 100],
+  [188, 72, 100],
+  [194, 68, 96]
+];
+
+
+function setup() {
+
+  createCanvas(
+    windowWidth,
+    windowHeight
+  );
+
+  colorMode(
+    HSB,
+    360,
+    100,
+    100,
+    100
+  );
+
+  initSites();
+
+}
+
+
+function initSites() {
+
+  sites = [];
+
+  for (let i = 0; i < siteCount; i++) {
+
+    sites.push(
+      new Site(
+        random(width),
+        random(height)
+      )
+    );
+
+  }
+
+}
+
+
+function draw() {
+
+  background(
+    200,
+    70,
+    7
+  );
+
+
+  // update moving points
+  for (let s of sites) {
+
+    s.update();
+
+  }
+
+
+  drawVoronoiCells();
+
+  drawSites();
+
+}
+
+
+
+function drawVoronoiCells() {
+
+  let cells = [];
+
+
+  // ==================================================
+  // STEP 1
+  // CALCULATE ALL VORONOI POLYGONS
+  // ==================================================
+
+  for (let i = 0; i < sites.length; i++) {
+
+    let a = sites[i];
+
+
+    // start with the entire screen
+    let poly = [
+
+      createVector(
+        0,
+        0
+      ),
+
+      createVector(
+        width,
+        0
+      ),
+
+      createVector(
+        width,
+        height
+      ),
+
+      createVector(
+        0,
+        height
+      )
+
+    ];
+
+
+    // clip against every other site
+    for (let j = 0; j < sites.length; j++) {
+
+      if (i === j) {
+        continue;
+      }
+
+
+      let b = sites[j];
+
+
+      poly =
+        clipPolygonToBisector(
+          poly,
+          a.pos,
+          b.pos
+        );
+
+
+      if (poly.length === 0) {
+        break;
+      }
+
+    }
+
+
+    cells.push({
+
+      poly: poly,
+
+      site: a
+
+    });
+
+  }
+
+
+
+  // ==================================================
+  // STEP 2
+  // ORIGINAL SHARP CELLS UNDERNEATH
+  //
+  // This hidden layer fills the tiny holes
+  // created when rounded corners pull inward.
+  // ==================================================
+
+  noStroke();
+
+
+  for (let cell of cells) {
+
+    if (cell.poly.length < 3) {
+      continue;
+    }
+
+
+    let a = cell.site;
+
+
+    let pulse =
+      0.5 +
+      0.5 *
+      sin(
+        frameCount * 0.03 +
+        a.phase
+      );
+
+
+    fill(
+      a.hue,
+      52 + pulse * 10,
+      15 + pulse * 12,
+      100
+    );
+
+
+    beginShape();
+
+
+    for (let p of cell.poly) {
+
+      vertex(
+        p.x,
+        p.y
+      );
+
+    }
+
+
+    endShape(CLOSE);
+
+  }
+
+
+
+  // ==================================================
+  // STEP 3
+  // ROUNDED ORGANIC CELL FILLS
+  // ==================================================
+
+  for (let cell of cells) {
+
+    if (cell.poly.length < 3) {
+      continue;
+    }
+
+
+    let a = cell.site;
+
+
+    let pulse =
+      0.5 +
+      0.5 *
+      sin(
+        frameCount * 0.03 +
+        a.phase
+      );
+
+
+    let roundAmount =
+      10 +
+      pulse * 6;
+
+
+    noStroke();
+
+
+    fill(
+      a.hue,
+      48 + pulse * 15,
+      20 + pulse * 17,
+      94
+    );
+
+
+    drawRoundedPolygon(
+      cell.poly,
+      roundAmount
+    );
+
+  }
+
+
+
+  // ==================================================
+  // STEP 4
+  // WIDE SOFT GLOW
+  // ==================================================
+
+  noFill();
+
+
+  for (let cell of cells) {
+
+    if (cell.poly.length < 3) {
+      continue;
+    }
+
+
+    let a = cell.site;
+
+
+    let pulse =
+      0.5 +
+      0.5 *
+      sin(
+        frameCount * 0.03 +
+        a.phase
+      );
+
+
+    let roundAmount =
+      10 +
+      pulse * 6;
+
+
+    stroke(
+      a.hue,
+      55,
+      95,
+      12
+    );
+
+
+    strokeWeight(6);
+
+
+    drawRoundedPolygon(
+      cell.poly,
+      roundAmount
+    );
+
+  }
+
+
+
+  // ==================================================
+  // STEP 5
+  // MAIN CLEAN AQUA LINE
+  // ==================================================
+
+  for (let cell of cells) {
+
+    if (cell.poly.length < 3) {
+      continue;
+    }
+
+
+    let a = cell.site;
+
+
+    let pulse =
+      0.5 +
+      0.5 *
+      sin(
+        frameCount * 0.03 +
+        a.phase
+      );
+
+
+    let roundAmount =
+      10 +
+      pulse * 6;
+
+
+    stroke(
+      a.hue,
+      35,
+      98,
+      78
+    );
+
+
+    strokeWeight(1.6);
+
+
+    drawRoundedPolygon(
+      cell.poly,
+      roundAmount
+    );
+
+  }
+
+
+
+  // ==================================================
+  // STEP 6
+  // THIN BRIGHT HIGHLIGHT
+  // ==================================================
+
+  for (let cell of cells) {
+
+    if (cell.poly.length < 3) {
+      continue;
+    }
+
+
+    let a = cell.site;
+
+
+    let pulse =
+      0.5 +
+      0.5 *
+      sin(
+        frameCount * 0.03 +
+        a.phase
+      );
+
+
+    let roundAmount =
+      10 +
+      pulse * 6;
+
+
+    stroke(
+      a.hue,
+      10,
+      100,
+      30
+    );
+
+
+    strokeWeight(0.65);
+
+
+    drawRoundedPolygon(
+      cell.poly,
+      roundAmount
+    );
+
+  }
+
+}
+
+
+
+function drawRoundedPolygon(
+  poly,
+  radius
+) {
+
+  if (poly.length < 3) {
+    return;
+  }
+
+
+  let roundedPoints = [];
+
+
+  for (let i = 0; i < poly.length; i++) {
+
+    let previous =
+      poly[
+        (
+          i - 1 +
+          poly.length
+        )
+        %
+        poly.length
+      ];
+
+
+    let current =
+      poly[i];
+
+
+    let next =
+      poly[
+        (
+          i + 1
+        )
+        %
+        poly.length
+      ];
+
+
+    let distancePrevious =
+      dist(
+        current.x,
+        current.y,
+        previous.x,
+        previous.y
+      );
+
+
+    let distanceNext =
+      dist(
+        current.x,
+        current.y,
+        next.x,
+        next.y
+      );
+
+
+    // prevent large rounding on tiny edges
+    let r =
+      min(
+        radius,
+        distancePrevious * 0.28,
+        distanceNext * 0.28
+      );
+
+
+    let before =
+      p5.Vector.lerp(
+        current,
+        previous,
+        r / distancePrevious
+      );
+
+
+    let after =
+      p5.Vector.lerp(
+        current,
+        next,
+        r / distanceNext
+      );
+
+
+    roundedPoints.push({
+
+      corner: current,
+
+      before: before,
+
+      after: after
+
+    });
+
+  }
+
+
+  beginShape();
+
+
+  let last =
+    roundedPoints[
+      roundedPoints.length - 1
+    ];
+
+
+  vertex(
+    last.after.x,
+    last.after.y
+  );
+
+
+  for (let i = 0; i < roundedPoints.length; i++) {
+
+    let p =
+      roundedPoints[i];
+
+
+    // straight section
+    vertex(
+      p.before.x,
+      p.before.y
+    );
+
+
+    // curved corner
+    quadraticVertex(
+      p.corner.x,
+      p.corner.y,
+      p.after.x,
+      p.after.y
+    );
+
+  }
+
+
+  endShape(CLOSE);
+
+}
+
+
+
+function clipPolygonToBisector(
+  poly,
+  siteA,
+  siteB
+) {
+
+  let result = [];
+
+
+  if (poly.length === 0) {
+    return result;
+  }
+
+
+  for (let i = 0; i < poly.length; i++) {
+
+    let current =
+      poly[i];
+
+
+    let next =
+      poly[
+        (
+          i + 1
+        )
+        %
+        poly.length
+      ];
+
+
+    let currentInside =
+      isCloserToA(
+        current,
+        siteA,
+        siteB
+      );
+
+
+    let nextInside =
+      isCloserToA(
+        next,
+        siteA,
+        siteB
+      );
+
+
+    if (
+      currentInside &&
+      nextInside
+    ) {
+
+      result.push(
+        next.copy()
+      );
+
+    }
+
+
+    else if (
+      currentInside &&
+      !nextInside
+    ) {
+
+      let intersection =
+        bisectorIntersection(
+          current,
+          next,
+          siteA,
+          siteB
+        );
+
+
+      if (intersection) {
+
+        result.push(
+          intersection
+        );
+
+      }
+
+    }
+
+
+    else if (
+      !currentInside &&
+      nextInside
+    ) {
+
+      let intersection =
+        bisectorIntersection(
+          current,
+          next,
+          siteA,
+          siteB
+        );
+
+
+      if (intersection) {
+
+        result.push(
+          intersection
+        );
+
+      }
+
+
+      result.push(
+        next.copy()
+      );
+
+    }
+
+  }
+
+
+  return result;
+
+}
+
+
+
+function isCloserToA(
+  p,
+  a,
+  b
+) {
+
+  let distanceA =
+    sq(
+      p.x - a.x
+    )
+    +
+    sq(
+      p.y - a.y
+    );
+
+
+  let distanceB =
+    sq(
+      p.x - b.x
+    )
+    +
+    sq(
+      p.y - b.y
+    );
+
+
+  return distanceA <= distanceB;
+
+}
+
+
+
+function bisectorIntersection(
+  p1,
+  p2,
+  a,
+  b
+) {
+
+  let f1 =
+    signedDistanceDifference(
+      p1,
+      a,
+      b
+    );
+
+
+  let f2 =
+    signedDistanceDifference(
+      p2,
+      a,
+      b
+    );
+
+
+  let denominator =
+    f1 - f2;
+
+
+  if (
+    abs(denominator)
+    <
+    0.000001
+  ) {
+
+    return null;
+
+  }
+
+
+  let t =
+    f1 /
+    denominator;
+
+
+  t =
+    constrain(
+      t,
+      0,
+      1
+    );
+
+
+  return createVector(
+
+    lerp(
+      p1.x,
+      p2.x,
+      t
+    ),
+
+    lerp(
+      p1.y,
+      p2.y,
+      t
+    )
+
+  );
+
+}
+
+
+
+function signedDistanceDifference(
+  p,
+  a,
+  b
+) {
+
+  let distanceA =
+    sq(
+      p.x - a.x
+    )
+    +
+    sq(
+      p.y - a.y
+    );
+
+
+  let distanceB =
+    sq(
+      p.x - b.x
+    )
+    +
+    sq(
+      p.y - b.y
+    );
+
+
+  return (
+    distanceA -
+    distanceB
+  );
+
+}
+
+
+
+function drawSites() {
+
+  blendMode(ADD);
+
+
+  for (let s of sites) {
+
+    let pulse =
+      1 +
+      0.2 *
+      sin(
+        frameCount * 0.07 +
+        s.phase
+      );
+
+
+    noStroke();
+
+
+    // large subtle glow
+    fill(
+      s.hue,
+      60,
+      100,
+      5
+    );
+
+
+    circle(
+      s.pos.x,
+      s.pos.y,
+      30 * pulse
+    );
+
+
+    // middle glow
+    fill(
+      s.hue,
+      50,
+      100,
+      16
+    );
+
+
+    circle(
+      s.pos.x,
+      s.pos.y,
+      11 * pulse
+    );
+
+
+    // central point
+    fill(
+      s.hue,
+      15,
+      100,
+      90
+    );
+
+
+    circle(
+      s.pos.x,
+      s.pos.y,
+      3.5 * pulse
+    );
+
+  }
+
+
+  blendMode(BLEND);
+
+}
+
+
+
+class Site {
+
+  constructor(
+    x,
+    y
+  ) {
+
+    this.pos =
+      createVector(
+        x,
+        y
+      );
+
+
+    let angle =
+      random(
+        TWO_PI
+      );
+
+
+    this.vel =
+      p5.Vector.fromAngle(
+        angle
+      );
+
+
+    this.vel.mult(
+      random(
+        0.18,
+        0.6
+      )
+    );
+
+
+    this.phase =
+      random(
+        TWO_PI
+      );
+
+
+    let c =
+      random(
+        palette
+      );
+
+
+    this.hue =
+      c[0] +
+      random(
+        -4,
+        4
+      );
+
+
+    this.wobbleAmount =
+      random(
+        0.1,
+        0.45
+      );
+
+
+    this.wobbleSpeed =
+      random(
+        0.008,
+        0.02
+      );
+
+  }
+
+
+
+  update() {
+
+    // organic horizontal movement
+    this.pos.x +=
+      this.vel.x +
+      sin(
+        frameCount *
+        this.wobbleSpeed +
+        this.phase
+      )
+      *
+      this.wobbleAmount;
+
+
+    // slightly different vertical movement
+    this.pos.y +=
+      this.vel.y +
+      cos(
+        frameCount *
+        this.wobbleSpeed *
+        1.13 +
+        this.phase
+      )
+      *
+      this.wobbleAmount;
+
+
+
+    // mouse pushes nearby cells away
+    let d =
+      dist(
+        this.pos.x,
+        this.pos.y,
+        mouseX,
+        mouseY
+      );
+
+
+    if (d < 170) {
+
+      let force =
+        createVector(
+          this.pos.x - mouseX,
+          this.pos.y - mouseY
+        );
+
+
+      if (force.mag() > 0) {
+
+        force.normalize();
+
+
+        force.mult(
+
+          map(
+            d,
+            0,
+            170,
+            1.1,
+            0
+          )
+
+        );
+
+
+        this.pos.add(
+          force
+        );
+
+      }
+
+    }
+
+
+
+    // bounce horizontally
+    if (
+      this.pos.x < 0 ||
+      this.pos.x > width
+    ) {
+
+      this.vel.x *= -1;
+
+
+      this.pos.x =
+        constrain(
+          this.pos.x,
+          0,
+          width
+        );
+
+    }
+
+
+
+    // bounce vertically
+    if (
+      this.pos.y < 0 ||
+      this.pos.y > height
+    ) {
+
+      this.vel.y *= -1;
+
+
+      this.pos.y =
+        constrain(
+          this.pos.y,
+          0,
+          height
+        );
+
+    }
+
+  }
+
+}
+
+
+
+function mousePressed() {
+
+  sites.push(
+
+    new Site(
+      mouseX,
+      mouseY
+    )
+
+  );
+
+
+  if (sites.length > 70) {
+
+    sites.splice(
+      0,
+      1
+    );
+
+  }
+
+}
+
+
+
+function keyPressed() {
+
+  // reset
+  if (
+    key === 'r' ||
+    key === 'R'
+  ) {
+
+    initSites();
+
+  }
+
+
+  // save image
+  if (
+    key === 's' ||
+    key === 'S'
+  ) {
+
+    saveCanvas(
+      'aqua-organic-voronoi',
+      'png'
+    );
+
+  }
+
+
+  // add points
+  if (
+    key === '+' ||
+    key === '='
+  ) {
+
+    siteCount =
+      min(
+        siteCount + 5,
+        70
+      );
+
+
+    initSites();
+
+  }
+
+
+  // remove points
+  if (
+    key === '-' ||
+    key === '_'
+  ) {
+
+    siteCount =
+      max(
+        siteCount - 5,
+        15
+      );
+
+
+    initSites();
+
+  }
+
+}
+
+
+
+function windowResized() {
+
+  resizeCanvas(
+    windowWidth,
+    windowHeight
+  );
+
+
+  initSites();
+
+}
+
+</script>
+
+</body>
+</html>

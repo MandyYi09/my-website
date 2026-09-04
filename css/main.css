@@ -1,7 +1,22 @@
-#section-effect {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: rgb(31, 74, 134);
+#section-3 {
+    background-color: #efefef;
+
+}
+#section-2,#section-3{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.intro {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+
+/* #section-effect {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 #section-effect2 {
@@ -29,7 +44,7 @@
     object-fit: cover;
 }
 
-#section-effect {
+#section-effect3 {
     height: 75dvh;
     background-color: rgb(31, 74, 134);
 }
@@ -119,4 +134,4 @@
 
 .bd-mode-toggle .dropdown-menu .active .bi {
     display: block !important
-}
+} */
