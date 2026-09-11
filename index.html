@@ -1,5297 +1,5010 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mandy — Portfolio</title>
 
-    <title>Mandy — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-    <style>
-        /* =========================================================
-   GLOBAL VARIABLES
+<style>
+:root{
+  --paper:#f3f0e9;
+  --cream:#f7f5ef;
+  --ink:#151515;
+  --muted:#6e6c66;
+  --line:rgba(20,20,20,.16);
+  --sage:#7b8b80;
+  --dark:#171817;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:Arial,Helvetica,sans-serif;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{max-width:100%;display:block}
+::selection{background:#cbd5ce;color:#111}
+
+#progress{
+  position:fixed;
+  left:0;
+  top:0;
+  height:3px;
+  background:var(--sage);
+  width:0;
+  z-index:9999;
+}
+
+
+/* =========================================================
+   NAV
 ========================================================= */
 
-        :root {
-            --paper: #f3f0e9;
-            --ink: #151515;
-            --muted: #6e6c66;
-            --line: rgba(20, 20, 20, .16);
+.nav{
+  position:fixed;
+  z-index:500;
+  top:0;
+  left:0;
+  right:0;
+  height:76px;
 
-            --sage: #6d7f73;
-            --sage2: #aebdb3;
+  padding:0 4vw;
 
-            --blue: #102b3a;
-            --cream: #f7f5ef;
-            --dark: #171817;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-            --serif: Georgia, "Times New Roman", serif;
-            --sans: Arial, Helvetica, sans-serif;
-        }
+  background:rgba(243,240,233,.82);
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+
+.brand{
+  font:700 26px/1 var(--serif);
+  letter-spacing:-1px;
+}
+
+.navlinks{
+  display:flex;
+  gap:28px;
+
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+}
+
+.navlinks a{
+  opacity:.58;
+  transition:.2s;
+}
+
+.navlinks a:hover{
+  opacity:1;
+}
 
 
-        /* =========================================================
-   RESET
+/* =========================================================
+   SHARED
 ========================================================= */
 
-        * {
-            box-sizing: border-box;
-        }
+.page-index{
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+.section{
+  padding:118px 5vw;
+}
 
-        body {
-            margin: 0;
-            background: var(--paper);
-            color: var(--ink);
-            font-family: var(--sans);
-            overflow-x: hidden;
-        }
+.section-head{
+  display:grid;
+  grid-template-columns:180px 1fr;
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+  gap:36px;
 
-        button {
-            font: inherit;
-        }
+  align-items:start;
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
+  margin-bottom:68px;
+}
 
-        ::selection {
-            background: #cbd5ce;
-            color: #111;
-        }
+.section-head h2{
+  font:
+    600
+    clamp(48px,6.3vw,92px)
+    /.98
+    var(--serif);
 
+  letter-spacing:-.04em;
 
-        /* =========================================================
-   SCROLL PROGRESS
-========================================================= */
+  margin:0;
 
-        #progress {
-            position: fixed;
-            left: 0;
-            top: 0;
+  max-width:1000px;
+}
 
-            height: 3px;
-            width: 0;
+.section-intro{
+  max-width:600px;
 
-            background: var(--sage);
+  color:var(--muted);
 
-            z-index: 9999;
-        }
+  line-height:1.75;
 
+  font-size:15px;
 
-        /* =========================================================
-   NAVBAR
-========================================================= */
+  margin-top:18px;
+}
 
-        .nav {
-            position: fixed;
+.hero h1 em,
+.section-head h2 em,
+.visual-subhead h3 em,
+.about-statement em,
+.footer h2 em{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-style:italic;
+  font-weight:400;
 
-            z-index: 500;
+  color:var(--sage);
 
-            top: 0;
-            left: 0;
-            right: 0;
-
-            height: 76px;
-
-            padding: 0 4vw;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            background: rgba(243, 240, 233, .78);
-
-            backdrop-filter: blur(18px);
-
-            border-bottom: 1px solid rgba(0, 0, 0, .07);
-        }
-
-        .brand {
-            font: 700 26px/1 var(--serif);
-            letter-spacing: -1px;
-        }
-
-        .navlinks {
-            display: flex;
-            gap: 28px;
-
-            font-size: 13px;
-
-            text-transform: uppercase;
-
-            letter-spacing: .13em;
-        }
-
-        .navlinks a {
-            opacity: .58;
-            transition: .2s;
-        }
-
-        .navlinks a:hover {
-            opacity: 1;
-        }
+  letter-spacing:-.035em;
+}
 
 
-        /* =========================================================
-   SHARED TYPOGRAPHY
-========================================================= */
-
-        .page-index {
-            font-size: 10px;
-
-            letter-spacing: .22em;
-
-            text-transform: uppercase;
-
-            color: var(--muted);
-        }
-
-
-        /* =========================================================
+/* =========================================================
    HERO
 ========================================================= */
 
-        .hero {
-            min-height: 100vh;
+.hero{
+  min-height:100vh;
 
-            padding: 130px 5vw 5vw;
+  padding:128px 5vw 5vw;
 
-            display: grid;
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
 
-            grid-template-columns: 1.15fr .85fr;
+  gap:4vw;
 
-            gap: 4vw;
+  align-items:center;
 
-            align-items: center;
+  position:relative;
 
-            position: relative;
+  overflow:hidden;
+}
 
-            overflow: hidden;
-        }
+.hero:before{
+  content:'';
 
+  position:absolute;
 
-        /* decorative background glow */
+  width:48vw;
+  height:48vw;
 
-        .hero::before {
-            content: "";
+  border-radius:50%;
 
-            position: absolute;
+  background:
+    radial-gradient(
+      circle,
+      #bdc9c1 0,
+      #dce1db 28%,
+      transparent 70%
+    );
 
-            width: 48vw;
-            height: 48vw;
+  right:-13vw;
+  top:-10vw;
 
-            border-radius: 50%;
+  opacity:.8;
+}
 
-            background:
-                radial-gradient(circle,
-                    #bdc9c1 0,
-                    #dce1db 28%,
-                    transparent 70%);
+.hero:after{
+  content:'';
 
-            right: -13vw;
-            top: -10vw;
+  position:absolute;
 
-            opacity: .85;
-        }
+  width:36vw;
+  height:36vw;
 
-        .hero::after {
-            content: "";
+  border-radius:50%;
 
-            position: absolute;
+  background:
+    radial-gradient(
+      circle,
+      #e5cbb4 0,
+      #efe1d5 30%,
+      transparent 70%
+    );
 
-            width: 36vw;
-            height: 36vw;
+  left:-12vw;
+  bottom:-16vw;
 
-            border-radius: 50%;
+  opacity:.75;
+}
 
-            background:
-                radial-gradient(circle,
-                    #e5cbb4 0,
-                    #efe1d5 30%,
-                    transparent 70%);
+.hero-copy{
+  position:relative;
 
-            left: -12vw;
-            bottom: -16vw;
+  z-index:2;
 
-            opacity: .8;
-        }
+  max-width:900px;
+}
 
+.eyebrow{
+  font-size:11px;
 
-        /* HERO LEFT */
+  letter-spacing:.22em;
 
-        .hero-copy {
-            position: relative;
-            z-index: 2;
+  text-transform:uppercase;
 
-            max-width: 920px;
-        }
+  color:#595a56;
 
-        .eyebrow {
-            font-size: 11px;
+  margin-bottom:22px;
+}
 
-            letter-spacing: .22em;
+.hero h1{
+  font:
+    600
+    clamp(64px,8.5vw,132px)
+    /.88
+    var(--serif);
 
-            text-transform: uppercase;
+  letter-spacing:-.05em;
 
-            color: #595a56;
+  margin:0;
 
-            margin-bottom: 22px;
-        }
+  max-width:900px;
+}
 
-        .hero h1 {
-            font:
-                600 clamp(68px, 9.4vw, 148px) /.82 var(--serif);
+.hero p{
+  max-width:610px;
 
-            letter-spacing: -.068em;
+  font-size:17px;
 
-            margin: 0;
+  line-height:1.72;
 
-            max-width: 950px;
-        }
+  color:#62615c;
 
-        .hero h1 em {
-            color: var(--sage);
-            font-weight: 500;
-        }
+  margin:34px 0;
+}
 
-        .hero p {
-            max-width: 610px;
+.hero-actions{
+  display:flex;
 
-            font-size: 17px;
+  gap:12px;
 
-            line-height: 1.72;
+  flex-wrap:wrap;
+}
 
-            color: #62615c;
+.pill{
+  padding:13px 21px;
 
-            margin: 34px 0;
-        }
+  border-radius:999px;
 
-        .hero-actions {
-            display: flex;
+  border:1px solid #2a2a2a;
 
-            gap: 12px;
+  font-size:13px;
 
-            flex-wrap: wrap;
-        }
+  transition:.25s;
+}
 
+.pill.dark{
+  background:#191919;
+  color:white;
+}
 
-        /* buttons */
-
-        .pill {
-            padding: 13px 21px;
-
-            border-radius: 999px;
-
-            border: 1px solid #2a2a2a;
-
-            font-size: 13px;
-
-            transition: .25s;
-        }
-
-        .pill.dark {
-            background: #191919;
-            color: white;
-        }
-
-        .pill:hover {
-            transform: translateY(-3px);
-        }
+.pill:hover{
+  transform:translateY(-3px);
+}
 
 
-        /* =========================================================
-   HERO INTERACTIVE BOARD
+/* =========================================================
+   PERSONAL INDEX
 ========================================================= */
 
-        .identity-board {
-            position: relative;
+.identity-board{
+  position:relative;
 
-            z-index: 2;
+  z-index:2;
 
-            border: 1px solid var(--line);
+  border:1px solid var(--line);
 
-            min-height: 580px;
+  min-height:590px;
 
-            background: rgba(255, 255, 255, .28);
+  background:rgba(255,255,255,.28);
 
-            display: grid;
+  display:grid;
 
-            grid-template-rows:
-                auto 1fr auto;
+  grid-template-rows:
+    auto
+    1fr
+    auto;
 
-            overflow: hidden;
+  overflow:hidden;
 
-            backdrop-filter: blur(12px);
-        }
+  backdrop-filter:blur(12px);
+}
 
+.identity-top,
+.identity-bottom{
+  padding:18px 20px;
 
-        /* top and bottom */
+  display:flex;
 
-        .identity-top,
-        .identity-bottom {
-            padding: 18px 20px;
+  justify-content:space-between;
+  align-items:center;
 
-            display: flex;
+  font-size:10px;
 
-            justify-content: space-between;
+  letter-spacing:.15em;
 
-            align-items: center;
+  text-transform:uppercase;
+}
 
-            font-size: 10px;
+.identity-top{
+  border-bottom:1px solid var(--line);
+}
 
-            letter-spacing: .15em;
+.identity-bottom{
+  border-top:1px solid var(--line);
+}
 
-            text-transform: uppercase;
-        }
+.identity-bottom a{
+  font-weight:700;
+}
 
-        .identity-top {
-            border-bottom: 1px solid var(--line);
-        }
+.identity-body{
+  display:grid;
 
-        .identity-bottom {
-            border-top: 1px solid var(--line);
-        }
+  grid-template-columns:
+    .82fr
+    1.18fr;
 
-        .identity-bottom a {
-            font-weight: 700;
-        }
+  min-height:0;
+}
 
+.identity-menu{
+  border-right:1px solid var(--line);
 
-        /* board body */
+  display:flex;
 
-        .identity-body {
-            display: grid;
+  flex-direction:column;
 
-            grid-template-columns: .86fr 1.14fr;
+  position:relative;
 
-            min-height: 0;
-        }
+  z-index:4;
+}
 
+.identity-item{
+  appearance:none;
 
-        /* LEFT MENU */
+  border:0;
 
-        .identity-menu {
-            border-right: 1px solid var(--line);
+  border-bottom:1px solid var(--line);
 
-            display: flex;
+  background:transparent;
 
-            flex-direction: column;
-        }
+  color:inherit;
 
-        .identity-item {
-            appearance: none;
+  padding:20px 18px;
 
-            border: 0;
+  text-align:left;
 
-            border-bottom: 1px solid var(--line);
+  display:grid;
 
-            background: transparent;
+  grid-template-columns:
+    30px
+    1fr;
 
-            color: inherit;
+  grid-template-areas:
+    'num name'
+    'num desc';
 
-            padding: 20px 18px;
+  column-gap:8px;
 
-            text-align: left;
+  cursor:pointer;
 
-            display: grid;
+  transition:.25s;
 
-            grid-template-columns: 30px 1fr;
+  position:relative;
 
-            grid-template-areas:
-                "num name"
-                "num desc";
+  z-index:5;
+}
 
-            column-gap: 8px;
+.identity-item:last-child{
+  border-bottom:0;
+}
 
-            cursor: pointer;
+.identity-item:hover,
+.identity-item.active{
+  background:#171817;
 
-            transition: .25s;
-        }
+  color:#f4f1e9;
+}
 
-        .identity-item:last-child {
-            border-bottom: 0;
-        }
+.identity-item span{
+  grid-area:num;
 
-        .identity-item:hover,
-        .identity-item.active {
-            background: #171817;
-            color: #f4f1e9;
-        }
+  font-size:9px;
 
-        .identity-item span {
-            grid-area: num;
+  letter-spacing:.12em;
 
-            font-size: 9px;
+  opacity:.55;
 
-            letter-spacing: .12em;
+  padding-top:4px;
+}
 
-            opacity: .55;
+.identity-item b{
+  grid-area:name;
 
-            padding-top: 4px;
-        }
+  font:
+    500
+    19px
+    /1.05
+    var(--serif);
 
-        .identity-item b {
-            grid-area: name;
+  letter-spacing:-.02em;
+}
 
-            font:
-                500 19px /1.05 var(--serif);
+.identity-item small{
+  grid-area:desc;
 
-            letter-spacing: -.02em;
-        }
+  margin-top:6px;
 
-        .identity-item small {
-            grid-area: desc;
+  font-size:8px;
 
-            margin-top: 6px;
+  letter-spacing:.11em;
 
-            font-size: 8px;
+  text-transform:uppercase;
 
-            letter-spacing: .11em;
+  opacity:.62;
+}
 
-            text-transform: uppercase;
 
-            opacity: .62;
-        }
+/* RIGHT SIDE */
 
+.identity-preview{
+  min-width:0;
 
-        /* RIGHT PREVIEW */
+  display:grid;
 
-        .identity-preview {
-            min-width: 0;
+  grid-template-rows:
+    minmax(330px,1fr)
+    auto;
 
-            display: grid;
+  background:#e3e5df;
 
-            grid-template-rows:
-                minmax(235px, 1fr) auto;
+  overflow:hidden;
+}
 
-            background: #e3e5df;
-        }
+.identity-scenes{
+  position:relative;
 
-        .identity-scenes {
-            position: relative;
+  min-height:330px;
 
-            overflow: hidden;
+  overflow:hidden;
 
-            background-image:
-                linear-gradient(rgba(20, 20, 20, .055) 1px,
-                    transparent 1px),
-                linear-gradient(90deg,
-                    rgba(20, 20, 20, .055) 1px,
-                    transparent 1px);
+  background-image:
+    linear-gradient(
+      rgba(20,20,20,.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(20,20,20,.055) 1px,
+      transparent 1px
+    );
 
-            background-size: 42px 42px;
-        }
+  background-size:42px 42px;
 
-        .identity-scene {
-            position: absolute;
+  pointer-events:none;
+}
 
-            inset: 0;
+.identity-scene{
+  position:absolute;
 
-            display: grid;
+  inset:0;
 
-            place-items: center;
+  opacity:0;
+  visibility:hidden;
 
-            padding: 32px;
+  transition:opacity .34s ease;
 
-            opacity: 0;
+  pointer-events:none;
 
-            transform: scale(.97);
+  z-index:0;
+}
 
-            transition:
-                opacity .35s ease,
-                transform .4s ease;
+.identity-scene.active{
+  opacity:1;
+  visibility:visible;
 
-            color: #60766a;
-        }
+  z-index:2;
+}
 
-        .identity-scene.active {
-            opacity: 1;
-            transform: scale(1);
-        }
 
-        .identity-scene svg {
-            width: 100%;
-            height: 100%;
-
-            max-height: 260px;
-        }
-
-        .identity-scene.image-scene {
-            padding: 0;
-        }
-
-        .identity-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-
-            transition:
-                transform .5s ease,
-                filter .5s ease;
-        }
-
-        .identity-scene.active .identity-image {
-            transform: scale(1.02);
-        }
-
-
-        .identity-image.contain {
-            object-fit: contain;
-            padding: 28px;
-            background: #e3e5df;
-        }
-
-        .scene-rowing {
-            color: #546d75;
-        }
-
-        .scene-python {
-            color: #6b756d;
-        }
-
-        .scene-photo {
-            color: #806e63;
-        }
-
-        .scene-code {
-            color: #5d665f;
-        }
-
-
-        /* preview text */
-
-        .identity-copy {
-            border-top: 1px solid var(--line);
-
-            padding: 20px 22px 22px;
-
-            background: rgba(247, 245, 239, .8);
-        }
-
-        .identity-copy span {
-            font-size: 9px;
-
-            letter-spacing: .15em;
-
-            text-transform: uppercase;
-
-            color: #777;
-        }
-
-        .identity-copy h3 {
-            font:
-                500 36px /.95 var(--serif);
-
-            letter-spacing: -.035em;
-
-            margin: 8px 0 9px;
-        }
-
-        .identity-copy p {
-            font-size: 12px;
-
-            line-height: 1.55;
-
-            color: #666;
-
-            margin: 0;
-
-            max-width: 430px;
-        }
-
-        .identity-tags {
-            margin-top: 14px;
-
-            font-size: 9px;
-
-            letter-spacing: .1em;
-
-            text-transform: uppercase;
-
-            color: #738178;
-        }
-
-
-        /* =========================================================
-   GENERAL SECTIONS
+/* =========================================================
+   PERSONAL INDEX IMAGES
 ========================================================= */
 
-        .section {
-            padding: 120px 5vw;
-        }
+/*
+   We use background images rather than old SVG placeholders.
+   This prevents the old graphics from appearing on top.
+*/
 
-        .section-head {
-            display: grid;
+.scene-photo{
+  position:absolute;
 
-            grid-template-columns: 180px 1fr;
+  inset:0;
 
-            gap: 36px;
+  background-repeat:no-repeat;
 
-            align-items: start;
+  background-color:#dfe3dd;
+}
 
-            margin-bottom: 70px;
-        }
+.scene-photo.cover{
+  background-size:cover;
 
-        .section-head h2 {
-            font:
-                600 clamp(52px, 7vw, 105px) /.94 var(--serif);
-
-            letter-spacing: -.055em;
-
-            margin: 0;
-
-            max-width: 1000px;
-        }
-
-        .section-head h2 em {
-            color: var(--sage);
-
-            font-weight: 500;
-        }
-
-        .section-intro {
-            max-width: 560px;
-
-            color: var(--muted);
-
-            line-height: 1.75;
-
-            font-size: 15px;
-
-            margin-top: 18px;
-        }
+  background-position:center;
+}
 
 
-        /* =========================================================
+/* PHOTOGRAPHY */
+
+.scene-photo.photo{
+  background-image:url('assets/images/photography/sunset.jpg');
+
+  background-position:center 42%;
+}
+
+
+/* TENNIS */
+
+.scene-photo.tennis{
+  background-image:url('images/tennis.jpg');
+
+  background-position:center;
+}
+
+
+/* CREATIVE CODING */
+
+.scene-photo.creative{
+  background-image:url('images/creative-code.png');
+
+  background-position:center;
+}
+
+
+/* =========================================================
+   ROWING PERSONAL INDEX
+========================================================= */
+
+/*
+   Rowing is a wide horizontal image.
+
+   Background:
+   enlarged + blurred
+
+   Foreground:
+   complete image using contain
+*/
+
+.scene-rowing{
+  position:absolute;
+
+  inset:0;
+
+  overflow:hidden;
+
+  background:#dfe3dd;
+}
+
+.scene-rowing:before{
+  content:'';
+
+  position:absolute;
+
+  inset:-24px;
+
+  background-image:url('assets/images/sports/rowing.jpg');
+
+  background-size:cover;
+
+  background-position:center;
+
+  filter:
+    blur(20px)
+    brightness(.8);
+
+  transform:scale(1.06);
+
+  opacity:.34;
+}
+
+.scene-rowing:after{
+  content:'';
+
+  position:absolute;
+
+  inset:24px;
+
+  background-image:url('assets/images/sports/rowing.jpg');
+
+  background-repeat:no-repeat;
+
+  background-size:contain;
+
+  background-position:center;
+}
+
+
+/* =========================================================
+   PYTHON + ECONOMICS PERSONAL INDEX
+========================================================= */
+
+.python-visual{
+  position:absolute;
+
+  inset:0;
+
+  padding:34px;
+
+  display:grid;
+
+  grid-template-columns:
+    .75fr
+    1.25fr;
+
+  gap:24px;
+
+  align-items:stretch;
+
+  background:#e5e7e1;
+}
+
+.python-code{
+  border:1px solid var(--line);
+
+  padding:20px;
+
+  font:
+    11px
+    /1.7
+    monospace;
+
+  color:#47534b;
+
+  background:rgba(247,245,239,.68);
+}
+
+.python-chart{
+  position:relative;
+
+  border:1px solid var(--line);
+
+  background:rgba(247,245,239,.6);
+
+  overflow:hidden;
+}
+
+.python-chart:before{
+  content:'';
+
+  position:absolute;
+
+  left:12%;
+  right:8%;
+
+  bottom:14%;
+
+  height:1px;
+
+  background:#aeb4ae;
+}
+
+.python-chart:after{
+  content:'';
+
+  position:absolute;
+
+  left:14%;
+
+  bottom:14%;
+
+  width:72%;
+  height:62%;
+
+  border-left:1px solid #aeb4ae;
+  border-bottom:1px solid #aeb4ae;
+
+  background:
+    radial-gradient(
+      circle at 16% 72%,
+      #9daa9f 0 4px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 28% 64%,
+      #9daa9f 0 4px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 40% 56%,
+      #9daa9f 0 4px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 56% 42%,
+      #9daa9f 0 4px,
+      transparent 5px
+    ),
+    radial-gradient(
+      circle at 72% 27%,
+      #6f8176 0 7px,
+      transparent 8px
+    );
+}
+
+
+/* PERSONAL INDEX COPY */
+
+.identity-copy{
+  border-top:1px solid var(--line);
+
+  padding:20px 22px 22px;
+
+  background:rgba(247,245,239,.88);
+}
+
+.identity-copy span{
+  font-size:9px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+  color:#777;
+}
+
+.identity-copy h3{
+  font:
+    500
+    34px
+    /.98
+    var(--serif);
+
+  letter-spacing:-.035em;
+
+  margin:8px 0 9px;
+}
+
+.identity-copy p{
+  font-size:12px;
+
+  line-height:1.55;
+
+  color:#666;
+
+  margin:0;
+
+  max-width:430px;
+}
+
+.identity-tags{
+  margin-top:14px;
+
+  font-size:9px;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+  color:#738178;
+}
+
+
+/* =========================================================
    HOW I THINK
 ========================================================= */
 
-        .think-grid {
-            display: grid;
+.think-grid{
+  display:grid;
 
-            grid-template-columns: 1fr 1.12fr;
+  grid-template-columns:
+    1fr
+    1.12fr;
 
-            border-top: 1px solid var(--line);
+  border-top:1px solid var(--line);
 
-            border-bottom: 1px solid var(--line);
-        }
+  border-bottom:1px solid var(--line);
+}
 
-        .think-menu {
-            border-right: 1px solid var(--line);
-        }
+.think-menu{
+  border-right:1px solid var(--line);
+}
 
-        .think-btn {
-            width: 100%;
+.think-btn{
+  width:100%;
 
-            background: none;
+  background:none;
 
-            border: 0;
+  border:0;
 
-            border-bottom: 1px solid var(--line);
+  border-bottom:1px solid var(--line);
 
-            padding: 27px 20px;
+  padding:27px 20px;
 
-            display: flex;
+  display:flex;
 
-            align-items: center;
+  align-items:center;
+  justify-content:space-between;
 
-            justify-content: space-between;
+  text-align:left;
 
-            text-align: left;
+  cursor:pointer;
 
-            cursor: pointer;
+  transition:.25s;
+}
 
-            transition: .25s;
-        }
+.think-btn:last-child{
+  border-bottom:0;
+}
 
-        .think-btn:last-child {
-            border-bottom: 0;
-        }
+.think-btn:hover,
+.think-btn.active{
+  background:#e8e5de;
+}
 
-        .think-btn:hover,
-        .think-btn.active {
-            background: #e8e5de;
-        }
+.think-word{
+  font:
+    500
+    clamp(30px,4vw,54px)
+    /1
+    var(--serif);
+}
 
-        .think-word {
-            font:
-                500 clamp(30px, 4vw, 54px) /1 var(--serif);
-        }
+.think-num{
+  font-size:10px;
 
-        .think-num {
-            font-size: 10px;
+  letter-spacing:.16em;
+}
 
-            letter-spacing: .16em;
-        }
+.think-panel{
+  min-height:580px;
 
-        .think-panel {
-            min-height: 540px;
+  padding:48px 52px;
 
-            padding: 52px;
+  display:grid;
 
-            display: flex;
+  grid-template-rows:
+    auto
+    1fr
+    auto;
 
-            flex-direction: column;
+  gap:36px;
 
-            justify-content: space-between;
+  background:#e2e4dd;
+}
 
-            background: #e2e4dd;
-        }
+.think-panel .big{
+  font:
+    500
+    clamp(40px,5.2vw,76px)
+    /1.02
+    var(--serif);
 
-        .think-panel .big {
-            font:
-                500 clamp(45px, 6vw, 88px) /.98 var(--serif);
+  max-width:720px;
 
-            max-width: 720px;
+  letter-spacing:-.035em;
 
-            letter-spacing: -.04em;
-        }
+  align-self:center;
+}
 
-        .think-panel .mini {
-            display: grid;
+.think-panel .mini{
+  display:grid;
 
-            grid-template-columns: 1fr 1fr;
+  grid-template-columns:
+    1fr
+    1fr;
 
-            gap: 40px;
+  gap:40px;
 
-            font-size: 13px;
+  padding-top:22px;
 
-            line-height: 1.65;
+  border-top:
+    1px solid
+    rgba(20,20,20,.14);
 
-            color: #555;
-        }
+  font-size:13px;
+
+  line-height:1.65;
+
+  color:#555;
+}
 
 
-        /* =========================================================
+/* =========================================================
    SPORTS
 ========================================================= */
 
-        .sports {
-            background: var(--dark);
+.sports{
+  background:var(--dark);
 
-            color: #f5f1ea;
+  color:#f5f1ea;
 
-            padding-top: 130px;
-        }
+  padding-top:128px;
+}
 
-        .sports .section-head .page-index,
-        .sports .section-intro {
-            color: #999;
-        }
+.sports .section-head .page-index,
+.sports .section-intro{
+  color:#999;
+}
 
-        .sports .section-head h2 em {
-            color: #a8bbb0;
-        }
+.sports .section-head h2 em{
+  color:#a8bbb0;
+}
 
+.sports-loop{
+  display:grid;
 
-        /* 4 PART LOOP */
+  grid-template-columns:
+    repeat(4,1fr);
 
-        .sports-loop {
-            display: grid;
+  border-top:1px solid #3a3b39;
 
-            grid-template-columns: repeat(4, 1fr);
+  border-bottom:1px solid #3a3b39;
 
-            border-top: 1px solid #3a3b39;
+  margin-bottom:88px;
+}
 
-            border-bottom: 1px solid #3a3b39;
+.loop-item{
+  padding:31px 24px;
 
-            margin-bottom: 90px;
-        }
+  min-height:205px;
 
-        .loop-item {
-            padding: 31px 24px;
+  border-right:1px solid #3a3b39;
+}
 
-            min-height: 210px;
+.loop-item:last-child{
+  border-right:0;
+}
 
-            border-right: 1px solid #3a3b39;
-        }
+.loop-item span{
+  font-size:10px;
 
-        .loop-item:last-child {
-            border-right: 0;
-        }
+  color:#8d8f8a;
 
-        .loop-item span {
-            font-size: 10px;
+  letter-spacing:.16em;
+}
 
-            color: #8d8f8a;
+.loop-item h3{
+  font:
+    500
+    34px
+    /1.05
+    var(--serif);
 
-            letter-spacing: .16em;
-        }
+  margin:55px 0 10px;
+}
 
-        .loop-item h3 {
-            font:
-                500 36px /1.05 var(--serif);
+.loop-item p{
+  font-size:12px;
 
-            margin: 58px 0 10px;
-        }
+  color:#94968f;
 
-        .loop-item p {
-            font-size: 12px;
+  line-height:1.55;
 
-            color: #94968f;
+  margin:0;
+}
 
-            line-height: 1.55;
 
-            margin: 0;
-        }
+/* SPORT STORY */
 
+.sport-story{
+  display:grid;
 
-        /* TENNIS / ROWING STORIES */
+  grid-template-columns:
+    1.03fr
+    .97fr;
 
-        .sport-story {
-            display: grid;
+  margin-bottom:22px;
 
-            grid-template-columns: 1.03fr .97fr;
+  min-height:650px;
+}
 
-            margin-bottom: 22px;
+.sport-story.reverse{
+  grid-template-columns:
+    .97fr
+    1.03fr;
+}
 
-            min-height: 720px;
-        }
+.sport-art{
+  position:relative;
 
-        .sport-story.reverse {
-            grid-template-columns: .97fr 1.03fr;
-        }
+  overflow:hidden;
 
-        .sport-art {
-            position: relative;
+  background:#21332b;
+}
 
-            overflow: hidden;
+.sport-image{
+  position:absolute;
 
-            background: #21332b;
-        }
+  inset:0;
 
-        .sport-copy {
-            background: #ece7de;
+  background-size:cover;
 
-            color: #171717;
+  background-position:center;
 
-            padding: 62px 6vw;
+  background-repeat:no-repeat;
+}
 
-            display: flex;
+.sport-image.tennis-large{
+  background-image:url('images/tennis.jpg');
+}
 
-            flex-direction: column;
+.sport-image.rowing-large{
+  background-image:url('assets/images/sports/rowing.jpg');
 
-            justify-content: space-between;
-        }
+  background-position:center;
+}
 
-        .sport-copy .kicker {
-            font-size: 10px;
+.sport-copy{
+  background:#ece7de;
 
-            letter-spacing: .18em;
+  color:#171717;
 
-            text-transform: uppercase;
-        }
+  padding:58px 6vw;
 
-        .sport-copy h3 {
-            font:
-                500 clamp(54px, 6vw, 96px) /.93 var(--serif);
+  display:flex;
 
-            letter-spacing: -.055em;
+  flex-direction:column;
 
-            margin: 24px 0;
-        }
+  justify-content:space-between;
+}
 
-        .sport-copy p {
-            max-width: 500px;
+.sport-copy .kicker{
+  font-size:10px;
 
-            color: #64625d;
+  letter-spacing:.18em;
 
-            line-height: 1.75;
-        }
+  text-transform:uppercase;
+}
 
-        .quote {
-            font:
-                500 clamp(32px, 4vw, 58px) /1.05 var(--serif);
+.sport-copy h3{
+  font:
+    500
+    clamp(48px,5.4vw,82px)
+    /.96
+    var(--serif);
 
-            margin-top: 60px;
+  letter-spacing:-.045em;
 
-            max-width: 640px;
-        }
+  margin:24px 0;
+}
 
-        .sport-svg {
-            width: 100%;
+.sport-copy p{
+  max-width:500px;
 
-            height: 100%;
+  color:#64625d;
 
-            min-height: 720px;
+  line-height:1.75;
+}
 
-            display: block;
-        }
+.quote{
+  font:
+    500
+    clamp(28px,3.5vw,50px)
+    /1.08
+    var(--serif);
 
-        .caption {
-            position: absolute;
+  margin-top:55px;
 
-            left: 22px;
+  max-width:640px;
+}
 
-            bottom: 20px;
+.caption{
+  position:absolute;
 
-            color: white;
+  left:22px;
 
-            font-size: 10px;
+  bottom:20px;
 
-            letter-spacing: .17em;
+  color:white;
 
-            text-transform: uppercase;
+  font-size:10px;
 
-            background: rgba(0, 0, 0, .28);
+  letter-spacing:.17em;
 
-            padding: 9px 12px;
+  text-transform:uppercase;
 
-            border-radius: 999px;
+  background:rgba(0,0,0,.28);
 
-            backdrop-filter: blur(8px);
-        }
+  padding:9px 12px;
 
+  border-radius:999px;
 
-        /* =========================================================
-   TWO SIDES OF SPORT
-========================================================= */
+  backdrop-filter:blur(8px);
+}
 
-        .sport-two-sides {
-            margin-top: 90px;
 
-            border-top: 1px solid #3a3b39;
+/* TWO SIDES */
 
-            border-bottom: 1px solid #3a3b39;
+.sport-two-sides{
+  margin-top:88px;
 
-            display: grid;
+  border-top:1px solid #3a3b39;
 
-            grid-template-columns: 1fr 1fr;
-        }
+  border-bottom:1px solid #3a3b39;
 
-        .sport-side {
-            min-height: 430px;
+  display:grid;
 
-            padding: 46px;
+  grid-template-columns:
+    1fr
+    1fr;
+}
 
-            display: flex;
+.sport-side{
+  min-height:400px;
 
-            flex-direction: column;
+  padding:44px;
 
-            justify-content: space-between;
-        }
+  display:flex;
 
-        .sport-side+.sport-side {
-            border-left: 1px solid #3a3b39;
-        }
+  flex-direction:column;
 
-        .sport-side span {
-            font-size: 9px;
+  justify-content:space-between;
+}
 
-            letter-spacing: .17em;
+.sport-side + .sport-side{
+  border-left:1px solid #3a3b39;
+}
 
-            text-transform: uppercase;
+.sport-side span{
+  font-size:9px;
 
-            color: #8d948f;
-        }
+  letter-spacing:.17em;
 
-        .sport-side h3 {
-            font:
-                500 clamp(44px, 5vw, 78px) /.96 var(--serif);
+  text-transform:uppercase;
 
-            letter-spacing: -.05em;
+  color:#8d948f;
+}
 
-            margin: 42px 0 22px;
-        }
+.sport-side h3{
+  font:
+    500
+    clamp(40px,4.8vw,70px)
+    /.98
+    var(--serif);
 
-        .sport-side p {
-            max-width: 500px;
+  letter-spacing:-.045em;
 
-            color: #9a9c96;
+  margin:38px 0 20px;
+}
 
-            line-height: 1.7;
+.sport-side p{
+  max-width:500px;
 
-            font-size: 14px;
-        }
+  color:#9a9c96;
 
-        .organizer-side {
-            background: #20221f;
-        }
+  line-height:1.7;
 
-        .side-tags {
-            font-size: 9px;
+  font-size:14px;
+}
 
-            letter-spacing: .13em;
+.organizer-side{
+  background:#20221f;
+}
 
-            text-transform: uppercase;
+.side-tags{
+  font-size:9px;
 
-            color: #78847d;
-        }
+  letter-spacing:.13em;
 
-        .sport-work-link {
-            margin-top: 34px;
+  text-transform:uppercase;
 
-            align-self: flex-start;
+  color:#78847d;
+}
 
-            border-bottom: 1px solid #758379;
+.sport-work-link{
+  margin-top:30px;
 
-            padding-bottom: 5px;
+  align-self:flex-start;
 
-            font-size: 11px;
+  border-bottom:1px solid #758379;
 
-            letter-spacing: .08em;
+  padding-bottom:5px;
 
-            text-transform: uppercase;
+  font-size:11px;
 
-            color: #c6d0c9;
-        }
+  letter-spacing:.08em;
 
+  text-transform:uppercase;
 
-        /* =========================================================
+  color:#c6d0c9;
+}
+
+
+/* =========================================================
    WORK
 ========================================================= */
 
-        .work {
-            background: var(--cream);
-        }
+.work{
+  background:var(--cream);
+}
 
-        .work-grid {
-            display: grid;
+.work-subhead{
+  margin:14px 0 26px;
 
-            grid-template-columns: 1fr 1fr;
+  padding-top:24px;
 
-            gap: 18px;
-        }
+  border-top:1px solid var(--line);
 
-        .project-card {
-            border: 1px solid var(--line);
+  display:flex;
 
-            background: #efede7;
+  justify-content:space-between;
 
-            min-height: 610px;
+  gap:40px;
 
-            display: grid;
+  align-items:flex-start;
+}
 
-            grid-template-rows:
-                auto 1fr auto;
+.work-subhead > p{
+  margin:0;
 
-            transition: .28s;
+  max-width:520px;
 
-            overflow: hidden;
-        }
+  color:var(--muted);
 
-        .project-card:hover {
-            transform: translateY(-5px);
+  font-size:13px;
 
-            box-shadow:
-                0 24px 60px rgba(0, 0, 0, .08);
-        }
+  line-height:1.65;
+}
 
-        .project-meta {
-            padding: 20px 22px;
+.work-grid{
+  display:grid;
 
-            border-bottom: 1px solid var(--line);
+  grid-template-columns:
+    1fr
+    1fr;
 
-            display: flex;
+  gap:18px;
+}
 
-            justify-content: space-between;
+.featured-work-grid{
+  margin-bottom:96px;
+}
 
-            font-size: 10px;
+.project-card{
+  border:1px solid var(--line);
 
-            text-transform: uppercase;
+  background:#efede7;
 
-            letter-spacing: .14em;
-        }
+  min-height:590px;
 
-        .project-visual {
-            padding: 30px;
+  display:grid;
 
-            display: flex;
+  grid-template-rows:
+    auto
+    1fr
+    auto;
 
-            align-items: center;
+  transition:.28s;
 
-            justify-content: center;
+  overflow:hidden;
+}
 
-            position: relative;
+.project-card:hover{
+  transform:translateY(-5px);
 
-            overflow: hidden;
+  box-shadow:
+    0 24px 60px
+    rgba(0,0,0,.08);
+}
 
-            background: #e7e8e2;
-        }
+.project-meta{
+  padding:20px 22px;
 
-        .project-visual img {
-            max-height: 310px;
+  border-bottom:1px solid var(--line);
 
-            object-fit: contain;
+  display:flex;
 
-            filter:
-                saturate(.35) contrast(.92);
-        }
+  justify-content:space-between;
 
-        .project-copy {
-            padding: 28px 28px 34px;
-        }
+  font-size:10px;
 
-        .project-copy h3 {
-            font:
-                500 clamp(38px, 4vw, 62px) /1 var(--serif);
+  text-transform:uppercase;
 
-            margin: 0 0 12px;
+  letter-spacing:.14em;
+}
 
-            letter-spacing: -.04em;
-        }
+.project-visual{
+  padding:30px;
 
-        .project-copy p {
-            color: #666;
+  display:flex;
 
-            line-height: 1.6;
+  align-items:center;
 
-            max-width: 600px;
-        }
+  justify-content:center;
 
+  position:relative;
 
-        /* WORK SUBHEAD */
+  overflow:hidden;
 
-        .work-subhead {
-            margin: 14px 0 26px;
+  background:#e7e8e2;
+}
 
-            padding-top: 24px;
+.project-copy{
+  padding:28px 28px 34px;
+}
 
-            border-top: 1px solid var(--line);
+.project-copy h3{
+  font:
+    500
+    clamp(36px,3.8vw,58px)
+    /1
+    var(--serif);
 
-            display: flex;
+  margin:0 0 12px;
 
-            justify-content: space-between;
+  letter-spacing:-.04em;
+}
 
-            gap: 40px;
+.project-copy p{
+  color:#666;
 
-            align-items: flex-start;
-        }
+  line-height:1.6;
 
-        .work-subhead>p {
-            margin: 0;
+  max-width:600px;
+}
 
-            max-width: 520px;
+.project-link-row{
+  margin-top:28px;
 
-            color: var(--muted);
+  padding-top:18px;
 
-            font-size: 13px;
+  border-top:1px solid var(--line);
 
-            line-height: 1.65;
-        }
+  display:flex;
 
-        .featured-work-grid {
-            margin-bottom: 100px;
-        }
+  align-items:center;
 
+  justify-content:space-between;
 
-        /* project link */
+  gap:16px;
+}
 
-        .project-link-row {
-            margin-top: 28px;
+.project-link-row > span{
+  font-size:9px;
 
-            padding-top: 18px;
+  letter-spacing:.13em;
 
-            border-top: 1px solid var(--line);
+  color:#8a8984;
 
-            display: flex;
+  text-transform:uppercase;
+}
 
-            align-items: center;
+.project-link{
+  display:inline-flex;
 
-            justify-content: space-between;
+  align-items:center;
 
-            gap: 16px;
-        }
+  gap:8px;
 
-        .project-link-row>span {
-            font-size: 9px;
+  font-size:10px;
 
-            letter-spacing: .13em;
+  letter-spacing:.13em;
 
-            color: #8a8984;
+  text-transform:uppercase;
 
-            text-transform: uppercase;
-        }
+  border-bottom:1px solid currentColor;
 
-        .project-link {
-            display: inline-flex;
+  padding-bottom:5px;
 
-            align-items: center;
+  transition:.2s;
 
-            gap: 8px;
+  white-space:nowrap;
+}
 
-            font-size: 10px;
+.project-link:hover{
+  color:var(--sage);
 
-            letter-spacing: .13em;
+  transform:translateX(3px);
+}
 
-            text-transform: uppercase;
+.project-link.placeholder{
+  color:#8c8b86;
 
-            border-bottom: 1px solid currentColor;
+  border-bottom-style:dashed;
+}
 
-            padding-bottom: 5px;
+.project-link.placeholder:hover{
+  transform:none;
 
-            transition: .2s;
+  color:#8c8b86;
+}
 
-            white-space: nowrap;
-        }
 
-        .project-link:hover {
-            color: var(--sage);
-
-            transform: translateX(3px);
-        }
-
-        .project-link.placeholder {
-            color: #8c8b86;
-
-            border-bottom-style: dashed;
-        }
-
-        .project-link.placeholder:hover {
-            transform: none;
-
-            color: #8c8b86;
-        }
-
-
-        /* =========================================================
-   EVENT PROJECT
+/* =========================================================
+   EVENT PROJECT VISUAL
 ========================================================= */
 
-        .event-visual {
-            background: #dfe3dd;
-        }
+.event-board{
+  width:88%;
 
-        .event-board {
-            width: 88%;
+  min-height:330px;
 
-            min-height: 330px;
+  border:1px solid #b9beb8;
 
-            border: 1px solid #b9beb8;
+  background:#f6f3ec;
 
-            background: #f6f3ec;
+  display:grid;
 
-            display: grid;
+  grid-template-rows:
+    auto
+    1fr
+    auto;
 
-            grid-template-rows:
-                auto 1fr auto;
+  box-shadow:
+    0 24px 60px
+    rgba(0,0,0,.07);
+}
 
-            box-shadow:
-                0 24px 60px rgba(0, 0, 0, .07);
-        }
+.event-board-top{
+  padding:16px 18px;
 
-        .event-board-top {
-            padding: 16px 18px;
+  border-bottom:1px solid #ccd0ca;
 
-            border-bottom: 1px solid #ccd0ca;
+  display:flex;
 
-            display: flex;
+  justify-content:space-between;
 
-            justify-content: space-between;
+  font-size:8px;
 
-            font-size: 8px;
+  letter-spacing:.13em;
 
-            letter-spacing: .13em;
+  color:#69736c;
+}
 
-            color: #69736c;
-        }
+.event-flow{
+  display:grid;
 
-        .event-flow {
-            display: grid;
+  grid-template-columns:
+    1fr
+    auto
+    1fr
+    auto
+    1fr;
 
-            grid-template-columns:
-                1fr auto 1fr auto 1fr;
+  align-items:center;
 
-            align-items: center;
+  gap:10px;
 
-            gap: 10px;
+  padding:30px 22px;
+}
 
-            padding: 30px 22px;
-        }
+.event-flow div{
+  border:1px solid #ccd0ca;
 
-        .event-flow div {
-            border: 1px solid #ccd0ca;
+  min-height:128px;
 
-            min-height: 128px;
+  padding:16px;
 
-            padding: 16px;
+  display:flex;
 
-            display: flex;
+  flex-direction:column;
 
-            flex-direction: column;
+  justify-content:space-between;
+}
 
-            justify-content: space-between;
-        }
+.event-flow span{
+  font-size:8px;
 
-        .event-flow span {
-            font-size: 8px;
+  color:#889189;
+}
 
-            color: #889189;
-        }
+.event-flow b{
+  font:
+    500
+    20px
+    /1
+    var(--serif);
 
-        .event-flow b {
-            font:
-                500 20px /1 var(--serif);
+  letter-spacing:-.02em;
+}
 
-            letter-spacing: -.02em;
-        }
+.event-flow small{
+  font-size:8px;
 
-        .event-flow small {
-            font-size: 8px;
+  text-transform:uppercase;
 
-            text-transform: uppercase;
+  letter-spacing:.08em;
 
-            letter-spacing: .08em;
+  color:#8a8c87;
+}
 
-            color: #8a8c87;
-        }
+.event-flow i{
+  font-style:normal;
 
-        .event-flow i {
-            font-style: normal;
+  color:#87958c;
+}
 
-            color: #87958c;
-        }
+.event-slots{
+  display:grid;
 
-        .event-slots {
-            display: grid;
+  grid-template-columns:
+    repeat(4,1fr);
 
-            grid-template-columns:
-                repeat(4, 1fr);
+  border-top:1px solid #ccd0ca;
+}
 
-            border-top: 1px solid #ccd0ca;
-        }
+.event-slots span{
+  padding:12px 8px;
 
-        .event-slots span {
-            padding: 12px 8px;
+  text-align:center;
 
-            text-align: center;
+  border-right:1px solid #ccd0ca;
 
-            border-right: 1px solid #ccd0ca;
+  font-size:8px;
 
-            font-size: 8px;
+  letter-spacing:.09em;
 
-            letter-spacing: .09em;
+  text-transform:uppercase;
 
-            text-transform: uppercase;
+  color:#707972;
+}
 
-            color: #707972;
-        }
-
-        .event-slots span:last-child {
-            border-right: 0;
-        }
+.event-slots span:last-child{
+  border-right:0;
+}
 
 
-        /* =========================================================
-   UCLA PROJECT VISUAL
+/* =========================================================
+   UCLA VISUAL
 ========================================================= */
 
-        .ucla-board {
-            width: 88%;
+.ucla-board{
+  width:88%;
 
-            height: 78%;
+  height:78%;
 
-            display: grid;
+  display:grid;
 
-            grid-template-columns:
-                .8fr 1.2fr;
+  grid-template-columns:
+    .8fr
+    1.2fr;
 
-            border: 1px solid #b9beb8;
+  border:1px solid #b9beb8;
 
-            background: #f5f3ed;
+  background:#f5f3ed;
 
-            box-shadow:
-                0 24px 60px rgba(0, 0, 0, .07);
-        }
+  box-shadow:
+    0 24px 60px
+    rgba(0,0,0,.07);
+}
 
-        .ucla-code {
-            padding: 20px;
+.ucla-code{
+  padding:20px;
 
-            border-right: 1px solid #c8ccc6;
+  border-right:1px solid #c8ccc6;
 
-            font:
-                11px /1.65 monospace;
+  font:
+    11px
+    /1.65
+    monospace;
 
-            color: #2a352e;
-        }
+  color:#2a352e;
+}
 
-        .ucla-code .muted {
-            color: #819086;
-        }
+.ucla-code .muted{
+  color:#819086;
+}
 
-        .ucla-chart {
-            padding: 18px;
+.ucla-chart{
+  padding:18px;
 
-            display: grid;
+  display:grid;
 
-            grid-template-rows:
-                auto 1fr;
-        }
+  grid-template-rows:
+    auto
+    1fr;
+}
 
-        .ucla-chart-top {
-            display: flex;
+.ucla-chart-top{
+  display:flex;
 
-            justify-content: space-between;
+  justify-content:space-between;
 
-            font-size: 8px;
+  font-size:8px;
 
-            text-transform: uppercase;
+  text-transform:uppercase;
 
-            letter-spacing: .1em;
+  letter-spacing:.1em;
 
-            color: #707870;
-        }
+  color:#707870;
+}
 
-        .ucla-chart svg {
-            width: 100%;
+.ucla-chart svg{
+  width:100%;
+  height:100%;
 
-            height: 100%;
+  min-height:200px;
+}
 
-            min-height: 200px;
-        }
+.ucla-note{
+  font-size:8px;
 
-        .ucla-note {
-            font-size: 8px;
+  letter-spacing:.09em;
 
-            letter-spacing: .09em;
+  text-transform:uppercase;
 
-            text-transform: uppercase;
-
-            color: #7b837d;
-        }
+  color:#7b837d;
+}
 
 
-        /* =========================================================
+/* =========================================================
    VISUAL PROJECTS
 ========================================================= */
 
-        .visual-subhead {
-            margin-top: 10px;
+.visual-subhead{
+  margin-top:10px;
 
-            margin-bottom: 34px;
+  margin-bottom:34px;
 
-            align-items: end;
-        }
+  align-items:end;
+}
 
-        .visual-subhead h3 {
-            font:
-                500 clamp(42px, 5vw, 74px) /.96 var(--serif);
+.visual-subhead h3{
+  font:
+    500
+    clamp(38px,4.5vw,66px)
+    /1
+    var(--serif);
 
-            letter-spacing: -.045em;
+  letter-spacing:-.035em;
 
-            margin: 10px 0 0;
-        }
+  margin:10px 0 0;
+}
 
-        .visual-subhead h3 em {
-            color: var(--sage);
+.visual-project-grid{
+  display:grid;
 
-            font-weight: 500;
-        }
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
 
-        .visual-project-grid {
-            display: grid;
+  gap:18px;
+}
 
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
+.visual-card{
+  border:1px solid var(--line);
 
-            gap: 18px;
-        }
+  background:#f0eee8;
 
-        .visual-card {
-            border: 1px solid var(--line);
+  min-width:0;
 
-            background: #f0eee8;
+  overflow:hidden;
 
-            min-width: 0;
+  transition:
+    transform .28s ease,
+    box-shadow .28s ease;
+}
 
-            overflow: hidden;
+.visual-card:hover{
+  transform:translateY(-5px);
 
-            transition:
-                transform .28s ease,
-                box-shadow .28s ease;
-        }
+  box-shadow:
+    0 22px 55px
+    rgba(0,0,0,.07);
+}
 
-        .visual-card:hover {
-            transform: translateY(-5px);
+.visual-card-top{
+  height:52px;
 
-            box-shadow:
-                0 22px 55px rgba(0, 0, 0, .07);
-        }
+  padding:0 18px;
 
-        .visual-card-top {
-            height: 52px;
+  border-bottom:1px solid var(--line);
 
-            padding: 0 18px;
+  display:flex;
 
-            border-bottom: 1px solid var(--line);
+  align-items:center;
 
-            display: flex;
+  justify-content:space-between;
 
-            align-items: center;
+  font-size:8px;
 
-            justify-content: space-between;
+  letter-spacing:.14em;
 
-            font-size: 8px;
+  text-transform:uppercase;
 
-            letter-spacing: .14em;
+  color:#777;
+}
 
-            text-transform: uppercase;
+.live-preview{
+  height:360px;
 
-            color: #777;
-        }
+  position:relative;
 
+  background:#dfe1db;
 
-        /* LIVE PREVIEW */
+  overflow:hidden;
 
-        .live-preview {
-            height: 390px;
+  border-bottom:1px solid var(--line);
+}
 
-            position: relative;
+.live-preview iframe{
+  position:absolute;
 
-            background: #dfe1db;
+  inset:0;
 
-            overflow: hidden;
+  width:100%;
+  height:100%;
 
-            border-bottom: 1px solid var(--line);
-        }
+  border:0;
 
-        .live-preview iframe {
-            position: absolute;
+  background:#e4e3dd;
 
-            inset: 0;
+  pointer-events:none;
+}
 
-            width: 100%;
+.live-label{
+  position:absolute;
 
-            height: 100%;
+  z-index:3;
 
-            border: 0;
+  right:13px;
+  top:13px;
 
-            background: #e4e3dd;
+  padding:7px 9px;
 
-            pointer-events: none;
+  background:rgba(243,240,233,.86);
 
-            z-index: 2;
-        }
+  border:1px solid rgba(0,0,0,.1);
 
-        .preview-fallback {
-            position: absolute;
+  font-size:7px;
 
-            inset: 0;
+  letter-spacing:.12em;
 
-            z-index: 1;
+  text-transform:uppercase;
 
-            display: grid;
+  backdrop-filter:blur(8px);
+}
 
-            place-items: center;
+.visual-card-copy{
+  padding:25px 25px 28px;
 
-            overflow: hidden;
-        }
+  min-height:190px;
 
-        .live-label {
-            position: absolute;
+  display:flex;
 
-            z-index: 3;
+  align-items:flex-end;
 
-            right: 13px;
+  justify-content:space-between;
 
-            top: 13px;
+  gap:30px;
+}
 
-            padding: 7px 9px;
+.visual-card-copy h3{
+  font:
+    500
+    clamp(32px,3.8vw,50px)
+    /1
+    var(--serif);
 
-            background: rgba(243, 240, 233, .86);
+  letter-spacing:-.04em;
 
-            border: 1px solid rgba(0, 0, 0, .1);
+  margin:0 0 10px;
+}
 
-            font-size: 7px;
+.visual-card-copy p{
+  max-width:440px;
 
-            letter-spacing: .12em;
+  margin:0;
 
-            text-transform: uppercase;
+  color:#6d6c67;
 
-            backdrop-filter: blur(8px);
-        }
+  font-size:12px;
 
+  line-height:1.6;
+}
 
-        /* visual project text */
 
-        .visual-card-copy {
-            padding: 25px 25px 28px;
+/* FUTURE PROJECT */
 
-            min-height: 208px;
+.future-preview{
+  height:360px;
 
-            display: flex;
+  border-bottom:1px solid var(--line);
 
-            align-items: flex-end;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 39px,
+      rgba(0,0,0,.055) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 39px,
+      rgba(0,0,0,.055) 40px
+    );
 
-            justify-content: space-between;
+  display:flex;
 
-            gap: 30px;
-        }
+  align-items:center;
 
-        .visual-card-copy h3 {
-            font:
-                500 clamp(34px, 4vw, 54px) /1 var(--serif);
+  justify-content:center;
 
-            letter-spacing: -.04em;
+  gap:34px;
 
-            margin: 0 0 10px;
-        }
+  color:#6e766f;
+}
 
-        .visual-card-copy p {
-            max-width: 440px;
+.future-preview.alt{
+  background:#1a1c1a;
 
-            margin: 0;
+  color:#aeb9b0;
+}
 
-            color: #6d6c67;
+.future-preview span{
+  font:
+    500
+    clamp(64px,9vw,110px)
+    /1
+    var(--serif);
 
-            font-size: 12px;
+  opacity:.18;
+}
 
-            line-height: 1.6;
-        }
+.future-preview p{
+  font-size:10px;
 
+  letter-spacing:.2em;
 
-        /* =========================================================
-   FALLBACK VISUALS
-========================================================= */
+  line-height:1.55;
 
-        .grid-one {
-            background: #e5e4dd;
-        }
+  margin:0;
+}
 
-        .mini-grid {
-            width: 75%;
 
-            height: 68%;
-
-            background:
-                conic-gradient(from 90deg at 1px 1px,
-                    #65766c 25%,
-                    #d7b89e 0 50%,
-                    #c9d0c9 0 75%,
-                    #303532 0);
-
-            background-size: 42px 42px;
-
-            filter: saturate(.65);
-        }
-
-        .grid-two {
-            background: #d8ddd7;
-        }
-
-        .shape {
-            position: absolute;
-
-            border: 1px solid #3d4a42;
-        }
-
-        .shape.s1 {
-            width: 36%;
-
-            height: 36%;
-
-            left: 12%;
-
-            top: 18%;
-
-            border-radius: 50%;
-
-            background: #738579;
-        }
-
-        .shape.s2 {
-            width: 38%;
-
-            height: 55%;
-
-            right: 11%;
-
-            bottom: 8%;
-
-            transform: rotate(18deg);
-
-            background: #d1b49e;
-        }
-
-        .shape.s3 {
-            width: 22%;
-
-            height: 22%;
-
-            left: 38%;
-
-            bottom: 14%;
-
-            background: #242826;
-        }
-
-
-        /* AI HAND */
-
-        .hand-fallback {
-            background: #202321;
-
-            color: #c9d3cb;
-
-            text-align: center;
-        }
-
-        .hand-fallback>span {
-            position: absolute;
-
-            left: 24px;
-
-            top: 20px;
-
-            font:
-                500 52px /1 var(--serif);
-
-            opacity: .2;
-        }
-
-        .hand-lines {
-            font:
-                500 70px /1.05 monospace;
-
-            transform: rotate(-9deg);
-
-            letter-spacing: .06em;
-        }
-
-
-        /* WALKER */
-
-        .walker-fallback {
-            background: #e4e0d8;
-        }
-
-        .walker-path {
-            position: absolute;
-
-            width: 70%;
-
-            height: 60%;
-
-            border:
-                2px dashed #72847a;
-
-            border-radius:
-                48% 52% 62% 38% / 50% 38% 62% 50%;
-
-            transform: rotate(-8deg);
-        }
-
-        .walker-dot {
-            width: 18px;
-
-            height: 18px;
-
-            border-radius: 50%;
-
-            background: #1f2421;
-
-            position: absolute;
-
-            left: 29%;
-
-            top: 28%;
-
-            box-shadow:
-                120px 70px 0 #809187,
-                230px 10px 0 #bd977e;
-        }
-
-
-        /* =========================================================
-   FUTURE PROJECT CARDS
-========================================================= */
-
-        .future-card {
-            background: #e7e5df;
-        }
-
-        .future-preview {
-            height: 390px;
-
-            border-bottom: 1px solid var(--line);
-
-            background:
-                repeating-linear-gradient(0deg,
-                    transparent 0,
-                    transparent 39px,
-                    rgba(0, 0, 0, .055) 40px),
-                repeating-linear-gradient(90deg,
-                    transparent 0,
-                    transparent 39px,
-                    rgba(0, 0, 0, .055) 40px);
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 34px;
-
-            color: #6e766f;
-        }
-
-        .future-preview.alt {
-            background: #1a1c1a;
-
-            color: #aeb9b0;
-        }
-
-        .future-preview span {
-            font:
-                500 clamp(70px, 10vw, 130px) /1 var(--serif);
-
-            opacity: .18;
-        }
-
-        .future-preview p {
-            font-size: 10px;
-
-            letter-spacing: .2em;
-
-            line-height: 1.55;
-
-            margin: 0;
-        }
-
-        .future-card .visual-card-copy h3 {
-            color: #6f726d;
-        }
-
-
-        /* =========================================================
+/* =========================================================
    PHOTOGRAPHY
 ========================================================= */
 
-        .photo {
-            background: #e7e1d8;
-        }
+.photo{
+  background:#e7e1d8;
+}
 
-        .photo-grid {
-            display: grid;
+.photo-grid{
+  display:grid;
 
-            grid-template-columns:
-                repeat(12, 1fr);
+  grid-template-columns:
+    repeat(12,1fr);
 
-            grid-auto-rows: 120px;
+  grid-auto-rows:120px;
 
-            gap: 16px;
-        }
+  gap:16px;
+}
 
-        .ph {
-            position: relative;
+.ph{
+  position:relative;
 
-            overflow: hidden;
+  overflow:hidden;
 
-            min-height: 280px;
-        }
+  min-height:280px;
 
-        .ph:nth-child(1) {
-            grid-column: span 7;
+  background:#d2d0c8;
+}
 
-            grid-row: span 4;
-        }
+.ph:nth-child(1){
+  grid-column:span 7;
+  grid-row:span 4;
+}
 
-        .ph:nth-child(2) {
-            grid-column: span 5;
+.ph:nth-child(2){
+  grid-column:span 5;
+  grid-row:span 3;
+}
 
-            grid-row: span 3;
-        }
+.ph:nth-child(3){
+  grid-column:span 5;
+  grid-row:span 4;
+}
 
-        .ph:nth-child(3) {
-            grid-column: span 5;
+.ph:nth-child(4){
+  grid-column:span 7;
+  grid-row:span 3;
+}
 
-            grid-row: span 4;
-        }
+.ph:nth-child(5){
+  grid-column:span 4;
+  grid-row:span 3;
+}
 
-        .ph:nth-child(4) {
-            grid-column: span 7;
+.ph:nth-child(6){
+  grid-column:span 8;
+  grid-row:span 3;
+}
 
-            grid-row: span 3;
-        }
+.photo-slot{
+  position:absolute;
 
-        .ph:nth-child(5) {
-            grid-column: span 4;
+  inset:0;
 
-            grid-row: span 3;
-        }
+  background-size:cover;
 
-        .ph:nth-child(6) {
-            grid-column: span 8;
+  background-position:center;
 
-            grid-row: span 3;
-        }
+  background-repeat:no-repeat;
 
-        .ph svg {
-            width: 100%;
+  transition:.5s;
+}
 
-            height: 100%;
+.ph:hover .photo-slot{
+  transform:scale(1.025);
+}
 
-            display: block;
+.ph-label{
+  position:absolute;
 
-            transition: .5s;
-        }
+  left:18px;
 
-        .ph:hover svg {
-            transform: scale(1.025);
-        }
+  bottom:16px;
 
-        .ph-label {
-            position: absolute;
+  font-size:10px;
 
-            left: 18px;
+  letter-spacing:.14em;
 
-            bottom: 16px;
+  text-transform:uppercase;
 
-            font-size: 10px;
+  background:rgba(255,255,255,.68);
 
-            letter-spacing: .14em;
+  padding:8px 10px;
 
-            text-transform: uppercase;
-
-            background: rgba(255, 255, 255, .68);
-
-            padding: 8px 10px;
-
-            backdrop-filter: blur(8px);
-        }
+  backdrop-filter:blur(8px);
+}
 
 
-        /* =========================================================
+/* =========================================================
    ABOUT
 ========================================================= */
 
-        .about {
-            background: #d9ded8;
-        }
+.about{
+  background:#d9ded8;
+}
 
-        .about-grid {
-            display: grid;
+.about-grid{
+  display:grid;
 
-            grid-template-columns:
-                1.18fr .82fr;
+  grid-template-columns:
+    1fr
+    .9fr;
 
-            gap: 4vw;
+  gap:7vw;
 
-            align-items: start;
-        }
+  align-items:start;
+}
 
-        .about-statement {
-            font:
-                500 clamp(50px, 7vw, 104px) /.96 var(--serif);
+.about-statement{
+  font:
+    500
+    clamp(42px,5.4vw,78px)
+    /1.02
+    var(--serif);
 
-            letter-spacing: -.055em;
+  letter-spacing:-.04em;
 
-            margin: 0;
-        }
+  margin:0;
 
-        .about-statement em {
-            color: var(--sage);
+  max-width:900px;
+}
 
-            font-weight: 500;
-        }
+.about-second-line{
+  display:block;
 
-        .about-notes {
-            border-top: 1px solid var(--line);
-        }
+  margin-top:20px;
 
-        .note {
-            padding: 24px 0;
+  font-size:.72em;
 
-            border-bottom: 1px solid var(--line);
+  line-height:1.08;
 
-            display: grid;
+  max-width:720px;
+}
 
-            grid-template-columns:
-                110px 1fr;
+.about-notes{
+  border-top:1px solid var(--line);
+}
 
-            gap: 20px;
-        }
+.note{
+  padding:24px 0;
 
-        .note b {
-            font-size: 10px;
+  border-bottom:1px solid var(--line);
 
-            letter-spacing: .16em;
+  display:grid;
 
-            text-transform: uppercase;
-        }
+  grid-template-columns:
+    110px
+    1fr;
 
-        .note p {
-            margin: 0;
+  gap:20px;
+}
 
-            color: #545751;
+.note b{
+  font-size:10px;
 
-            line-height: 1.65;
+  letter-spacing:.16em;
 
-            font-size: 14px;
-        }
+  text-transform:uppercase;
+}
+
+.note p{
+  margin:0;
+
+  color:#545751;
+
+  line-height:1.65;
+
+  font-size:14px;
+}
 
 
-        /* =========================================================
+/* =========================================================
    FOOTER
 ========================================================= */
 
-        .footer {
-            background: #141514;
+.footer{
+  background:#141514;
 
-            color: #d4d2cc;
+  color:#d4d2cc;
 
-            padding: 80px 5vw 36px;
-        }
+  padding:80px 5vw 36px;
+}
 
-        .footer-top {
-            display: flex;
+.footer-top{
+  display:flex;
 
-            align-items: flex-end;
+  align-items:flex-end;
 
-            justify-content: space-between;
+  justify-content:space-between;
 
-            gap: 40px;
+  gap:40px;
 
-            border-bottom: 1px solid #383a37;
+  border-bottom:1px solid #383a37;
 
-            padding-bottom: 70px;
-        }
+  padding-bottom:70px;
+}
 
-        .footer h2 {
-            font:
-                500 clamp(58px, 8vw, 116px) /.9 var(--serif);
+.footer h2{
+  font:
+    500
+    clamp(54px,7vw,100px)
+    /.92
+    var(--serif);
 
-            letter-spacing: -.055em;
+  letter-spacing:-.045em;
 
-            margin: 0;
-        }
+  margin:0;
+}
 
-        .footer .small {
-            color: #7f837c;
+.footer .small{
+  color:#7f837c;
 
-            max-width: 380px;
+  max-width:380px;
 
-            line-height: 1.6;
-        }
+  line-height:1.6;
+}
 
-        .footer-bottom {
-            display: flex;
+.footer-bottom{
+  display:flex;
 
-            justify-content: space-between;
+  justify-content:space-between;
 
-            padding-top: 28px;
+  padding-top:28px;
 
-            font-size: 10px;
+  font-size:10px;
 
-            text-transform: uppercase;
+  text-transform:uppercase;
 
-            letter-spacing: .13em;
+  letter-spacing:.13em;
 
-            color: #747871;
-        }
+  color:#747871;
+}
 
 
-        /* =========================================================
-   SCROLL ANIMATION
+/* =========================================================
+   SCROLL FADE
 ========================================================= */
 
-        .fade {
-            opacity: 0;
+.fade{
+  opacity:0;
 
-            transform: translateY(26px);
+  transform:translateY(24px);
 
-            transition:
-                opacity .8s ease,
-                transform .8s ease;
-        }
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
 
-        .fade.show {
-            opacity: 1;
+.fade.show{
+  opacity:1;
 
-            transform: none;
-        }
+  transform:none;
+}
 
 
-        /* =========================================================
-   RESPONSIVE — TABLET
+/* =========================================================
+   TABLET
 ========================================================= */
 
-        @media(max-width:900px) {
+@media(max-width:900px){
 
-            .navlinks {
-                gap: 14px;
-                font-size: 10px;
-            }
+  .navlinks{
+    gap:14px;
+    font-size:10px;
+  }
 
-            .hero {
-                grid-template-columns: 1fr;
+  .hero{
+    grid-template-columns:1fr;
 
-                padding-top: 120px;
-            }
+    padding-top:118px;
+  }
 
-            .section-head {
-                grid-template-columns: 1fr;
+  .section-head{
+    grid-template-columns:1fr;
 
-                gap: 12px;
-            }
+    gap:12px;
+  }
 
-            .think-grid,
-            .sport-story,
-            .sport-story.reverse,
-            .work-grid,
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
+  .think-grid,
+  .sport-story,
+  .sport-story.reverse,
+  .work-grid,
+  .about-grid{
+    grid-template-columns:1fr;
+  }
 
-            .sports-loop {
-                grid-template-columns: 1fr 1fr;
-            }
+  .sports-loop{
+    grid-template-columns:
+      1fr
+      1fr;
+  }
 
-            .loop-item:nth-child(2) {
-                border-right: 0;
-            }
+  .loop-item:nth-child(2){
+    border-right:0;
+  }
 
-            .loop-item {
-                border-bottom:
-                    1px solid #3a3b39;
-            }
+  .loop-item{
+    border-bottom:1px solid #3a3b39;
+  }
 
-            .photo-grid {
-                grid-template-columns:
-                    1fr 1fr;
+  .sport-two-sides,
+  .visual-project-grid{
+    grid-template-columns:1fr;
+  }
 
-                grid-auto-rows: 190px;
-            }
+  .sport-side + .sport-side{
+    border-left:0;
 
-            .ph {
-                grid-column: auto !important;
+    border-top:1px solid #3a3b39;
+  }
 
-                grid-row: span 2 !important;
-            }
+  .work-subhead{
+    display:block;
+  }
 
-            .identity-board {
-                min-height: 560px;
-            }
+  .work-subhead > p{
+    margin-top:14px;
+  }
 
-            .identity-body {
-                grid-template-columns:
-                    .72fr 1.28fr;
-            }
+  .photo-grid{
+    grid-template-columns:
+      1fr
+      1fr;
 
-            .sport-two-sides,
-            .visual-project-grid {
-                grid-template-columns: 1fr;
-            }
+    grid-auto-rows:190px;
+  }
 
-            .sport-side+.sport-side {
-                border-left: 0;
+  .ph{
+    grid-column:auto !important;
 
-                border-top:
-                    1px solid #3a3b39;
-            }
+    grid-row:span 2 !important;
+  }
 
-            .work-subhead {
-                display: block;
-            }
+  .identity-body{
+    grid-template-columns:
+      .74fr
+      1.26fr;
+  }
 
-            .work-subhead>p {
-                margin-top: 14px;
-            }
-
-            .visual-subhead {
-                display: grid;
-            }
-
-            .visual-subhead>p {
-                margin-top: 20px;
-            }
-
-            .live-preview,
-            .future-preview {
-                height: 340px;
-            }
-
-        }
+}
 
 
-        /* =========================================================
-   RESPONSIVE — MOBILE
+/* =========================================================
+   MOBILE
 ========================================================= */
 
-        @media(max-width:600px) {
+@media(max-width:600px){
 
-            .nav {
-                padding: 0 20px;
-            }
+  .nav{
+    padding:0 20px;
+  }
 
-            .navlinks {
-                gap: 12px;
-            }
+  .navlinks a:nth-child(2),
+  .navlinks a:nth-child(4){
+    display:none;
+  }
 
-            .navlinks a:nth-child(2),
-            .navlinks a:nth-child(4) {
-                display: none;
-            }
+  .hero,
+  .section{
+    padding-left:22px;
+    padding-right:22px;
+  }
 
-            .hero,
-            .section {
-                padding-left: 22px;
-                padding-right: 22px;
-            }
+  .hero h1{
+    font-size:62px;
+  }
 
-            .hero h1 {
-                font-size: 64px;
-            }
+  .identity-body{
+    grid-template-columns:1fr;
+  }
 
-            .think-panel {
-                padding:
-                    32px 22px;
-            }
+  .identity-menu{
+    border-right:0;
 
-            .sports-loop {
-                grid-template-columns: 1fr;
-            }
+    border-bottom:1px solid var(--line);
 
-            .loop-item {
-                border-right: 0;
-            }
+    display:grid;
 
-            .sport-copy {
-                padding:
-                    46px 24px;
-            }
+    grid-template-columns:
+      1fr
+      1fr;
+  }
 
-            .sport-svg {
-                min-height: 520px;
-            }
+  .identity-item{
+    min-height:82px;
+  }
 
-            .photo-grid {
-                grid-template-columns: 1fr;
-            }
+  .identity-item:nth-child(odd){
+    border-right:1px solid var(--line);
+  }
 
-            .footer-top {
-                display: block;
-            }
+  .identity-item:last-child{
+    grid-column:1 / -1;
+  }
 
-            .footer .small {
-                margin-top: 30px;
-            }
+  .identity-preview{
+    grid-template-rows:
+      260px
+      auto;
+  }
 
-            .identity-board {
-                min-height: auto;
-            }
+  .identity-top span:last-child{
+    display:none;
+  }
 
-            .identity-body {
-                grid-template-columns: 1fr;
-            }
+  .identity-bottom span{
+    display:none;
+  }
 
-            .identity-menu {
-                border-right: 0;
+  .identity-bottom{
+    justify-content:flex-end;
+  }
 
-                border-bottom:
-                    1px solid var(--line);
+  .think-panel{
+    padding:32px 22px;
+  }
 
-                display: grid;
+  .think-panel .mini{
+    grid-template-columns:1fr;
 
-                grid-template-columns:
-                    1fr 1fr;
-            }
+    gap:16px;
+  }
 
-            .identity-item {
-                min-height: 82px;
-            }
+  .sports-loop{
+    grid-template-columns:1fr;
+  }
 
-            .identity-item:nth-child(odd) {
-                border-right:
-                    1px solid var(--line);
-            }
+  .loop-item{
+    border-right:0;
+  }
 
-            .identity-item:last-child {
-                grid-column:
-                    1 / -1;
-            }
+  .sport-copy{
+    padding:44px 24px;
+  }
 
-            .identity-preview {
-                grid-template-rows:
-                    230px auto;
-            }
+  .sport-story{
+    min-height:520px;
+  }
 
-            .identity-top span:last-child {
-                display: none;
-            }
+  .sport-side{
+    padding:34px 24px;
 
-            .identity-bottom span {
-                display: none;
-            }
+    min-height:350px;
+  }
 
-            .identity-bottom {
-                justify-content: flex-end;
-            }
+  .event-flow{
+    grid-template-columns:1fr;
 
-            .sport-side {
-                padding:
-                    34px 24px;
+    padding:18px;
+  }
 
-                min-height: 360px;
-            }
+  .event-flow i{
+    transform:rotate(90deg);
 
-            .event-flow {
-                grid-template-columns: 1fr;
+    justify-self:center;
+  }
 
-                padding: 18px;
-            }
+  .event-slots{
+    grid-template-columns:
+      1fr
+      1fr;
+  }
 
-            .event-flow i {
-                transform: rotate(90deg);
+  .project-link-row,
+  .visual-card-copy{
+    align-items:flex-start;
 
-                justify-self: center;
-            }
+    flex-direction:column;
+  }
 
-            .event-slots {
-                grid-template-columns:
-                    1fr 1fr;
-            }
+  .live-preview,
+  .future-preview{
+    height:300px;
+  }
 
-            .event-slots span:nth-child(2) {
-                border-right: 0;
-            }
+  .photo-grid{
+    grid-template-columns:1fr;
+  }
 
-            .event-slots span:nth-child(-n+2) {
-                border-bottom:
-                    1px solid #ccd0ca;
-            }
+  .footer-top{
+    display:block;
+  }
 
-            .project-link-row,
-            .visual-card-copy {
-                align-items: flex-start;
+  .footer .small{
+    margin-top:30px;
+  }
 
-                flex-direction: column;
-            }
+}
 
-            .visual-card-copy {
-                min-height: 230px;
-            }
-
-            .live-preview,
-            .future-preview {
-                height: 300px;
-            }
-
-        }
-    </style>
+</style>
 </head>
 
 
 <body>
 
 
-    <!-- ======================================================
-     SCROLL PROGRESS
-====================================================== -->
-
-    <div id="progress"></div>
+<div id="progress"></div>
 
 
-    <!-- ======================================================
+<!-- ======================================================
      NAVBAR
 ====================================================== -->
 
-    <nav class="nav">
+<nav class="nav">
 
-        <a class="brand" href="#home">
-            Mandy.
-        </a>
+  <a
+    class="brand"
+    href="#home"
+  >
+    Mandy.
+  </a>
 
-        <div class="navlinks">
+  <div class="navlinks">
 
-            <a href="#home">
-                Home
-            </a>
+    <a href="#home">
+      Home
+    </a>
 
-            <a href="#sports">
-                Sports
-            </a>
+    <a href="#sports">
+      Sports
+    </a>
 
-            <a href="#work">
-                Work
-            </a>
+    <a href="#work">
+      Work
+    </a>
 
-            <a href="#photography">
-                Photography
-            </a>
+    <a href="#photography">
+      Photography
+    </a>
 
-            <a href="#about">
-                About
-            </a>
+    <a href="#about">
+      About
+    </a>
 
-        </div>
+  </div>
 
-    </nav>
+</nav>
 
 
-    <!-- ======================================================
-     HOME / HERO
+<!-- ======================================================
+     HOME
 ====================================================== -->
 
-    <section class="hero" id="home">
+<section
+  class="hero"
+  id="home"
+>
 
-        <!-- LEFT -->
 
-        <div class="hero-copy fade">
+  <!-- LEFT -->
 
-            <div class="eyebrow">
-                Code · Tennis · Rowing · Economics · Photography
-            </div>
+  <div class="hero-copy fade">
 
-            <h1>
-                Notice.
+    <div class="eyebrow">
+      Code · Tennis · Rowing · Economics · Photography
+    </div>
+
+    <h1>
+      Notice.
+      <br>
+
+      Build.
+      <br>
+
+      <em>
+        Question.
+      </em>
+    </h1>
+
+    <p>
+      Things I notice, make, and come back to.
+    </p>
+
+    <div class="hero-actions">
+
+      <a
+        class="pill dark"
+        href="#work"
+      >
+        View selected work →
+      </a>
+
+      <a
+        class="pill"
+        href="#sports"
+      >
+        Explore sport
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- ====================================================
+       PERSONAL INDEX
+  ===================================================== -->
+
+  <div
+    class="identity-board fade"
+    id="identityBoard"
+  >
+
+
+    <div class="identity-top">
+
+      <span>
+        Personal index
+      </span>
+
+      <span>
+        Sport · Systems · Visuals
+      </span>
+
+    </div>
+
+
+    <div class="identity-body">
+
+
+      <!-- LEFT MENU -->
+
+      <div
+        class="identity-menu"
+        aria-label="Explore Mandy's interests"
+      >
+
+
+        <button
+          class="identity-item active"
+          data-key="tennis"
+        >
+
+          <span>
+            01
+          </span>
+
+          <b>
+            Tennis
+          </b>
+
+          <small>
+            Practice / Focus
+          </small>
+
+        </button>
+
+
+        <button
+          class="identity-item"
+          data-key="rowing"
+        >
+
+          <span>
+            02
+          </span>
+
+          <b>
+            Rowing
+          </b>
+
+          <small>
+            Rhythm / Presence
+          </small>
+
+        </button>
+
+
+        <button
+          class="identity-item"
+          data-key="python"
+        >
+
+          <span>
+            03
+          </span>
+
+          <b>
+            Python + Economics
+          </b>
+
+          <small>
+            Models / Decisions
+          </small>
+
+        </button>
+
+
+        <button
+          class="identity-item"
+          data-key="photo"
+        >
+
+          <span>
+            04
+          </span>
+
+          <b>
+            Photography
+          </b>
+
+          <small>
+            Observation / Framing
+          </small>
+
+        </button>
+
+
+        <button
+          class="identity-item"
+          data-key="code"
+        >
+
+          <span>
+            05
+          </span>
+
+          <b>
+            Creative Coding
+          </b>
+
+          <small>
+            Rules / Behavior
+          </small>
+
+        </button>
+
+      </div>
+
+
+      <!-- RIGHT PREVIEW -->
+
+      <div class="identity-preview">
+
+
+        <div class="identity-scenes">
+
+
+          <!-- 01 / TENNIS -->
+
+          <div
+            class="identity-scene active"
+            data-scene="tennis"
+          >
+
+            <div
+              class="scene-photo cover tennis"
+            ></div>
+
+          </div>
+
+
+          <!-- 02 / ROWING -->
+
+          <div
+            class="identity-scene"
+            data-scene="rowing"
+          >
+
+            <div
+              class="scene-rowing"
+            ></div>
+
+          </div>
+
+
+          <!-- 03 / PYTHON + ECONOMICS -->
+
+          <div
+            class="identity-scene"
+            data-scene="python"
+          >
+
+            <div class="python-visual">
+
+
+              <div class="python-code">
+
+                <b>
+                  TimeValue()
+                </b>
+
+                <br><br>
+
+                # input
+
                 <br>
 
-                Build.
+                rate = 5% / 0.05 / 5
+
                 <br>
 
-                <em>
-                    Question.
-                </em>
-            </h1>
+                freq = annual / monthly
 
-            <p>
-                Things I notice, make, and come back to.
-            </p>
+                <br><br>
 
-            <div class="hero-actions">
+                normalize → validate
 
-                <a class="pill dark" href="#work">
-                    View selected work →
-                </a>
+                <br>
 
-                <a class="pill" href="#sports">
-                    Explore sport
-                </a>
+                PV · FV · annuity
+
+              </div>
+
+
+              <div class="python-chart"></div>
+
 
             </div>
 
-        </div>
+          </div>
 
 
-        <!-- RIGHT INTERACTIVE BOARD -->
+          <!-- 04 / PHOTOGRAPHY -->
 
-        <div class="identity-board fade" id="identityBoard">
+          <div
+            class="identity-scene"
+            data-scene="photo"
+          >
 
-            <div class="identity-top">
+            <div
+              class="scene-photo cover photo"
+            ></div>
 
-                <span>
-                    Personal index
-                </span>
+          </div>
 
-                <span>
-                    Sport · Systems · Visuals
-                </span>
 
-            </div>
+          <!-- 05 / CREATIVE CODING -->
 
+          <div
+            class="identity-scene"
+            data-scene="code"
+          >
 
-            <div class="identity-body">
+            <div
+              class="scene-photo cover creative"
+            ></div>
 
+          </div>
 
-                <!-- MENU -->
-
-                <div class="identity-menu" aria-label="Explore Mandy's interests">
-
-                    <button class="identity-item active" data-key="tennis">
-
-                        <span>
-                            01
-                        </span>
-
-                        <b>
-                            Tennis
-                        </b>
-
-                        <small>
-                            Practice / Focus
-                        </small>
-
-                    </button>
-
-
-                    <button class="identity-item" data-key="rowing">
-
-                        <span>
-                            02
-                        </span>
-
-                        <b>
-                            Rowing
-                        </b>
-
-                        <small>
-                            Rhythm / Presence
-                        </small>
-
-                    </button>
-
-
-                    <button class="identity-item" data-key="python">
-
-                        <span>
-                            03
-                        </span>
-
-                        <b>
-                            Python + Economics
-                        </b>
-
-                        <small>
-                            Models / Decisions
-                        </small>
-
-                    </button>
-
-
-                    <button class="identity-item" data-key="photo">
-
-                        <span>
-                            04
-                        </span>
-
-                        <b>
-                            Photography
-                        </b>
-
-                        <small>
-                            Observation / Framing
-                        </small>
-
-                    </button>
-
-
-                    <button class="identity-item" data-key="code">
-
-                        <span>
-                            05
-                        </span>
-
-                        <b>
-                            Creative Coding
-                        </b>
-
-                        <small>
-                            Rules / Behavior
-                        </small>
-
-                    </button>
-
-                </div>
-
-
-                <!-- PREVIEW -->
-
-                <div class="identity-preview">
-
-
-                    <div class="identity-scenes">
-
-                        <!-- TENNIS -->
-                        <div class="identity-scene image-scene active" data-scene="tennis">
-                            <img class="identity-image" src="images/tennis.jpg" alt="Tennis">
-                        </div>
-
-
-                        <!-- ROWING -->
-                        <div class="identity-scene image-scene" data-scene="rowing">
-                            <img class="identity-image" src="images/rowing.jpg" alt="Rowing">
-                        </div>
-
-
-                        <!-- PYTHON + ECONOMICS -->
-                        <div class="identity-scene image-scene" data-scene="python">
-                            <img class="identity-image contain" src="images/python-economics.png"
-                                alt="Python and Economics Project">
-                        </div>
-
-
-                        <!-- PHOTOGRAPHY -->
-                        <div class="identity-scene image-scene" data-scene="photo">
-                            <img class="identity-image" src="images/photography.jpg" alt="Photography">
-                        </div>
-
-
-                        <!-- CREATIVE CODING -->
-                        <div class="identity-scene image-scene" data-scene="code">
-                            <img class="identity-image contain" src="images/creative-code.png" alt="Creative Coding">
-                        </div>
-
-                    </div>
-
-
-                    <!-- PHOTOGRAPHY -->
-
-                    <div class="
-                            identity-scene
-                            scene-photo
-                        " data-scene="photo">
-
-                        <svg viewBox="0 0 520 330">
-
-                            <rect x="78" y="50" width="180" height="220" fill="none" stroke="currentColor"
-                                stroke-width="2" />
-
-                            <rect x="278" y="86" width="166" height="184" fill="none" stroke="currentColor"
-                                stroke-width="2" />
-
-                            <circle cx="170" cy="125" r="38" fill="currentColor" opacity=".7" />
-
-                            <path d="
-                                M80 235
-                                L143 169
-                                L203 211
-                                L258 151
-                                L258 270
-                                L80 270
-                                Z
-                                " fill="currentColor" opacity=".24" />
-
-                            <path d="
-                                M278 221
-                                L326 166
-                                L358 195
-                                L405 132
-                                L444 174
-                                L444 270
-                                L278 270
-                                Z
-                                " fill="currentColor" opacity=".4" />
-
-                        </svg>
-
-                    </div>
-
-
-                    <!-- CREATIVE CODING -->
-
-                    <div class="
-                            identity-scene
-                            scene-code
-                        " data-scene="code">
-
-                        <svg viewBox="0 0 520 330">
-
-                            <g stroke="currentColor" opacity=".36">
-
-                                <line x1="92" y1="90" x2="188" y2="136" />
-
-                                <line x1="188" y1="136" x2="292" y2="83" />
-
-                                <line x1="292" y1="83" x2="406" y2="148" />
-
-                                <line x1="188" y1="136" x2="228" y2="240" />
-
-                                <line x1="228" y1="240" x2="365" y2="227" />
-
-                                <line x1="365" y1="227" x2="406" y2="148" />
-
-                                <line x1="92" y1="90" x2="132" y2="226" />
-
-                            </g>
-
-
-                            <g fill="currentColor">
-
-                                <circle cx="92" cy="90" r="8" />
-
-                                <circle cx="188" cy="136" r="13" />
-
-                                <circle cx="292" cy="83" r="7" />
-
-                                <circle cx="406" cy="148" r="11" />
-
-                                <circle cx="228" cy="240" r="9" />
-
-                                <circle cx="365" cy="227" r="7" />
-
-                                <circle cx="132" cy="226" r="6" />
-
-                            </g>
-
-                        </svg>
-
-                    </div>
-
-                </div>
-
-
-                <!-- DYNAMIC TEXT -->
-
-                <div class="identity-copy">
-
-                    <span id="identityKicker">
-                        SPORT / PRACTICE
-                    </span>
-
-                    <h3 id="identityTitle">
-                        Tennis
-                    </h3>
-
-                    <p id="identityText">
-                        A place where I practice showing up,
-                        resetting after mistakes,
-                        and staying with what is happening now.
-                    </p>
-
-                    <div class="identity-tags" id="identityTags">
-                        Presence · Repetition · Reset
-                    </div>
-
-                </div>
-
-            </div>
 
         </div>
 
 
-        <div class="identity-bottom">
+        <!-- TEXT BELOW PREVIEW -->
 
-            <span>
-                Hover or click to explore
-            </span>
+        <div class="identity-copy">
 
-            <a href="#sports">
-                Start with sport →
-            </a>
+          <span id="identityKicker">
+            SPORT / PRACTICE
+          </span>
+
+          <h3 id="identityTitle">
+            Tennis
+          </h3>
+
+          <p id="identityText">
+            A place where I practice showing up,
+            resetting after mistakes,
+            and staying with what is happening now.
+          </p>
+
+          <div
+            class="identity-tags"
+            id="identityTags"
+          >
+            Presence · Repetition · Reset
+          </div>
 
         </div>
 
-        </div>
+      </div>
 
-    </section>
+    </div>
 
 
-    <!-- ======================================================
+    <div class="identity-bottom">
+
+      <span>
+        Click to explore
+      </span>
+
+      <a href="#sports">
+        Start with sport →
+      </a>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
      HOW I THINK
 ====================================================== -->
 
-    <section class="section" id="thinking">
-
-        <div class="section-head fade">
-
-            <div>
-
-                <div class="page-index">
-                    01 / How I think
-                </div>
-
-            </div>
+<section
+  class="section"
+  id="thinking"
+>
 
 
-            <div>
+  <div class="section-head fade">
 
-                <h2>
-                    Different tools,
-                    <br>
+    <div>
 
-                    <em>
-                        same curiosity.
-                    </em>
-                </h2>
+      <div class="page-index">
+        01 / How I think
+      </div>
 
-                <p class="section-intro">
-                    Rather than list interests,
-                    this section shows the role each one plays.
-                    Click the words to change the right-hand panel.
-                </p>
+    </div>
 
-            </div>
+
+    <div>
+
+      <h2>
+        Different tools,
+        <br>
+
+        <em>
+          same curiosity.
+        </em>
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="think-grid fade">
+
+
+    <div class="think-menu">
+
+
+      <button
+        class="think-btn active"
+        data-key="observe"
+      >
+
+        <span class="think-word">
+          Observe
+        </span>
+
+        <span class="think-num">
+          01
+        </span>
+
+      </button>
+
+
+      <button
+        class="think-btn"
+        data-key="model"
+      >
+
+        <span class="think-word">
+          Model
+        </span>
+
+        <span class="think-num">
+          02
+        </span>
+
+      </button>
+
+
+      <button
+        class="think-btn"
+        data-key="build"
+      >
+
+        <span class="think-word">
+          Build
+        </span>
+
+        <span class="think-num">
+          03
+        </span>
+
+      </button>
+
+
+      <button
+        class="think-btn"
+        data-key="question"
+      >
+
+        <span class="think-word">
+          Question
+        </span>
+
+        <span class="think-num">
+          04
+        </span>
+
+      </button>
+
+
+    </div>
+
+
+    <div
+      class="think-panel"
+      id="thinkPanel"
+    >
+
+
+      <div class="page-index">
+        Photography / attention
+      </div>
+
+
+      <div class="big">
+        I use images to slow down
+        and notice patterns
+        I would normally pass by.
+      </div>
+
+
+      <div class="mini">
+
+
+        <div>
+
+          WHAT IT TRAINS
+          <br>
+
+          <b>
+            Attention · Framing · Detail
+          </b>
 
         </div>
 
 
-        <div class="think-grid fade">
+        <div>
 
+          WHERE IT APPEARS
+          <br>
 
-            <!-- LEFT -->
-
-            <div class="think-menu">
-
-                <button class="think-btn active" data-key="observe">
-
-                    <span class="think-word">
-                        Observe
-                    </span>
-
-                    <span class="think-num">
-                        01
-                    </span>
-
-                </button>
-
-
-                <button class="think-btn" data-key="model">
-
-                    <span class="think-word">
-                        Model
-                    </span>
-
-                    <span class="think-num">
-                        02
-                    </span>
-
-                </button>
-
-
-                <button class="think-btn" data-key="build">
-
-                    <span class="think-word">
-                        Build
-                    </span>
-
-                    <span class="think-num">
-                        03
-                    </span>
-
-                </button>
-
-
-                <button class="think-btn" data-key="question">
-
-                    <span class="think-word">
-                        Question
-                    </span>
-
-                    <span class="think-num">
-                        04
-                    </span>
-
-                </button>
-
-            </div>
-
-
-            <!-- RIGHT -->
-
-            <div class="think-panel" id="thinkPanel">
-
-                <div class="page-index">
-                    Photography / attention
-                </div>
-
-                <div class="big">
-                    I use images to slow down
-                    and notice patterns
-                    I would normally pass by.
-                </div>
-
-                <div class="mini">
-
-                    <div>
-                        WHAT IT TRAINS
-                        <br>
-
-                        <b>
-                            Attention · Framing · Detail
-                        </b>
-                    </div>
-
-                    <div>
-                        WHERE IT APPEARS
-                        <br>
-
-                        <b>
-                            Photography · Research · Observation
-                        </b>
-                    </div>
-
-                </div>
-
-            </div>
+          <b>
+            Photography · Research · Observation
+          </b>
 
         </div>
 
-    </section>
+
+      </div>
 
 
-    <!-- ======================================================
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
      SPORTS
 ====================================================== -->
 
-    <section class="section sports" id="sports">
+<section
+  class="section sports"
+  id="sports"
+>
 
 
-        <!-- HEADER -->
-
-        <div class="section-head fade">
-
-            <div>
-
-                <div class="page-index">
-                    02 / Sport
-                </div>
-
-            </div>
+  <div class="section-head fade">
 
 
-            <div>
+    <div>
 
-                <h2>
-                    Two sides
-                    <br>
+      <div class="page-index">
+        02 / Sport
+      </div>
 
-                    of
+    </div>
 
-                    <em>
-                        sport.
-                    </em>
-                </h2>
 
-                <p class="section-intro">
+    <div>
 
-                    Sport is both something I practice
-                    and something I am beginning to understand
-                    from behind the scenes.
+      <h2>
+        Two sides
+        <br>
 
-                    One side is personal —
-                    showing up, focusing,
-                    and feeling change over time.
+        of
 
-                    The other is organizational —
-                    seeing how an event is planned
-                    before anyone enters the venue.
+        <em>
+          sport.
+        </em>
+      </h2>
 
-                </p>
 
-            </div>
+      <p class="section-intro">
+        I experience sport both by participating in it
+        and by beginning to see what happens behind an event.
+      </p>
 
+    </div>
+
+
+  </div>
+
+
+  <!-- 4 PART LOOP -->
+
+  <div class="sports-loop fade">
+
+
+    <div class="loop-item">
+
+      <span>
+        01
+      </span>
+
+      <h3>
+        Resistance
+      </h3>
+
+      <p>
+        I often hesitate before I start.
+      </p>
+
+    </div>
+
+
+    <div class="loop-item">
+
+      <span>
+        02
+      </span>
+
+      <h3>
+        Presence
+      </h3>
+
+      <p>
+        Movement narrows my attention to the moment.
+      </p>
+
+    </div>
+
+
+    <div class="loop-item">
+
+      <span>
+        03
+      </span>
+
+      <h3>
+        Release
+      </h3>
+
+      <p>
+        I finish physically tired,
+        mentally lighter.
+      </p>
+
+    </div>
+
+
+    <div class="loop-item">
+
+      <span>
+        04
+      </span>
+
+      <h3>
+        Change
+      </h3>
+
+      <p>
+        Small repetitions become visible
+        only over time.
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- TENNIS -->
+
+  <div class="sport-story fade">
+
+
+    <div class="sport-art">
+
+      <div
+        class="sport-image tennis-large"
+      ></div>
+
+      <div class="caption">
+        Replace with your tennis photo if needed
+      </div>
+
+    </div>
+
+
+    <div class="sport-copy">
+
+
+      <div>
+
+        <div class="kicker">
+          Tennis / the practice of showing up
         </div>
 
+        <h3>
+          Before,
+          <br>
 
-        <!-- PROCESS -->
+          I hesitate.
+        </h3>
 
-        <div class="sports-loop fade">
+        <p>
+          There is usually a moment before practice
+          when I want to stay home or keep studying.
 
-            <div class="loop-item">
+          I know that feeling well enough now
+          that I try not to treat it as a decision.
 
-                <span>
-                    01
-                </span>
+          I simply go.
+        </p>
 
-                <h3>
-                    Resistance
-                </h3>
-
-                <p>
-                    I often hesitate before I start.
-                </p>
-
-            </div>
+      </div>
 
 
-            <div class="loop-item">
-
-                <span>
-                    02
-                </span>
-
-                <h3>
-                    Presence
-                </h3>
-
-                <p>
-                    Movement narrows my attention
-                    to the moment.
-                </p>
-
-            </div>
+      <div class="quote">
+        “The hardest part is often just starting.”
+      </div>
 
 
-            <div class="loop-item">
-
-                <span>
-                    03
-                </span>
-
-                <h3>
-                    Release
-                </h3>
-
-                <p>
-                    I finish physically tired,
-                    mentally lighter.
-                </p>
-
-            </div>
+    </div>
 
 
-            <div class="loop-item">
+  </div>
 
-                <span>
-                    04
-                </span>
 
-                <h3>
-                    Change
-                </h3>
+  <!-- ROWING -->
 
-                <p>
-                    Small repetitions become visible
-                    only over time.
-                </p>
+  <div class="sport-story reverse fade">
 
-            </div>
 
+    <div class="sport-copy">
+
+
+      <div>
+
+        <div class="kicker">
+          Rowing / returning to the present
         </div>
 
+        <h3>
+          During,
+          <br>
 
-        <!-- ==================================================
-         TENNIS
-    ================================================== -->
+          I return.
+        </h3>
 
-        <div class="sport-story fade">
+        <p>
+          Once I start moving,
+          schoolwork and deadlines move into the background.
 
+          In rowing,
+          repetition and rhythm make my attention settle
+          into the body
+          instead of the noise around it.
+        </p>
 
-            <!-- IMAGE PLACEHOLDER -->
+      </div>
 
-            <div class="sport-art">
 
-                <!--
-                LATER:
+      <div class="quote">
+        “Movement gives my mind somewhere to be.”
+      </div>
 
-                Replace this whole SVG with:
 
-                <img
-                    class="sport-svg"
-                    src="assets/images/tennis.jpg"
-                    alt="Tennis practice"
-                    style="object-fit:cover;"
-                >
-            -->
+    </div>
 
-                <svg class="sport-svg" viewBox="0 0 900 760" preserveAspectRatio="xMidYMid slice"
-                    aria-label="Tennis placeholder">
 
-                    <defs>
+    <div class="sport-art">
 
-                        <linearGradient id="tg" x1="0" x2="1">
+      <div
+        class="sport-image rowing-large"
+      ></div>
 
-                            <stop stop-color="#687b64" />
+      <div class="caption">
+        Rowing
+      </div>
 
-                            <stop offset="1" stop-color="#9baa8b" />
+    </div>
 
-                        </linearGradient>
 
-                    </defs>
+  </div>
 
-                    <rect width="900" height="760" fill="url(#tg)" />
 
-                    <g stroke="#f4efe4" stroke-width="8" opacity=".92">
+  <!-- PARTICIPATING / ORGANIZING -->
 
-                        <rect x="120" y="90" width="660" height="580" fill="none" />
+  <div class="sport-two-sides fade">
 
-                        <line x1="450" y1="90" x2="450" y2="670" />
 
-                        <line x1="120" y1="380" x2="780" y2="380" />
+    <div class="sport-side">
 
-                        <rect x="275" y="90" width="350" height="580" fill="none" />
+      <span>
+        01 / PARTICIPATING
+      </span>
 
-                    </g>
+      <h3>
+        On the court.
+        <br>
 
+        On the water.
+      </h3>
 
-                    <circle cx="690" cy="210" r="22" fill="#d8e36d" />
+      <p>
+        Tennis and rowing are where I experience sport
+        from inside the movement:
 
+        effort,
+        focus,
+        routine,
+        recovery,
 
-                    <path d="
-                    M210 545
-                    C295 455
-                    335 350
-                    405 265
-                    " fill="none" stroke="#151515" stroke-width="16" stroke-linecap="round" opacity=".7" />
+        and the gradual changes
+        that only appear
+        after staying with something.
+      </p>
 
+      <div class="side-tags">
+        Tennis · Rowing · Presence · Health
+      </div>
 
-                    <circle cx="200" cy="555" r="30" fill="#151515" opacity=".7" />
+    </div>
 
-                </svg>
 
+    <div class="sport-side organizer-side">
 
-                <div class="caption">
-                    Replace with your tennis photo
-                </div>
+      <span>
+        02 / ORGANIZING
+      </span>
 
-            </div>
+      <h3>
+        Behind
+        <br>
 
+        the event.
+      </h3>
 
-            <!-- TEXT -->
+      <p>
+        I am also participating
+        in the behind-the-scenes planning
+        of a sports event.
 
-            <div class="sport-copy">
+        This space can later hold
+        planning materials,
+        responsibilities,
+        decisions,
+        changes,
+        and event-day execution.
+      </p>
 
-                <div>
+      <a
+        class="sport-work-link"
+        href="#work"
+      >
+        See it develop in Work →
+      </a>
 
-                    <div class="kicker">
-                        Tennis / the practice of showing up
-                    </div>
+    </div>
 
-                    <h3>
-                        Before,
-                        <br>
 
-                        I hesitate.
-                    </h3>
+  </div>
 
-                    <p>
 
-                        There is usually a moment before practice
-                        when I want to stay home
-                        or keep studying.
+</section>
 
-                        I know that feeling well enough now
-                        that I try not to treat it
-                        as a decision.
 
-                        I simply go.
-
-                    </p>
-
-                </div>
-
-
-                <div class="quote">
-                    “The hardest part is often just starting.”
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ==================================================
-         ROWING
-    ================================================== -->
-
-        <div class="sport-story reverse fade">
-
-
-            <!-- TEXT -->
-
-            <div class="sport-copy">
-
-                <div>
-
-                    <div class="kicker">
-                        Rowing / returning to the present
-                    </div>
-
-                    <h3>
-                        During,
-                        <br>
-
-                        I return.
-                    </h3>
-
-                    <p>
-
-                        Once I start moving,
-                        schoolwork and deadlines
-                        move into the background.
-
-                        In rowing,
-                        repetition and rhythm
-                        make my attention settle
-                        into the body
-                        instead of the noise around it.
-
-                    </p>
-
-                </div>
-
-
-                <div class="quote">
-                    “Movement gives my mind somewhere to be.”
-                </div>
-
-            </div>
-
-
-            <!-- IMAGE PLACEHOLDER -->
-
-            <div class="sport-art">
-
-                <!--
-                Replace with your rowing photo later.
-            -->
-
-                <svg class="sport-svg" viewBox="0 0 900 760" preserveAspectRatio="xMidYMid slice"
-                    aria-label="Rowing placeholder">
-
-                    <defs>
-
-                        <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
-
-                            <stop stop-color="#9eb9c5" />
-
-                            <stop offset="1" stop-color="#143240" />
-
-                        </linearGradient>
-
-                    </defs>
-
-
-                    <rect width="900" height="760" fill="url(#rg)" />
-
-
-                    <g fill="none" stroke="#d8e6e8" opacity=".27" stroke-width="3">
-
-                        <path d="
-                        M0 120
-                        Q180 90
-                        360 120
-                        T900 120
-                        " />
-
-                        <path d="
-                        M0 210
-                        Q180 175
-                        360 210
-                        T900 210
-                        " />
-
-                        <path d="
-                        M0 310
-                        Q180 275
-                        360 310
-                        T900 310
-                        " />
-
-                        <path d="
-                        M0 430
-                        Q180 390
-                        360 430
-                        T900 430
-                        " />
-
-                        <path d="
-                        M0 560
-                        Q180 520
-                        360 560
-                        T900 560
-                        " />
-
-                    </g>
-
-
-                    <path d="
-                    M450 155
-                    L474 620
-                    L450 685
-                    L426 620
-                    Z
-                    " fill="#ece9df" />
-
-
-                    <g stroke="#efece4" stroke-width="7">
-
-                        <line x1="445" y1="300" x2="260" y2="250" />
-
-                        <line x1="455" y1="300" x2="640" y2="250" />
-
-                        <line x1="442" y1="405" x2="220" y2="390" />
-
-                        <line x1="458" y1="405" x2="680" y2="390" />
-
-                        <line x1="440" y1="510" x2="250" y2="550" />
-
-                        <line x1="460" y1="510" x2="650" y2="550" />
-
-                    </g>
-
-
-                    <circle cx="450" cy="360" r="24" fill="#d16e4e" />
-
-                </svg>
-
-
-                <div class="caption">
-                    Replace with your rowing photo
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ==================================================
-         PARTICIPATING VS ORGANIZING
-    ================================================== -->
-
-        <div class="sport-two-sides fade">
-
-
-            <!-- PARTICIPATING -->
-
-            <div class="
-            sport-side
-            participant-side
-        ">
-
-                <span>
-                    01 / PARTICIPATING
-                </span>
-
-                <h3>
-                    On the court.
-                    <br>
-
-                    On the water.
-                </h3>
-
-                <p>
-
-                    Tennis and rowing are where I experience
-                    sport from inside the movement:
-
-                    effort,
-                    focus,
-                    routine,
-                    recovery,
-
-                    and the gradual changes
-                    that only appear
-                    after staying with something.
-
-                </p>
-
-                <div class="side-tags">
-                    Tennis · Rowing · Presence · Health
-                </div>
-
-            </div>
-
-
-            <!-- ORGANIZING -->
-
-            <div class="
-            sport-side
-            organizer-side
-        ">
-
-                <span>
-                    02 / ORGANIZING
-                </span>
-
-                <h3>
-                    Behind
-                    <br>
-
-                    the event.
-                </h3>
-
-                <p>
-
-                    I am also participating in the
-                    behind-the-scenes planning
-                    of a sports event.
-
-                    I want to use this space
-                    to document the parts
-                    I actually work on —
-
-                    planning materials,
-                    decisions,
-                    changes,
-                    execution,
-
-                    and what I learn
-                    from seeing sport
-                    as an organized experience.
-
-                </p>
-
-                <a class="sport-work-link" href="#work">
-                    See it develop in Work →
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ======================================================
+<!-- ======================================================
      WORK
 ====================================================== -->
 
-    <section class="section work" id="work">
+<section
+  class="section work"
+  id="work"
+>
 
 
-        <!-- HEADER -->
+  <div class="section-head fade">
 
-        <div class="section-head fade">
 
-            <div>
+    <div>
 
-                <div class="page-index">
-                    03 / Selected work
-                </div>
+      <div class="page-index">
+        03 / Selected work
+      </div>
 
-            </div>
+    </div>
 
 
-            <div>
+    <div>
 
-                <h2>
-                    Things I build,
-                    <br>
+      <h2>
+        Things I build,
+        <br>
 
-                    test,
-                    and
+        test,
+        and
 
-                    <em>
-                        question.
-                    </em>
-                </h2>
+        <em>
+          question.
+        </em>
+      </h2>
 
-                <p class="section-intro">
+      <p class="section-intro">
+        Projects, experiments,
+        and things I return to.
+      </p>
 
-                    Some ideas become larger case studies;
-                    others stay as smaller visual experiments.
+    </div>
 
-                    I keep both here —
-                    along with the process,
-                    changes,
-                    and links to the work itself.
 
-                </p>
+  </div>
 
-            </div>
 
-        </div>
+  <!-- APPLIED -->
 
+  <div class="work-subhead fade">
 
-        <!-- ==================================================
-         APPLIED / ACADEMIC
-    ================================================== -->
+    <div class="page-index">
+      A / Applied + academic work
+    </div>
 
-        <div class="work-subhead fade">
+    <p>
+      Larger projects where process,
+      decisions,
+      and context matter.
+    </p>
 
-            <div class="page-index">
-                A / Applied + academic work
-            </div>
+  </div>
 
-            <p>
-                Projects where the process,
-                decisions,
-                and context matter as much
-                as the final output.
-            </p>
 
-        </div>
+  <div class="
+    work-grid
+    featured-work-grid
+  ">
 
 
-        <div class="
-        work-grid
-        featured-work-grid
-    ">
+    <!-- EVENT PROJECT -->
 
+    <article class="project-card fade">
 
-            <!-- =================================================
-             PROJECT 01 — EVENT PLANNING
-        ================================================= -->
 
-            <article class="project-card fade">
+      <div class="project-meta">
 
+        <span>
+          Current activity
+        </span>
 
-                <div class="project-meta">
+        <span>
+          Sport · Event Planning
+        </span>
 
-                    <span>
-                        Current activity
-                    </span>
+      </div>
 
-                    <span>
-                        Sport · Event Planning
-                    </span>
 
-                </div>
+      <div class="project-visual">
 
 
-                <div class="
-                project-visual
-                event-visual
-            ">
+        <div class="event-board">
 
-                    <div class="event-board">
 
+          <div class="event-board-top">
 
-                        <div class="event-board-top">
+            <span>
+              BEHIND THE EVENT
+            </span>
 
-                            <span>
-                                BEHIND THE EVENT
-                            </span>
+            <span>
+              WORK IN PROGRESS
+            </span>
 
-                            <span>
-                                WORK IN PROGRESS
-                            </span>
+          </div>
 
-                        </div>
 
-
-                        <div class="event-flow">
-
-
-                            <div>
-
-                                <span>
-                                    01
-                                </span>
-
-                                <b>
-                                    PLAN
-                                </b>
-
-                                <small>
-                                    before the event
-                                </small>
-
-                            </div>
-
-
-                            <i>
-                                →
-                            </i>
-
-
-                            <div>
-
-                                <span>
-                                    02
-                                </span>
-
-                                <b>
-                                    COORDINATE
-                                </b>
-
-                                <small>
-                                    people + information
-                                </small>
-
-                            </div>
-
-
-                            <i>
-                                →
-                            </i>
-
-
-                            <div>
-
-                                <span>
-                                    03
-                                </span>
-
-                                <b>
-                                    EXECUTE
-                                </b>
-
-                                <small>
-                                    event day
-                                </small>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="event-slots">
-
-                            <span>
-                                timeline
-                            </span>
-
-                            <span>
-                                venue
-                            </span>
-
-                            <span>
-                                communication
-                            </span>
-
-                            <span>
-                                changes
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-
-                <div class="project-copy">
-
-                    <h3>
-                        Behind the Event
-                    </h3>
-
-                    <p>
-
-                        <b>
-                            Current experience.
-                        </b>
-
-                        I am participating
-                        in the behind-the-scenes
-                        planning of a sports event.
-
-                        This card is intentionally unfinished:
-
-                        I will replace the placeholders
-                        with the responsibilities,
-                        planning artifacts,
-                        problems,
-                        decisions
-                        and reflections
-                        that actually emerge.
-
-                    </p>
-
-
-                    <div class="project-link-row">
-
-                        <span>
-                            CASE STUDY / PROJECT LINK
-                        </span>
-
-                        <!--
-                        REPLACE # WITH YOUR PROJECT URL
-                    -->
-
-                        <a class="
-                            project-link
-                            placeholder
-                        " href="#" onclick="return false;">
-                            Add link when ready ↗
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-             PROJECT 02 — UCLA
-        ================================================= -->
-
-            <article class="project-card fade">
-
-
-                <div class="project-meta">
-
-                    <span>
-                        UCLA Summer Study
-                    </span>
-
-                    <span>
-                        Python + Economics
-                    </span>
-
-                </div>
-
-
-                <div class="project-visual">
-
-
-                    <div class="ucla-board">
-
-
-                        <!-- LEFT CODE -->
-
-                        <div class="ucla-code">
-
-                            <b>
-                                TimeValue()
-                            </b>
-
-                            <br><br>
-
-                            <span class="muted">
-                                # input
-                            </span>
-
-                            <br>
-
-                            rate = 5% / 0.05 / 5
-
-                            <br>
-
-                            freq = annual / monthly
-
-                            <br><br>
-
-
-                            <span class="muted">
-                                normalize → validate
-                            </span>
-
-                            <br>
-
-                            PV · FV · annuity
-
-                            <br><br>
-
-
-                            <span class="ucla-note">
-                                formula → usable tool
-                            </span>
-
-                        </div>
-
-
-                        <!-- RIGHT GRAPH -->
-
-                        <div class="ucla-chart">
-
-
-                            <div class="ucla-chart-top">
-
-                                <span>
-                                    portfolio optimization
-                                </span>
-
-                                <span>
-                                    risk / return
-                                </span>
-
-                            </div>
-
-
-                            <svg viewBox="0 0 360 250" aria-label="stylized efficient frontier">
-
-
-                                <line x1="42" y1="212" x2="330" y2="212" stroke="#aeb4ae" />
-
-
-                                <line x1="42" y1="212" x2="42" y2="25" stroke="#aeb4ae" />
-
-
-                                <g fill="#9daa9f" opacity=".45">
-
-                                    <circle cx="82" cy="185" r="3" />
-
-                                    <circle cx="102" cy="171" r="3" />
-
-                                    <circle cx="124" cy="164" r="3" />
-
-                                    <circle cx="143" cy="147" r="3" />
-
-                                    <circle cx="167" cy="140" r="3" />
-
-                                    <circle cx="191" cy="118" r="3" />
-
-                                    <circle cx="218" cy="105" r="3" />
-
-                                    <circle cx="244" cy="90" r="3" />
-
-                                    <circle cx="272" cy="77" r="3" />
-
-                                </g>
-
-
-                                <path d="
-                                M73 190
-                                C116 176
-                                154 145
-                                189 121
-                                C225 97
-                                260 77
-                                306 61
-                                " fill="none" stroke="#647b6c" stroke-width="4" />
-
-
-                                <circle cx="236" cy="95" r="9" fill="#f5f3ed" stroke="#27332c" stroke-width="3" />
-
-
-                                <text x="250" y="91" font-size="9" fill="#556159">
-                                    max Sharpe
-                                </text>
-
-
-                                <text x="250" y="104" font-size="8" fill="#89918b">
-                                    one definition of “best”
-                                </text>
-
-                            </svg>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="project-copy">
-
-                    <h3>
-                        From Models to Decisions
-                    </h3>
-
-                    <p>
-
-                        <b>
-                            Two course projects.
-                        </b>
-
-                        A time-value calculator
-                        taught me to turn formulas
-                        into usable logic;
-
-                        portfolio optimization
-                        made me question
-                        how assumptions and objectives
-                        shape a supposedly
-                        “optimal” answer.
-
-                    </p>
-
-
-                    <div class="project-link-row">
-
-                        <span>
-                            PROJECT / NOTEBOOK LINK
-                        </span>
-
-                        <a class="
-                            project-link
-                            placeholder
-                        " href="#" onclick="return false;">
-                            Add public link ↗
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-
-        <!-- ==================================================
-         VISUAL PROJECTS
-    ================================================== -->
-
-        <div class="
-        work-subhead
-        visual-subhead
-        fade
-    ">
+          <div class="event-flow">
 
 
             <div>
 
-                <div class="page-index">
-                    B / Visual projects
-                </div>
+              <span>
+                01
+              </span>
 
-                <h3>
-                    Code as a place
-                    <br>
+              <b>
+                PLAN
+              </b>
 
-                    to
-
-                    <em>
-                        experiment.
-                    </em>
-                </h3>
+              <small>
+                before the event
+              </small>
 
             </div>
 
 
-            <p>
-                Four earlier visual experiments,
-                kept as part of the trail.
+            <i>
+              →
+            </i>
 
-                Two open spaces are left
-                for whatever I build next.
-            </p>
+
+            <div>
+
+              <span>
+                02
+              </span>
+
+              <b>
+                COORDINATE
+              </b>
+
+              <small>
+                people + information
+              </small>
+
+            </div>
+
+
+            <i>
+              →
+            </i>
+
+
+            <div>
+
+              <span>
+                03
+              </span>
+
+              <b>
+                EXECUTE
+              </b>
+
+              <small>
+                event day
+              </small>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="event-slots">
+
+            <span>
+              timeline
+            </span>
+
+            <span>
+              venue
+            </span>
+
+            <span>
+              communication
+            </span>
+
+            <span>
+              changes
+            </span>
+
+          </div>
+
 
         </div>
 
 
-        <div class="visual-project-grid">
+      </div>
 
 
-            <!-- =================================================
-             VISUAL PROJECT 01
-             GRID 1
-        ================================================= -->
+      <div class="project-copy">
 
-            <article class="visual-card fade">
 
+        <h3>
+          Behind the Event
+        </h3>
 
-                <div class="visual-card-top">
 
-                    <span>
-                        01 / EXISTING
-                    </span>
+        <p>
+          This will become a case study
+          built from the work you actually do
+          during the event-planning process.
+        </p>
 
-                    <span>
-                        CREATIVE CODE
-                    </span>
 
-                </div>
+        <div class="project-link-row">
 
+          <span>
+            CASE STUDY / PROJECT LINK
+          </span>
 
-                <div class="live-preview">
-
-
-                    <iframe src="https://mandyyi09.github.io/grid-1/" title="Grid-1 live preview" loading="lazy"
-                        tabindex="-1"></iframe>
-
-
-                    <div class="
-                        preview-fallback
-                        grid-one
-                    " aria-hidden="true">
-
-                        <div class="mini-grid"></div>
-
-                    </div>
-
-
-                    <span class="live-label">
-                        LIVE PROJECT PREVIEW
-                    </span>
-
-                </div>
-
-
-                <div class="visual-card-copy">
-
-
-                    <div>
-
-                        <h3>
-                            Grid-1
-                        </h3>
-
-                        <p>
-                            Existing visual project.
-                            Replace this line with the question,
-                            rule,
-                            or experiment behind the piece.
-                        </p>
-
-                    </div>
-
-
-                    <a class="project-link" href="https://mandyyi09.github.io/grid-1/" target="_blank" rel="noopener">
-                        Open project ↗
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-             VISUAL PROJECT 02
-             GRID 2
-        ================================================= -->
-
-            <article class="visual-card fade">
-
-
-                <div class="visual-card-top">
-
-                    <span>
-                        02 / EXISTING
-                    </span>
-
-                    <span>
-                        CREATIVE CODE
-                    </span>
-
-                </div>
-
-
-                <div class="live-preview">
-
-
-                    <iframe src="https://mandyyi09.github.io/grid-2/" title="Grid-2 live preview" loading="lazy"
-                        tabindex="-1"></iframe>
-
-
-                    <div class="
-                        preview-fallback
-                        grid-two
-                    " aria-hidden="true">
-
-                        <div class="shape s1"></div>
-
-                        <div class="shape s2"></div>
-
-                        <div class="shape s3"></div>
-
-                    </div>
-
-
-                    <span class="live-label">
-                        LIVE PROJECT PREVIEW
-                    </span>
-
-                </div>
-
-
-                <div class="visual-card-copy">
-
-
-                    <div>
-
-                        <h3>
-                            Grid-2
-                        </h3>
-
-                        <p>
-                            Existing visual project.
-                            Replace this line with the question,
-                            rule,
-                            or experiment behind the piece.
-                        </p>
-
-                    </div>
-
-
-                    <a class="project-link" href="https://mandyyi09.github.io/grid-2/" target="_blank" rel="noopener">
-                        Open project ↗
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-             VISUAL PROJECT 03
-             AI HAND
-        ================================================= -->
-
-            <article class="visual-card fade">
-
-
-                <div class="visual-card-top">
-
-                    <span>
-                        03 / EXISTING
-                    </span>
-
-                    <span>
-                        AI + VISUAL
-                    </span>
-
-                </div>
-
-
-                <div class="live-preview">
-
-
-                    <iframe src="https://mandyyi09.github.io/ai-hands/" title="AI Hand live preview" loading="lazy"
-                        tabindex="-1"></iframe>
-
-
-                    <div class="
-                        preview-fallback
-                        hand-fallback
-                    " aria-hidden="true">
-
-                        <span>
-                            AI
-                        </span>
-
-                        <div class="hand-lines">
-                            ⌁
-                            <br>
-
-                            ╲│╱
-                            <br>
-
-                            ╱│╲
-                        </div>
-
-                    </div>
-
-
-                    <span class="live-label">
-                        LIVE PROJECT PREVIEW
-                    </span>
-
-                </div>
-
-
-                <div class="visual-card-copy">
-
-
-                    <div>
-
-                        <h3>
-                            AI Hand
-                        </h3>
-
-                        <p>
-                            Existing visual project.
-                            Keep the final description grounded
-                            in what the project actually explores.
-                        </p>
-
-                    </div>
-
-
-                    <a class="project-link" href="https://mandyyi09.github.io/ai-hands/" target="_blank" rel="noopener">
-                        Open project ↗
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-             VISUAL PROJECT 04
-             WALKER
-        ================================================= -->
-
-            <article class="visual-card fade">
-
-
-                <div class="visual-card-top">
-
-                    <span>
-                        04 / EXISTING
-                    </span>
-
-                    <span>
-                        CREATIVE CODE
-                    </span>
-
-                </div>
-
-
-                <div class="live-preview">
-
-
-                    <iframe src="https://mandyyi09.github.io/walker/" title="Walker live preview" loading="lazy"
-                        tabindex="-1"></iframe>
-
-
-                    <div class="
-                        preview-fallback
-                        walker-fallback
-                    " aria-hidden="true">
-
-                        <div class="walker-path"></div>
-
-                        <span class="walker-dot"></span>
-
-                    </div>
-
-
-                    <span class="live-label">
-                        LIVE PROJECT PREVIEW
-                    </span>
-
-                </div>
-
-
-                <div class="visual-card-copy">
-
-
-                    <div>
-
-                        <h3>
-                            Walker
-                        </h3>
-
-                        <p>
-                            Existing visual project.
-                            Add one sentence later explaining
-                            the rule,
-                            interaction,
-                            or idea you were testing.
-                        </p>
-
-                    </div>
-
-
-                    <a class="project-link" href="https://mandyyi09.github.io/walker/" target="_blank" rel="noopener">
-                        Open project ↗
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-             FUTURE PROJECT 05
-        ================================================= -->
-
-            <article class="
-            visual-card
-            future-card
-            fade
-        ">
-
-
-                <div class="visual-card-top">
-
-                    <span>
-                        05 / RESERVED
-                    </span>
-
-                    <span>
-                        FUTURE PROJECT
-                    </span>
-
-                </div>
-
-
-                <div class="future-preview">
-
-                    <span>
-                        05
-                    </span>
-
-                    <p>
-                        DROP
-                        <br>
-
-                        PROJECT
-                        <br>
-
-                        HERE
-                    </p>
-
-                </div>
-
-
-                <div class="visual-card-copy">
-
-
-                    <div>
-
-                        <h3>
-                            Future Project
-                        </h3>
-
-                        <p>
-                            Reserved for a project
-                            that grows from a real question,
-                            activity,
-                            or problem
-                            you want to investigate.
-                        </p>
-
-                    </div>
-
-
-                    <a class="
-                        project-link
-                        placeholder
-                    " href="#" onclick="return false;">
-                        Add project link ↗
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-             FUTURE PROJECT 06
-        ================================================= -->
-
-            <article class="
-            visual-card
-            future-card
-            fade
-        ">
-
-
-                <div class="visual-card-top">
-
-                    <span>
-                        06 / RESERVED
-                    </span>
-
-                    <span>
-                        FUTURE PROJECT
-                    </span>
-
-                </div>
-
-
-                <div class="
-                future-preview
-                alt
-            ">
-
-                    <span>
-                        06
-                    </span>
-
-                    <p>
-                        DROP
-                        <br>
-
-                        PROJECT
-                        <br>
-
-                        HERE
-                    </p>
-
-                </div>
-
-
-                <div class="visual-card-copy">
-
-
-                    <div>
-
-                        <h3>
-                            Future Project
-                        </h3>
-
-                        <p>
-                            Reserved for another project.
-
-                            The layout is already complete;
-
-                            only the visual,
-                            description
-                            and link
-                            need to change.
-                        </p>
-
-                    </div>
-
-
-                    <a class="
-                        project-link
-                        placeholder
-                    " href="#" onclick="return false;">
-                        Add project link ↗
-                    </a>
-
-                </div>
-
-            </article>
+          <a
+            class="project-link placeholder"
+            href="#"
+            onclick="return false;"
+          >
+            Add link when ready ↗
+          </a>
 
         </div>
 
-    </section>
+
+      </div>
 
 
-    <!-- ======================================================
+    </article>
+
+
+    <!-- UCLA -->
+
+    <article class="project-card fade">
+
+
+      <div class="project-meta">
+
+        <span>
+          UCLA Summer Study
+        </span>
+
+        <span>
+          Python + Economics
+        </span>
+
+      </div>
+
+
+      <div class="project-visual">
+
+
+        <div class="ucla-board">
+
+
+          <div class="ucla-code">
+
+            <b>
+              TimeValue()
+            </b>
+
+            <br><br>
+
+            <span class="muted">
+              # input
+            </span>
+
+            <br>
+
+            rate = 5% / 0.05 / 5
+
+            <br>
+
+            freq = annual / monthly
+
+            <br><br>
+
+            <span class="muted">
+              normalize → validate
+            </span>
+
+            <br>
+
+            PV · FV · annuity
+
+            <br><br>
+
+            <span class="ucla-note">
+              formula → usable tool
+            </span>
+
+          </div>
+
+
+          <div class="ucla-chart">
+
+
+            <div class="ucla-chart-top">
+
+              <span>
+                portfolio optimization
+              </span>
+
+              <span>
+                risk / return
+              </span>
+
+            </div>
+
+
+            <svg
+              viewBox="0 0 360 250"
+              aria-label="stylized efficient frontier"
+            >
+
+
+              <line
+                x1="42"
+                y1="212"
+
+                x2="330"
+                y2="212"
+
+                stroke="#aeb4ae"
+              />
+
+
+              <line
+                x1="42"
+                y1="212"
+
+                x2="42"
+                y2="25"
+
+                stroke="#aeb4ae"
+              />
+
+
+              <g
+                fill="#9daa9f"
+                opacity=".45"
+              >
+
+                <circle
+                  cx="82"
+                  cy="185"
+                  r="3"
+                />
+
+                <circle
+                  cx="102"
+                  cy="171"
+                  r="3"
+                />
+
+                <circle
+                  cx="124"
+                  cy="164"
+                  r="3"
+                />
+
+                <circle
+                  cx="143"
+                  cy="147"
+                  r="3"
+                />
+
+                <circle
+                  cx="167"
+                  cy="140"
+                  r="3"
+                />
+
+                <circle
+                  cx="191"
+                  cy="118"
+                  r="3"
+                />
+
+                <circle
+                  cx="218"
+                  cy="105"
+                  r="3"
+                />
+
+                <circle
+                  cx="244"
+                  cy="90"
+                  r="3"
+                />
+
+                <circle
+                  cx="272"
+                  cy="77"
+                  r="3"
+                />
+
+              </g>
+
+
+              <path
+                d="
+                M73 190
+                C116 176
+                154 145
+                189 121
+                C225 97
+                260 77
+                306 61
+                "
+
+                fill="none"
+
+                stroke="#647b6c"
+
+                stroke-width="4"
+              />
+
+
+              <circle
+                cx="236"
+                cy="95"
+
+                r="9"
+
+                fill="#f5f3ed"
+
+                stroke="#27332c"
+
+                stroke-width="3"
+              />
+
+
+              <text
+                x="250"
+                y="91"
+
+                font-size="9"
+
+                fill="#556159"
+              >
+                max Sharpe
+              </text>
+
+
+              <text
+                x="250"
+                y="104"
+
+                font-size="8"
+
+                fill="#89918b"
+              >
+                one definition of “best”
+              </text>
+
+
+            </svg>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+      <div class="project-copy">
+
+
+        <h3>
+          From Models to Decisions
+        </h3>
+
+
+        <p>
+          A time-value calculator taught me
+          to turn formulas into usable logic;
+
+          portfolio optimization made me look more closely
+          at what a model is actually optimizing.
+        </p>
+
+
+        <div class="project-link-row">
+
+          <span>
+            PROJECT / NOTEBOOK LINK
+          </span>
+
+          <a
+            class="project-link placeholder"
+            href="#"
+            onclick="return false;"
+          >
+            Add public link ↗
+          </a>
+
+        </div>
+
+
+      </div>
+
+
+    </article>
+
+
+  </div>
+
+
+  <!-- ==================================================
+       VISUAL PROJECTS
+  ================================================== -->
+
+  <div class="
+    work-subhead
+    visual-subhead
+    fade
+  ">
+
+
+    <div>
+
+      <div class="page-index">
+        B / Visual projects
+      </div>
+
+      <h3>
+        Code as a place
+        <br>
+
+        to
+
+        <em>
+          experiment.
+        </em>
+      </h3>
+
+    </div>
+
+
+    <p>
+      Four existing visual projects,
+      plus two open spaces
+      for what comes next.
+    </p>
+
+
+  </div>
+
+
+  <div class="visual-project-grid">
+
+
+    <!-- GRID 1 -->
+
+    <article class="visual-card fade">
+
+
+      <div class="visual-card-top">
+
+        <span>
+          01 / EXISTING
+        </span>
+
+        <span>
+          CREATIVE CODE
+        </span>
+
+      </div>
+
+
+      <div class="live-preview">
+
+        <iframe
+          src="https://mandyyi09.github.io/grid-1/"
+          title="Grid-1 preview"
+          loading="lazy"
+          tabindex="-1"
+        ></iframe>
+
+        <span class="live-label">
+          LIVE PROJECT PREVIEW
+        </span>
+
+      </div>
+
+
+      <div class="visual-card-copy">
+
+
+        <div>
+
+          <h3>
+            Grid-1
+          </h3>
+
+          <p>
+            Add the question,
+            rule,
+            or experiment
+            behind the piece.
+          </p>
+
+        </div>
+
+
+        <a
+          class="project-link"
+          href="https://mandyyi09.github.io/grid-1/"
+          target="_blank"
+          rel="noopener"
+        >
+          Open project ↗
+        </a>
+
+
+      </div>
+
+
+    </article>
+
+
+    <!-- GRID 2 -->
+
+    <article class="visual-card fade">
+
+
+      <div class="visual-card-top">
+
+        <span>
+          02 / EXISTING
+        </span>
+
+        <span>
+          CREATIVE CODE
+        </span>
+
+      </div>
+
+
+      <div class="live-preview">
+
+        <iframe
+          src="https://mandyyi09.github.io/grid-2/"
+          title="Grid-2 preview"
+          loading="lazy"
+          tabindex="-1"
+        ></iframe>
+
+        <span class="live-label">
+          LIVE PROJECT PREVIEW
+        </span>
+
+      </div>
+
+
+      <div class="visual-card-copy">
+
+
+        <div>
+
+          <h3>
+            Grid-2
+          </h3>
+
+          <p>
+            Add the question,
+            rule,
+            or experiment
+            behind the piece.
+          </p>
+
+        </div>
+
+
+        <a
+          class="project-link"
+          href="https://mandyyi09.github.io/grid-2/"
+          target="_blank"
+          rel="noopener"
+        >
+          Open project ↗
+        </a>
+
+
+      </div>
+
+
+    </article>
+
+
+    <!-- AI HAND -->
+
+    <article class="visual-card fade">
+
+
+      <div class="visual-card-top">
+
+        <span>
+          03 / EXISTING
+        </span>
+
+        <span>
+          AI + VISUAL
+        </span>
+
+      </div>
+
+
+      <div class="live-preview">
+
+        <iframe
+          src="https://mandyyi09.github.io/ai-hands/"
+          title="AI Hand preview"
+          loading="lazy"
+          tabindex="-1"
+        ></iframe>
+
+        <span class="live-label">
+          LIVE PROJECT PREVIEW
+        </span>
+
+      </div>
+
+
+      <div class="visual-card-copy">
+
+
+        <div>
+
+          <h3>
+            AI Hand
+          </h3>
+
+          <p>
+            Keep the final description grounded
+            in what the project actually explores.
+          </p>
+
+        </div>
+
+
+        <a
+          class="project-link"
+          href="https://mandyyi09.github.io/ai-hands/"
+          target="_blank"
+          rel="noopener"
+        >
+          Open project ↗
+        </a>
+
+
+      </div>
+
+
+    </article>
+
+
+    <!-- WALKER -->
+
+    <article class="visual-card fade">
+
+
+      <div class="visual-card-top">
+
+        <span>
+          04 / EXISTING
+        </span>
+
+        <span>
+          CREATIVE CODE
+        </span>
+
+      </div>
+
+
+      <div class="live-preview">
+
+        <iframe
+          src="https://mandyyi09.github.io/walker/"
+          title="Walker preview"
+          loading="lazy"
+          tabindex="-1"
+        ></iframe>
+
+        <span class="live-label">
+          LIVE PROJECT PREVIEW
+        </span>
+
+      </div>
+
+
+      <div class="visual-card-copy">
+
+
+        <div>
+
+          <h3>
+            Walker
+          </h3>
+
+          <p>
+            Add one sentence explaining
+            the rule,
+            interaction,
+            or idea
+            you were testing.
+          </p>
+
+        </div>
+
+
+        <a
+          class="project-link"
+          href="https://mandyyi09.github.io/walker/"
+          target="_blank"
+          rel="noopener"
+        >
+          Open project ↗
+        </a>
+
+
+      </div>
+
+
+    </article>
+
+
+    <!-- FUTURE PROJECT -->
+
+    <article class="visual-card fade">
+
+
+      <div class="visual-card-top">
+
+        <span>
+          05 / RESERVED
+        </span>
+
+        <span>
+          FUTURE PROJECT
+        </span>
+
+      </div>
+
+
+      <div class="future-preview">
+
+        <span>
+          05
+        </span>
+
+        <p>
+          DROP
+          <br>
+
+          PROJECT
+          <br>
+
+          HERE
+        </p>
+
+      </div>
+
+
+      <div class="visual-card-copy">
+
+
+        <div>
+
+          <h3>
+            Future Project
+          </h3>
+
+          <p>
+            Reserved for a future project.
+          </p>
+
+        </div>
+
+
+        <a
+          class="project-link placeholder"
+          href="#"
+          onclick="return false;"
+        >
+          Add project link ↗
+        </a>
+
+
+      </div>
+
+
+    </article>
+
+
+    <!-- FUTURE PROJECT -->
+
+    <article class="visual-card fade">
+
+
+      <div class="visual-card-top">
+
+        <span>
+          06 / RESERVED
+        </span>
+
+        <span>
+          FUTURE PROJECT
+        </span>
+
+      </div>
+
+
+      <div class="
+        future-preview
+        alt
+      ">
+
+        <span>
+          06
+        </span>
+
+        <p>
+          DROP
+          <br>
+
+          PROJECT
+          <br>
+
+          HERE
+        </p>
+
+      </div>
+
+
+      <div class="visual-card-copy">
+
+
+        <div>
+
+          <h3>
+            Future Project
+          </h3>
+
+          <p>
+            Reserved for another project.
+          </p>
+
+        </div>
+
+
+        <a
+          class="project-link placeholder"
+          href="#"
+          onclick="return false;"
+        >
+          Add project link ↗
+        </a>
+
+
+      </div>
+
+
+    </article>
+
+
+  </div>
+
+
+</section>
+
+
+<!-- ======================================================
      PHOTOGRAPHY
 ====================================================== -->
 
-    <section class="section photo" id="photography">
+<section
+  class="section photo"
+  id="photography"
+>
 
 
-        <div class="section-head fade">
+  <div class="section-head fade">
 
-            <div>
 
-                <div class="page-index">
-                    04 / Photography
-                </div>
+    <div>
 
-            </div>
+      <div class="page-index">
+        04 / Photography
+      </div>
 
+    </div>
 
-            <div>
 
-                <h2>
-                    Things
-                    <br>
+    <div>
 
-                    <em>
-                        I notice.
-                    </em>
-                </h2>
+      <h2>
+        Things
+        <br>
 
-                <p class="section-intro">
+        <em>
+          I notice.
+        </em>
+      </h2>
 
-                    The blocks below are designed
-                    as image slots.
+    </div>
 
-                    Replace each SVG
-                    with your own photo
-                    and keep the uneven editorial rhythm.
 
-                </p>
+  </div>
 
-            </div>
 
-        </div>
+  <div class="photo-grid fade">
 
 
-        <div class="photo-grid fade">
+    <div class="ph">
 
+      <div
+        class="photo-slot"
+        style="
+          background-image:url('assets/images/photography/sunset.jpg');
+          background-position:center 42%;
+        "
+      ></div>
 
-            <!-- PHOTO 01 -->
+      <div class="ph-label">
+        01 / selected photograph
+      </div>
 
-            <div class="ph">
+    </div>
 
-                <svg viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice">
 
-                    <defs>
+    <div class="ph">
 
-                        <linearGradient id="p1" x1="0" x2="1">
+      <div
+        class="photo-slot"
+        style="background:#293a36;"
+      ></div>
 
-                            <stop stop-color="#d6c7b8" />
+      <div class="ph-label">
+        02 / replace with photo
+      </div>
 
-                            <stop offset="1" stop-color="#796e67" />
+    </div>
 
-                        </linearGradient>
 
-                    </defs>
+    <div class="ph">
 
-                    <rect width="800" height="520" fill="url(#p1)" />
+      <div
+        class="photo-slot"
+        style="background:#c8cac3;"
+      ></div>
 
-                    <circle cx="610" cy="170" r="120" fill="#f1e5d5" opacity=".55" />
+      <div class="ph-label">
+        03 / replace with photo
+      </div>
 
-                    <path d="
-                    M0 400
-                    L800 250
-                    L800 520
-                    L0 520
-                    Z
-                    " fill="#2b2c2a" opacity=".52" />
+    </div>
 
-                </svg>
 
+    <div class="ph">
 
-                <div class="ph-label">
-                    01 / replace with photo
-                </div>
+      <div
+        class="photo-slot"
+        style="background:#b2c4ce;"
+      ></div>
 
-            </div>
+      <div class="ph-label">
+        04 / replace with photo
+      </div>
 
+    </div>
 
-            <!-- PHOTO 02 -->
 
-            <div class="ph">
+    <div class="ph">
 
-                <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+      <div
+        class="photo-slot"
+        style="background:#b6957d;"
+      ></div>
 
-                    <rect width="600" height="600" fill="#293a36" />
+      <div class="ph-label">
+        05 / replace with photo
+      </div>
 
-                    <g stroke="#8da29a" stroke-width="2" opacity=".7">
+    </div>
 
-                        <line x1="0" y1="120" x2="600" y2="410" />
 
-                        <line x1="0" y1="220" x2="600" y2="510" />
+    <div class="ph">
 
-                        <line x1="100" y1="0" x2="450" y2="600" />
+      <div
+        class="photo-slot"
+        style="background:#25292b;"
+      ></div>
 
-                    </g>
+      <div class="ph-label">
+        06 / replace with photo
+      </div>
 
+    </div>
 
-                    <rect x="270" y="210" width="120" height="230" fill="#d7d8cb" />
 
-                </svg>
+  </div>
 
 
-                <div class="ph-label">
-                    02 / replace with photo
-                </div>
+</section>
 
-            </div>
 
-
-            <!-- PHOTO 03 -->
-
-            <div class="ph">
-
-                <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice">
-
-                    <rect width="600" height="700" fill="#c8cac3" />
-
-                    <path d="
-                    M-30 680
-                    C120 420
-                    310 280
-                    620 120
-                    " fill="none" stroke="#6d7f73" stroke-width="150" opacity=".7" />
-
-                    <circle cx="435" cy="180" r="50" fill="#eee5d9" />
-
-                </svg>
-
-
-                <div class="ph-label">
-                    03 / replace with photo
-                </div>
-
-            </div>
-
-
-            <!-- PHOTO 04 -->
-
-            <div class="ph">
-
-                <svg viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice">
-
-                    <rect width="800" height="520" fill="#b2c4ce" />
-
-                    <rect y="300" width="800" height="220" fill="#5f7885" />
-
-                    <path d="
-                    M0 330
-                    Q100 300
-                    200 330
-                    T400 330
-                    T600 330
-                    T800 330
-                    " fill="none" stroke="#e6eeee" stroke-width="6" opacity=".6" />
-
-                </svg>
-
-
-                <div class="ph-label">
-                    04 / replace with photo
-                </div>
-
-            </div>
-
-
-            <!-- PHOTO 05 -->
-
-            <div class="ph">
-
-                <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
-
-                    <rect width="600" height="600" fill="#b6957d" />
-
-                    <circle cx="300" cy="300" r="180" fill="#ead7c6" />
-
-                    <circle cx="300" cy="300" r="82" fill="#292827" />
-
-                </svg>
-
-
-                <div class="ph-label">
-                    05 / replace with photo
-                </div>
-
-            </div>
-
-
-            <!-- PHOTO 06 -->
-
-            <div class="ph">
-
-                <svg viewBox="0 0 900 520" preserveAspectRatio="xMidYMid slice">
-
-                    <rect width="900" height="520" fill="#25292b" />
-
-                    <g fill="#d2c8b8" opacity=".7">
-
-                        <rect x="80" y="60" width="120" height="400" />
-
-                        <rect x="260" y="120" width="72" height="340" />
-
-                        <rect x="390" y="40" width="180" height="420" />
-
-                        <rect x="650" y="180" width="110" height="280" />
-
-                    </g>
-
-                </svg>
-
-
-                <div class="ph-label">
-                    06 / replace with photo
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ======================================================
+<!-- ======================================================
      ABOUT
 ====================================================== -->
 
-    <section class="section about" id="about">
+<section
+  class="section about"
+  id="about"
+>
 
 
-        <div class="section-head fade">
-
-            <div>
-
-                <div class="page-index">
-                    05 / About
-                </div>
-
-            </div>
+  <div class="section-head fade">
 
 
-            <div>
+    <div>
 
-                <h2>
-                    Not one
-                    <br>
+      <div class="page-index">
+        05 / About
+      </div>
 
-                    <em>
-                        single lane.
-                    </em>
-                </h2>
-
-            </div>
-
-        </div>
+    </div>
 
 
-        <div class="about-grid fade">
+    <div>
+
+      <h2>
+        Not one
+        <br>
+
+        <em>
+          single lane.
+        </em>
+      </h2>
+
+    </div>
 
 
-            <p class="about-statement">
-
-                I like moving between
-                the
-
-                <em>
-                    analytical
-                </em>
-
-                and the visual —
-
-                because each makes me notice
-                something the other misses.
-
-            </p>
+  </div>
 
 
-            <div class="about-notes">
+  <div class="about-grid fade">
 
 
-                <div class="note">
+    <p class="about-statement">
 
-                    <b>
-                        I build
-                    </b>
+      I move between the
 
-                    <p>
-                        Code,
-                        small tools,
-                        interfaces
-                        and prototypes.
-                    </p>
+      <em>
+        analytical
+      </em>
 
-                </div>
+      and the visual.
 
+      <span class="about-second-line">
+        Each catches what the other misses.
+      </span>
 
-                <div class="note">
-
-                    <b>
-                        I explore
-                    </b>
-
-                    <p>
-                        Photography,
-                        creative coding,
-                        patterns,
-                        systems
-                        and questions.
-                    </p>
-
-                </div>
+    </p>
 
 
-                <div class="note">
-
-                    <b>
-                        I practice
-                    </b>
-
-                    <p>
-                        Tennis and rowing —
-                        not as credentials,
-                        but as places
-                        to keep showing up.
-                    </p>
-
-                </div>
+    <div class="about-notes">
 
 
-                <div class="note">
+      <div class="note">
 
-                    <b>
-                        I think about
-                    </b>
+        <b>
+          I build
+        </b>
 
-                    <p>
-                        Business decisions,
-                        trade-offs,
-                        human behavior
-                        and what technology changes.
-                    </p>
+        <p>
+          Code,
+          small tools,
+          interfaces
+          and prototypes.
+        </p>
 
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+      </div>
 
 
-    <!-- ======================================================
+      <div class="note">
+
+        <b>
+          I explore
+        </b>
+
+        <p>
+          Photography,
+          creative coding,
+          patterns,
+          systems
+          and questions.
+        </p>
+
+      </div>
+
+
+      <div class="note">
+
+        <b>
+          I practice
+        </b>
+
+        <p>
+          Tennis and rowing —
+          not as credentials,
+          but as places
+          to keep showing up.
+        </p>
+
+      </div>
+
+
+      <div class="note">
+
+        <b>
+          I think about
+        </b>
+
+        <p>
+          Business decisions,
+          trade-offs,
+          human behavior
+          and what technology changes.
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</section>
+
+
+<!-- ======================================================
      FOOTER
 ====================================================== -->
 
-    <footer class="footer">
+<footer class="footer">
 
 
-        <div class="footer-top">
-
-            <h2>
-                Keep
-                <br>
-
-                <em style="
-                font-weight:400;
-                color:#9eafa4;
-                ">
-                    questioning.
-                </em>
-            </h2>
+  <div class="footer-top">
 
 
-            <p class="small">
+    <h2>
+      Keep
+      <br>
 
-                Things I notice,
-                make,
-                test,
-                and return to.
-
-            </p>
-
-        </div>
+      <em>
+        questioning.
+      </em>
+    </h2>
 
 
-        <div class="footer-bottom">
-
-            <span>
-                Mandy · 2026
-            </span>
-
-            <span>
-                Code · Sport · Systems · Visual Thinking
-            </span>
-
-        </div>
-
-    </footer>
+    <p class="small">
+      Things I notice,
+      make,
+      test,
+      and return to.
+    </p>
 
 
-    <!-- ======================================================
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      Mandy · 2026
+    </span>
+
+    <span>
+      Code · Sport · Systems · Visual Thinking
+    </span>
+
+  </div>
+
+
+</footer>
+
+
+<!-- ======================================================
      JAVASCRIPT
 ====================================================== -->
 
-    <script>
+<script>
 
 
-        /* =========================================================
-           HOW I THINK INTERACTION
-        ========================================================= */
+/* =========================================================
+   HOW I THINK
+========================================================= */
 
-        const thinkData = {
+const thinkData = {
 
-            observe: [
+  observe: [
 
-                "Photography / attention",
+    'Photography / attention',
 
-                "I use images to slow down and notice patterns I would normally pass by.",
+    'I use images to slow down and notice patterns I would normally pass by.',
 
-                "Attention · Framing · Detail",
+    'Attention · Framing · Detail',
 
-                "Photography · Research · Observation"
+    'Photography · Research · Observation'
 
-            ],
-
-
-            model: [
-
-                "Economics / systems",
-
-                "I like turning a messy situation into variables, assumptions and relationships I can test.",
-
-                "Abstraction · Quantitative thinking · Assumptions",
-
-                "Economics · Analytics · Systems"
-
-            ],
+  ],
 
 
-            build: [
+  model: [
 
-                "Code / prototyping",
+    'Economics / systems',
 
-                "Building forces an idea to become specific. A prototype tells me what my explanation was still hiding.",
+    'I like turning a messy situation into variables, assumptions and relationships I can test.',
 
-                "Making · Iteration · Debugging",
+    'Abstraction · Quantitative thinking · Assumptions',
 
-                "Python · JavaScript · Interfaces"
+    'Economics · Analytics · Systems'
 
-            ],
-
-
-            question: [
-
-                "Reflection / decisions",
-
-                "The output is rarely the end. I am most interested in what changes when the assumptions or priorities change.",
-
-                "Curiosity · Trade-offs · Reflection",
-
-                "Business · Product · Decision-making"
-
-            ]
-
-        };
+  ],
 
 
-        const panel =
-            document.getElementById(
-                "thinkPanel"
-            );
+  build: [
+
+    'Code / prototyping',
+
+    'Building forces an idea to become specific. A prototype tells me what my explanation was still hiding.',
+
+    'Making · Iteration · Debugging',
+
+    'Python · JavaScript · Interfaces'
+
+  ],
 
 
-        document
+  question: [
+
+    'Reflection / decisions',
+
+    'The output is rarely the end. I am most interested in what changes when the assumptions or priorities change.',
+
+    'Curiosity · Trade-offs · Reflection',
+
+    'Business · Product · Decision-making'
+
+  ]
+
+};
+
+
+const panel =
+  document.getElementById(
+    'thinkPanel'
+  );
+
+
+document
+  .querySelectorAll(
+    '.think-btn'
+  )
+  .forEach(
+    btn => {
+
+      btn.addEventListener(
+        'click',
+        () => {
+
+          document
             .querySelectorAll(
-                ".think-btn"
+              '.think-btn'
             )
             .forEach(
-
-                btn =>
-
-                    btn.addEventListener(
-
-                        "click",
-
-                        () => {
-
-                            document
-                                .querySelectorAll(
-                                    ".think-btn"
-                                )
-                                .forEach(
-                                    b =>
-                                        b.classList.remove(
-                                            "active"
-                                        )
-                                );
-
-
-                            btn
-                                .classList
-                                .add(
-                                    "active"
-                                );
-
-
-                            const d =
-                                thinkData[
-                                btn.dataset.key
-                                ];
-
-
-                            panel.innerHTML = `
-
-                <div class="page-index">
-                    ${d[0]}
-                </div>
-
-                <div class="big">
-                    ${d[1]}
-                </div>
-
-                <div class="mini">
-
-                    <div>
-
-                        WHAT IT TRAINS
-                        <br>
-
-                        <b>
-                            ${d[2]}
-                        </b>
-
-                    </div>
-
-                    <div>
-
-                        WHERE IT APPEARS
-                        <br>
-
-                        <b>
-                            ${d[3]}
-                        </b>
-
-                    </div>
-
-                </div>
-
-            `;
-
-                        }
-
-                    )
-
+              b =>
+                b.classList.remove(
+                  'active'
+                )
             );
 
 
-        /* =========================================================
-           HERO PERSONAL INDEX
-        ========================================================= */
+          btn
+            .classList
+            .add(
+              'active'
+            );
 
-        const identityData = {
 
+          const d =
+            thinkData[
+              btn.dataset.key
+            ];
 
-            tennis: {
 
-                kicker:
-                    "SPORT / PRACTICE",
+          panel.innerHTML = `
 
-                title:
-                    "Tennis",
+            <div class="page-index">
+              ${d[0]}
+            </div>
 
-                text:
-                    "A place where I practice showing up, resetting after mistakes, and staying with what is happening now.",
+            <div class="big">
+              ${d[1]}
+            </div>
 
-                tags:
-                    "Presence · Repetition · Reset"
+            <div class="mini">
 
-            },
+              <div>
+                WHAT IT TRAINS
+                <br>
 
+                <b>
+                  ${d[2]}
+                </b>
+              </div>
 
-            rowing: {
+              <div>
+                WHERE IT APPEARS
+                <br>
 
-                kicker:
-                    "SPORT / RHYTHM",
+                <b>
+                  ${d[3]}
+                </b>
+              </div>
 
-                title:
-                    "Rowing",
+            </div>
 
-                text:
-                    "Repetition and rhythm pull my attention away from everyday pressure and toward the movement happening in front of me.",
-
-                tags:
-                    "Rhythm · Coordination · Endurance"
-
-            },
-
-
-            python: {
-
-                kicker:
-                    "TECH + ECONOMICS",
-
-                title:
-                    "Python + Economics",
-
-                text:
-                    "I use code to turn economic ideas into models, then question what assumptions and priorities are hidden inside the result.",
-
-                tags:
-                    "Data · Models · Decisions"
-
-            },
-
-
-            photo: {
-
-                kicker:
-                    "VISUAL / OBSERVATION",
-
-                title:
-                    "Photography",
-
-                text:
-                    "Photography slows me down. It is where I practice noticing small patterns, framing choices, and details I would otherwise pass by.",
-
-                tags:
-                    "Attention · Framing · Detail"
-
-            },
-
-
-            code: {
-
-                kicker:
-                    "CREATIVE TECHNOLOGY",
-
-                title:
-                    "Creative Coding",
-
-                text:
-                    "Small rules can create surprising behavior. I use code as a space to test, iterate, and make abstract systems visible.",
-
-                tags:
-                    "Rules · Interaction · Experiment"
-
-            }
-
-        };
-
-
-        function setIdentity(key) {
-
-            const d =
-                identityData[key];
-
-
-            if (!d) {
-                return;
-            }
-
-
-            /* menu active */
-
-            document
-                .querySelectorAll(
-                    ".identity-item"
-                )
-                .forEach(
-
-                    button =>
-
-                        button
-                            .classList
-                            .toggle(
-
-                                "active",
-
-                                button.dataset.key
-                                === key
-
-                            )
-
-                );
-
-
-            /* scene active */
-
-            document
-                .querySelectorAll(
-                    ".identity-scene"
-                )
-                .forEach(
-
-                    scene =>
-
-                        scene
-                            .classList
-                            .toggle(
-
-                                "active",
-
-                                scene.dataset.scene
-                                === key
-
-                            )
-
-                );
-
-
-            /* text */
-
-            document
-                .getElementById(
-                    "identityKicker"
-                )
-                .textContent =
-                d.kicker;
-
-
-            document
-                .getElementById(
-                    "identityTitle"
-                )
-                .textContent =
-                d.title;
-
-
-            document
-                .getElementById(
-                    "identityText"
-                )
-                .textContent =
-                d.text;
-
-
-            document
-                .getElementById(
-                    "identityTags"
-                )
-                .textContent =
-                d.tags;
+          `;
 
         }
+      );
+
+    }
+  );
 
 
-        /* hover + click */
+/* =========================================================
+   PERSONAL INDEX
+========================================================= */
 
-        document
-            .querySelectorAll(
-                ".identity-item"
-            )
-            .forEach(
-
-                btn => {
-
-                    btn.addEventListener(
-
-                        "mouseenter",
-
-                        () =>
-
-                            setIdentity(
-                                btn.dataset.key
-                            )
-
-                    );
+const identityData = {
 
 
-                    btn.addEventListener(
+  tennis: {
 
-                        "focus",
+    kicker:
+      'SPORT / PRACTICE',
 
-                        () =>
+    title:
+      'Tennis',
 
-                            setIdentity(
-                                btn.dataset.key
-                            )
+    text:
+      'A place where I practice showing up, resetting after mistakes, and staying with what is happening now.',
 
-                    );
+    tags:
+      'Presence · Repetition · Reset'
 
-
-                    btn.addEventListener(
-
-                        "click",
-
-                        () =>
-
-                            setIdentity(
-                                btn.dataset.key
-                            )
-
-                    );
-
-                }
-
-            );
+  },
 
 
-        /* =========================================================
-           SCROLL FADE
-        ========================================================= */
+  rowing: {
 
-        const observer =
-            new IntersectionObserver(
+    kicker:
+      'SPORT / RHYTHM',
 
-                entries =>
+    title:
+      'Rowing',
 
-                    entries.forEach(
+    text:
+      'Repetition and rhythm pull my attention away from everyday pressure and toward the movement happening in front of me.',
 
-                        entry => {
+    tags:
+      'Rhythm · Coordination · Endurance'
 
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                entry
-                                    .target
-                                    .classList
-                                    .add(
-                                        "show"
-                                    );
-
-                            }
-
-                        }
-
-                    ),
-
-                {
-                    threshold: .08
-                }
-
-            );
+  },
 
 
-        document
-            .querySelectorAll(
-                ".fade"
-            )
-            .forEach(
+  python: {
 
-                element =>
-                    observer.observe(
-                        element
-                    )
+    kicker:
+      'TECH + ECONOMICS',
 
-            );
+    title:
+      'Python + Economics',
 
+    text:
+      'I use code to turn economic ideas into models, then look more closely at the assumptions and choices inside the result.',
 
-        /* =========================================================
-           TOP SCROLL PROGRESS
-        ========================================================= */
+    tags:
+      'Data · Models · Decisions'
 
-        window.addEventListener(
-
-            "scroll",
-
-            () => {
-
-                const max =
-                    document
-                        .documentElement
-                        .scrollHeight
-                    -
-                    innerHeight;
+  },
 
 
-                const progress =
-                    max > 0
-                        ?
-                        scrollY / max * 100
-                        :
-                        0;
+  photo: {
+
+    kicker:
+      'VISUAL / OBSERVATION',
+
+    title:
+      'Photography',
+
+    text:
+      'Photography slows me down. It is where I practice noticing small patterns, framing choices, and details I would otherwise pass by.',
+
+    tags:
+      'Attention · Framing · Detail'
+
+  },
 
 
-                document
-                    .getElementById(
-                        "progress"
-                    )
-                    .style
-                    .width =
-                    progress + "%";
+  code: {
 
-            }
+    kicker:
+      'CREATIVE TECHNOLOGY',
 
-        );
+    title:
+      'Creative Coding',
+
+    text:
+      'Small rules can create surprising behavior. I use code as a space to test, iterate, and make abstract systems visible.',
+
+    tags:
+      'Rules · Interaction · Experiment'
+
+  }
+
+};
 
 
-    </script>
+/* switch Personal Index */
+
+function setIdentity(key){
+
+  const d =
+    identityData[key];
+
+
+  if(!d){
+    return;
+  }
+
+
+  /* left buttons */
+
+  document
+    .querySelectorAll(
+      '.identity-item'
+    )
+    .forEach(
+      button => {
+
+        button
+          .classList
+          .toggle(
+            'active',
+            button.dataset.key === key
+          );
+
+      }
+    );
+
+
+  /* right scenes */
+
+  document
+    .querySelectorAll(
+      '.identity-scene'
+    )
+    .forEach(
+      scene => {
+
+        scene
+          .classList
+          .toggle(
+            'active',
+            scene.dataset.scene === key
+          );
+
+      }
+    );
+
+
+  /* text */
+
+  document
+    .getElementById(
+      'identityKicker'
+    )
+    .textContent =
+      d.kicker;
+
+
+  document
+    .getElementById(
+      'identityTitle'
+    )
+    .textContent =
+      d.title;
+
+
+  document
+    .getElementById(
+      'identityText'
+    )
+    .textContent =
+      d.text;
+
+
+  document
+    .getElementById(
+      'identityTags'
+    )
+    .textContent =
+      d.tags;
+
+}
+
+
+/* click events */
+
+document
+  .querySelectorAll(
+    '.identity-item'
+  )
+  .forEach(
+    btn => {
+
+      btn.addEventListener(
+        'click',
+        () => {
+
+          setIdentity(
+            btn.dataset.key
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   SCROLL FADE
+========================================================= */
+
+const obs =
+  new IntersectionObserver(
+
+    entries =>
+      entries.forEach(
+        entry => {
+
+          if(
+            entry.isIntersecting
+          ){
+
+            entry
+              .target
+              .classList
+              .add(
+                'show'
+              );
+
+          }
+
+        }
+      ),
+
+    {
+      threshold:.08
+    }
+
+  );
+
+
+document
+  .querySelectorAll(
+    '.fade'
+  )
+  .forEach(
+    element =>
+      obs.observe(
+        element
+      )
+  );
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+window.addEventListener(
+  'scroll',
+  () => {
+
+    const max =
+      document
+        .documentElement
+        .scrollHeight
+      -
+      innerHeight;
+
+
+    const percentage =
+      max > 0
+      ?
+      scrollY / max * 100
+      :
+      0;
+
+
+    document
+      .getElementById(
+        'progress'
+      )
+      .style
+      .width =
+        percentage + '%';
+
+  }
+);
+
+
+</script>
 
 
 </body>
-
 </html>
