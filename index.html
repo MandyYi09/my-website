@@ -2,221 +2,5296 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Mandy — Portfolio</title>
+
+    <style>
+        /* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
+
+        :root {
+            --paper: #f3f0e9;
+            --ink: #151515;
+            --muted: #6e6c66;
+            --line: rgba(20, 20, 20, .16);
+
+            --sage: #6d7f73;
+            --sage2: #aebdb3;
+
+            --blue: #102b3a;
+            --cream: #f7f5ef;
+            --dark: #171817;
+
+            --serif: Georgia, "Times New Roman", serif;
+            --sans: Arial, Helvetica, sans-serif;
+        }
+
+
+        /* =========================================================
+   RESET
+========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--sans);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ::selection {
+            background: #cbd5ce;
+            color: #111;
+        }
+
+
+        /* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+        #progress {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            height: 3px;
+            width: 0;
+
+            background: var(--sage);
+
+            z-index: 9999;
+        }
+
+
+        /* =========================================================
+   NAVBAR
+========================================================= */
+
+        .nav {
+            position: fixed;
+
+            z-index: 500;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 76px;
+
+            padding: 0 4vw;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(243, 240, 233, .78);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(0, 0, 0, .07);
+        }
+
+        .brand {
+            font: 700 26px/1 var(--serif);
+            letter-spacing: -1px;
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 28px;
+
+            font-size: 13px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .13em;
+        }
+
+        .navlinks a {
+            opacity: .58;
+            transition: .2s;
+        }
+
+        .navlinks a:hover {
+            opacity: 1;
+        }
+
+
+        /* =========================================================
+   SHARED TYPOGRAPHY
+========================================================= */
+
+        .page-index {
+            font-size: 10px;
+
+            letter-spacing: .22em;
+
+            text-transform: uppercase;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+   HERO
+========================================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            padding: 130px 5vw 5vw;
+
+            display: grid;
+
+            grid-template-columns: 1.15fr .85fr;
+
+            gap: 4vw;
+
+            align-items: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        /* decorative background glow */
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 48vw;
+            height: 48vw;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(circle,
+                    #bdc9c1 0,
+                    #dce1db 28%,
+                    transparent 70%);
+
+            right: -13vw;
+            top: -10vw;
+
+            opacity: .85;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 36vw;
+            height: 36vw;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(circle,
+                    #e5cbb4 0,
+                    #efe1d5 30%,
+                    transparent 70%);
+
+            left: -12vw;
+            bottom: -16vw;
+
+            opacity: .8;
+        }
+
+
+        /* HERO LEFT */
+
+        .hero-copy {
+            position: relative;
+            z-index: 2;
+
+            max-width: 920px;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+
+            letter-spacing: .22em;
+
+            text-transform: uppercase;
+
+            color: #595a56;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font:
+                600 clamp(68px, 9.4vw, 148px) /.82 var(--serif);
+
+            letter-spacing: -.068em;
+
+            margin: 0;
+
+            max-width: 950px;
+        }
+
+        .hero h1 em {
+            color: var(--sage);
+            font-weight: 500;
+        }
+
+        .hero p {
+            max-width: 610px;
+
+            font-size: 17px;
+
+            line-height: 1.72;
+
+            color: #62615c;
+
+            margin: 34px 0;
+        }
+
+        .hero-actions {
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+
+        /* buttons */
+
+        .pill {
+            padding: 13px 21px;
+
+            border-radius: 999px;
+
+            border: 1px solid #2a2a2a;
+
+            font-size: 13px;
+
+            transition: .25s;
+        }
+
+        .pill.dark {
+            background: #191919;
+            color: white;
+        }
+
+        .pill:hover {
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================================================
+   HERO INTERACTIVE BOARD
+========================================================= */
+
+        .identity-board {
+            position: relative;
+
+            z-index: 2;
+
+            border: 1px solid var(--line);
+
+            min-height: 580px;
+
+            background: rgba(255, 255, 255, .28);
+
+            display: grid;
+
+            grid-template-rows:
+                auto 1fr auto;
+
+            overflow: hidden;
+
+            backdrop-filter: blur(12px);
+        }
+
+
+        /* top and bottom */
+
+        .identity-top,
+        .identity-bottom {
+            padding: 18px 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-size: 10px;
+
+            letter-spacing: .15em;
+
+            text-transform: uppercase;
+        }
+
+        .identity-top {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .identity-bottom {
+            border-top: 1px solid var(--line);
+        }
+
+        .identity-bottom a {
+            font-weight: 700;
+        }
+
+
+        /* board body */
+
+        .identity-body {
+            display: grid;
+
+            grid-template-columns: .86fr 1.14fr;
+
+            min-height: 0;
+        }
+
+
+        /* LEFT MENU */
+
+        .identity-menu {
+            border-right: 1px solid var(--line);
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .identity-item {
+            appearance: none;
+
+            border: 0;
+
+            border-bottom: 1px solid var(--line);
+
+            background: transparent;
+
+            color: inherit;
+
+            padding: 20px 18px;
+
+            text-align: left;
+
+            display: grid;
+
+            grid-template-columns: 30px 1fr;
+
+            grid-template-areas:
+                "num name"
+                "num desc";
+
+            column-gap: 8px;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+        .identity-item:last-child {
+            border-bottom: 0;
+        }
+
+        .identity-item:hover,
+        .identity-item.active {
+            background: #171817;
+            color: #f4f1e9;
+        }
+
+        .identity-item span {
+            grid-area: num;
+
+            font-size: 9px;
+
+            letter-spacing: .12em;
+
+            opacity: .55;
+
+            padding-top: 4px;
+        }
+
+        .identity-item b {
+            grid-area: name;
+
+            font:
+                500 19px /1.05 var(--serif);
+
+            letter-spacing: -.02em;
+        }
+
+        .identity-item small {
+            grid-area: desc;
+
+            margin-top: 6px;
+
+            font-size: 8px;
+
+            letter-spacing: .11em;
+
+            text-transform: uppercase;
+
+            opacity: .62;
+        }
+
+
+        /* RIGHT PREVIEW */
+
+        .identity-preview {
+            min-width: 0;
+
+            display: grid;
+
+            grid-template-rows:
+                minmax(235px, 1fr) auto;
+
+            background: #e3e5df;
+        }
+
+        .identity-scenes {
+            position: relative;
+
+            overflow: hidden;
+
+            background-image:
+                linear-gradient(rgba(20, 20, 20, .055) 1px,
+                    transparent 1px),
+                linear-gradient(90deg,
+                    rgba(20, 20, 20, .055) 1px,
+                    transparent 1px);
+
+            background-size: 42px 42px;
+        }
+
+        .identity-scene {
+            position: absolute;
+
+            inset: 0;
+
+            display: grid;
+
+            place-items: center;
+
+            padding: 32px;
+
+            opacity: 0;
+
+            transform: scale(.97);
+
+            transition:
+                opacity .35s ease,
+                transform .4s ease;
+
+            color: #60766a;
+        }
+
+        .identity-scene.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .identity-scene svg {
+            width: 100%;
+            height: 100%;
+
+            max-height: 260px;
+        }
+
+        .identity-scene.image-scene {
+            padding: 0;
+        }
+
+        .identity-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+
+            transition:
+                transform .5s ease,
+                filter .5s ease;
+        }
+
+        .identity-scene.active .identity-image {
+            transform: scale(1.02);
+        }
+
+
+        .identity-image.contain {
+            object-fit: contain;
+            padding: 28px;
+            background: #e3e5df;
+        }
+
+        .scene-rowing {
+            color: #546d75;
+        }
+
+        .scene-python {
+            color: #6b756d;
+        }
+
+        .scene-photo {
+            color: #806e63;
+        }
+
+        .scene-code {
+            color: #5d665f;
+        }
+
+
+        /* preview text */
+
+        .identity-copy {
+            border-top: 1px solid var(--line);
+
+            padding: 20px 22px 22px;
+
+            background: rgba(247, 245, 239, .8);
+        }
+
+        .identity-copy span {
+            font-size: 9px;
+
+            letter-spacing: .15em;
+
+            text-transform: uppercase;
+
+            color: #777;
+        }
+
+        .identity-copy h3 {
+            font:
+                500 36px /.95 var(--serif);
+
+            letter-spacing: -.035em;
+
+            margin: 8px 0 9px;
+        }
+
+        .identity-copy p {
+            font-size: 12px;
+
+            line-height: 1.55;
+
+            color: #666;
+
+            margin: 0;
+
+            max-width: 430px;
+        }
+
+        .identity-tags {
+            margin-top: 14px;
+
+            font-size: 9px;
+
+            letter-spacing: .1em;
+
+            text-transform: uppercase;
+
+            color: #738178;
+        }
+
+
+        /* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+        .section {
+            padding: 120px 5vw;
+        }
+
+        .section-head {
+            display: grid;
+
+            grid-template-columns: 180px 1fr;
+
+            gap: 36px;
+
+            align-items: start;
+
+            margin-bottom: 70px;
+        }
+
+        .section-head h2 {
+            font:
+                600 clamp(52px, 7vw, 105px) /.94 var(--serif);
+
+            letter-spacing: -.055em;
+
+            margin: 0;
+
+            max-width: 1000px;
+        }
+
+        .section-head h2 em {
+            color: var(--sage);
+
+            font-weight: 500;
+        }
+
+        .section-intro {
+            max-width: 560px;
+
+            color: var(--muted);
+
+            line-height: 1.75;
+
+            font-size: 15px;
+
+            margin-top: 18px;
+        }
+
+
+        /* =========================================================
+   HOW I THINK
+========================================================= */
+
+        .think-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1.12fr;
+
+            border-top: 1px solid var(--line);
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .think-menu {
+            border-right: 1px solid var(--line);
+        }
+
+        .think-btn {
+            width: 100%;
+
+            background: none;
+
+            border: 0;
+
+            border-bottom: 1px solid var(--line);
+
+            padding: 27px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+        .think-btn:last-child {
+            border-bottom: 0;
+        }
+
+        .think-btn:hover,
+        .think-btn.active {
+            background: #e8e5de;
+        }
+
+        .think-word {
+            font:
+                500 clamp(30px, 4vw, 54px) /1 var(--serif);
+        }
+
+        .think-num {
+            font-size: 10px;
+
+            letter-spacing: .16em;
+        }
+
+        .think-panel {
+            min-height: 540px;
+
+            padding: 52px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            background: #e2e4dd;
+        }
+
+        .think-panel .big {
+            font:
+                500 clamp(45px, 6vw, 88px) /.98 var(--serif);
+
+            max-width: 720px;
+
+            letter-spacing: -.04em;
+        }
+
+        .think-panel .mini {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px;
+
+            font-size: 13px;
+
+            line-height: 1.65;
+
+            color: #555;
+        }
+
+
+        /* =========================================================
+   SPORTS
+========================================================= */
+
+        .sports {
+            background: var(--dark);
+
+            color: #f5f1ea;
+
+            padding-top: 130px;
+        }
+
+        .sports .section-head .page-index,
+        .sports .section-intro {
+            color: #999;
+        }
+
+        .sports .section-head h2 em {
+            color: #a8bbb0;
+        }
+
+
+        /* 4 PART LOOP */
+
+        .sports-loop {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            border-top: 1px solid #3a3b39;
+
+            border-bottom: 1px solid #3a3b39;
+
+            margin-bottom: 90px;
+        }
+
+        .loop-item {
+            padding: 31px 24px;
+
+            min-height: 210px;
+
+            border-right: 1px solid #3a3b39;
+        }
+
+        .loop-item:last-child {
+            border-right: 0;
+        }
+
+        .loop-item span {
+            font-size: 10px;
+
+            color: #8d8f8a;
+
+            letter-spacing: .16em;
+        }
+
+        .loop-item h3 {
+            font:
+                500 36px /1.05 var(--serif);
+
+            margin: 58px 0 10px;
+        }
+
+        .loop-item p {
+            font-size: 12px;
+
+            color: #94968f;
+
+            line-height: 1.55;
+
+            margin: 0;
+        }
+
+
+        /* TENNIS / ROWING STORIES */
+
+        .sport-story {
+            display: grid;
+
+            grid-template-columns: 1.03fr .97fr;
+
+            margin-bottom: 22px;
+
+            min-height: 720px;
+        }
+
+        .sport-story.reverse {
+            grid-template-columns: .97fr 1.03fr;
+        }
+
+        .sport-art {
+            position: relative;
+
+            overflow: hidden;
+
+            background: #21332b;
+        }
+
+        .sport-copy {
+            background: #ece7de;
+
+            color: #171717;
+
+            padding: 62px 6vw;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+        .sport-copy .kicker {
+            font-size: 10px;
+
+            letter-spacing: .18em;
+
+            text-transform: uppercase;
+        }
+
+        .sport-copy h3 {
+            font:
+                500 clamp(54px, 6vw, 96px) /.93 var(--serif);
+
+            letter-spacing: -.055em;
+
+            margin: 24px 0;
+        }
+
+        .sport-copy p {
+            max-width: 500px;
+
+            color: #64625d;
+
+            line-height: 1.75;
+        }
+
+        .quote {
+            font:
+                500 clamp(32px, 4vw, 58px) /1.05 var(--serif);
+
+            margin-top: 60px;
+
+            max-width: 640px;
+        }
+
+        .sport-svg {
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 720px;
+
+            display: block;
+        }
+
+        .caption {
+            position: absolute;
+
+            left: 22px;
+
+            bottom: 20px;
+
+            color: white;
+
+            font-size: 10px;
+
+            letter-spacing: .17em;
+
+            text-transform: uppercase;
+
+            background: rgba(0, 0, 0, .28);
+
+            padding: 9px 12px;
+
+            border-radius: 999px;
+
+            backdrop-filter: blur(8px);
+        }
+
+
+        /* =========================================================
+   TWO SIDES OF SPORT
+========================================================= */
+
+        .sport-two-sides {
+            margin-top: 90px;
+
+            border-top: 1px solid #3a3b39;
+
+            border-bottom: 1px solid #3a3b39;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .sport-side {
+            min-height: 430px;
+
+            padding: 46px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+        .sport-side+.sport-side {
+            border-left: 1px solid #3a3b39;
+        }
+
+        .sport-side span {
+            font-size: 9px;
+
+            letter-spacing: .17em;
+
+            text-transform: uppercase;
+
+            color: #8d948f;
+        }
+
+        .sport-side h3 {
+            font:
+                500 clamp(44px, 5vw, 78px) /.96 var(--serif);
+
+            letter-spacing: -.05em;
+
+            margin: 42px 0 22px;
+        }
+
+        .sport-side p {
+            max-width: 500px;
+
+            color: #9a9c96;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+        .organizer-side {
+            background: #20221f;
+        }
+
+        .side-tags {
+            font-size: 9px;
+
+            letter-spacing: .13em;
+
+            text-transform: uppercase;
+
+            color: #78847d;
+        }
+
+        .sport-work-link {
+            margin-top: 34px;
+
+            align-self: flex-start;
+
+            border-bottom: 1px solid #758379;
+
+            padding-bottom: 5px;
+
+            font-size: 11px;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+
+            color: #c6d0c9;
+        }
+
+
+        /* =========================================================
+   WORK
+========================================================= */
+
+        .work {
+            background: var(--cream);
+        }
+
+        .work-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+        .project-card {
+            border: 1px solid var(--line);
+
+            background: #efede7;
+
+            min-height: 610px;
+
+            display: grid;
+
+            grid-template-rows:
+                auto 1fr auto;
+
+            transition: .28s;
+
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, .08);
+        }
+
+        .project-meta {
+            padding: 20px 22px;
+
+            border-bottom: 1px solid var(--line);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .14em;
+        }
+
+        .project-visual {
+            padding: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #e7e8e2;
+        }
+
+        .project-visual img {
+            max-height: 310px;
+
+            object-fit: contain;
+
+            filter:
+                saturate(.35) contrast(.92);
+        }
+
+        .project-copy {
+            padding: 28px 28px 34px;
+        }
+
+        .project-copy h3 {
+            font:
+                500 clamp(38px, 4vw, 62px) /1 var(--serif);
+
+            margin: 0 0 12px;
+
+            letter-spacing: -.04em;
+        }
+
+        .project-copy p {
+            color: #666;
+
+            line-height: 1.6;
+
+            max-width: 600px;
+        }
+
+
+        /* WORK SUBHEAD */
+
+        .work-subhead {
+            margin: 14px 0 26px;
+
+            padding-top: 24px;
+
+            border-top: 1px solid var(--line);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 40px;
+
+            align-items: flex-start;
+        }
+
+        .work-subhead>p {
+            margin: 0;
+
+            max-width: 520px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.65;
+        }
+
+        .featured-work-grid {
+            margin-bottom: 100px;
+        }
+
+
+        /* project link */
+
+        .project-link-row {
+            margin-top: 28px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid var(--line);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 16px;
+        }
+
+        .project-link-row>span {
+            font-size: 9px;
+
+            letter-spacing: .13em;
+
+            color: #8a8984;
+
+            text-transform: uppercase;
+        }
+
+        .project-link {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 10px;
+
+            letter-spacing: .13em;
+
+            text-transform: uppercase;
+
+            border-bottom: 1px solid currentColor;
+
+            padding-bottom: 5px;
+
+            transition: .2s;
+
+            white-space: nowrap;
+        }
+
+        .project-link:hover {
+            color: var(--sage);
+
+            transform: translateX(3px);
+        }
+
+        .project-link.placeholder {
+            color: #8c8b86;
+
+            border-bottom-style: dashed;
+        }
+
+        .project-link.placeholder:hover {
+            transform: none;
+
+            color: #8c8b86;
+        }
+
+
+        /* =========================================================
+   EVENT PROJECT
+========================================================= */
+
+        .event-visual {
+            background: #dfe3dd;
+        }
+
+        .event-board {
+            width: 88%;
+
+            min-height: 330px;
+
+            border: 1px solid #b9beb8;
+
+            background: #f6f3ec;
+
+            display: grid;
+
+            grid-template-rows:
+                auto 1fr auto;
+
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, .07);
+        }
+
+        .event-board-top {
+            padding: 16px 18px;
+
+            border-bottom: 1px solid #ccd0ca;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 8px;
+
+            letter-spacing: .13em;
+
+            color: #69736c;
+        }
+
+        .event-flow {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto 1fr auto 1fr;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 30px 22px;
+        }
+
+        .event-flow div {
+            border: 1px solid #ccd0ca;
+
+            min-height: 128px;
+
+            padding: 16px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+        .event-flow span {
+            font-size: 8px;
+
+            color: #889189;
+        }
+
+        .event-flow b {
+            font:
+                500 20px /1 var(--serif);
+
+            letter-spacing: -.02em;
+        }
+
+        .event-flow small {
+            font-size: 8px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .08em;
+
+            color: #8a8c87;
+        }
+
+        .event-flow i {
+            font-style: normal;
+
+            color: #87958c;
+        }
+
+        .event-slots {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            border-top: 1px solid #ccd0ca;
+        }
+
+        .event-slots span {
+            padding: 12px 8px;
+
+            text-align: center;
+
+            border-right: 1px solid #ccd0ca;
+
+            font-size: 8px;
+
+            letter-spacing: .09em;
+
+            text-transform: uppercase;
+
+            color: #707972;
+        }
+
+        .event-slots span:last-child {
+            border-right: 0;
+        }
+
+
+        /* =========================================================
+   UCLA PROJECT VISUAL
+========================================================= */
+
+        .ucla-board {
+            width: 88%;
+
+            height: 78%;
+
+            display: grid;
+
+            grid-template-columns:
+                .8fr 1.2fr;
+
+            border: 1px solid #b9beb8;
+
+            background: #f5f3ed;
+
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, .07);
+        }
+
+        .ucla-code {
+            padding: 20px;
+
+            border-right: 1px solid #c8ccc6;
+
+            font:
+                11px /1.65 monospace;
+
+            color: #2a352e;
+        }
+
+        .ucla-code .muted {
+            color: #819086;
+        }
+
+        .ucla-chart {
+            padding: 18px;
+
+            display: grid;
+
+            grid-template-rows:
+                auto 1fr;
+        }
+
+        .ucla-chart-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 8px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .1em;
+
+            color: #707870;
+        }
+
+        .ucla-chart svg {
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 200px;
+        }
+
+        .ucla-note {
+            font-size: 8px;
+
+            letter-spacing: .09em;
+
+            text-transform: uppercase;
+
+            color: #7b837d;
+        }
+
+
+        /* =========================================================
+   VISUAL PROJECTS
+========================================================= */
+
+        .visual-subhead {
+            margin-top: 10px;
+
+            margin-bottom: 34px;
+
+            align-items: end;
+        }
+
+        .visual-subhead h3 {
+            font:
+                500 clamp(42px, 5vw, 74px) /.96 var(--serif);
+
+            letter-spacing: -.045em;
+
+            margin: 10px 0 0;
+        }
+
+        .visual-subhead h3 em {
+            color: var(--sage);
+
+            font-weight: 500;
+        }
+
+        .visual-project-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .visual-card {
+            border: 1px solid var(--line);
+
+            background: #f0eee8;
+
+            min-width: 0;
+
+            overflow: hidden;
+
+            transition:
+                transform .28s ease,
+                box-shadow .28s ease;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 22px 55px rgba(0, 0, 0, .07);
+        }
+
+        .visual-card-top {
+            height: 52px;
+
+            padding: 0 18px;
+
+            border-bottom: 1px solid var(--line);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            font-size: 8px;
+
+            letter-spacing: .14em;
+
+            text-transform: uppercase;
+
+            color: #777;
+        }
+
+
+        /* LIVE PREVIEW */
+
+        .live-preview {
+            height: 390px;
+
+            position: relative;
+
+            background: #dfe1db;
+
+            overflow: hidden;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .live-preview iframe {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            border: 0;
+
+            background: #e4e3dd;
+
+            pointer-events: none;
+
+            z-index: 2;
+        }
+
+        .preview-fallback {
+            position: absolute;
+
+            inset: 0;
+
+            z-index: 1;
+
+            display: grid;
+
+            place-items: center;
+
+            overflow: hidden;
+        }
+
+        .live-label {
+            position: absolute;
+
+            z-index: 3;
+
+            right: 13px;
+
+            top: 13px;
+
+            padding: 7px 9px;
+
+            background: rgba(243, 240, 233, .86);
+
+            border: 1px solid rgba(0, 0, 0, .1);
+
+            font-size: 7px;
+
+            letter-spacing: .12em;
+
+            text-transform: uppercase;
+
+            backdrop-filter: blur(8px);
+        }
+
+
+        /* visual project text */
+
+        .visual-card-copy {
+            padding: 25px 25px 28px;
+
+            min-height: 208px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+        .visual-card-copy h3 {
+            font:
+                500 clamp(34px, 4vw, 54px) /1 var(--serif);
+
+            letter-spacing: -.04em;
+
+            margin: 0 0 10px;
+        }
+
+        .visual-card-copy p {
+            max-width: 440px;
+
+            margin: 0;
+
+            color: #6d6c67;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+   FALLBACK VISUALS
+========================================================= */
+
+        .grid-one {
+            background: #e5e4dd;
+        }
+
+        .mini-grid {
+            width: 75%;
+
+            height: 68%;
+
+            background:
+                conic-gradient(from 90deg at 1px 1px,
+                    #65766c 25%,
+                    #d7b89e 0 50%,
+                    #c9d0c9 0 75%,
+                    #303532 0);
+
+            background-size: 42px 42px;
+
+            filter: saturate(.65);
+        }
+
+        .grid-two {
+            background: #d8ddd7;
+        }
+
+        .shape {
+            position: absolute;
+
+            border: 1px solid #3d4a42;
+        }
+
+        .shape.s1 {
+            width: 36%;
+
+            height: 36%;
+
+            left: 12%;
+
+            top: 18%;
+
+            border-radius: 50%;
+
+            background: #738579;
+        }
+
+        .shape.s2 {
+            width: 38%;
+
+            height: 55%;
+
+            right: 11%;
+
+            bottom: 8%;
+
+            transform: rotate(18deg);
+
+            background: #d1b49e;
+        }
+
+        .shape.s3 {
+            width: 22%;
+
+            height: 22%;
+
+            left: 38%;
+
+            bottom: 14%;
+
+            background: #242826;
+        }
+
+
+        /* AI HAND */
+
+        .hand-fallback {
+            background: #202321;
+
+            color: #c9d3cb;
+
+            text-align: center;
+        }
+
+        .hand-fallback>span {
+            position: absolute;
+
+            left: 24px;
+
+            top: 20px;
+
+            font:
+                500 52px /1 var(--serif);
+
+            opacity: .2;
+        }
+
+        .hand-lines {
+            font:
+                500 70px /1.05 monospace;
+
+            transform: rotate(-9deg);
+
+            letter-spacing: .06em;
+        }
+
+
+        /* WALKER */
+
+        .walker-fallback {
+            background: #e4e0d8;
+        }
+
+        .walker-path {
+            position: absolute;
+
+            width: 70%;
+
+            height: 60%;
+
+            border:
+                2px dashed #72847a;
+
+            border-radius:
+                48% 52% 62% 38% / 50% 38% 62% 50%;
+
+            transform: rotate(-8deg);
+        }
+
+        .walker-dot {
+            width: 18px;
+
+            height: 18px;
+
+            border-radius: 50%;
+
+            background: #1f2421;
+
+            position: absolute;
+
+            left: 29%;
+
+            top: 28%;
+
+            box-shadow:
+                120px 70px 0 #809187,
+                230px 10px 0 #bd977e;
+        }
+
+
+        /* =========================================================
+   FUTURE PROJECT CARDS
+========================================================= */
+
+        .future-card {
+            background: #e7e5df;
+        }
+
+        .future-preview {
+            height: 390px;
+
+            border-bottom: 1px solid var(--line);
+
+            background:
+                repeating-linear-gradient(0deg,
+                    transparent 0,
+                    transparent 39px,
+                    rgba(0, 0, 0, .055) 40px),
+                repeating-linear-gradient(90deg,
+                    transparent 0,
+                    transparent 39px,
+                    rgba(0, 0, 0, .055) 40px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 34px;
+
+            color: #6e766f;
+        }
+
+        .future-preview.alt {
+            background: #1a1c1a;
+
+            color: #aeb9b0;
+        }
+
+        .future-preview span {
+            font:
+                500 clamp(70px, 10vw, 130px) /1 var(--serif);
+
+            opacity: .18;
+        }
+
+        .future-preview p {
+            font-size: 10px;
+
+            letter-spacing: .2em;
+
+            line-height: 1.55;
+
+            margin: 0;
+        }
+
+        .future-card .visual-card-copy h3 {
+            color: #6f726d;
+        }
+
+
+        /* =========================================================
+   PHOTOGRAPHY
+========================================================= */
+
+        .photo {
+            background: #e7e1d8;
+        }
+
+        .photo-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(12, 1fr);
+
+            grid-auto-rows: 120px;
+
+            gap: 16px;
+        }
+
+        .ph {
+            position: relative;
+
+            overflow: hidden;
+
+            min-height: 280px;
+        }
+
+        .ph:nth-child(1) {
+            grid-column: span 7;
+
+            grid-row: span 4;
+        }
+
+        .ph:nth-child(2) {
+            grid-column: span 5;
+
+            grid-row: span 3;
+        }
+
+        .ph:nth-child(3) {
+            grid-column: span 5;
+
+            grid-row: span 4;
+        }
+
+        .ph:nth-child(4) {
+            grid-column: span 7;
+
+            grid-row: span 3;
+        }
+
+        .ph:nth-child(5) {
+            grid-column: span 4;
+
+            grid-row: span 3;
+        }
+
+        .ph:nth-child(6) {
+            grid-column: span 8;
+
+            grid-row: span 3;
+        }
+
+        .ph svg {
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            transition: .5s;
+        }
+
+        .ph:hover svg {
+            transform: scale(1.025);
+        }
+
+        .ph-label {
+            position: absolute;
+
+            left: 18px;
+
+            bottom: 16px;
+
+            font-size: 10px;
+
+            letter-spacing: .14em;
+
+            text-transform: uppercase;
+
+            background: rgba(255, 255, 255, .68);
+
+            padding: 8px 10px;
+
+            backdrop-filter: blur(8px);
+        }
+
+
+        /* =========================================================
+   ABOUT
+========================================================= */
+
+        .about {
+            background: #d9ded8;
+        }
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.18fr .82fr;
+
+            gap: 4vw;
+
+            align-items: start;
+        }
+
+        .about-statement {
+            font:
+                500 clamp(50px, 7vw, 104px) /.96 var(--serif);
+
+            letter-spacing: -.055em;
+
+            margin: 0;
+        }
+
+        .about-statement em {
+            color: var(--sage);
+
+            font-weight: 500;
+        }
+
+        .about-notes {
+            border-top: 1px solid var(--line);
+        }
+
+        .note {
+            padding: 24px 0;
+
+            border-bottom: 1px solid var(--line);
+
+            display: grid;
+
+            grid-template-columns:
+                110px 1fr;
+
+            gap: 20px;
+        }
+
+        .note b {
+            font-size: 10px;
+
+            letter-spacing: .16em;
+
+            text-transform: uppercase;
+        }
+
+        .note p {
+            margin: 0;
+
+            color: #545751;
+
+            line-height: 1.65;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+   FOOTER
+========================================================= */
+
+        .footer {
+            background: #141514;
+
+            color: #d4d2cc;
+
+            padding: 80px 5vw 36px;
+        }
+
+        .footer-top {
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 40px;
+
+            border-bottom: 1px solid #383a37;
+
+            padding-bottom: 70px;
+        }
+
+        .footer h2 {
+            font:
+                500 clamp(58px, 8vw, 116px) /.9 var(--serif);
+
+            letter-spacing: -.055em;
+
+            margin: 0;
+        }
+
+        .footer .small {
+            color: #7f837c;
+
+            max-width: 380px;
+
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding-top: 28px;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .13em;
+
+            color: #747871;
+        }
+
+
+        /* =========================================================
+   SCROLL ANIMATION
+========================================================= */
+
+        .fade {
+            opacity: 0;
+
+            transform: translateY(26px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s ease;
+        }
+
+        .fade.show {
+            opacity: 1;
+
+            transform: none;
+        }
+
+
+        /* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+        @media(max-width:900px) {
+
+            .navlinks {
+                gap: 14px;
+                font-size: 10px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                padding-top: 120px;
+            }
+
+            .section-head {
+                grid-template-columns: 1fr;
+
+                gap: 12px;
+            }
+
+            .think-grid,
+            .sport-story,
+            .sport-story.reverse,
+            .work-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sports-loop {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .loop-item:nth-child(2) {
+                border-right: 0;
+            }
+
+            .loop-item {
+                border-bottom:
+                    1px solid #3a3b39;
+            }
+
+            .photo-grid {
+                grid-template-columns:
+                    1fr 1fr;
+
+                grid-auto-rows: 190px;
+            }
+
+            .ph {
+                grid-column: auto !important;
+
+                grid-row: span 2 !important;
+            }
+
+            .identity-board {
+                min-height: 560px;
+            }
+
+            .identity-body {
+                grid-template-columns:
+                    .72fr 1.28fr;
+            }
+
+            .sport-two-sides,
+            .visual-project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sport-side+.sport-side {
+                border-left: 0;
+
+                border-top:
+                    1px solid #3a3b39;
+            }
+
+            .work-subhead {
+                display: block;
+            }
+
+            .work-subhead>p {
+                margin-top: 14px;
+            }
+
+            .visual-subhead {
+                display: grid;
+            }
+
+            .visual-subhead>p {
+                margin-top: 20px;
+            }
+
+            .live-preview,
+            .future-preview {
+                height: 340px;
+            }
+
+        }
+
+
+        /* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+        @media(max-width:600px) {
+
+            .nav {
+                padding: 0 20px;
+            }
+
+            .navlinks {
+                gap: 12px;
+            }
+
+            .navlinks a:nth-child(2),
+            .navlinks a:nth-child(4) {
+                display: none;
+            }
+
+            .hero,
+            .section {
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+            }
+
+            .think-panel {
+                padding:
+                    32px 22px;
+            }
+
+            .sports-loop {
+                grid-template-columns: 1fr;
+            }
+
+            .loop-item {
+                border-right: 0;
+            }
+
+            .sport-copy {
+                padding:
+                    46px 24px;
+            }
+
+            .sport-svg {
+                min-height: 520px;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                display: block;
+            }
+
+            .footer .small {
+                margin-top: 30px;
+            }
+
+            .identity-board {
+                min-height: auto;
+            }
+
+            .identity-body {
+                grid-template-columns: 1fr;
+            }
+
+            .identity-menu {
+                border-right: 0;
+
+                border-bottom:
+                    1px solid var(--line);
+
+                display: grid;
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .identity-item {
+                min-height: 82px;
+            }
+
+            .identity-item:nth-child(odd) {
+                border-right:
+                    1px solid var(--line);
+            }
+
+            .identity-item:last-child {
+                grid-column:
+                    1 / -1;
+            }
+
+            .identity-preview {
+                grid-template-rows:
+                    230px auto;
+            }
+
+            .identity-top span:last-child {
+                display: none;
+            }
+
+            .identity-bottom span {
+                display: none;
+            }
+
+            .identity-bottom {
+                justify-content: flex-end;
+            }
+
+            .sport-side {
+                padding:
+                    34px 24px;
+
+                min-height: 360px;
+            }
+
+            .event-flow {
+                grid-template-columns: 1fr;
+
+                padding: 18px;
+            }
+
+            .event-flow i {
+                transform: rotate(90deg);
+
+                justify-self: center;
+            }
+
+            .event-slots {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .event-slots span:nth-child(2) {
+                border-right: 0;
+            }
+
+            .event-slots span:nth-child(-n+2) {
+                border-bottom:
+                    1px solid #ccd0ca;
+            }
+
+            .project-link-row,
+            .visual-card-copy {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .visual-card-copy {
+                min-height: 230px;
+            }
+
+            .live-preview,
+            .future-preview {
+                height: 300px;
+            }
+
+        }
+    </style>
 </head>
 
 
 <body>
-    <div id="wrapper">
 
-        <div id="section-1" class="section">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+
+    <!-- ======================================================
+     SCROLL PROGRESS
+====================================================== -->
+
+    <div id="progress"></div>
+
+
+    <!-- ======================================================
+     NAVBAR
+====================================================== -->
+
+    <nav class="nav">
+
+        <a class="brand" href="#home">
+            Mandy.
+        </a>
+
+        <div class="navlinks">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#sports">
+                Sports
+            </a>
+
+            <a href="#work">
+                Work
+            </a>
+
+            <a href="#photography">
+                Photography
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ======================================================
+     HOME / HERO
+====================================================== -->
+
+    <section class="hero" id="home">
+
+        <!-- LEFT -->
+
+        <div class="hero-copy fade">
+
+            <div class="eyebrow">
+                Code · Tennis · Rowing · Economics · Photography
+            </div>
+
+            <h1>
+                Notice.
+                <br>
+
+                Build.
+                <br>
+
+                <em>
+                    Question.
+                </em>
+            </h1>
+
+            <p>
+                Things I notice, make, and come back to.
+            </p>
+
+            <div class="hero-actions">
+
+                <a class="pill dark" href="#work">
+                    View selected work →
+                </a>
+
+                <a class="pill" href="#sports">
+                    Explore sport
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT INTERACTIVE BOARD -->
+
+        <div class="identity-board fade" id="identityBoard">
+
+            <div class="identity-top">
+
+                <span>
+                    Personal index
+                </span>
+
+                <span>
+                    Sport · Systems · Visuals
+                </span>
+
+            </div>
+
+
+            <div class="identity-body">
+
+
+                <!-- MENU -->
+
+                <div class="identity-menu" aria-label="Explore Mandy's interests">
+
+                    <button class="identity-item active" data-key="tennis">
+
+                        <span>
+                            01
+                        </span>
+
+                        <b>
+                            Tennis
+                        </b>
+
+                        <small>
+                            Practice / Focus
+                        </small>
+
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="projects.html">Projects</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="hobbies.html">Hobbies</a>
-                            </li>
-                        </ul>
-                    </div>
+
+
+                    <button class="identity-item" data-key="rowing">
+
+                        <span>
+                            02
+                        </span>
+
+                        <b>
+                            Rowing
+                        </b>
+
+                        <small>
+                            Rhythm / Presence
+                        </small>
+
+                    </button>
+
+
+                    <button class="identity-item" data-key="python">
+
+                        <span>
+                            03
+                        </span>
+
+                        <b>
+                            Python + Economics
+                        </b>
+
+                        <small>
+                            Models / Decisions
+                        </small>
+
+                    </button>
+
+
+                    <button class="identity-item" data-key="photo">
+
+                        <span>
+                            04
+                        </span>
+
+                        <b>
+                            Photography
+                        </b>
+
+                        <small>
+                            Observation / Framing
+                        </small>
+
+                    </button>
+
+
+                    <button class="identity-item" data-key="code">
+
+                        <span>
+                            05
+                        </span>
+
+                        <b>
+                            Creative Coding
+                        </b>
+
+                        <small>
+                            Rules / Behavior
+                        </small>
+
+                    </button>
+
                 </div>
-            </nav>
+
+
+                <!-- PREVIEW -->
+
+                <div class="identity-preview">
+
+
+                    <div class="identity-scenes">
+
+                        <!-- TENNIS -->
+                        <div class="identity-scene image-scene active" data-scene="tennis">
+                            <img class="identity-image" src="images/tennis.jpg" alt="Tennis">
+                        </div>
+
+
+                        <!-- ROWING -->
+                        <div class="identity-scene image-scene" data-scene="rowing">
+                            <img class="identity-image" src="images/rowing.jpg" alt="Rowing">
+                        </div>
+
+
+                        <!-- PYTHON + ECONOMICS -->
+                        <div class="identity-scene image-scene" data-scene="python">
+                            <img class="identity-image contain" src="images/python-economics.png"
+                                alt="Python and Economics Project">
+                        </div>
+
+
+                        <!-- PHOTOGRAPHY -->
+                        <div class="identity-scene image-scene" data-scene="photo">
+                            <img class="identity-image" src="images/photography.jpg" alt="Photography">
+                        </div>
+
+
+                        <!-- CREATIVE CODING -->
+                        <div class="identity-scene image-scene" data-scene="code">
+                            <img class="identity-image contain" src="images/creative-code.png" alt="Creative Coding">
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHOTOGRAPHY -->
+
+                    <div class="
+                            identity-scene
+                            scene-photo
+                        " data-scene="photo">
+
+                        <svg viewBox="0 0 520 330">
+
+                            <rect x="78" y="50" width="180" height="220" fill="none" stroke="currentColor"
+                                stroke-width="2" />
+
+                            <rect x="278" y="86" width="166" height="184" fill="none" stroke="currentColor"
+                                stroke-width="2" />
+
+                            <circle cx="170" cy="125" r="38" fill="currentColor" opacity=".7" />
+
+                            <path d="
+                                M80 235
+                                L143 169
+                                L203 211
+                                L258 151
+                                L258 270
+                                L80 270
+                                Z
+                                " fill="currentColor" opacity=".24" />
+
+                            <path d="
+                                M278 221
+                                L326 166
+                                L358 195
+                                L405 132
+                                L444 174
+                                L444 270
+                                L278 270
+                                Z
+                                " fill="currentColor" opacity=".4" />
+
+                        </svg>
+
+                    </div>
+
+
+                    <!-- CREATIVE CODING -->
+
+                    <div class="
+                            identity-scene
+                            scene-code
+                        " data-scene="code">
+
+                        <svg viewBox="0 0 520 330">
+
+                            <g stroke="currentColor" opacity=".36">
+
+                                <line x1="92" y1="90" x2="188" y2="136" />
+
+                                <line x1="188" y1="136" x2="292" y2="83" />
+
+                                <line x1="292" y1="83" x2="406" y2="148" />
+
+                                <line x1="188" y1="136" x2="228" y2="240" />
+
+                                <line x1="228" y1="240" x2="365" y2="227" />
+
+                                <line x1="365" y1="227" x2="406" y2="148" />
+
+                                <line x1="92" y1="90" x2="132" y2="226" />
+
+                            </g>
+
+
+                            <g fill="currentColor">
+
+                                <circle cx="92" cy="90" r="8" />
+
+                                <circle cx="188" cy="136" r="13" />
+
+                                <circle cx="292" cy="83" r="7" />
+
+                                <circle cx="406" cy="148" r="11" />
+
+                                <circle cx="228" cy="240" r="9" />
+
+                                <circle cx="365" cy="227" r="7" />
+
+                                <circle cx="132" cy="226" r="6" />
+
+                            </g>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DYNAMIC TEXT -->
+
+                <div class="identity-copy">
+
+                    <span id="identityKicker">
+                        SPORT / PRACTICE
+                    </span>
+
+                    <h3 id="identityTitle">
+                        Tennis
+                    </h3>
+
+                    <p id="identityText">
+                        A place where I practice showing up,
+                        resetting after mistakes,
+                        and staying with what is happening now.
+                    </p>
+
+                    <div class="identity-tags" id="identityTags">
+                        Presence · Repetition · Reset
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div id="section-slider" class="section">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item">
-                        <img src="https://picsum.photos/1000/500" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>...</h5>
-                            <p>...</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://picsum.photos/1000/500" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>...</h5>
-                            <p>...</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://picsum.photos/1000/500" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>...</h5>
-                            <p>...</p>
-                        </div>
-                    </div>
+
+        <div class="identity-bottom">
+
+            <span>
+                Hover or click to explore
+            </span>
+
+            <a href="#sports">
+                Start with sport →
+            </a>
+
+        </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================
+     HOW I THINK
+====================================================== -->
+
+    <section class="section" id="thinking">
+
+        <div class="section-head fade">
+
+            <div>
+
+                <div class="page-index">
+                    01 / How I think
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Different tools,
+                    <br>
+
+                    <em>
+                        same curiosity.
+                    </em>
+                </h2>
+
+                <p class="section-intro">
+                    Rather than list interests,
+                    this section shows the role each one plays.
+                    Click the words to change the right-hand panel.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="think-grid fade">
+
+
+            <!-- LEFT -->
+
+            <div class="think-menu">
+
+                <button class="think-btn active" data-key="observe">
+
+                    <span class="think-word">
+                        Observe
+                    </span>
+
+                    <span class="think-num">
+                        01
+                    </span>
+
+                </button>
+
+
+                <button class="think-btn" data-key="model">
+
+                    <span class="think-word">
+                        Model
+                    </span>
+
+                    <span class="think-num">
+                        02
+                    </span>
+
+                </button>
+
+
+                <button class="think-btn" data-key="build">
+
+                    <span class="think-word">
+                        Build
+                    </span>
+
+                    <span class="think-num">
+                        03
+                    </span>
+
+                </button>
+
+
+                <button class="think-btn" data-key="question">
+
+                    <span class="think-word">
+                        Question
+                    </span>
+
+                    <span class="think-num">
+                        04
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="think-panel" id="thinkPanel">
+
+                <div class="page-index">
+                    Photography / attention
+                </div>
+
+                <div class="big">
+                    I use images to slow down
+                    and notice patterns
+                    I would normally pass by.
+                </div>
+
+                <div class="mini">
+
+                    <div>
+                        WHAT IT TRAINS
+                        <br>
+
+                        <b>
+                            Attention · Framing · Detail
+                        </b>
+                    </div>
+
+                    <div>
+                        WHERE IT APPEARS
+                        <br>
+
+                        <b>
+                            Photography · Research · Observation
+                        </b>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================
+     SPORTS
+====================================================== -->
+
+    <section class="section sports" id="sports">
+
+
+        <!-- HEADER -->
+
+        <div class="section-head fade">
+
+            <div>
+
+                <div class="page-index">
+                    02 / Sport
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Two sides
+                    <br>
+
+                    of
+
+                    <em>
+                        sport.
+                    </em>
+                </h2>
+
+                <p class="section-intro">
+
+                    Sport is both something I practice
+                    and something I am beginning to understand
+                    from behind the scenes.
+
+                    One side is personal —
+                    showing up, focusing,
+                    and feeling change over time.
+
+                    The other is organizational —
+                    seeing how an event is planned
+                    before anyone enters the venue.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROCESS -->
+
+        <div class="sports-loop fade">
+
+            <div class="loop-item">
+
+                <span>
+                    01
+                </span>
+
+                <h3>
+                    Resistance
+                </h3>
+
+                <p>
+                    I often hesitate before I start.
+                </p>
+
+            </div>
+
+
+            <div class="loop-item">
+
+                <span>
+                    02
+                </span>
+
+                <h3>
+                    Presence
+                </h3>
+
+                <p>
+                    Movement narrows my attention
+                    to the moment.
+                </p>
+
+            </div>
+
+
+            <div class="loop-item">
+
+                <span>
+                    03
+                </span>
+
+                <h3>
+                    Release
+                </h3>
+
+                <p>
+                    I finish physically tired,
+                    mentally lighter.
+                </p>
+
+            </div>
+
+
+            <div class="loop-item">
+
+                <span>
+                    04
+                </span>
+
+                <h3>
+                    Change
+                </h3>
+
+                <p>
+                    Small repetitions become visible
+                    only over time.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+         TENNIS
+    ================================================== -->
+
+        <div class="sport-story fade">
+
+
+            <!-- IMAGE PLACEHOLDER -->
+
+            <div class="sport-art">
+
+                <!--
+                LATER:
+
+                Replace this whole SVG with:
+
+                <img
+                    class="sport-svg"
+                    src="assets/images/tennis.jpg"
+                    alt="Tennis practice"
+                    style="object-fit:cover;"
+                >
+            -->
+
+                <svg class="sport-svg" viewBox="0 0 900 760" preserveAspectRatio="xMidYMid slice"
+                    aria-label="Tennis placeholder">
+
+                    <defs>
+
+                        <linearGradient id="tg" x1="0" x2="1">
+
+                            <stop stop-color="#687b64" />
+
+                            <stop offset="1" stop-color="#9baa8b" />
+
+                        </linearGradient>
+
+                    </defs>
+
+                    <rect width="900" height="760" fill="url(#tg)" />
+
+                    <g stroke="#f4efe4" stroke-width="8" opacity=".92">
+
+                        <rect x="120" y="90" width="660" height="580" fill="none" />
+
+                        <line x1="450" y1="90" x2="450" y2="670" />
+
+                        <line x1="120" y1="380" x2="780" y2="380" />
+
+                        <rect x="275" y="90" width="350" height="580" fill="none" />
+
+                    </g>
+
+
+                    <circle cx="690" cy="210" r="22" fill="#d8e36d" />
+
+
+                    <path d="
+                    M210 545
+                    C295 455
+                    335 350
+                    405 265
+                    " fill="none" stroke="#151515" stroke-width="16" stroke-linecap="round" opacity=".7" />
+
+
+                    <circle cx="200" cy="555" r="30" fill="#151515" opacity=".7" />
+
+                </svg>
+
+
+                <div class="caption">
+                    Replace with your tennis photo
+                </div>
+
+            </div>
+
+
+            <!-- TEXT -->
+
+            <div class="sport-copy">
+
+                <div>
+
+                    <div class="kicker">
+                        Tennis / the practice of showing up
+                    </div>
+
+                    <h3>
+                        Before,
+                        <br>
+
+                        I hesitate.
+                    </h3>
+
+                    <p>
+
+                        There is usually a moment before practice
+                        when I want to stay home
+                        or keep studying.
+
+                        I know that feeling well enough now
+                        that I try not to treat it
+                        as a decision.
+
+                        I simply go.
+
+                    </p>
+
+                </div>
+
+
+                <div class="quote">
+                    “The hardest part is often just starting.”
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+         ROWING
+    ================================================== -->
+
+        <div class="sport-story reverse fade">
+
+
+            <!-- TEXT -->
+
+            <div class="sport-copy">
+
+                <div>
+
+                    <div class="kicker">
+                        Rowing / returning to the present
+                    </div>
+
+                    <h3>
+                        During,
+                        <br>
+
+                        I return.
+                    </h3>
+
+                    <p>
+
+                        Once I start moving,
+                        schoolwork and deadlines
+                        move into the background.
+
+                        In rowing,
+                        repetition and rhythm
+                        make my attention settle
+                        into the body
+                        instead of the noise around it.
+
+                    </p>
+
+                </div>
+
+
+                <div class="quote">
+                    “Movement gives my mind somewhere to be.”
+                </div>
+
+            </div>
+
+
+            <!-- IMAGE PLACEHOLDER -->
+
+            <div class="sport-art">
+
+                <!--
+                Replace with your rowing photo later.
+            -->
+
+                <svg class="sport-svg" viewBox="0 0 900 760" preserveAspectRatio="xMidYMid slice"
+                    aria-label="Rowing placeholder">
+
+                    <defs>
+
+                        <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
+
+                            <stop stop-color="#9eb9c5" />
+
+                            <stop offset="1" stop-color="#143240" />
+
+                        </linearGradient>
+
+                    </defs>
+
+
+                    <rect width="900" height="760" fill="url(#rg)" />
+
+
+                    <g fill="none" stroke="#d8e6e8" opacity=".27" stroke-width="3">
+
+                        <path d="
+                        M0 120
+                        Q180 90
+                        360 120
+                        T900 120
+                        " />
+
+                        <path d="
+                        M0 210
+                        Q180 175
+                        360 210
+                        T900 210
+                        " />
+
+                        <path d="
+                        M0 310
+                        Q180 275
+                        360 310
+                        T900 310
+                        " />
+
+                        <path d="
+                        M0 430
+                        Q180 390
+                        360 430
+                        T900 430
+                        " />
+
+                        <path d="
+                        M0 560
+                        Q180 520
+                        360 560
+                        T900 560
+                        " />
+
+                    </g>
+
+
+                    <path d="
+                    M450 155
+                    L474 620
+                    L450 685
+                    L426 620
+                    Z
+                    " fill="#ece9df" />
+
+
+                    <g stroke="#efece4" stroke-width="7">
+
+                        <line x1="445" y1="300" x2="260" y2="250" />
+
+                        <line x1="455" y1="300" x2="640" y2="250" />
+
+                        <line x1="442" y1="405" x2="220" y2="390" />
+
+                        <line x1="458" y1="405" x2="680" y2="390" />
+
+                        <line x1="440" y1="510" x2="250" y2="550" />
+
+                        <line x1="460" y1="510" x2="650" y2="550" />
+
+                    </g>
+
+
+                    <circle cx="450" cy="360" r="24" fill="#d16e4e" />
+
+                </svg>
+
+
+                <div class="caption">
+                    Replace with your rowing photo
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+         PARTICIPATING VS ORGANIZING
+    ================================================== -->
+
+        <div class="sport-two-sides fade">
+
+
+            <!-- PARTICIPATING -->
+
+            <div class="
+            sport-side
+            participant-side
+        ">
+
+                <span>
+                    01 / PARTICIPATING
+                </span>
+
+                <h3>
+                    On the court.
+                    <br>
+
+                    On the water.
+                </h3>
+
+                <p>
+
+                    Tennis and rowing are where I experience
+                    sport from inside the movement:
+
+                    effort,
+                    focus,
+                    routine,
+                    recovery,
+
+                    and the gradual changes
+                    that only appear
+                    after staying with something.
+
+                </p>
+
+                <div class="side-tags">
+                    Tennis · Rowing · Presence · Health
+                </div>
+
+            </div>
+
+
+            <!-- ORGANIZING -->
+
+            <div class="
+            sport-side
+            organizer-side
+        ">
+
+                <span>
+                    02 / ORGANIZING
+                </span>
+
+                <h3>
+                    Behind
+                    <br>
+
+                    the event.
+                </h3>
+
+                <p>
+
+                    I am also participating in the
+                    behind-the-scenes planning
+                    of a sports event.
+
+                    I want to use this space
+                    to document the parts
+                    I actually work on —
+
+                    planning materials,
+                    decisions,
+                    changes,
+                    execution,
+
+                    and what I learn
+                    from seeing sport
+                    as an organized experience.
+
+                </p>
+
+                <a class="sport-work-link" href="#work">
+                    See it develop in Work →
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+
             </div>
 
-            <div class="carousel-item">
-                <img src="..." alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>...</h5>
-                    <p>...</p>
-                </div>
-            </div>
         </div>
 
-        <!-- <div id="section-effect" class="section"></div> -->
+    </section>
 
 
-        <div id="section-2" class="section1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="card">
-                                    <img src="assets/images/projects/handsCard.png" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Camera AI Controll</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make
-                                            up the
-                                            bulk of the card’s content.</p>
-                                        <a href="https://mandyyi09.github.io/ai-hands/" class="btn btn-primary">view
-                                            project</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="card">
-                                    <img src="assets/images/projects/handsCard.png" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Camera AI Controll</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make
-                                            up the
-                                            bulk of the card’s content.</p>
-                                        <a href="https://mandyyi09.github.io/ai-hands/" class="btn btn-primary">view
-                                            project</a>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- ======================================================
+     WORK
+====================================================== -->
+
+    <section class="section work" id="work">
+
+
+        <!-- HEADER -->
+
+        <div class="section-head fade">
+
+            <div>
+
+                <div class="page-index">
+                    03 / Selected work
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Things I build,
+                    <br>
+
+                    test,
+                    and
+
+                    <em>
+                        question.
+                    </em>
+                </h2>
+
+                <p class="section-intro">
+
+                    Some ideas become larger case studies;
+                    others stay as smaller visual experiments.
+
+                    I keep both here —
+                    along with the process,
+                    changes,
+                    and links to the work itself.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+         APPLIED / ACADEMIC
+    ================================================== -->
+
+        <div class="work-subhead fade">
+
+            <div class="page-index">
+                A / Applied + academic work
+            </div>
+
+            <p>
+                Projects where the process,
+                decisions,
+                and context matter as much
+                as the final output.
+            </p>
+
+        </div>
+
+
+        <div class="
+        work-grid
+        featured-work-grid
+    ">
+
+
+            <!-- =================================================
+             PROJECT 01 — EVENT PLANNING
+        ================================================= -->
+
+            <article class="project-card fade">
+
+
+                <div class="project-meta">
+
+                    <span>
+                        Current activity
+                    </span>
+
+                    <span>
+                        Sport · Event Planning
+                    </span>
+
+                </div>
+
+
+                <div class="
+                project-visual
+                event-visual
+            ">
+
+                    <div class="event-board">
+
+
+                        <div class="event-board-top">
+
+                            <span>
+                                BEHIND THE EVENT
+                            </span>
+
+                            <span>
+                                WORK IN PROGRESS
+                            </span>
+
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <img src="https:/picsum.photos/300/300" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div id="section-effect"></div> -->
 
-        <div id="section-3" class="section2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-6">
-                        <img src="https:/picsum.photos/500/500" alt="">
-                    </div>
-                    <div class="col-6">
-                        <div class="card">
-                            <img class="card-img-top" src="https:/picsum.photos/400/300" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make
-                                    up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                        <div class="event-flow">
+
+
+                            <div>
+
+                                <span>
+                                    01
+                                </span>
+
+                                <b>
+                                    PLAN
+                                </b>
+
+                                <small>
+                                    before the event
+                                </small>
+
                             </div>
+
+
+                            <i>
+                                →
+                            </i>
+
+
+                            <div>
+
+                                <span>
+                                    02
+                                </span>
+
+                                <b>
+                                    COORDINATE
+                                </b>
+
+                                <small>
+                                    people + information
+                                </small>
+
+                            </div>
+
+
+                            <i>
+                                →
+                            </i>
+
+
+                            <div>
+
+                                <span>
+                                    03
+                                </span>
+
+                                <b>
+                                    EXECUTE
+                                </b>
+
+                                <small>
+                                    event day
+                                </small>
+
+                            </div>
+
                         </div>
+
+
+                        <div class="event-slots">
+
+                            <span>
+                                timeline
+                            </span>
+
+                            <span>
+                                venue
+                            </span>
+
+                            <span>
+                                communication
+                            </span>
+
+                            <span>
+                                changes
+                            </span>
+
+                        </div>
+
+
                     </div>
+
                 </div>
-            </div>
+
+
+                <div class="project-copy">
+
+                    <h3>
+                        Behind the Event
+                    </h3>
+
+                    <p>
+
+                        <b>
+                            Current experience.
+                        </b>
+
+                        I am participating
+                        in the behind-the-scenes
+                        planning of a sports event.
+
+                        This card is intentionally unfinished:
+
+                        I will replace the placeholders
+                        with the responsibilities,
+                        planning artifacts,
+                        problems,
+                        decisions
+                        and reflections
+                        that actually emerge.
+
+                    </p>
+
+
+                    <div class="project-link-row">
+
+                        <span>
+                            CASE STUDY / PROJECT LINK
+                        </span>
+
+                        <!--
+                        REPLACE # WITH YOUR PROJECT URL
+                    -->
+
+                        <a class="
+                            project-link
+                            placeholder
+                        " href="#" onclick="return false;">
+                            Add link when ready ↗
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             PROJECT 02 — UCLA
+        ================================================= -->
+
+            <article class="project-card fade">
+
+
+                <div class="project-meta">
+
+                    <span>
+                        UCLA Summer Study
+                    </span>
+
+                    <span>
+                        Python + Economics
+                    </span>
+
+                </div>
+
+
+                <div class="project-visual">
+
+
+                    <div class="ucla-board">
+
+
+                        <!-- LEFT CODE -->
+
+                        <div class="ucla-code">
+
+                            <b>
+                                TimeValue()
+                            </b>
+
+                            <br><br>
+
+                            <span class="muted">
+                                # input
+                            </span>
+
+                            <br>
+
+                            rate = 5% / 0.05 / 5
+
+                            <br>
+
+                            freq = annual / monthly
+
+                            <br><br>
+
+
+                            <span class="muted">
+                                normalize → validate
+                            </span>
+
+                            <br>
+
+                            PV · FV · annuity
+
+                            <br><br>
+
+
+                            <span class="ucla-note">
+                                formula → usable tool
+                            </span>
+
+                        </div>
+
+
+                        <!-- RIGHT GRAPH -->
+
+                        <div class="ucla-chart">
+
+
+                            <div class="ucla-chart-top">
+
+                                <span>
+                                    portfolio optimization
+                                </span>
+
+                                <span>
+                                    risk / return
+                                </span>
+
+                            </div>
+
+
+                            <svg viewBox="0 0 360 250" aria-label="stylized efficient frontier">
+
+
+                                <line x1="42" y1="212" x2="330" y2="212" stroke="#aeb4ae" />
+
+
+                                <line x1="42" y1="212" x2="42" y2="25" stroke="#aeb4ae" />
+
+
+                                <g fill="#9daa9f" opacity=".45">
+
+                                    <circle cx="82" cy="185" r="3" />
+
+                                    <circle cx="102" cy="171" r="3" />
+
+                                    <circle cx="124" cy="164" r="3" />
+
+                                    <circle cx="143" cy="147" r="3" />
+
+                                    <circle cx="167" cy="140" r="3" />
+
+                                    <circle cx="191" cy="118" r="3" />
+
+                                    <circle cx="218" cy="105" r="3" />
+
+                                    <circle cx="244" cy="90" r="3" />
+
+                                    <circle cx="272" cy="77" r="3" />
+
+                                </g>
+
+
+                                <path d="
+                                M73 190
+                                C116 176
+                                154 145
+                                189 121
+                                C225 97
+                                260 77
+                                306 61
+                                " fill="none" stroke="#647b6c" stroke-width="4" />
+
+
+                                <circle cx="236" cy="95" r="9" fill="#f5f3ed" stroke="#27332c" stroke-width="3" />
+
+
+                                <text x="250" y="91" font-size="9" fill="#556159">
+                                    max Sharpe
+                                </text>
+
+
+                                <text x="250" y="104" font-size="8" fill="#89918b">
+                                    one definition of “best”
+                                </text>
+
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="project-copy">
+
+                    <h3>
+                        From Models to Decisions
+                    </h3>
+
+                    <p>
+
+                        <b>
+                            Two course projects.
+                        </b>
+
+                        A time-value calculator
+                        taught me to turn formulas
+                        into usable logic;
+
+                        portfolio optimization
+                        made me question
+                        how assumptions and objectives
+                        shape a supposedly
+                        “optimal” answer.
+
+                    </p>
+
+
+                    <div class="project-link-row">
+
+                        <span>
+                            PROJECT / NOTEBOOK LINK
+                        </span>
+
+                        <a class="
+                            project-link
+                            placeholder
+                        " href="#" onclick="return false;">
+                            Add public link ↗
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
         </div>
 
 
-        <!-- <div id="section-effect"></div> -->
+        <!-- ==================================================
+         VISUAL PROJECTS
+    ================================================== -->
+
+        <div class="
+        work-subhead
+        visual-subhead
+        fade
+    ">
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"></script>
+            <div>
 
-        <!-- Swiper JS -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js"></script> -->
-        <!-- <script>
-                var swiper = new Swiper('.mySwiper', {
-                    effect: 'coverflow',
-                    grabCursor: true,
-                    centeredSlides: true,
-                    autoplay: true,
-                    slidesPerView: 'auto',
-                    coverflowEffect: {
-                        rotate: 20,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 1,
-                        slideShadows: true,
-                    },
-                    pagination: {
-                        el: '.swiper-pagination',
-                    },
-                });
-            </script> -->
-    </div>
+                <div class="page-index">
+                    B / Visual projects
+                </div>
+
+                <h3>
+                    Code as a place
+                    <br>
+
+                    to
+
+                    <em>
+                        experiment.
+                    </em>
+                </h3>
+
+            </div>
+
+
+            <p>
+                Four earlier visual experiments,
+                kept as part of the trail.
+
+                Two open spaces are left
+                for whatever I build next.
+            </p>
+
+        </div>
+
+
+        <div class="visual-project-grid">
+
+
+            <!-- =================================================
+             VISUAL PROJECT 01
+             GRID 1
+        ================================================= -->
+
+            <article class="visual-card fade">
+
+
+                <div class="visual-card-top">
+
+                    <span>
+                        01 / EXISTING
+                    </span>
+
+                    <span>
+                        CREATIVE CODE
+                    </span>
+
+                </div>
+
+
+                <div class="live-preview">
+
+
+                    <iframe src="https://mandyyi09.github.io/grid-1/" title="Grid-1 live preview" loading="lazy"
+                        tabindex="-1"></iframe>
+
+
+                    <div class="
+                        preview-fallback
+                        grid-one
+                    " aria-hidden="true">
+
+                        <div class="mini-grid"></div>
+
+                    </div>
+
+
+                    <span class="live-label">
+                        LIVE PROJECT PREVIEW
+                    </span>
+
+                </div>
+
+
+                <div class="visual-card-copy">
+
+
+                    <div>
+
+                        <h3>
+                            Grid-1
+                        </h3>
+
+                        <p>
+                            Existing visual project.
+                            Replace this line with the question,
+                            rule,
+                            or experiment behind the piece.
+                        </p>
+
+                    </div>
+
+
+                    <a class="project-link" href="https://mandyyi09.github.io/grid-1/" target="_blank" rel="noopener">
+                        Open project ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             VISUAL PROJECT 02
+             GRID 2
+        ================================================= -->
+
+            <article class="visual-card fade">
+
+
+                <div class="visual-card-top">
+
+                    <span>
+                        02 / EXISTING
+                    </span>
+
+                    <span>
+                        CREATIVE CODE
+                    </span>
+
+                </div>
+
+
+                <div class="live-preview">
+
+
+                    <iframe src="https://mandyyi09.github.io/grid-2/" title="Grid-2 live preview" loading="lazy"
+                        tabindex="-1"></iframe>
+
+
+                    <div class="
+                        preview-fallback
+                        grid-two
+                    " aria-hidden="true">
+
+                        <div class="shape s1"></div>
+
+                        <div class="shape s2"></div>
+
+                        <div class="shape s3"></div>
+
+                    </div>
+
+
+                    <span class="live-label">
+                        LIVE PROJECT PREVIEW
+                    </span>
+
+                </div>
+
+
+                <div class="visual-card-copy">
+
+
+                    <div>
+
+                        <h3>
+                            Grid-2
+                        </h3>
+
+                        <p>
+                            Existing visual project.
+                            Replace this line with the question,
+                            rule,
+                            or experiment behind the piece.
+                        </p>
+
+                    </div>
+
+
+                    <a class="project-link" href="https://mandyyi09.github.io/grid-2/" target="_blank" rel="noopener">
+                        Open project ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             VISUAL PROJECT 03
+             AI HAND
+        ================================================= -->
+
+            <article class="visual-card fade">
+
+
+                <div class="visual-card-top">
+
+                    <span>
+                        03 / EXISTING
+                    </span>
+
+                    <span>
+                        AI + VISUAL
+                    </span>
+
+                </div>
+
+
+                <div class="live-preview">
+
+
+                    <iframe src="https://mandyyi09.github.io/ai-hands/" title="AI Hand live preview" loading="lazy"
+                        tabindex="-1"></iframe>
+
+
+                    <div class="
+                        preview-fallback
+                        hand-fallback
+                    " aria-hidden="true">
+
+                        <span>
+                            AI
+                        </span>
+
+                        <div class="hand-lines">
+                            ⌁
+                            <br>
+
+                            ╲│╱
+                            <br>
+
+                            ╱│╲
+                        </div>
+
+                    </div>
+
+
+                    <span class="live-label">
+                        LIVE PROJECT PREVIEW
+                    </span>
+
+                </div>
+
+
+                <div class="visual-card-copy">
+
+
+                    <div>
+
+                        <h3>
+                            AI Hand
+                        </h3>
+
+                        <p>
+                            Existing visual project.
+                            Keep the final description grounded
+                            in what the project actually explores.
+                        </p>
+
+                    </div>
+
+
+                    <a class="project-link" href="https://mandyyi09.github.io/ai-hands/" target="_blank" rel="noopener">
+                        Open project ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             VISUAL PROJECT 04
+             WALKER
+        ================================================= -->
+
+            <article class="visual-card fade">
+
+
+                <div class="visual-card-top">
+
+                    <span>
+                        04 / EXISTING
+                    </span>
+
+                    <span>
+                        CREATIVE CODE
+                    </span>
+
+                </div>
+
+
+                <div class="live-preview">
+
+
+                    <iframe src="https://mandyyi09.github.io/walker/" title="Walker live preview" loading="lazy"
+                        tabindex="-1"></iframe>
+
+
+                    <div class="
+                        preview-fallback
+                        walker-fallback
+                    " aria-hidden="true">
+
+                        <div class="walker-path"></div>
+
+                        <span class="walker-dot"></span>
+
+                    </div>
+
+
+                    <span class="live-label">
+                        LIVE PROJECT PREVIEW
+                    </span>
+
+                </div>
+
+
+                <div class="visual-card-copy">
+
+
+                    <div>
+
+                        <h3>
+                            Walker
+                        </h3>
+
+                        <p>
+                            Existing visual project.
+                            Add one sentence later explaining
+                            the rule,
+                            interaction,
+                            or idea you were testing.
+                        </p>
+
+                    </div>
+
+
+                    <a class="project-link" href="https://mandyyi09.github.io/walker/" target="_blank" rel="noopener">
+                        Open project ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             FUTURE PROJECT 05
+        ================================================= -->
+
+            <article class="
+            visual-card
+            future-card
+            fade
+        ">
+
+
+                <div class="visual-card-top">
+
+                    <span>
+                        05 / RESERVED
+                    </span>
+
+                    <span>
+                        FUTURE PROJECT
+                    </span>
+
+                </div>
+
+
+                <div class="future-preview">
+
+                    <span>
+                        05
+                    </span>
+
+                    <p>
+                        DROP
+                        <br>
+
+                        PROJECT
+                        <br>
+
+                        HERE
+                    </p>
+
+                </div>
+
+
+                <div class="visual-card-copy">
+
+
+                    <div>
+
+                        <h3>
+                            Future Project
+                        </h3>
+
+                        <p>
+                            Reserved for a project
+                            that grows from a real question,
+                            activity,
+                            or problem
+                            you want to investigate.
+                        </p>
+
+                    </div>
+
+
+                    <a class="
+                        project-link
+                        placeholder
+                    " href="#" onclick="return false;">
+                        Add project link ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+             FUTURE PROJECT 06
+        ================================================= -->
+
+            <article class="
+            visual-card
+            future-card
+            fade
+        ">
+
+
+                <div class="visual-card-top">
+
+                    <span>
+                        06 / RESERVED
+                    </span>
+
+                    <span>
+                        FUTURE PROJECT
+                    </span>
+
+                </div>
+
+
+                <div class="
+                future-preview
+                alt
+            ">
+
+                    <span>
+                        06
+                    </span>
+
+                    <p>
+                        DROP
+                        <br>
+
+                        PROJECT
+                        <br>
+
+                        HERE
+                    </p>
+
+                </div>
+
+
+                <div class="visual-card-copy">
+
+
+                    <div>
+
+                        <h3>
+                            Future Project
+                        </h3>
+
+                        <p>
+                            Reserved for another project.
+
+                            The layout is already complete;
+
+                            only the visual,
+                            description
+                            and link
+                            need to change.
+                        </p>
+
+                    </div>
+
+
+                    <a class="
+                        project-link
+                        placeholder
+                    " href="#" onclick="return false;">
+                        Add project link ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================
+     PHOTOGRAPHY
+====================================================== -->
+
+    <section class="section photo" id="photography">
+
+
+        <div class="section-head fade">
+
+            <div>
+
+                <div class="page-index">
+                    04 / Photography
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Things
+                    <br>
+
+                    <em>
+                        I notice.
+                    </em>
+                </h2>
+
+                <p class="section-intro">
+
+                    The blocks below are designed
+                    as image slots.
+
+                    Replace each SVG
+                    with your own photo
+                    and keep the uneven editorial rhythm.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="photo-grid fade">
+
+
+            <!-- PHOTO 01 -->
+
+            <div class="ph">
+
+                <svg viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice">
+
+                    <defs>
+
+                        <linearGradient id="p1" x1="0" x2="1">
+
+                            <stop stop-color="#d6c7b8" />
+
+                            <stop offset="1" stop-color="#796e67" />
+
+                        </linearGradient>
+
+                    </defs>
+
+                    <rect width="800" height="520" fill="url(#p1)" />
+
+                    <circle cx="610" cy="170" r="120" fill="#f1e5d5" opacity=".55" />
+
+                    <path d="
+                    M0 400
+                    L800 250
+                    L800 520
+                    L0 520
+                    Z
+                    " fill="#2b2c2a" opacity=".52" />
+
+                </svg>
+
+
+                <div class="ph-label">
+                    01 / replace with photo
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 02 -->
+
+            <div class="ph">
+
+                <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+
+                    <rect width="600" height="600" fill="#293a36" />
+
+                    <g stroke="#8da29a" stroke-width="2" opacity=".7">
+
+                        <line x1="0" y1="120" x2="600" y2="410" />
+
+                        <line x1="0" y1="220" x2="600" y2="510" />
+
+                        <line x1="100" y1="0" x2="450" y2="600" />
+
+                    </g>
+
+
+                    <rect x="270" y="210" width="120" height="230" fill="#d7d8cb" />
+
+                </svg>
+
+
+                <div class="ph-label">
+                    02 / replace with photo
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 03 -->
+
+            <div class="ph">
+
+                <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice">
+
+                    <rect width="600" height="700" fill="#c8cac3" />
+
+                    <path d="
+                    M-30 680
+                    C120 420
+                    310 280
+                    620 120
+                    " fill="none" stroke="#6d7f73" stroke-width="150" opacity=".7" />
+
+                    <circle cx="435" cy="180" r="50" fill="#eee5d9" />
+
+                </svg>
+
+
+                <div class="ph-label">
+                    03 / replace with photo
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 04 -->
+
+            <div class="ph">
+
+                <svg viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice">
+
+                    <rect width="800" height="520" fill="#b2c4ce" />
+
+                    <rect y="300" width="800" height="220" fill="#5f7885" />
+
+                    <path d="
+                    M0 330
+                    Q100 300
+                    200 330
+                    T400 330
+                    T600 330
+                    T800 330
+                    " fill="none" stroke="#e6eeee" stroke-width="6" opacity=".6" />
+
+                </svg>
+
+
+                <div class="ph-label">
+                    04 / replace with photo
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 05 -->
+
+            <div class="ph">
+
+                <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
+
+                    <rect width="600" height="600" fill="#b6957d" />
+
+                    <circle cx="300" cy="300" r="180" fill="#ead7c6" />
+
+                    <circle cx="300" cy="300" r="82" fill="#292827" />
+
+                </svg>
+
+
+                <div class="ph-label">
+                    05 / replace with photo
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 06 -->
+
+            <div class="ph">
+
+                <svg viewBox="0 0 900 520" preserveAspectRatio="xMidYMid slice">
+
+                    <rect width="900" height="520" fill="#25292b" />
+
+                    <g fill="#d2c8b8" opacity=".7">
+
+                        <rect x="80" y="60" width="120" height="400" />
+
+                        <rect x="260" y="120" width="72" height="340" />
+
+                        <rect x="390" y="40" width="180" height="420" />
+
+                        <rect x="650" y="180" width="110" height="280" />
+
+                    </g>
+
+                </svg>
+
+
+                <div class="ph-label">
+                    06 / replace with photo
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================
+     ABOUT
+====================================================== -->
+
+    <section class="section about" id="about">
+
+
+        <div class="section-head fade">
+
+            <div>
+
+                <div class="page-index">
+                    05 / About
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Not one
+                    <br>
+
+                    <em>
+                        single lane.
+                    </em>
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="about-grid fade">
+
+
+            <p class="about-statement">
+
+                I like moving between
+                the
+
+                <em>
+                    analytical
+                </em>
+
+                and the visual —
+
+                because each makes me notice
+                something the other misses.
+
+            </p>
+
+
+            <div class="about-notes">
+
+
+                <div class="note">
+
+                    <b>
+                        I build
+                    </b>
+
+                    <p>
+                        Code,
+                        small tools,
+                        interfaces
+                        and prototypes.
+                    </p>
+
+                </div>
+
+
+                <div class="note">
+
+                    <b>
+                        I explore
+                    </b>
+
+                    <p>
+                        Photography,
+                        creative coding,
+                        patterns,
+                        systems
+                        and questions.
+                    </p>
+
+                </div>
+
+
+                <div class="note">
+
+                    <b>
+                        I practice
+                    </b>
+
+                    <p>
+                        Tennis and rowing —
+                        not as credentials,
+                        but as places
+                        to keep showing up.
+                    </p>
+
+                </div>
+
+
+                <div class="note">
+
+                    <b>
+                        I think about
+                    </b>
+
+                    <p>
+                        Business decisions,
+                        trade-offs,
+                        human behavior
+                        and what technology changes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================
+     FOOTER
+====================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-top">
+
+            <h2>
+                Keep
+                <br>
+
+                <em style="
+                font-weight:400;
+                color:#9eafa4;
+                ">
+                    questioning.
+                </em>
+            </h2>
+
+
+            <p class="small">
+
+                Things I notice,
+                make,
+                test,
+                and return to.
+
+            </p>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Mandy · 2026
+            </span>
+
+            <span>
+                Code · Sport · Systems · Visual Thinking
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+
+    <script>
+
+
+        /* =========================================================
+           HOW I THINK INTERACTION
+        ========================================================= */
+
+        const thinkData = {
+
+            observe: [
+
+                "Photography / attention",
+
+                "I use images to slow down and notice patterns I would normally pass by.",
+
+                "Attention · Framing · Detail",
+
+                "Photography · Research · Observation"
+
+            ],
+
+
+            model: [
+
+                "Economics / systems",
+
+                "I like turning a messy situation into variables, assumptions and relationships I can test.",
+
+                "Abstraction · Quantitative thinking · Assumptions",
+
+                "Economics · Analytics · Systems"
+
+            ],
+
+
+            build: [
+
+                "Code / prototyping",
+
+                "Building forces an idea to become specific. A prototype tells me what my explanation was still hiding.",
+
+                "Making · Iteration · Debugging",
+
+                "Python · JavaScript · Interfaces"
+
+            ],
+
+
+            question: [
+
+                "Reflection / decisions",
+
+                "The output is rarely the end. I am most interested in what changes when the assumptions or priorities change.",
+
+                "Curiosity · Trade-offs · Reflection",
+
+                "Business · Product · Decision-making"
+
+            ]
+
+        };
+
+
+        const panel =
+            document.getElementById(
+                "thinkPanel"
+            );
+
+
+        document
+            .querySelectorAll(
+                ".think-btn"
+            )
+            .forEach(
+
+                btn =>
+
+                    btn.addEventListener(
+
+                        "click",
+
+                        () => {
+
+                            document
+                                .querySelectorAll(
+                                    ".think-btn"
+                                )
+                                .forEach(
+                                    b =>
+                                        b.classList.remove(
+                                            "active"
+                                        )
+                                );
+
+
+                            btn
+                                .classList
+                                .add(
+                                    "active"
+                                );
+
+
+                            const d =
+                                thinkData[
+                                btn.dataset.key
+                                ];
+
+
+                            panel.innerHTML = `
+
+                <div class="page-index">
+                    ${d[0]}
+                </div>
+
+                <div class="big">
+                    ${d[1]}
+                </div>
+
+                <div class="mini">
+
+                    <div>
+
+                        WHAT IT TRAINS
+                        <br>
+
+                        <b>
+                            ${d[2]}
+                        </b>
+
+                    </div>
+
+                    <div>
+
+                        WHERE IT APPEARS
+                        <br>
+
+                        <b>
+                            ${d[3]}
+                        </b>
+
+                    </div>
+
+                </div>
+
+            `;
+
+                        }
+
+                    )
+
+            );
+
+
+        /* =========================================================
+           HERO PERSONAL INDEX
+        ========================================================= */
+
+        const identityData = {
+
+
+            tennis: {
+
+                kicker:
+                    "SPORT / PRACTICE",
+
+                title:
+                    "Tennis",
+
+                text:
+                    "A place where I practice showing up, resetting after mistakes, and staying with what is happening now.",
+
+                tags:
+                    "Presence · Repetition · Reset"
+
+            },
+
+
+            rowing: {
+
+                kicker:
+                    "SPORT / RHYTHM",
+
+                title:
+                    "Rowing",
+
+                text:
+                    "Repetition and rhythm pull my attention away from everyday pressure and toward the movement happening in front of me.",
+
+                tags:
+                    "Rhythm · Coordination · Endurance"
+
+            },
+
+
+            python: {
+
+                kicker:
+                    "TECH + ECONOMICS",
+
+                title:
+                    "Python + Economics",
+
+                text:
+                    "I use code to turn economic ideas into models, then question what assumptions and priorities are hidden inside the result.",
+
+                tags:
+                    "Data · Models · Decisions"
+
+            },
+
+
+            photo: {
+
+                kicker:
+                    "VISUAL / OBSERVATION",
+
+                title:
+                    "Photography",
+
+                text:
+                    "Photography slows me down. It is where I practice noticing small patterns, framing choices, and details I would otherwise pass by.",
+
+                tags:
+                    "Attention · Framing · Detail"
+
+            },
+
+
+            code: {
+
+                kicker:
+                    "CREATIVE TECHNOLOGY",
+
+                title:
+                    "Creative Coding",
+
+                text:
+                    "Small rules can create surprising behavior. I use code as a space to test, iterate, and make abstract systems visible.",
+
+                tags:
+                    "Rules · Interaction · Experiment"
+
+            }
+
+        };
+
+
+        function setIdentity(key) {
+
+            const d =
+                identityData[key];
+
+
+            if (!d) {
+                return;
+            }
+
+
+            /* menu active */
+
+            document
+                .querySelectorAll(
+                    ".identity-item"
+                )
+                .forEach(
+
+                    button =>
+
+                        button
+                            .classList
+                            .toggle(
+
+                                "active",
+
+                                button.dataset.key
+                                === key
+
+                            )
+
+                );
+
+
+            /* scene active */
+
+            document
+                .querySelectorAll(
+                    ".identity-scene"
+                )
+                .forEach(
+
+                    scene =>
+
+                        scene
+                            .classList
+                            .toggle(
+
+                                "active",
+
+                                scene.dataset.scene
+                                === key
+
+                            )
+
+                );
+
+
+            /* text */
+
+            document
+                .getElementById(
+                    "identityKicker"
+                )
+                .textContent =
+                d.kicker;
+
+
+            document
+                .getElementById(
+                    "identityTitle"
+                )
+                .textContent =
+                d.title;
+
+
+            document
+                .getElementById(
+                    "identityText"
+                )
+                .textContent =
+                d.text;
+
+
+            document
+                .getElementById(
+                    "identityTags"
+                )
+                .textContent =
+                d.tags;
+
+        }
+
+
+        /* hover + click */
+
+        document
+            .querySelectorAll(
+                ".identity-item"
+            )
+            .forEach(
+
+                btn => {
+
+                    btn.addEventListener(
+
+                        "mouseenter",
+
+                        () =>
+
+                            setIdentity(
+                                btn.dataset.key
+                            )
+
+                    );
+
+
+                    btn.addEventListener(
+
+                        "focus",
+
+                        () =>
+
+                            setIdentity(
+                                btn.dataset.key
+                            )
+
+                    );
+
+
+                    btn.addEventListener(
+
+                        "click",
+
+                        () =>
+
+                            setIdentity(
+                                btn.dataset.key
+                            )
+
+                    );
+
+                }
+
+            );
+
+
+        /* =========================================================
+           SCROLL FADE
+        ========================================================= */
+
+        const observer =
+            new IntersectionObserver(
+
+                entries =>
+
+                    entries.forEach(
+
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry
+                                    .target
+                                    .classList
+                                    .add(
+                                        "show"
+                                    );
+
+                            }
+
+                        }
+
+                    ),
+
+                {
+                    threshold: .08
+                }
+
+            );
+
+
+        document
+            .querySelectorAll(
+                ".fade"
+            )
+            .forEach(
+
+                element =>
+                    observer.observe(
+                        element
+                    )
+
+            );
+
+
+        /* =========================================================
+           TOP SCROLL PROGRESS
+        ========================================================= */
+
+        window.addEventListener(
+
+            "scroll",
+
+            () => {
+
+                const max =
+                    document
+                        .documentElement
+                        .scrollHeight
+                    -
+                    innerHeight;
+
+
+                const progress =
+                    max > 0
+                        ?
+                        scrollY / max * 100
+                        :
+                        0;
+
+
+                document
+                    .getElementById(
+                        "progress"
+                    )
+                    .style
+                    .width =
+                    progress + "%";
+
+            }
+
+        );
+
+
+    </script>
+
 
 </body>
 
-
 </html>
-
-<!-- <div id="section-1" class="navbar">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="projects.html">projects</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="hobbies.html">Hobbies</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div> -->
