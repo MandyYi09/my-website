@@ -74,8 +74,8 @@
     "source": {
       "metadataUrl": "https://api.github.com/repos/MandyYi09/ai-hands",
       "languagesUrl": "https://api.github.com/repos/MandyYi09/ai-hands/languages",
-      "fetchedAt": "2026-09-24T10:25:12Z",
-      "demoCheckedAt": "2026-09-24T10:26:34Z",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": "2026-09-27T05:26:21Z",
       "readmeStatus": "missing",
       "descriptionBasis": "sourceReview",
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
@@ -168,7 +168,7 @@
     "source": {
       "metadataUrl": "https://api.github.com/repos/MandyYi09/ai-hands-exp-2",
       "languagesUrl": "https://api.github.com/repos/MandyYi09/ai-hands-exp-2/languages",
-      "fetchedAt": "2026-09-24T10:25:12Z",
+      "fetchedAt": "2026-09-27T05:30:01Z",
       "demoCheckedAt": null,
       "readmeStatus": "missing",
       "descriptionBasis": "sourceReview",
@@ -261,7 +261,7 @@
     "source": {
       "metadataUrl": "https://api.github.com/repos/MandyYi09/fitAi",
       "languagesUrl": "https://api.github.com/repos/MandyYi09/fitAi/languages",
-      "fetchedAt": "2026-09-24T10:25:12Z",
+      "fetchedAt": "2026-09-27T05:30:01Z",
       "demoCheckedAt": null,
       "readmeStatus": "available",
       "descriptionBasis": "readmeAndSourceReview",
@@ -354,8 +354,8 @@
     "source": {
       "metadataUrl": "https://api.github.com/repos/MandyYi09/grid-1",
       "languagesUrl": "https://api.github.com/repos/MandyYi09/grid-1/languages",
-      "fetchedAt": "2026-09-24T10:25:12Z",
-      "demoCheckedAt": "2026-09-24T10:26:39Z",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": "2026-09-27T05:26:23Z",
       "readmeStatus": "missing",
       "descriptionBasis": "sourceReview",
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
@@ -444,8 +444,8 @@
     "source": {
       "metadataUrl": "https://api.github.com/repos/MandyYi09/grid-2",
       "languagesUrl": "https://api.github.com/repos/MandyYi09/grid-2/languages",
-      "fetchedAt": "2026-09-24T10:25:12Z",
-      "demoCheckedAt": "2026-09-24T10:26:41Z",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": "2026-09-27T05:26:24Z",
       "readmeStatus": "missing",
       "descriptionBasis": "sourceReview",
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
@@ -457,6 +457,203 @@
         {
           "url": "https://github.com/MandyYi09/grid-2/blob/main/index.html",
           "note": "Browser entry point and library imports."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1387528885",
+    "slug": "moderized-china-art-2d",
+    "title": "The Cloud Court",
+    "repositoryName": "moderized-china-art-2d",
+    "fullName": "MandyYi09/moderized-china-art-2d",
+    "owner": "MandyYi09",
+    "shortDescription": "An interactive living scroll with animated guardians, drifting clouds, and synthesized chimes.",
+    "longDescription": "This Canvas 2D artwork transforms three reference paintings into textured paper puppets in an animated sky. Visitors can drag the guardians, awaken their elemental effects, scatter particles, adjust the wind, and enable synthesized pentatonic chimes. The scene includes keyboard controls, fullscreen mode, a reference gallery, and a reduced-motion preference that starts the animation paused.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "Canvas 2D",
+      "Web Audio API"
+    ],
+    "programmingLanguages": [
+      "HTML",
+      "JavaScript",
+      "CSS"
+    ],
+    "domainTags": [
+      "chinese-art",
+      "interactive-art",
+      "animation",
+      "creative-coding",
+      "generative-audio"
+    ],
+    "schoolSubjects": [
+      "Visual Arts",
+      "Computer Science",
+      "Music"
+    ],
+    "category": "Interactive Art",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/moderized-china-art-2d",
+    "homepageUrl": null,
+    "demoUrl": null,
+    "readmeUrl": "https://github.com/MandyYi09/moderized-china-art-2d/blob/main/README.md",
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": false,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-09-25T13:14:53Z",
+    "updatedAt": "2026-09-25T13:15:21Z",
+    "pushedAt": "2026-09-25T13:15:17Z",
+    "sortOrder": 5,
+    "primaryLanguage": "HTML",
+    "languageBreakdown": [
+      {
+        "name": "HTML",
+        "bytes": 5541
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "Character names and elemental gestures are artistic interpretations, not historical identifications.",
+      "Source artwork reuse remains subject to the rights of its owner."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/moderized-china-art-2d",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/moderized-china-art-2d/languages",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": null,
+      "readmeStatus": "available",
+      "descriptionBasis": "readmeAndSourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-2d/blob/main/README.md",
+          "note": "Interaction guide, artwork provenance, and interpretation limits."
+        },
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-2d/blob/main/scene.js",
+          "note": "Canvas rendering, puppet animation, pointer controls, and Web Audio synthesis."
+        },
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-2d/blob/main/index.html",
+          "note": "Interface, controls, and source-painting gallery."
+        },
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-2d/blob/main/style.css",
+          "note": "Responsive CSS presentation."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1387536348",
+    "slug": "moderized-china-art-3d",
+    "title": "The Keeper of the Cloud Gate",
+    "repositoryName": "moderized-china-art-3d",
+    "fullName": "MandyYi09/moderized-china-art-3d",
+    "owner": "MandyYi09",
+    "shortDescription": "An explorable Three.js guardian sculpture inspired by traditional Chinese paintings.",
+    "longDescription": "This browser gallery presents a procedural celestial guardian with layered armor, a crown, staff, pearl, ribbons, and a lotus pedestal. Three.js orbit controls and five camera presets reveal the sculpture from different angles, while gallery, moonlit, and dawn lighting change its atmosphere. Visitors can toggle rotation, floating clouds, and wireframe, save a PNG view, or download a static GLB model. The project includes reference-inspired concept artwork and editable modeling source.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "Three.js",
+      "Vite",
+      "WebGL 2"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "chinese-art",
+      "3d-modeling",
+      "procedural-art",
+      "interactive-art"
+    ],
+    "schoolSubjects": [
+      "Visual Arts",
+      "Computer Science",
+      "Mathematics"
+    ],
+    "category": "3D Art & Visualization",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/moderized-china-art-3d",
+    "homepageUrl": null,
+    "demoUrl": null,
+    "readmeUrl": "https://github.com/MandyYi09/moderized-china-art-3d/blob/main/README.md",
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": false,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-09-25T13:19:16Z",
+    "updatedAt": "2026-09-25T13:19:40Z",
+    "pushedAt": "2026-09-25T13:19:36Z",
+    "sortOrder": 6,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 31738
+      },
+      {
+        "name": "HTML",
+        "bytes": 8259
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "Requires WebGL 2 and a Vite development server or production build.",
+      "The exported GLB is static and excludes viewer lighting, controls, and atmosphere animation.",
+      "The visualization model includes double-sided ribbon surfaces and is not a watertight 3D-print file."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/moderized-china-art-3d",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/moderized-china-art-3d/languages",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": null,
+      "readmeStatus": "available",
+      "descriptionBasis": "readmeAndSourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-3d/blob/main/README.md",
+          "note": "Viewer features, model exports, runtime requirements, and model limitations."
+        },
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-3d/blob/main/package.json",
+          "note": "Three.js dependency and Vite build scripts."
+        },
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-3d/blob/main/src/main.js",
+          "note": "Camera views, lighting controls, animation, and PNG capture."
+        },
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-3d/blob/main/src/sculpture.js",
+          "note": "Procedural guardian geometry and materials."
+        },
+        {
+          "url": "https://github.com/MandyYi09/moderized-china-art-3d/blob/main/src/style.css",
+          "note": "Responsive CSS gallery presentation."
         }
       ]
     }
@@ -512,14 +709,14 @@
     "forks": 0,
     "openIssues": 0,
     "createdAt": "2026-07-24T10:10:36Z",
-    "updatedAt": "2026-09-11T12:59:52Z",
-    "pushedAt": "2026-09-11T12:59:48Z",
-    "sortOrder": 5,
+    "updatedAt": "2026-09-27T04:56:35Z",
+    "pushedAt": "2026-09-27T04:56:30Z",
+    "sortOrder": 7,
     "primaryLanguage": "HTML",
     "languageBreakdown": [
       {
         "name": "HTML",
-        "bytes": 193851
+        "bytes": 205072
       },
       {
         "name": "CSS",
@@ -533,8 +730,8 @@
     "source": {
       "metadataUrl": "https://api.github.com/repos/MandyYi09/my-website",
       "languagesUrl": "https://api.github.com/repos/MandyYi09/my-website/languages",
-      "fetchedAt": "2026-09-24T10:25:12Z",
-      "demoCheckedAt": "2026-09-24T10:26:45Z",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": "2026-09-27T05:26:32Z",
       "readmeStatus": "missing",
       "descriptionBasis": "sourceReview",
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
@@ -550,6 +747,198 @@
         {
           "url": "https://github.com/MandyYi09/my-website/blob/main/projects.html",
           "note": "Supporting project page and placeholder content."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1390171247",
+    "slug": "p5-polar-curve",
+    "title": "Circle Multiplication — Generative Study",
+    "repositoryName": "p5-polar-curve",
+    "fullName": "MandyYi09/p5-polar-curve",
+    "owner": "MandyYi09",
+    "shortDescription": "A fullscreen p5.js artwork that evolves circular multiplication patterns automatically.",
+    "longDescription": "This generative sketch places evenly spaced points around a circle and connects each point i to (i × m) mod N. Each page load randomizes the point count, initial multiplier, palette, and animation speed. As the multiplier increases, the straight chords form changing curve envelopes and woven patterns. The responsive canvas fills the viewport, and returning from a background tab resumes the composition without fast-forwarding.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "p5.js"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "generative-art",
+      "modular-arithmetic",
+      "geometry",
+      "mathematical-visualization",
+      "creative-coding"
+    ],
+    "schoolSubjects": [
+      "Mathematics",
+      "Computer Science",
+      "Visual Arts"
+    ],
+    "category": "Mathematical Visualization",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/p5-polar-curve",
+    "homepageUrl": null,
+    "demoUrl": "https://mandyyi09.github.io/p5-polar-curve/",
+    "readmeUrl": "https://github.com/MandyYi09/p5-polar-curve/blob/main/README.md",
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": true,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-09-27T05:16:40Z",
+    "updatedAt": "2026-09-27T05:16:49Z",
+    "pushedAt": "2026-09-27T05:16:45Z",
+    "sortOrder": 8,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 3067
+      },
+      {
+        "name": "HTML",
+        "bytes": 562
+      },
+      {
+        "name": "CSS",
+        "bytes": 250
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "The animation runs automatically; this minimal version has no on-screen controls."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve/languages",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": "2026-09-27T05:26:33Z",
+      "readmeStatus": "available",
+      "descriptionBasis": "readmeAndSourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/p5-polar-curve/blob/main/README.md",
+          "note": "Circle multiplication rule, randomized parameters, and fullscreen behavior."
+        },
+        {
+          "url": "https://github.com/MandyYi09/p5-polar-curve/blob/main/sketch.js",
+          "note": "Seeded initialization, modular chord drawing, and time-based animation."
+        },
+        {
+          "url": "https://github.com/MandyYi09/p5-polar-curve/blob/main/index.html",
+          "note": "Local p5.js bundle and fullscreen canvas entry point."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1390177271",
+    "slug": "p5-polar-curve-interactive",
+    "title": "Math Garden — Circle Multiplication",
+    "repositoryName": "p5-polar-curve-interactive",
+    "fullName": "MandyYi09/p5-polar-curve-interactive",
+    "owner": "MandyYi09",
+    "shortDescription": "An interactive p5.js math garden for exploring multiplication patterns around a circle.",
+    "longDescription": "This Chinese-language visualization connects each circle point i to (i × m) mod N, revealing cardioid-like envelopes, two-lobed curves, and woven patterns. Visitors can adjust the multiplier and point count, select three presets and four palettes, inspect individual connections near the circle, start or pause the animation, and export the canvas as a PNG. Explanatory text connects the geometric patterns to modular arithmetic, and the initial canvas remains still until animation is enabled.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "p5.js"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "interactive-mathematics",
+      "modular-arithmetic",
+      "geometry",
+      "mathematical-visualization",
+      "creative-coding"
+    ],
+    "schoolSubjects": [
+      "Mathematics",
+      "Computer Science",
+      "Visual Arts"
+    ],
+    "category": "Mathematical Visualization",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/p5-polar-curve-interactive",
+    "homepageUrl": null,
+    "demoUrl": null,
+    "readmeUrl": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/README.md",
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": false,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-09-27T05:21:19Z",
+    "updatedAt": "2026-09-27T05:21:28Z",
+    "pushedAt": "2026-09-27T05:21:24Z",
+    "sortOrder": 9,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 7540
+      },
+      {
+        "name": "HTML",
+        "bytes": 5594
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "Curve envelopes are finite chord approximations; the sketch draws straight connections."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve-interactive",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve-interactive/languages",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": null,
+      "readmeStatus": "available",
+      "descriptionBasis": "readmeAndSourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/README.md",
+          "note": "Mathematical explanation, controls, and offline setup."
+        },
+        {
+          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/sketch.js",
+          "note": "Parameter controls, presets, hover inspection, animation, and PNG export."
+        },
+        {
+          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/index.html",
+          "note": "Chinese-language explanations and interaction controls."
+        },
+        {
+          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/style.css",
+          "note": "Responsive CSS layout and palettes."
         }
       ]
     }
@@ -605,7 +994,7 @@
     "createdAt": "2026-07-23T11:32:37Z",
     "updatedAt": "2026-07-24T09:49:17Z",
     "pushedAt": "2026-07-24T09:48:29Z",
-    "sortOrder": 6,
+    "sortOrder": 10,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -626,8 +1015,8 @@
     "source": {
       "metadataUrl": "https://api.github.com/repos/MandyYi09/walker",
       "languagesUrl": "https://api.github.com/repos/MandyYi09/walker/languages",
-      "fetchedAt": "2026-09-24T10:25:12Z",
-      "demoCheckedAt": "2026-09-24T10:26:47Z",
+      "fetchedAt": "2026-09-27T05:30:01Z",
+      "demoCheckedAt": "2026-09-27T05:26:35Z",
       "readmeStatus": "missing",
       "descriptionBasis": "sourceReview",
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",

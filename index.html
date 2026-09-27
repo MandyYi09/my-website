@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="libs/photoswipe/photoswipe.css">
+
   <style>
     :root {
       --paper: #f3f0e9;
@@ -1827,6 +1829,7 @@
       min-height: 280px;
 
       background: #d2d0c8;
+      cursor: zoom-in;
 
       grid-column: span 4;
       grid-row: span 3;
@@ -1862,18 +1865,39 @@
       grid-row: span 3;
     }
 
+    .ph:focus-visible {
+      outline: 3px solid var(--ink);
+      outline-offset: 4px;
+    }
+
+    .photo-hint {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pswp__photo-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: calc(100% - 40px);
+      padding: 10px 16px;
+      background: rgba(0, 0, 0, .65);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-align: center;
+      pointer-events: none;
+    }
+
     .photo-slot {
       position: absolute;
-
       inset: 0;
-
-      background-size: cover;
-
-      background-position: center;
-
-      background-repeat: no-repeat;
-
-      transition: .5s;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
     }
 
     .ph:hover .photo-slot {
@@ -2317,8 +2341,8 @@
         Sports
       </a>
 
-      <a href="#work">
-        Work
+      <a href="projects.html">
+        Projects
       </a>
 
       <a href="#photography">
@@ -3130,6 +3154,8 @@
           Projects, experiments,
           and things I return to.
         </p>
+
+        <a class="pill" href="projects.html">Explore all projects ↗</a>
 
       </div>
 
@@ -3967,243 +3993,137 @@
     </div>
 
 
-    <div class="photo-grid fade">
+    <p class="photo-hint">Click a photo to explore the full-screen gallery.</p>
 
-      <!-- 01 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/sunset-La Jolla.jpg');
-                background-position:center 42%;
-            "></div>
+    <div class="photo-grid fade" id="photo-gallery" aria-label="Photography gallery">
 
-        <div class="ph-label">
-          01 / La Jolla
-        </div>
-      </div>
+      <a class="ph" href="assets/images/photography/sunset-La Jolla.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 01 / La Jolla">
+        <img class="photo-slot" src="assets/images/photography/sunset-La Jolla.jpg" alt="La Jolla"
+          loading="lazy" decoding="async" style="object-position: center 42%;">
+        <span class="ph-label">01 / La Jolla</span>
+      </a>
 
+      <a class="ph" href="assets/images/photography/beach.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 02 / Beach">
+        <img class="photo-slot" src="assets/images/photography/beach.jpg" alt="Beach"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">02 / Beach</span>
+      </a>
 
-      <!-- 02 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/beach.jpg');
-                background-position:center;
-            "></div>
+      <a class="ph" href="assets/images/photography/city-LA.jpg" data-pswp-width="4284" data-pswp-height="5712"
+        data-cropped="true" aria-label="Open photograph 03 / Los Angeles">
+        <img class="photo-slot" src="assets/images/photography/city-LA.jpg" alt="Los Angeles"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">03 / Los Angeles</span>
+      </a>
 
-        <div class="ph-label">
-          02 / Beach
-        </div>
-      </div>
+      <a class="ph" href="assets/images/photography/Japan.jpg" data-pswp-width="2268" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 04 / Japan">
+        <img class="photo-slot" src="assets/images/photography/Japan.jpg" alt="Japan"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">04 / Japan</span>
+      </a>
 
+      <a class="ph" href="assets/images/photography/jiuzhaigou.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 05 / Jiuzhaigou">
+        <img class="photo-slot" src="assets/images/photography/jiuzhaigou.jpg" alt="Jiuzhaigou"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">05 / Jiuzhaigou</span>
+      </a>
 
-      <!-- 03 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/city-LA.jpg');
-                background-position:center;
-            "></div>
+      <a class="ph" href="assets/images/photography/mountain.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 06 / Mountain">
+        <img class="photo-slot" src="assets/images/photography/mountain.jpg" alt="Mountain"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">06 / Mountain</span>
+      </a>
 
-        <div class="ph-label">
-          03 / Los Angeles
-        </div>
-      </div>
+      <a class="ph" href="assets/images/photography/ocean.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 07 / Ocean">
+        <img class="photo-slot" src="assets/images/photography/ocean.jpg" alt="Ocean"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">07 / Ocean</span>
+      </a>
 
+      <a class="ph" href="assets/images/photography/lake.jpg" data-pswp-width="2675" data-pswp-height="3567"
+        data-cropped="true" aria-label="Open photograph 08 / Lake">
+        <img class="photo-slot" src="assets/images/photography/lake.jpg" alt="Lake"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">08 / Lake</span>
+      </a>
 
-      <!-- 04 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/Japan.jpg');
-                background-position:center;
-            "></div>
+      <a class="ph" href="assets/images/photography/hill.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 09 / Hill">
+        <img class="photo-slot" src="assets/images/photography/hill.jpg" alt="Hill"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">09 / Hill</span>
+      </a>
 
-        <div class="ph-label">
-          04 / Japan
-        </div>
-      </div>
+      <a class="ph" href="assets/images/photography/fireworks.jpg" data-pswp-width="2160" data-pswp-height="3057"
+        data-cropped="true" aria-label="Open photograph 10 / Fireworks">
+        <img class="photo-slot" src="assets/images/photography/fireworks.jpg" alt="Fireworks"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">10 / Fireworks</span>
+      </a>
 
+      <a class="ph" href="assets/images/photography/LA.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 11 / LA">
+        <img class="photo-slot" src="assets/images/photography/LA.jpg" alt="LA"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">11 / LA</span>
+      </a>
 
-      <!-- 05 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/jiuzhaigou.jpg');
-                background-position:center;
-            "></div>
+      <a class="ph" href="assets/images/photography/La Jolla.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 12 / La Jolla">
+        <img class="photo-slot" src="assets/images/photography/La Jolla.jpg" alt="La Jolla"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">12 / La Jolla</span>
+      </a>
 
-        <div class="ph-label">
-          05 / Jiuzhaigou
-        </div>
-      </div>
+      <a class="ph" href="assets/images/photography/sunset-2.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 13 / Sunset">
+        <img class="photo-slot" src="assets/images/photography/sunset-2.jpg" alt="Sunset"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">13 / Sunset</span>
+      </a>
 
+      <a class="ph" href="assets/images/photography/sunset.JPG" data-pswp-width="3072" data-pswp-height="4096"
+        data-cropped="true" aria-label="Open photograph 14 / Sunset">
+        <img class="photo-slot" src="assets/images/photography/sunset.JPG" alt="Sunset"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">14 / Sunset</span>
+      </a>
 
-      <!-- 06 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/mountain.jpg');
-                background-position:center;
-            "></div>
+      <a class="ph" href="assets/images/photography/IMG_1690.jpg" data-pswp-width="2160" data-pswp-height="3091"
+        data-cropped="true" aria-label="Open photograph 15 / Study">
+        <img class="photo-slot" src="assets/images/photography/IMG_1690.jpg" alt="Study"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">15 / Study</span>
+      </a>
 
-        <div class="ph-label">
-          06 / Mountain
-        </div>
-      </div>
+      <a class="ph" href="assets/images/photography/IMG_1692.jpg" data-pswp-width="2160" data-pswp-height="2963"
+        data-cropped="true" aria-label="Open photograph 16 / Study">
+        <img class="photo-slot" src="assets/images/photography/IMG_1692.jpg" alt="Study"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">16 / Study</span>
+      </a>
 
+      <a class="ph" href="assets/images/photography/IMG_1720.jpg" data-pswp-width="2160" data-pswp-height="3017"
+        data-cropped="true" aria-label="Open photograph 17 / Study">
+        <img class="photo-slot" src="assets/images/photography/IMG_1720.jpg" alt="Study"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">17 / Study</span>
+      </a>
 
-      <!-- 07 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/ocean.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          07 / Ocean
-        </div>
-      </div>
-
-
-      <!-- 08 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/lake.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          08 / Lake
-        </div>
-      </div>
-
-
-      <!-- 09 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/hill.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          09 / Hill
-        </div>
-      </div>
-
-
-      <!-- 10 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/fireworks.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          10 / Fireworks
-        </div>
-      </div>
-
-
-      <!-- 11 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/LA.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          11 / LA
-        </div>
-      </div>
-
-
-      <!-- 12 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/La Jolla.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          12 / La Jolla
-        </div>
-      </div>
-
-
-      <!-- 13 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/sunset-2.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          13 / Sunset
-        </div>
-      </div>
-
-
-      <!-- 14 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/sunset.JPG');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          14 / Sunset
-        </div>
-      </div>
-
-
-      <!-- 15 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/IMG_1690.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          15 / Study
-        </div>
-      </div>
-
-
-      <!-- 16 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/IMG_1692.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          16 / Study
-        </div>
-      </div>
-
-
-      <!-- 17 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/IMG_1720.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          17 / Study
-        </div>
-      </div>
-
-
-      <!-- 18 -->
-      <div class="ph">
-        <div class="photo-slot" style="
-                background-image:url('assets/images/photography/boat.jpg');
-                background-position:center;
-            "></div>
-
-        <div class="ph-label">
-          18 / Study
-        </div>
-      </div>
+      <a class="ph" href="assets/images/photography/boat.jpg" data-pswp-width="3024" data-pswp-height="4032"
+        data-cropped="true" aria-label="Open photograph 18 / Study">
+        <img class="photo-slot" src="assets/images/photography/boat.jpg" alt="Study"
+          loading="lazy" decoding="async" style="object-position: center;">
+        <span class="ph-label">18 / Study</span>
+      </a>
 
     </div>
-
 
   </section>
 
@@ -4391,6 +4311,8 @@
   <!-- ======================================================
      JAVASCRIPT
 ====================================================== -->
+
+  <script type="module" src="js/photography.js"></script>
 
   <script>
 
