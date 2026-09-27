@@ -1,0 +1,47 @@
+/* Navigation shares the carousel's palette and page gutters. */
+.nav.site-nav {
+  --nav-ink: #f7f5ef;
+  --nav-accent: #d9e6bd;
+  --nav-border: rgba(247,245,239,.2);
+  padding: 0 5vw;
+  color: var(--nav-ink);
+  background: rgba(10,15,12,.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background .25s, color .25s, border-color .25s;
+}
+.site-nav .brand { font: 400 34px/1 'Instrument Serif', Georgia, serif; letter-spacing: -.04em; }
+.site-nav .brand::after { content: ''; display: inline-block; margin-left: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--nav-accent); vertical-align: middle; }
+.site-nav .navlinks { align-items: center; gap: 32px; font-size: 10px; letter-spacing: .15em; }
+.site-nav .navlinks a { position: relative; display: block; padding: 15px 0; opacity: .78; }
+.site-nav .navlinks a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 1px; background: var(--nav-accent); transform: scaleX(0); transform-origin: left; transition: transform .2s; }
+.site-nav .navlinks a:hover, .site-nav .navlinks a[aria-current] { opacity: 1; color: var(--nav-accent); }
+.site-nav .navlinks a:hover::after, .site-nav .navlinks a[aria-current]::after { transform: scaleX(1); }
+.nav.site-nav.is-scrolled { --nav-ink: #20251f; --nav-accent: #53664b; --nav-border: rgba(20,25,20,.13); background: rgba(243,240,233,.94); }
+.site-nav :focus-visible { outline: 2px solid var(--nav-accent); outline-offset: 5px; }
+.nav-toggle { display: none; }
+.work-showcase { margin-top: 0; height: 100vh; height: 100svh; min-height: 636px; scroll-margin-top: 0; }
+.showcase-top { top: 110px; }
+.section, #introduction { scroll-margin-top: 76px; }
+@media (max-width: 700px) {
+  .nav.site-nav { padding: 0 22px; }
+  .site-nav .brand { font-size: 32px; }
+  .site-nav .navlinks { position: absolute; top: 76px; left: 0; right: 0; display: flex; align-items: stretch; flex-direction: column; gap: 0; padding: 16px 22px 24px; background: #111711; border-bottom: 1px solid var(--nav-border); }
+  .site-nav.is-scrolled .navlinks { background: #f3f0e9; }
+  .site-nav .navlinks a { display: block; padding: 16px 0; font-size: 13px; }
+  .site-nav.nav-ready:not(.menu-open) .navlinks { display: none; }
+  .site-nav.nav-ready .nav-toggle { display: flex; align-items: center; gap: 12px; min-height: 44px; border: 0; background: transparent; color: inherit; padding: 10px 0 10px 12px; cursor: pointer; font: 10px/1 Arial, sans-serif; letter-spacing: .15em; text-transform: uppercase; }
+  .nav-toggle-icon { display: grid; gap: 5px; width: 22px; }
+  .nav-toggle-icon::before, .nav-toggle-icon::after { content: ''; height: 1px; background: currentColor; transition: transform .2s; }
+  .menu-open .nav-toggle-icon::before { transform: translateY(3px) rotate(45deg); }
+  .menu-open .nav-toggle-icon::after { transform: translateY(-3px) rotate(-45deg); }
+  .showcase-top { top: 102px; }
+}
+@media (max-height: 650px) and (min-width: 701px) {
+  .work-showcase { min-height: 536px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .nav.site-nav, .site-nav *, .site-nav *::before, .site-nav *::after { transition: none; }
+}

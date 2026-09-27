@@ -2314,6 +2314,7 @@
 
     }
   </style>
+  <link rel="stylesheet" href="css/home-navigation.css">
 </head>
 
 
@@ -2327,13 +2328,17 @@
      NAVBAR
 ====================================================== -->
 
-  <nav class="nav">
+  <nav class="nav site-nav" aria-label="Main navigation">
 
     <a class="brand" href="#home">
       Mandy.
     </a>
 
-    <div class="navlinks">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="home-nav-links">
+      <span class="nav-toggle-label">Menu</span><span class="nav-toggle-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="navlinks" id="home-nav-links">
 
       <a href="#home">
         Home
@@ -4369,6 +4374,7 @@
 
   <script src="libs/swiper/swiper-bundle.min.js" defer></script>
   <script src="js/home-showcase.js" defer></script>
+  <script src="js/home-navigation.js" defer></script>
   <script type="module" src="js/photography.js"></script>
 
   <script>
