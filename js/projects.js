@@ -10,6 +10,12 @@
   const error = document.querySelector('#error-state');
   let projects = [];
   let category = '';
+  const projectCovers = {
+    'ai-hands': 'assets/images/projects/handsCard.png',
+    'grid-1': 'assets/images/projects/grid-1.jpg',
+    'grid-2': 'assets/images/projects/grid-2.jpg',
+    'walker': 'assets/images/projects/walkerCard.png'
+  };
 
   const element = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -37,10 +43,10 @@
   function card(project) {
     const article = element('article', 'project-card');
     const art = element('div', `project-art art-${project.collectionIndex % 7}`);
-    // Abstract covers remain until imageUrl contains a screenshot path or URL.
+    // Prefer catalog artwork, then an existing project screenshot.
     art.append(element('span', 'art-label', 'Project study'), element('span', 'art-number', String(project.collectionIndex + 1).padStart(2, '0')));
     art.setAttribute('aria-hidden', 'true');
-    const imageUrl = safeUrl(project.imageUrl);
+    const imageUrl = safeUrl(project.imageUrl) || safeUrl(projectCovers[project.slug]);
     if (imageUrl) {
       const image = element('img');
       image.alt = '';
@@ -71,7 +77,7 @@
     if (repo) links.append(link('View source ↗', repo));
     if (demo) links.append(link('Try it live ↗', demo, 'demo-link'));
     article.append(links);
-    if (project.longDescription || list(project.domainTags).length || list(project.limitations).length) {
+    if (project.longDescription || list(project.domainTags).length || list(project.schoolSubjects).length || list(project.limitations).length) {
       const details = element('details');
       details.append(element('summary', '', 'About this project'));
       if (project.longDescription) details.append(element('p', '', project.longDescription));
@@ -79,6 +85,11 @@
         const topics = element('p');
         topics.append(element('span', 'detail-label', 'Exploring'), document.createTextNode(list(project.domainTags).map(tag => tag.replaceAll('-', ' ')).join(' · ')));
         details.append(topics);
+      }
+      if (list(project.schoolSubjects).length) {
+        const subjects = element('p');
+        subjects.append(element('span', 'detail-label', 'Related subjects'), document.createTextNode(list(project.schoolSubjects).join(' · ')));
+        details.append(subjects);
       }
       if (list(project.limitations).length) {
         const notes = element('p');
@@ -93,7 +104,7 @@
   function render() {
     const query = search.value.trim().toLocaleLowerCase();
     const visible = projects.filter(project => {
-      const text = [project.title, project.shortDescription, project.longDescription, project.category, ...list(project.technologies), ...list(project.programmingLanguages), ...list(project.domainTags)].join(' ').toLocaleLowerCase();
+      const text = [project.title, project.shortDescription, project.longDescription, project.category, ...list(project.technologies), ...list(project.programmingLanguages), ...list(project.domainTags), ...list(project.schoolSubjects), ...list(project.topics)].join(' ').toLocaleLowerCase();
       return (!category || project.category === category) && (!query || text.includes(query));
     });
     if (sort.value === 'recent') visible.sort((a, b) => dateValue(b) - dateValue(a));
@@ -132,7 +143,7 @@
     grid.setAttribute('aria-busy', 'true');
     count.textContent = 'Loading the collection…';
     try {
-      const response = await fetch('data/git-projects.json');
+      const response = await fetch('data/git-projects.json', { cache: 'no-cache' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (!Array.isArray(data) || data.some(project => !project || typeof project.title !== 'string')) throw new Error('Invalid project collection');

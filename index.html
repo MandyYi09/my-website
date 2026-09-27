@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="libs/photoswipe/photoswipe.css">
+  <link rel="stylesheet" href="libs/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="css/home-showcase.css">
 
   <style>
     :root {
@@ -2362,7 +2364,60 @@
      HOME
 ====================================================== -->
 
-  <section class="hero" id="home">
+  <section class="work-showcase" id="home" aria-label="Selected work">
+    <div class="showcase-top"><span>Selected work / Mandy Yi</span><span>Experiments in code, art & observation</span></div>
+    <div class="swiper showcase-swiper">
+      <div class="swiper-wrapper">
+        <article class="swiper-slide showcase-slide showcase-slide--grid1" data-project="grid-1">
+          <img class="showcase-image" src="assets/images/projects/grid-1.jpg" alt="Colorful diagonal and vertical lines from Grid 1" fetchpriority="high" decoding="async">
+          <div class="showcase-copy">
+            <p class="showcase-kicker">01 / Creative coding · p5.js</p>
+            <h2>Grid 1.<em>Color in motion.</em></h2>
+            <p class="showcase-description">A study in rhythm and randomness. Small lines, endless combinations.</p>
+            <a class="showcase-link" href="https://mandyyi09.github.io/grid-1/" target="_blank" rel="noopener noreferrer">Explore the project<span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="swiper-slide showcase-slide showcase-slide--walker" data-project="walker">
+          <img class="showcase-image" src="assets/images/projects/walkerCard.png" alt="Colorful branching trails from Walker" loading="lazy" decoding="async">
+          <div class="showcase-copy">
+            <p class="showcase-kicker">02 / Generative art · p5.js</p>
+            <h2>Walker.<em>Follow the chance.</em></h2>
+            <p class="showcase-description">A wandering line leaves a trace. An experiment in movement, color, and the unexpected.</p>
+            <a class="showcase-link" href="https://mandyyi09.github.io/walker/" target="_blank" rel="noopener noreferrer">Explore the project<span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="swiper-slide showcase-slide showcase-slide--grid2" data-project="grid-2">
+          <img class="showcase-image" src="assets/images/projects/grid-2.jpg" alt="A black and white grid of circles, triangles, and squares" loading="lazy" decoding="async">
+          <div class="showcase-copy">
+            <p class="showcase-kicker">03 / Creative coding · p5.js</p>
+            <h2>Grid 2.<em>Play with order.</em></h2>
+            <p class="showcase-description">Circles, squares, and triangles. A simple visual language, constantly rearranged.</p>
+            <a class="showcase-link" href="https://mandyyi09.github.io/grid-2/" target="_blank" rel="noopener noreferrer">Explore the project<span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="swiper-slide showcase-slide showcase-slide--photo" data-project="">
+          <img class="showcase-image" src="assets/images/photography/beach.jpg" alt="Waves along the beach in La Jolla" loading="lazy" decoding="async">
+          <div class="showcase-copy">
+            <p class="showcase-kicker">04 / Photography · Selected moments</p>
+            <h2>A closer look.<em>Things I notice.</em></h2>
+            <p class="showcase-description">Light, places, and the small details that make me pause. A collection of moments worth keeping.</p>
+            <a class="showcase-link" href="#photography">Explore the photographs<span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+    <a class="showcase-more" href="projects.html">All projects <span aria-hidden="true">↗</span></a>
+    <div class="showcase-bottom">
+      <div class="showcase-pagination" aria-label="Choose a featured project"></div>
+      <div class="showcase-buttons">
+        <button class="showcase-control showcase-pause" type="button" aria-label="Pause slideshow"><span aria-hidden="true">Ⅱ</span></button>
+        <button class="showcase-control showcase-prev" type="button" aria-label="Previous project">←</button>
+        <button class="showcase-control showcase-next" type="button" aria-label="Next project">→</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero" id="introduction">
 
 
     <!-- LEFT -->
@@ -4312,6 +4367,8 @@
      JAVASCRIPT
 ====================================================== -->
 
+  <script src="libs/swiper/swiper-bundle.min.js" defer></script>
+  <script src="js/home-showcase.js" defer></script>
   <script type="module" src="js/photography.js"></script>
 
   <script>
