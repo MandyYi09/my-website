@@ -1,0 +1,646 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "github:1309862544",
+    "slug": "ai-hands",
+    "title": "AI Hands",
+    "repositoryName": "ai-hands",
+    "fullName": "MandyYi09/ai-hands",
+    "owner": "MandyYi09",
+    "shortDescription": "A webcam hand-tracking sketch that turns finger distance into color.",
+    "longDescription": "This browser sketch uses ml5.js hand-pose detection with p5.js to track the thumb and index fingertips. Their distance controls the red intensity of the canvas background, while blue circles mark both fingertips. The sketch hides the original camera element and displays a minimal visual response to the detected hand positions.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "p5.js",
+      "ml5.js"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "hand-tracking",
+      "computer-vision",
+      "gesture-interaction",
+      "creative-coding"
+    ],
+    "schoolSubjects": [
+      "Computer Science",
+      "Mathematics",
+      "Visual Arts"
+    ],
+    "category": "Creative Coding",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/ai-hands",
+    "homepageUrl": null,
+    "demoUrl": "https://mandyyi09.github.io/ai-hands/",
+    "readmeUrl": null,
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": true,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-07-23T11:24:19Z",
+    "updatedAt": "2026-07-23T11:29:21Z",
+    "pushedAt": "2026-07-23T11:29:17Z",
+    "sortOrder": 0,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 1081
+      },
+      {
+        "name": "HTML",
+        "bytes": 463
+      },
+      {
+        "name": "CSS",
+        "bytes": 72
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "Requires camera access and a working hand-pose model; live tracking was not tested during catalog creation."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/ai-hands",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/ai-hands/languages",
+      "fetchedAt": "2026-09-24T10:25:12Z",
+      "demoCheckedAt": "2026-09-24T10:26:34Z",
+      "readmeStatus": "missing",
+      "descriptionBasis": "sourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/ai-hands/blob/main/sketch.js",
+          "note": "Implemented sketch behavior, algorithms, and interactive features."
+        },
+        {
+          "url": "https://github.com/MandyYi09/ai-hands/blob/main/index.html",
+          "note": "Browser entry point and library imports."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1383373817",
+    "slug": "ai-hands-exp-2",
+    "title": "AI Hands Experiment 2",
+    "repositoryName": "ai-hands-exp-2",
+    "fullName": "MandyYi09/ai-hands-exp-2",
+    "owner": "MandyYi09",
+    "shortDescription": "A hand-tracking experiment with fading finger trails and movement-triggered effects.",
+    "longDescription": "This p5.js and ml5.js experiment draws a mirrored webcam view across the browser window and follows the first detected index fingertip. A fading trail records its path, while smoothed movement speed changes the size of the finger marker. Faster movements trigger an expanding impact ring. The source resets tracking coordinates after a resize and starts a new trail when a hand reappears.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "p5.js",
+      "ml5.js",
+      "MediaPipe"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "hand-tracking",
+      "computer-vision",
+      "motion-trails",
+      "gesture-interaction",
+      "interactive-art"
+    ],
+    "schoolSubjects": [
+      "Computer Science",
+      "Mathematics",
+      "Visual Arts"
+    ],
+    "category": "Creative Coding",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/ai-hands-exp-2",
+    "homepageUrl": null,
+    "demoUrl": null,
+    "readmeUrl": null,
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": false,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-09-23T12:08:49Z",
+    "updatedAt": "2026-09-23T12:09:02Z",
+    "pushedAt": "2026-09-23T12:08:58Z",
+    "sortOrder": 1,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 6216
+      },
+      {
+        "name": "HTML",
+        "bytes": 478
+      },
+      {
+        "name": "CSS",
+        "bytes": 207
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "Requires camera access and an externally loaded hand-pose library; live tracking was not tested during catalog creation."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/ai-hands-exp-2",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/ai-hands-exp-2/languages",
+      "fetchedAt": "2026-09-24T10:25:12Z",
+      "demoCheckedAt": null,
+      "readmeStatus": "missing",
+      "descriptionBasis": "sourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/ai-hands-exp-2/blob/main/sketch.js",
+          "note": "Implemented sketch behavior, algorithms, and interactive features."
+        },
+        {
+          "url": "https://github.com/MandyYi09/ai-hands-exp-2/blob/main/index.html",
+          "note": "Browser entry point and library imports."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1374415221",
+    "slug": "fitai",
+    "title": "Align Stretching Studio",
+    "repositoryName": "fitAi",
+    "fullName": "MandyYi09/fitAi",
+    "owner": "MandyYi09",
+    "shortDescription": "A browser stretching prototype with 3D pose references and camera-based comparison.",
+    "longDescription": "Align Stretching Studio presents 32 stretching and yoga movements with rotatable Three.js references and optional MediaPipe pose tracking. It compares detected joint angles with reference geometry, offers front and side inspection views, and includes a manual hold timer. The README describes local frame processing and a focus view that responds to stable tracking. This is a prototype: its 2D landmark comparisons estimate reference similarity and do not establish safe form or clinical correctness.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "Three.js",
+      "MediaPipe Tasks Vision",
+      "WebGL",
+      "Web Media Capture API"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "pose-estimation",
+      "computer-vision",
+      "stretching",
+      "yoga",
+      "fitness",
+      "3d-visualization"
+    ],
+    "schoolSubjects": [
+      "Computer Science",
+      "Mathematics",
+      "Physical Education"
+    ],
+    "category": "Movement & Fitness",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/fitAi",
+    "homepageUrl": null,
+    "demoUrl": null,
+    "readmeUrl": "https://github.com/MandyYi09/fitAi/blob/main/README.md",
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": false,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-09-17T12:38:22Z",
+    "updatedAt": "2026-09-19T08:23:24Z",
+    "pushedAt": "2026-09-19T08:23:19Z",
+    "sortOrder": 2,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 35424
+      },
+      {
+        "name": "HTML",
+        "bytes": 8840
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "The README states that the prototype is not clinically validated and cannot assess pain, joint loading, balance, depth, or injury risk.",
+      "Camera angle, occlusion, and low-confidence landmarks can affect comparisons; live webcam behavior was not tested during catalog creation."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/fitAi",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/fitAi/languages",
+      "fetchedAt": "2026-09-24T10:25:12Z",
+      "demoCheckedAt": null,
+      "readmeStatus": "available",
+      "descriptionBasis": "readmeAndSourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/fitAi/blob/main/README.md",
+          "note": "Project purpose, movement library, runtime, and stated limitations."
+        },
+        {
+          "url": "https://github.com/MandyYi09/fitAi/blob/main/src/app.js",
+          "note": "Three.js rendering, MediaPipe pose tracking, and opt-in camera capture."
+        },
+        {
+          "url": "https://github.com/MandyYi09/fitAi/blob/main/src/index.html",
+          "note": "Movement count, browser entry point, and linked CSS stylesheet."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1316093205",
+    "slug": "grid-1",
+    "title": "Grid 1",
+    "repositoryName": "grid-1",
+    "fullName": "MandyYi09/grid-1",
+    "owner": "MandyYi09",
+    "shortDescription": "An animated grid of randomly colored diagonal and vertical line segments.",
+    "longDescription": "This p5.js sketch divides a window-sized canvas into an 18-pixel grid. On each frame, random choices determine whether a cell draws a diagonal line, a vertical line, or no line. Random RGB strokes and a translucent black background create a changing field of colored marks and fading trails.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "p5.js"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "generative-art",
+      "grid-patterns",
+      "randomness",
+      "animation"
+    ],
+    "schoolSubjects": [
+      "Computer Science",
+      "Mathematics",
+      "Visual Arts"
+    ],
+    "category": "Creative Coding",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/grid-1",
+    "homepageUrl": null,
+    "demoUrl": "https://mandyyi09.github.io/grid-1/",
+    "readmeUrl": null,
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": true,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-07-29T12:13:33Z",
+    "updatedAt": "2026-07-29T12:14:49Z",
+    "pushedAt": "2026-07-29T12:13:40Z",
+    "sortOrder": 3,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 702
+      },
+      {
+        "name": "HTML",
+        "bytes": 414
+      },
+      {
+        "name": "CSS",
+        "bytes": 72
+      }
+    ],
+    "license": null,
+    "limitations": [],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/grid-1",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/grid-1/languages",
+      "fetchedAt": "2026-09-24T10:25:12Z",
+      "demoCheckedAt": "2026-09-24T10:26:39Z",
+      "readmeStatus": "missing",
+      "descriptionBasis": "sourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/grid-1/blob/main/sketch.js",
+          "note": "Implemented sketch behavior, algorithms, and interactive features."
+        },
+        {
+          "url": "https://github.com/MandyYi09/grid-1/blob/main/index.html",
+          "note": "Browser entry point and library imports."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1316797561",
+    "slug": "grid-2",
+    "title": "Grid 2",
+    "repositoryName": "grid-2",
+    "fullName": "MandyYi09/grid-2",
+    "owner": "MandyYi09",
+    "shortDescription": "A changing geometric grid of randomly selected squares, circles, and triangles.",
+    "longDescription": "This p5.js sketch fills the browser window with a 12-pixel grid. Each cell randomly selects a square, circle, or triangle on every frame, producing a continuously changing geometric pattern against a gray background. A resize handler adjusts the canvas when the browser window changes size.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "p5.js"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "generative-art",
+      "grid-patterns",
+      "geometry",
+      "randomness",
+      "animation"
+    ],
+    "schoolSubjects": [
+      "Computer Science",
+      "Mathematics",
+      "Visual Arts"
+    ],
+    "category": "Creative Coding",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/grid-2",
+    "homepageUrl": null,
+    "demoUrl": "https://mandyyi09.github.io/grid-2/",
+    "readmeUrl": null,
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": true,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-07-30T03:48:16Z",
+    "updatedAt": "2026-09-14T07:24:43Z",
+    "pushedAt": "2026-09-14T07:24:40Z",
+    "sortOrder": 4,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 1041
+      },
+      {
+        "name": "HTML",
+        "bytes": 414
+      },
+      {
+        "name": "CSS",
+        "bytes": 72
+      }
+    ],
+    "license": null,
+    "limitations": [],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/grid-2",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/grid-2/languages",
+      "fetchedAt": "2026-09-24T10:25:12Z",
+      "demoCheckedAt": "2026-09-24T10:26:41Z",
+      "readmeStatus": "missing",
+      "descriptionBasis": "sourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/grid-2/blob/main/sketch.js",
+          "note": "Implemented sketch behavior, algorithms, and interactive features."
+        },
+        {
+          "url": "https://github.com/MandyYi09/grid-2/blob/main/index.html",
+          "note": "Browser entry point and library imports."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1310901772",
+    "slug": "my-website",
+    "title": "Mandy's Portfolio",
+    "repositoryName": "my-website",
+    "fullName": "MandyYi09/my-website",
+    "owner": "MandyYi09",
+    "shortDescription": "A personal portfolio connecting creative coding, visual work, and sporting interests.",
+    "longDescription": "This multi-page personal website combines a portfolio landing page with supporting about, projects, hobbies, and art pages. The current homepage presents sporting interests, creative work, and links to the Grid 1, Grid 2, AI Hands, and Walker demos. Its HTML contains inline JavaScript interactions; supporting pages also load Bootstrap, Swiper, PhotoSwipe, and Headroom.js. Some project cards and supporting-page text remain placeholders.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "Bootstrap",
+      "Swiper",
+      "PhotoSwipe",
+      "Headroom.js"
+    ],
+    "programmingLanguages": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "domainTags": [
+      "personal-portfolio",
+      "web-design",
+      "creative-coding",
+      "visual-storytelling"
+    ],
+    "schoolSubjects": [
+      "Computer Science",
+      "Visual Arts"
+    ],
+    "category": "Portfolio & Web Design",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/my-website",
+    "homepageUrl": null,
+    "demoUrl": "https://mandyyi09.github.io/my-website/",
+    "readmeUrl": null,
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": true,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-07-24T10:10:36Z",
+    "updatedAt": "2026-09-11T12:59:52Z",
+    "pushedAt": "2026-09-11T12:59:48Z",
+    "sortOrder": 5,
+    "primaryLanguage": "HTML",
+    "languageBreakdown": [
+      {
+        "name": "HTML",
+        "bytes": 193851
+      },
+      {
+        "name": "CSS",
+        "bytes": 2491
+      }
+    ],
+    "license": null,
+    "limitations": [
+      "Some project cards and supporting pages contain placeholder content."
+    ],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/my-website",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/my-website/languages",
+      "fetchedAt": "2026-09-24T10:25:12Z",
+      "demoCheckedAt": "2026-09-24T10:26:45Z",
+      "readmeStatus": "missing",
+      "descriptionBasis": "sourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/my-website/blob/main/index.html",
+          "note": "Portfolio content, linked creative-coding demos, inline JavaScript, and placeholder cards."
+        },
+        {
+          "url": "https://github.com/MandyYi09/my-website/blob/main/about.html",
+          "note": "Bootstrap, Swiper, PhotoSwipe, and Headroom.js imports on a supporting page."
+        },
+        {
+          "url": "https://github.com/MandyYi09/my-website/blob/main/projects.html",
+          "note": "Supporting project page and placeholder content."
+        }
+      ]
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "id": "github:1309869614",
+    "slug": "walker",
+    "title": "Walker",
+    "repositoryName": "walker",
+    "fullName": "MandyYi09/walker",
+    "owner": "MandyYi09",
+    "shortDescription": "A colorful random-walk sketch with fading paths and bounded motion.",
+    "longDescription": "This p5.js sketch starts a walker at the center of the canvas and repeatedly draws short segments to randomly chosen nearby positions. Coordinates stay within the canvas, while gradually changing RGB values vary the path color. The program takes 120 steps per frame and overlays a translucent black background, leaving a fading record of the walk.",
+    "isFeaturedOnHomePage": false,
+    "isFeaturedOnSection": false,
+    "isFavorite": false,
+    "technologies": [
+      "p5.js"
+    ],
+    "programmingLanguages": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "domainTags": [
+      "generative-art",
+      "random-walk",
+      "randomness",
+      "animation"
+    ],
+    "schoolSubjects": [
+      "Computer Science",
+      "Mathematics",
+      "Visual Arts"
+    ],
+    "category": "Creative Coding",
+    "topics": [],
+    "repositoryUrl": "https://github.com/MandyYi09/walker",
+    "homepageUrl": null,
+    "demoUrl": "https://mandyyi09.github.io/walker/",
+    "readmeUrl": null,
+    "imageUrl": null,
+    "defaultBranch": "main",
+    "visibility": "public",
+    "isArchived": false,
+    "isFork": false,
+    "isTemplate": false,
+    "hasPages": true,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "createdAt": "2026-07-23T11:32:37Z",
+    "updatedAt": "2026-07-24T09:49:17Z",
+    "pushedAt": "2026-07-24T09:48:29Z",
+    "sortOrder": 6,
+    "primaryLanguage": "JavaScript",
+    "languageBreakdown": [
+      {
+        "name": "JavaScript",
+        "bytes": 1242
+      },
+      {
+        "name": "HTML",
+        "bytes": 414
+      },
+      {
+        "name": "CSS",
+        "bytes": 72
+      }
+    ],
+    "license": null,
+    "limitations": [],
+    "source": {
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/walker",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/walker/languages",
+      "fetchedAt": "2026-09-24T10:25:12Z",
+      "demoCheckedAt": "2026-09-24T10:26:47Z",
+      "readmeStatus": "missing",
+      "descriptionBasis": "sourceReview",
+      "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
+      "evidence": [
+        {
+          "url": "https://github.com/MandyYi09/walker/blob/main/sketch.js",
+          "note": "Implemented sketch behavior, algorithms, and interactive features."
+        },
+        {
+          "url": "https://github.com/MandyYi09/walker/blob/main/index.html",
+          "note": "Browser entry point and library imports."
+        }
+      ]
+    }
+  }
+]

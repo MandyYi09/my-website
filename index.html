@@ -1,589 +1,596 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mandy — Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mandy — Portfolio</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --paper:#f3f0e9;
-  --cream:#f7f5ef;
-  --ink:#151515;
-  --muted:#6e6c66;
-  --line:rgba(20,20,20,.16);
-  --sage:#7b8b80;
-  --dark:#171817;
-  --serif:Georgia,'Times New Roman',serif;
-  --sans:Arial,Helvetica,sans-serif;
-}
+  <style>
+    :root {
+      --paper: #f3f0e9;
+      --cream: #f7f5ef;
+      --ink: #151515;
+      --muted: #6e6c66;
+      --line: rgba(20, 20, 20, .16);
+      --sage: #7b8b80;
+      --dark: #171817;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
-img{max-width:100%;display:block}
-::selection{background:#cbd5ce;color:#111}
+    * {
+      box-sizing: border-box
+    }
 
-#progress{
-  position:fixed;
-  left:0;
-  top:0;
-  height:3px;
-  background:var(--sage);
-  width:0;
-  z-index:9999;
-}
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      overflow-x: hidden
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    button {
+      font: inherit
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    ::selection {
+      background: #cbd5ce;
+      color: #111
+    }
+
+    #progress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 3px;
+      background: var(--sage);
+      width: 0;
+      z-index: 9999;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    NAV
 ========================================================= */
 
-.nav{
-  position:fixed;
-  z-index:500;
-  top:0;
-  left:0;
-  right:0;
-  height:76px;
+    .nav {
+      position: fixed;
+      z-index: 500;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 76px;
 
-  padding:0 4vw;
+      padding: 0 4vw;
 
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-  background:rgba(243,240,233,.82);
-  backdrop-filter:blur(18px);
+      background: rgba(243, 240, 233, .82);
+      backdrop-filter: blur(18px);
 
-  border-bottom:1px solid rgba(0,0,0,.07);
-}
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
 
-.brand{
-  font:700 26px/1 var(--serif);
-  letter-spacing:-1px;
-}
+    .brand {
+      font: 700 26px/1 var(--serif);
+      letter-spacing: -1px;
+    }
 
-.navlinks{
-  display:flex;
-  gap:28px;
+    .navlinks {
+      display: flex;
+      gap: 28px;
 
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.13em;
-}
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+    }
 
-.navlinks a{
-  opacity:.58;
-  transition:.2s;
-}
+    .navlinks a {
+      opacity: .58;
+      transition: .2s;
+    }
 
-.navlinks a:hover{
-  opacity:1;
-}
+    .navlinks a:hover {
+      opacity: 1;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    SHARED
 ========================================================= */
 
-.page-index{
-  font-size:10px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
+    .page-index {
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-.section{
-  padding:118px 5vw;
-}
+    .section {
+      padding: 118px 5vw;
+    }
 
-.section-head{
-  display:grid;
-  grid-template-columns:180px 1fr;
+    .section-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
 
-  gap:36px;
+      gap: 36px;
 
-  align-items:start;
+      align-items: start;
 
-  margin-bottom:68px;
-}
+      margin-bottom: 68px;
+    }
 
-.section-head h2{
-  font:
-    600
-    clamp(48px,6.3vw,92px)
-    /.98
-    var(--serif);
+    .section-head h2 {
+      font:
+        600 clamp(48px, 6.3vw, 92px) /.98 var(--serif);
 
-  letter-spacing:-.04em;
+      letter-spacing: -.04em;
 
-  margin:0;
+      margin: 0;
 
-  max-width:1000px;
-}
+      max-width: 1000px;
+    }
 
-.section-intro{
-  max-width:600px;
+    .section-intro {
+      max-width: 600px;
 
-  color:var(--muted);
+      color: var(--muted);
 
-  line-height:1.75;
+      line-height: 1.75;
 
-  font-size:15px;
+      font-size: 15px;
 
-  margin-top:18px;
-}
+      margin-top: 18px;
+    }
 
-.hero h1 em,
-.section-head h2 em,
-.visual-subhead h3 em,
-.about-statement em,
-.footer h2 em{
-  font-family:'Instrument Serif',Georgia,serif;
-  font-style:italic;
-  font-weight:400;
+    .hero h1 em,
+    .section-head h2 em,
+    .visual-subhead h3 em,
+    .about-statement em,
+    .footer h2 em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
 
-  color:var(--sage);
+      color: var(--sage);
 
-  letter-spacing:-.035em;
-}
+      letter-spacing: -.035em;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    HERO
 ========================================================= */
 
-.hero{
-  min-height:100vh;
+    .hero {
+      min-height: 100vh;
 
-  padding:128px 5vw 5vw;
+      padding: 128px 5vw 5vw;
 
-  display:grid;
-  grid-template-columns:1.08fr .92fr;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
 
-  gap:4vw;
+      gap: 4vw;
 
-  align-items:center;
+      align-items: center;
 
-  position:relative;
+      position: relative;
 
-  overflow:hidden;
-}
+      overflow: hidden;
+    }
 
-.hero:before{
-  content:'';
+    .hero:before {
+      content: '';
 
-  position:absolute;
+      position: absolute;
 
-  width:48vw;
-  height:48vw;
+      width: 48vw;
+      height: 48vw;
 
-  border-radius:50%;
+      border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle,
-      #bdc9c1 0,
-      #dce1db 28%,
-      transparent 70%
-    );
+      background:
+        radial-gradient(circle,
+          #bdc9c1 0,
+          #dce1db 28%,
+          transparent 70%);
 
-  right:-13vw;
-  top:-10vw;
+      right: -13vw;
+      top: -10vw;
 
-  opacity:.8;
-}
+      opacity: .8;
+    }
 
-.hero:after{
-  content:'';
+    .hero:after {
+      content: '';
 
-  position:absolute;
+      position: absolute;
 
-  width:36vw;
-  height:36vw;
+      width: 36vw;
+      height: 36vw;
 
-  border-radius:50%;
+      border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle,
-      #e5cbb4 0,
-      #efe1d5 30%,
-      transparent 70%
-    );
+      background:
+        radial-gradient(circle,
+          #e5cbb4 0,
+          #efe1d5 30%,
+          transparent 70%);
 
-  left:-12vw;
-  bottom:-16vw;
+      left: -12vw;
+      bottom: -16vw;
 
-  opacity:.75;
-}
+      opacity: .75;
+    }
 
-.hero-copy{
-  position:relative;
+    .hero-copy {
+      position: relative;
 
-  z-index:2;
+      z-index: 2;
 
-  max-width:900px;
-}
+      max-width: 900px;
+    }
 
-.eyebrow{
-  font-size:11px;
+    .eyebrow {
+      font-size: 11px;
 
-  letter-spacing:.22em;
+      letter-spacing: .22em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#595a56;
+      color: #595a56;
 
-  margin-bottom:22px;
-}
+      margin-bottom: 22px;
+    }
 
-.hero h1{
-  font:
-    600
-    clamp(64px,8.5vw,132px)
-    /.88
-    var(--serif);
+    .hero h1 {
+      font:
+        600 clamp(64px, 8.5vw, 132px) /.88 var(--serif);
 
-  letter-spacing:-.05em;
+      letter-spacing: -.05em;
 
-  margin:0;
+      margin: 0;
 
-  max-width:900px;
-}
+      max-width: 900px;
+    }
 
-.hero p{
-  max-width:610px;
+    .hero p {
+      max-width: 610px;
 
-  font-size:17px;
+      font-size: 17px;
 
-  line-height:1.72;
+      line-height: 1.72;
 
-  color:#62615c;
+      color: #62615c;
 
-  margin:34px 0;
-}
+      margin: 34px 0;
+    }
 
-.hero-actions{
-  display:flex;
+    .hero-actions {
+      display: flex;
 
-  gap:12px;
+      gap: 12px;
 
-  flex-wrap:wrap;
-}
+      flex-wrap: wrap;
+    }
 
-.pill{
-  padding:13px 21px;
+    .pill {
+      padding: 13px 21px;
 
-  border-radius:999px;
+      border-radius: 999px;
 
-  border:1px solid #2a2a2a;
+      border: 1px solid #2a2a2a;
 
-  font-size:13px;
+      font-size: 13px;
 
-  transition:.25s;
-}
+      transition: .25s;
+    }
 
-.pill.dark{
-  background:#191919;
-  color:white;
-}
+    .pill.dark {
+      background: #191919;
+      color: white;
+    }
 
-.pill:hover{
-  transform:translateY(-3px);
-}
+    .pill:hover {
+      transform: translateY(-3px);
+    }
 
 
-/* =========================================================
+    /* =========================================================
    PERSONAL INDEX
 ========================================================= */
 
-.identity-board{
-  position:relative;
+    .identity-board {
+      position: relative;
 
-  z-index:2;
+      z-index: 2;
 
-  border:1px solid var(--line);
+      border: 1px solid var(--line);
 
-  min-height:590px;
+      min-height: 590px;
 
-  background:rgba(255,255,255,.28);
+      background: rgba(255, 255, 255, .28);
 
-  display:grid;
+      display: grid;
 
-  grid-template-rows:
-    auto
-    1fr
-    auto;
+      grid-template-rows:
+        auto 1fr auto;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  backdrop-filter:blur(12px);
-}
+      backdrop-filter: blur(12px);
+    }
 
-.identity-top,
-.identity-bottom{
-  padding:18px 20px;
+    .identity-top,
+    .identity-bottom {
+      padding: 18px 20px;
 
-  display:flex;
+      display: flex;
 
-  justify-content:space-between;
-  align-items:center;
+      justify-content: space-between;
+      align-items: center;
 
-  font-size:10px;
+      font-size: 10px;
 
-  letter-spacing:.15em;
+      letter-spacing: .15em;
 
-  text-transform:uppercase;
-}
+      text-transform: uppercase;
+    }
 
-.identity-top{
-  border-bottom:1px solid var(--line);
-}
+    .identity-top {
+      border-bottom: 1px solid var(--line);
+    }
 
-.identity-bottom{
-  border-top:1px solid var(--line);
-}
+    .identity-bottom {
+      border-top: 1px solid var(--line);
+    }
 
-.identity-bottom a{
-  font-weight:700;
-}
+    .identity-bottom a {
+      font-weight: 700;
+    }
 
-.identity-body{
-  display:grid;
+    .identity-body {
+      display: grid;
 
-  grid-template-columns:
-    .82fr
-    1.18fr;
+      grid-template-columns:
+        .82fr 1.18fr;
 
-  min-height:0;
-}
+      min-height: 0;
+    }
 
-.identity-menu{
-  border-right:1px solid var(--line);
+    .identity-menu {
+      border-right: 1px solid var(--line);
 
-  display:flex;
+      display: flex;
 
-  flex-direction:column;
+      flex-direction: column;
 
-  position:relative;
+      position: relative;
 
-  z-index:4;
-}
+      z-index: 4;
+    }
 
-.identity-item{
-  appearance:none;
+    .identity-item {
+      appearance: none;
 
-  border:0;
+      border: 0;
 
-  border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
-  background:transparent;
+      background: transparent;
 
-  color:inherit;
+      color: inherit;
 
-  padding:20px 18px;
+      padding: 20px 18px;
 
-  text-align:left;
+      text-align: left;
 
-  display:grid;
+      display: grid;
 
-  grid-template-columns:
-    30px
-    1fr;
+      grid-template-columns:
+        30px 1fr;
 
-  grid-template-areas:
-    'num name'
-    'num desc';
+      grid-template-areas:
+        'num name'
+        'num desc';
 
-  column-gap:8px;
+      column-gap: 8px;
 
-  cursor:pointer;
+      cursor: pointer;
 
-  transition:.25s;
+      transition: .25s;
 
-  position:relative;
+      position: relative;
 
-  z-index:5;
-}
+      z-index: 5;
+    }
 
-.identity-item:last-child{
-  border-bottom:0;
-}
+    .identity-item:last-child {
+      border-bottom: 0;
+    }
 
-.identity-item:hover,
-.identity-item.active{
-  background:#171817;
+    .identity-item:hover,
+    .identity-item.active {
+      background: #171817;
 
-  color:#f4f1e9;
-}
+      color: #f4f1e9;
+    }
 
-.identity-item span{
-  grid-area:num;
+    .identity-item span {
+      grid-area: num;
 
-  font-size:9px;
+      font-size: 9px;
 
-  letter-spacing:.12em;
+      letter-spacing: .12em;
 
-  opacity:.55;
+      opacity: .55;
 
-  padding-top:4px;
-}
+      padding-top: 4px;
+    }
 
-.identity-item b{
-  grid-area:name;
+    .identity-item b {
+      grid-area: name;
 
-  font:
-    500
-    19px
-    /1.05
-    var(--serif);
+      font:
+        500 19px /1.05 var(--serif);
 
-  letter-spacing:-.02em;
-}
+      letter-spacing: -.02em;
+    }
 
-.identity-item small{
-  grid-area:desc;
+    .identity-item small {
+      grid-area: desc;
 
-  margin-top:6px;
+      margin-top: 6px;
 
-  font-size:8px;
+      font-size: 8px;
 
-  letter-spacing:.11em;
+      letter-spacing: .11em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  opacity:.62;
-}
+      opacity: .62;
+    }
 
 
-/* RIGHT SIDE */
+    /* RIGHT SIDE */
 
-.identity-preview{
-  min-width:0;
+    .identity-preview {
+      min-width: 0;
 
-  display:grid;
+      display: grid;
 
-  grid-template-rows:
-    minmax(330px,1fr)
-    auto;
+      grid-template-rows:
+        minmax(330px, 1fr) auto;
 
-  background:#e3e5df;
+      background: #e3e5df;
 
-  overflow:hidden;
-}
+      overflow: hidden;
+    }
 
-.identity-scenes{
-  position:relative;
+    .identity-scenes {
+      position: relative;
 
-  min-height:330px;
+      min-height: 330px;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  background-image:
-    linear-gradient(
-      rgba(20,20,20,.055) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(20,20,20,.055) 1px,
-      transparent 1px
-    );
+      background-image:
+        linear-gradient(rgba(20, 20, 20, .055) 1px,
+          transparent 1px),
+        linear-gradient(90deg,
+          rgba(20, 20, 20, .055) 1px,
+          transparent 1px);
 
-  background-size:42px 42px;
+      background-size: 42px 42px;
 
-  pointer-events:none;
-}
+      pointer-events: none;
+    }
 
-.identity-scene{
-  position:absolute;
+    .identity-scene {
+      position: absolute;
 
-  inset:0;
+      inset: 0;
 
-  opacity:0;
-  visibility:hidden;
+      opacity: 0;
+      visibility: hidden;
 
-  transition:opacity .34s ease;
+      transition: opacity .34s ease;
 
-  pointer-events:none;
+      pointer-events: none;
 
-  z-index:0;
-}
+      z-index: 0;
+    }
 
-.identity-scene.active{
-  opacity:1;
-  visibility:visible;
+    .identity-scene.active {
+      opacity: 1;
+      visibility: visible;
 
-  z-index:2;
-}
+      z-index: 2;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    PERSONAL INDEX IMAGES
 ========================================================= */
 
-/*
+    /*
    We use background images rather than old SVG placeholders.
    This prevents the old graphics from appearing on top.
 */
 
-.scene-photo{
-  position:absolute;
+    .scene-photo {
+      position: absolute;
 
-  inset:0;
+      inset: 0;
 
-  background-repeat:no-repeat;
+      background-repeat: no-repeat;
 
-  background-color:#dfe3dd;
-}
+      background-color: #dfe3dd;
+    }
 
-.scene-photo.cover{
-  background-size:cover;
+    .scene-photo.cover {
+      background-size: cover;
 
-  background-position:center;
-}
-
-
-/* PHOTOGRAPHY */
-
-.scene-photo.photo{
-  background-image:url('assets/images/photography/sunset.jpg');
-
-  background-position:center 42%;
-}
+      background-position: center;
+    }
 
 
-/* TENNIS */
+    /* PHOTOGRAPHY */
 
-.scene-photo.tennis{
-  background-image:url('images/tennis.jpg');
+    .scene-photo.photo {
+      background-image:
+        url('assets/images/photography/sunset.jpg');
 
-  background-position:center;
-}
-
-
-/* CREATIVE CODING */
-
-.scene-photo.creative{
-  background-image:url('images/creative-code.png');
-
-  background-position:center;
-}
+      background-position: center 42%;
+    }
 
 
-/* =========================================================
+    /* TENNIS */
+
+    .scene-photo.tennis {
+      background-image: url('images/tennis.jpg');
+
+      background-position: center;
+    }
+
+
+    /* CREATIVE CODING */
+
+    .scene-photo.creative {
+      background-image: url('images/creative-code.png');
+
+      background-position: center;
+    }
+
+
+    /* =========================================================
    ROWING PERSONAL INDEX
 ========================================================= */
 
-/*
+    /*
    Rowing is a wide horizontal image.
 
    Background:
@@ -593,2338 +600,2175 @@ img{max-width:100%;display:block}
    complete image using contain
 */
 
-.scene-rowing{
-  position:absolute;
+    .scene-rowing {
+      position: absolute;
 
-  inset:0;
+      inset: 0;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  background:#dfe3dd;
-}
+      background: #dfe3dd;
+    }
 
-.scene-rowing:before{
-  content:'';
+    .scene-rowing:before {
+      content: '';
 
-  position:absolute;
+      position: absolute;
 
-  inset:-24px;
+      inset: -24px;
 
-  background-image:url('assets/images/sports/rowing.jpg');
+      background-image:
+        url('assets/images/sports/rowing/rowing.JPG');
 
-  background-size:cover;
+      background-size: cover;
 
-  background-position:center;
+      background-position: center;
 
-  filter:
-    blur(20px)
-    brightness(.8);
+      filter:
+        blur(20px) brightness(.8);
 
-  transform:scale(1.06);
+      transform: scale(1.06);
 
-  opacity:.34;
-}
+      opacity: .34;
+    }
 
-.scene-rowing:after{
-  content:'';
+    .scene-rowing:after {
+      content: '';
 
-  position:absolute;
+      position: absolute;
 
-  inset:24px;
+      inset: 24px;
 
-  background-image:url('assets/images/sports/rowing.jpg');
+      background-image:
+        url('assets/images/sports/rowing/rowing.JPG');
 
-  background-repeat:no-repeat;
+      background-repeat: no-repeat;
 
-  background-size:contain;
+      background-size: contain;
 
-  background-position:center;
-}
+      background-position: center;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    PYTHON + ECONOMICS PERSONAL INDEX
 ========================================================= */
 
-.python-visual{
-  position:absolute;
+    .python-visual {
+      position: absolute;
 
-  inset:0;
+      inset: 0;
 
-  padding:34px;
+      padding: 34px;
 
-  display:grid;
+      display: grid;
 
-  grid-template-columns:
-    .75fr
-    1.25fr;
+      grid-template-columns:
+        .75fr 1.25fr;
 
-  gap:24px;
+      gap: 24px;
 
-  align-items:stretch;
+      align-items: stretch;
 
-  background:#e5e7e1;
-}
+      background: #e5e7e1;
+    }
 
-.python-code{
-  border:1px solid var(--line);
+    .python-code {
+      border: 1px solid var(--line);
 
-  padding:20px;
+      padding: 20px;
 
-  font:
-    11px
-    /1.7
-    monospace;
+      font:
+        11px /1.7 monospace;
 
-  color:#47534b;
+      color: #47534b;
 
-  background:rgba(247,245,239,.68);
-}
+      background: rgba(247, 245, 239, .68);
+    }
 
-.python-chart{
-  position:relative;
+    .python-chart {
+      position: relative;
 
-  border:1px solid var(--line);
+      border: 1px solid var(--line);
 
-  background:rgba(247,245,239,.6);
+      background: rgba(247, 245, 239, .6);
 
-  overflow:hidden;
-}
+      overflow: hidden;
+    }
 
-.python-chart:before{
-  content:'';
+    .python-chart:before {
+      content: '';
 
-  position:absolute;
+      position: absolute;
 
-  left:12%;
-  right:8%;
+      left: 12%;
+      right: 8%;
 
-  bottom:14%;
+      bottom: 14%;
 
-  height:1px;
+      height: 1px;
 
-  background:#aeb4ae;
-}
+      background: #aeb4ae;
+    }
 
-.python-chart:after{
-  content:'';
+    .python-chart:after {
+      content: '';
 
-  position:absolute;
+      position: absolute;
 
-  left:14%;
+      left: 14%;
 
-  bottom:14%;
+      bottom: 14%;
 
-  width:72%;
-  height:62%;
+      width: 72%;
+      height: 62%;
 
-  border-left:1px solid #aeb4ae;
-  border-bottom:1px solid #aeb4ae;
+      border-left: 1px solid #aeb4ae;
+      border-bottom: 1px solid #aeb4ae;
 
-  background:
-    radial-gradient(
-      circle at 16% 72%,
-      #9daa9f 0 4px,
-      transparent 5px
-    ),
-    radial-gradient(
-      circle at 28% 64%,
-      #9daa9f 0 4px,
-      transparent 5px
-    ),
-    radial-gradient(
-      circle at 40% 56%,
-      #9daa9f 0 4px,
-      transparent 5px
-    ),
-    radial-gradient(
-      circle at 56% 42%,
-      #9daa9f 0 4px,
-      transparent 5px
-    ),
-    radial-gradient(
-      circle at 72% 27%,
-      #6f8176 0 7px,
-      transparent 8px
-    );
-}
+      background:
+        radial-gradient(circle at 16% 72%,
+          #9daa9f 0 4px,
+          transparent 5px),
+        radial-gradient(circle at 28% 64%,
+          #9daa9f 0 4px,
+          transparent 5px),
+        radial-gradient(circle at 40% 56%,
+          #9daa9f 0 4px,
+          transparent 5px),
+        radial-gradient(circle at 56% 42%,
+          #9daa9f 0 4px,
+          transparent 5px),
+        radial-gradient(circle at 72% 27%,
+          #6f8176 0 7px,
+          transparent 8px);
+    }
 
 
-/* PERSONAL INDEX COPY */
+    /* PERSONAL INDEX COPY */
 
-.identity-copy{
-  border-top:1px solid var(--line);
+    .identity-copy {
+      border-top: 1px solid var(--line);
 
-  padding:20px 22px 22px;
+      padding: 20px 22px 22px;
 
-  background:rgba(247,245,239,.88);
-}
+      background: rgba(247, 245, 239, .88);
+    }
 
-.identity-copy span{
-  font-size:9px;
+    .identity-copy span {
+      font-size: 9px;
 
-  letter-spacing:.15em;
+      letter-spacing: .15em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#777;
-}
+      color: #777;
+    }
 
-.identity-copy h3{
-  font:
-    500
-    34px
-    /.98
-    var(--serif);
+    .identity-copy h3 {
+      font:
+        500 34px /.98 var(--serif);
 
-  letter-spacing:-.035em;
+      letter-spacing: -.035em;
 
-  margin:8px 0 9px;
-}
+      margin: 8px 0 9px;
+    }
 
-.identity-copy p{
-  font-size:12px;
+    .identity-copy p {
+      font-size: 12px;
 
-  line-height:1.55;
+      line-height: 1.55;
 
-  color:#666;
+      color: #666;
 
-  margin:0;
+      margin: 0;
 
-  max-width:430px;
-}
+      max-width: 430px;
+    }
 
-.identity-tags{
-  margin-top:14px;
+    .identity-tags {
+      margin-top: 14px;
 
-  font-size:9px;
+      font-size: 9px;
 
-  letter-spacing:.1em;
+      letter-spacing: .1em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#738178;
-}
+      color: #738178;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    HOW I THINK
 ========================================================= */
 
-.think-grid{
-  display:grid;
+    .think-grid {
+      display: grid;
 
-  grid-template-columns:
-    1fr
-    1.12fr;
+      grid-template-columns:
+        1fr 1.12fr;
 
-  border-top:1px solid var(--line);
+      border-top: 1px solid var(--line);
 
-  border-bottom:1px solid var(--line);
-}
+      border-bottom: 1px solid var(--line);
+    }
 
-.think-menu{
-  border-right:1px solid var(--line);
-}
+    .think-menu {
+      border-right: 1px solid var(--line);
+    }
 
-.think-btn{
-  width:100%;
+    .think-btn {
+      width: 100%;
 
-  background:none;
+      background: none;
 
-  border:0;
+      border: 0;
 
-  border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
-  padding:27px 20px;
+      padding: 27px 20px;
 
-  display:flex;
+      display: flex;
 
-  align-items:center;
-  justify-content:space-between;
+      align-items: center;
+      justify-content: space-between;
 
-  text-align:left;
+      text-align: left;
 
-  cursor:pointer;
+      cursor: pointer;
 
-  transition:.25s;
-}
+      transition: .25s;
+    }
 
-.think-btn:last-child{
-  border-bottom:0;
-}
+    .think-btn:last-child {
+      border-bottom: 0;
+    }
 
-.think-btn:hover,
-.think-btn.active{
-  background:#e8e5de;
-}
+    .think-btn:hover,
+    .think-btn.active {
+      background: #e8e5de;
+    }
 
-.think-word{
-  font:
-    500
-    clamp(30px,4vw,54px)
-    /1
-    var(--serif);
-}
+    .think-word {
+      font:
+        500 clamp(30px, 4vw, 54px) /1 var(--serif);
+    }
 
-.think-num{
-  font-size:10px;
+    .think-num {
+      font-size: 10px;
 
-  letter-spacing:.16em;
-}
+      letter-spacing: .16em;
+    }
 
-.think-panel{
-  min-height:580px;
+    .think-panel {
+      min-height: 580px;
 
-  padding:48px 52px;
+      padding: 48px 52px;
 
-  display:grid;
+      display: grid;
 
-  grid-template-rows:
-    auto
-    1fr
-    auto;
+      grid-template-rows:
+        auto 1fr auto;
 
-  gap:36px;
+      gap: 36px;
 
-  background:#e2e4dd;
-}
+      background: #e2e4dd;
+    }
 
-.think-panel .big{
-  font:
-    500
-    clamp(40px,5.2vw,76px)
-    /1.02
-    var(--serif);
+    .think-panel .big {
+      font:
+        500 clamp(40px, 5.2vw, 76px) /1.02 var(--serif);
 
-  max-width:720px;
+      max-width: 720px;
 
-  letter-spacing:-.035em;
+      letter-spacing: -.035em;
 
-  align-self:center;
-}
+      align-self: center;
+    }
 
-.think-panel .mini{
-  display:grid;
+    .think-panel .mini {
+      display: grid;
 
-  grid-template-columns:
-    1fr
-    1fr;
+      grid-template-columns:
+        1fr 1fr;
 
-  gap:40px;
+      gap: 40px;
 
-  padding-top:22px;
+      padding-top: 22px;
 
-  border-top:
-    1px solid
-    rgba(20,20,20,.14);
+      border-top:
+        1px solid rgba(20, 20, 20, .14);
 
-  font-size:13px;
+      font-size: 13px;
 
-  line-height:1.65;
+      line-height: 1.65;
 
-  color:#555;
-}
+      color: #555;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    SPORTS
 ========================================================= */
 
-.sports{
-  background:var(--dark);
+    .sports {
+      background: var(--dark);
 
-  color:#f5f1ea;
+      color: #f5f1ea;
 
-  padding-top:128px;
-}
+      padding-top: 128px;
+    }
 
-.sports .section-head .page-index,
-.sports .section-intro{
-  color:#999;
-}
+    .sports .section-head .page-index,
+    .sports .section-intro {
+      color: #999;
+    }
 
-.sports .section-head h2 em{
-  color:#a8bbb0;
-}
+    .sports .section-head h2 em {
+      color: #a8bbb0;
+    }
 
-.sports-loop{
-  display:grid;
+    .sports-loop {
+      display: grid;
 
-  grid-template-columns:
-    repeat(4,1fr);
+      grid-template-columns:
+        repeat(4, 1fr);
 
-  border-top:1px solid #3a3b39;
+      border-top: 1px solid #3a3b39;
 
-  border-bottom:1px solid #3a3b39;
+      border-bottom: 1px solid #3a3b39;
 
-  margin-bottom:88px;
-}
+      margin-bottom: 88px;
+    }
 
-.loop-item{
-  padding:31px 24px;
+    .loop-item {
+      padding: 31px 24px;
 
-  min-height:205px;
+      min-height: 205px;
 
-  border-right:1px solid #3a3b39;
-}
+      border-right: 1px solid #3a3b39;
+    }
 
-.loop-item:last-child{
-  border-right:0;
-}
+    .loop-item:last-child {
+      border-right: 0;
+    }
 
-.loop-item span{
-  font-size:10px;
+    .loop-item span {
+      font-size: 10px;
 
-  color:#8d8f8a;
+      color: #8d8f8a;
 
-  letter-spacing:.16em;
-}
+      letter-spacing: .16em;
+    }
 
-.loop-item h3{
-  font:
-    500
-    34px
-    /1.05
-    var(--serif);
+    .loop-item h3 {
+      font:
+        500 34px /1.05 var(--serif);
 
-  margin:55px 0 10px;
-}
+      margin: 55px 0 10px;
+    }
 
-.loop-item p{
-  font-size:12px;
+    .loop-item p {
+      font-size: 12px;
 
-  color:#94968f;
+      color: #94968f;
 
-  line-height:1.55;
+      line-height: 1.55;
 
-  margin:0;
-}
+      margin: 0;
+    }
 
 
-/* SPORT STORY */
+    /* SPORT STORY */
 
-.sport-story{
-  display:grid;
+    .sport-story {
+      display: grid;
 
-  grid-template-columns:
-    1.03fr
-    .97fr;
+      grid-template-columns:
+        1.03fr .97fr;
 
-  margin-bottom:22px;
+      margin-bottom: 22px;
 
-  min-height:650px;
-}
+      min-height: 650px;
+    }
 
-.sport-story.reverse{
-  grid-template-columns:
-    .97fr
-    1.03fr;
-}
+    .sport-story.reverse {
+      grid-template-columns:
+        .97fr 1.03fr;
+    }
 
-.sport-art{
-  position:relative;
+    .sport-art {
+      position: relative;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  background:#21332b;
-}
+      background: #21332b;
+    }
 
-.sport-image{
-  position:absolute;
+    .sport-image {
+      position: absolute;
 
-  inset:0;
+      inset: 0;
 
-  background-size:cover;
+      background-size: cover;
 
-  background-position:center;
+      background-position: center;
 
-  background-repeat:no-repeat;
-}
+      background-repeat: no-repeat;
+    }
 
-.sport-image.tennis-large{
-  background-image:url('images/tennis.jpg');
-}
+    .sport-image.tennis-large {
+      background-image: url('images/tennis.jpg');
+    }
 
-.sport-image.rowing-large{
-  background-image:url('assets/images/sports/rowing.jpg');
+    .sport-image.rowing-large {
+      background-image: url('assets/images/sports/rowing.jpg');
 
-  background-position:center;
-}
+      background-position: center;
+    }
 
-.sport-copy{
-  background:#ece7de;
+    .sport-copy {
+      background: #ece7de;
 
-  color:#171717;
+      color: #171717;
 
-  padding:58px 6vw;
+      padding: 58px 6vw;
 
-  display:flex;
+      display: flex;
 
-  flex-direction:column;
+      flex-direction: column;
 
-  justify-content:space-between;
-}
+      justify-content: space-between;
+    }
 
-.sport-copy .kicker{
-  font-size:10px;
+    .sport-copy .kicker {
+      font-size: 10px;
 
-  letter-spacing:.18em;
+      letter-spacing: .18em;
 
-  text-transform:uppercase;
-}
+      text-transform: uppercase;
+    }
 
-.sport-copy h3{
-  font:
-    500
-    clamp(48px,5.4vw,82px)
-    /.96
-    var(--serif);
+    .sport-copy h3 {
+      font:
+        500 clamp(48px, 5.4vw, 82px) /.96 var(--serif);
 
-  letter-spacing:-.045em;
+      letter-spacing: -.045em;
 
-  margin:24px 0;
-}
+      margin: 24px 0;
+    }
 
-.sport-copy p{
-  max-width:500px;
+    .sport-copy p {
+      max-width: 500px;
 
-  color:#64625d;
+      color: #64625d;
 
-  line-height:1.75;
-}
+      line-height: 1.75;
+    }
 
-.quote{
-  font:
-    500
-    clamp(28px,3.5vw,50px)
-    /1.08
-    var(--serif);
+    .quote {
+      font:
+        500 clamp(28px, 3.5vw, 50px) /1.08 var(--serif);
 
-  margin-top:55px;
+      margin-top: 55px;
 
-  max-width:640px;
-}
+      max-width: 640px;
+    }
 
-.caption{
-  position:absolute;
+    .caption {
+      position: absolute;
 
-  left:22px;
+      left: 22px;
 
-  bottom:20px;
+      bottom: 20px;
 
-  color:white;
+      color: white;
 
-  font-size:10px;
+      font-size: 10px;
 
-  letter-spacing:.17em;
+      letter-spacing: .17em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  background:rgba(0,0,0,.28);
+      background: rgba(0, 0, 0, .28);
 
-  padding:9px 12px;
+      padding: 9px 12px;
 
-  border-radius:999px;
+      border-radius: 999px;
 
-  backdrop-filter:blur(8px);
-}
+      backdrop-filter: blur(8px);
+    }
 
 
-/* TWO SIDES */
+    /* TWO SIDES */
 
-.sport-two-sides{
-  margin-top:88px;
+    .sport-two-sides {
+      margin-top: 88px;
 
-  border-top:1px solid #3a3b39;
+      border-top: 1px solid #3a3b39;
 
-  border-bottom:1px solid #3a3b39;
+      border-bottom: 1px solid #3a3b39;
 
-  display:grid;
+      display: grid;
 
-  grid-template-columns:
-    1fr
-    1fr;
-}
+      grid-template-columns:
+        1fr 1fr;
+    }
 
-.sport-side{
-  min-height:400px;
+    .sport-side {
+      min-height: 400px;
 
-  padding:44px;
+      padding: 44px;
 
-  display:flex;
+      display: flex;
 
-  flex-direction:column;
+      flex-direction: column;
 
-  justify-content:space-between;
-}
+      justify-content: space-between;
+    }
 
-.sport-side + .sport-side{
-  border-left:1px solid #3a3b39;
-}
+    .sport-side+.sport-side {
+      border-left: 1px solid #3a3b39;
+    }
 
-.sport-side span{
-  font-size:9px;
+    .sport-side span {
+      font-size: 9px;
 
-  letter-spacing:.17em;
+      letter-spacing: .17em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#8d948f;
-}
+      color: #8d948f;
+    }
 
-.sport-side h3{
-  font:
-    500
-    clamp(40px,4.8vw,70px)
-    /.98
-    var(--serif);
+    .sport-side h3 {
+      font:
+        500 clamp(40px, 4.8vw, 70px) /.98 var(--serif);
 
-  letter-spacing:-.045em;
+      letter-spacing: -.045em;
 
-  margin:38px 0 20px;
-}
+      margin: 38px 0 20px;
+    }
 
-.sport-side p{
-  max-width:500px;
+    .sport-side p {
+      max-width: 500px;
 
-  color:#9a9c96;
+      color: #9a9c96;
 
-  line-height:1.7;
+      line-height: 1.7;
 
-  font-size:14px;
-}
+      font-size: 14px;
+    }
 
-.organizer-side{
-  background:#20221f;
-}
+    .organizer-side {
+      background: #20221f;
+    }
 
-.side-tags{
-  font-size:9px;
+    .side-tags {
+      font-size: 9px;
 
-  letter-spacing:.13em;
+      letter-spacing: .13em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#78847d;
-}
+      color: #78847d;
+    }
 
-.sport-work-link{
-  margin-top:30px;
+    .sport-work-link {
+      margin-top: 30px;
 
-  align-self:flex-start;
+      align-self: flex-start;
 
-  border-bottom:1px solid #758379;
+      border-bottom: 1px solid #758379;
 
-  padding-bottom:5px;
+      padding-bottom: 5px;
 
-  font-size:11px;
+      font-size: 11px;
 
-  letter-spacing:.08em;
+      letter-spacing: .08em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#c6d0c9;
-}
+      color: #c6d0c9;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    WORK
 ========================================================= */
 
-.work{
-  background:var(--cream);
-}
+    .work {
+      background: var(--cream);
+    }
 
-.work-subhead{
-  margin:14px 0 26px;
+    .work-subhead {
+      margin: 14px 0 26px;
 
-  padding-top:24px;
+      padding-top: 24px;
 
-  border-top:1px solid var(--line);
+      border-top: 1px solid var(--line);
 
-  display:flex;
+      display: flex;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  gap:40px;
+      gap: 40px;
 
-  align-items:flex-start;
-}
+      align-items: flex-start;
+    }
 
-.work-subhead > p{
-  margin:0;
+    .work-subhead>p {
+      margin: 0;
 
-  max-width:520px;
+      max-width: 520px;
 
-  color:var(--muted);
+      color: var(--muted);
 
-  font-size:13px;
+      font-size: 13px;
 
-  line-height:1.65;
-}
+      line-height: 1.65;
+    }
 
-.work-grid{
-  display:grid;
+    .work-grid {
+      display: grid;
 
-  grid-template-columns:
-    1fr
-    1fr;
+      grid-template-columns:
+        1fr 1fr;
 
-  gap:18px;
-}
+      gap: 18px;
+    }
 
-.featured-work-grid{
-  margin-bottom:96px;
-}
+    .featured-work-grid {
+      margin-bottom: 96px;
+    }
 
-.project-card{
-  border:1px solid var(--line);
+    .project-card {
+      border: 1px solid var(--line);
 
-  background:#efede7;
+      background: #efede7;
 
-  min-height:590px;
+      min-height: 590px;
 
-  display:grid;
+      display: grid;
 
-  grid-template-rows:
-    auto
-    1fr
-    auto;
+      grid-template-rows:
+        auto 1fr auto;
 
-  transition:.28s;
+      transition: .28s;
 
-  overflow:hidden;
-}
+      overflow: hidden;
+    }
 
-.project-card:hover{
-  transform:translateY(-5px);
+    .project-card:hover {
+      transform: translateY(-5px);
 
-  box-shadow:
-    0 24px 60px
-    rgba(0,0,0,.08);
-}
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, .08);
+    }
 
-.project-meta{
-  padding:20px 22px;
+    .project-meta {
+      padding: 20px 22px;
 
-  border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
-  display:flex;
+      display: flex;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  font-size:10px;
+      font-size: 10px;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  letter-spacing:.14em;
-}
+      letter-spacing: .14em;
+    }
 
-.project-visual{
-  padding:30px;
+    .project-visual {
+      padding: 30px;
 
-  display:flex;
+      display: flex;
 
-  align-items:center;
+      align-items: center;
 
-  justify-content:center;
+      justify-content: center;
 
-  position:relative;
+      position: relative;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  background:#e7e8e2;
-}
+      background: #e7e8e2;
+    }
 
-.project-copy{
-  padding:28px 28px 34px;
-}
+    .project-copy {
+      padding: 28px 28px 34px;
+    }
 
-.project-copy h3{
-  font:
-    500
-    clamp(36px,3.8vw,58px)
-    /1
-    var(--serif);
+    .project-copy h3 {
+      font:
+        500 clamp(36px, 3.8vw, 58px) /1 var(--serif);
 
-  margin:0 0 12px;
+      margin: 0 0 12px;
 
-  letter-spacing:-.04em;
-}
+      letter-spacing: -.04em;
+    }
 
-.project-copy p{
-  color:#666;
+    .project-copy p {
+      color: #666;
 
-  line-height:1.6;
+      line-height: 1.6;
 
-  max-width:600px;
-}
+      max-width: 600px;
+    }
 
-.project-link-row{
-  margin-top:28px;
+    .project-link-row {
+      margin-top: 28px;
 
-  padding-top:18px;
+      padding-top: 18px;
 
-  border-top:1px solid var(--line);
+      border-top: 1px solid var(--line);
 
-  display:flex;
+      display: flex;
 
-  align-items:center;
+      align-items: center;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  gap:16px;
-}
+      gap: 16px;
+    }
 
-.project-link-row > span{
-  font-size:9px;
+    .project-link-row>span {
+      font-size: 9px;
 
-  letter-spacing:.13em;
+      letter-spacing: .13em;
 
-  color:#8a8984;
+      color: #8a8984;
 
-  text-transform:uppercase;
-}
+      text-transform: uppercase;
+    }
 
-.project-link{
-  display:inline-flex;
+    .project-link {
+      display: inline-flex;
 
-  align-items:center;
+      align-items: center;
 
-  gap:8px;
+      gap: 8px;
 
-  font-size:10px;
+      font-size: 10px;
 
-  letter-spacing:.13em;
+      letter-spacing: .13em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  border-bottom:1px solid currentColor;
+      border-bottom: 1px solid currentColor;
 
-  padding-bottom:5px;
+      padding-bottom: 5px;
 
-  transition:.2s;
+      transition: .2s;
 
-  white-space:nowrap;
-}
+      white-space: nowrap;
+    }
 
-.project-link:hover{
-  color:var(--sage);
+    .project-link:hover {
+      color: var(--sage);
 
-  transform:translateX(3px);
-}
+      transform: translateX(3px);
+    }
 
-.project-link.placeholder{
-  color:#8c8b86;
+    .project-link.placeholder {
+      color: #8c8b86;
 
-  border-bottom-style:dashed;
-}
+      border-bottom-style: dashed;
+    }
 
-.project-link.placeholder:hover{
-  transform:none;
+    .project-link.placeholder:hover {
+      transform: none;
 
-  color:#8c8b86;
-}
+      color: #8c8b86;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    EVENT PROJECT VISUAL
 ========================================================= */
 
-.event-board{
-  width:88%;
+    .event-board {
+      width: 88%;
 
-  min-height:330px;
+      min-height: 330px;
 
-  border:1px solid #b9beb8;
+      border: 1px solid #b9beb8;
 
-  background:#f6f3ec;
+      background: #f6f3ec;
 
-  display:grid;
+      display: grid;
 
-  grid-template-rows:
-    auto
-    1fr
-    auto;
+      grid-template-rows:
+        auto 1fr auto;
 
-  box-shadow:
-    0 24px 60px
-    rgba(0,0,0,.07);
-}
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, .07);
+    }
 
-.event-board-top{
-  padding:16px 18px;
+    .event-board-top {
+      padding: 16px 18px;
 
-  border-bottom:1px solid #ccd0ca;
+      border-bottom: 1px solid #ccd0ca;
 
-  display:flex;
+      display: flex;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  font-size:8px;
+      font-size: 8px;
 
-  letter-spacing:.13em;
+      letter-spacing: .13em;
 
-  color:#69736c;
-}
+      color: #69736c;
+    }
 
-.event-flow{
-  display:grid;
+    .event-flow {
+      display: grid;
 
-  grid-template-columns:
-    1fr
-    auto
-    1fr
-    auto
-    1fr;
+      grid-template-columns:
+        1fr auto 1fr auto 1fr;
 
-  align-items:center;
+      align-items: center;
 
-  gap:10px;
+      gap: 10px;
 
-  padding:30px 22px;
-}
+      padding: 30px 22px;
+    }
 
-.event-flow div{
-  border:1px solid #ccd0ca;
+    .event-flow div {
+      border: 1px solid #ccd0ca;
 
-  min-height:128px;
+      min-height: 128px;
 
-  padding:16px;
+      padding: 16px;
 
-  display:flex;
+      display: flex;
 
-  flex-direction:column;
+      flex-direction: column;
 
-  justify-content:space-between;
-}
+      justify-content: space-between;
+    }
 
-.event-flow span{
-  font-size:8px;
+    .event-flow span {
+      font-size: 8px;
 
-  color:#889189;
-}
+      color: #889189;
+    }
 
-.event-flow b{
-  font:
-    500
-    20px
-    /1
-    var(--serif);
+    .event-flow b {
+      font:
+        500 20px /1 var(--serif);
 
-  letter-spacing:-.02em;
-}
+      letter-spacing: -.02em;
+    }
 
-.event-flow small{
-  font-size:8px;
+    .event-flow small {
+      font-size: 8px;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  letter-spacing:.08em;
+      letter-spacing: .08em;
 
-  color:#8a8c87;
-}
+      color: #8a8c87;
+    }
 
-.event-flow i{
-  font-style:normal;
+    .event-flow i {
+      font-style: normal;
 
-  color:#87958c;
-}
+      color: #87958c;
+    }
 
-.event-slots{
-  display:grid;
+    .event-slots {
+      display: grid;
 
-  grid-template-columns:
-    repeat(4,1fr);
+      grid-template-columns:
+        repeat(4, 1fr);
 
-  border-top:1px solid #ccd0ca;
-}
+      border-top: 1px solid #ccd0ca;
+    }
 
-.event-slots span{
-  padding:12px 8px;
+    .event-slots span {
+      padding: 12px 8px;
 
-  text-align:center;
+      text-align: center;
 
-  border-right:1px solid #ccd0ca;
+      border-right: 1px solid #ccd0ca;
 
-  font-size:8px;
+      font-size: 8px;
 
-  letter-spacing:.09em;
+      letter-spacing: .09em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#707972;
-}
+      color: #707972;
+    }
 
-.event-slots span:last-child{
-  border-right:0;
-}
+    .event-slots span:last-child {
+      border-right: 0;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    UCLA VISUAL
 ========================================================= */
 
-.ucla-board{
-  width:88%;
+    .ucla-board {
+      width: 88%;
 
-  height:78%;
+      height: 78%;
 
-  display:grid;
+      display: grid;
 
-  grid-template-columns:
-    .8fr
-    1.2fr;
+      grid-template-columns:
+        .8fr 1.2fr;
 
-  border:1px solid #b9beb8;
+      border: 1px solid #b9beb8;
 
-  background:#f5f3ed;
+      background: #f5f3ed;
 
-  box-shadow:
-    0 24px 60px
-    rgba(0,0,0,.07);
-}
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, .07);
+    }
 
-.ucla-code{
-  padding:20px;
+    .ucla-code {
+      padding: 20px;
 
-  border-right:1px solid #c8ccc6;
+      border-right: 1px solid #c8ccc6;
 
-  font:
-    11px
-    /1.65
-    monospace;
+      font:
+        11px /1.65 monospace;
 
-  color:#2a352e;
-}
+      color: #2a352e;
+    }
 
-.ucla-code .muted{
-  color:#819086;
-}
+    .ucla-code .muted {
+      color: #819086;
+    }
 
-.ucla-chart{
-  padding:18px;
+    .ucla-chart {
+      padding: 18px;
 
-  display:grid;
+      display: grid;
 
-  grid-template-rows:
-    auto
-    1fr;
-}
+      grid-template-rows:
+        auto 1fr;
+    }
 
-.ucla-chart-top{
-  display:flex;
+    .ucla-chart-top {
+      display: flex;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  font-size:8px;
+      font-size: 8px;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  letter-spacing:.1em;
+      letter-spacing: .1em;
 
-  color:#707870;
-}
+      color: #707870;
+    }
 
-.ucla-chart svg{
-  width:100%;
-  height:100%;
+    .ucla-chart svg {
+      width: 100%;
+      height: 100%;
 
-  min-height:200px;
-}
+      min-height: 200px;
+    }
 
-.ucla-note{
-  font-size:8px;
+    .ucla-note {
+      font-size: 8px;
 
-  letter-spacing:.09em;
+      letter-spacing: .09em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#7b837d;
-}
+      color: #7b837d;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    VISUAL PROJECTS
 ========================================================= */
 
-.visual-subhead{
-  margin-top:10px;
+    .visual-subhead {
+      margin-top: 10px;
 
-  margin-bottom:34px;
+      margin-bottom: 34px;
 
-  align-items:end;
-}
+      align-items: end;
+    }
 
-.visual-subhead h3{
-  font:
-    500
-    clamp(38px,4.5vw,66px)
-    /1
-    var(--serif);
+    .visual-subhead h3 {
+      font:
+        500 clamp(38px, 4.5vw, 66px) /1 var(--serif);
 
-  letter-spacing:-.035em;
+      letter-spacing: -.035em;
 
-  margin:10px 0 0;
-}
+      margin: 10px 0 0;
+    }
 
-.visual-project-grid{
-  display:grid;
+    .visual-project-grid {
+      display: grid;
 
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
-  gap:18px;
-}
+      gap: 18px;
+    }
 
-.visual-card{
-  border:1px solid var(--line);
+    .visual-card {
+      border: 1px solid var(--line);
 
-  background:#f0eee8;
+      background: #f0eee8;
 
-  min-width:0;
+      min-width: 0;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  transition:
-    transform .28s ease,
-    box-shadow .28s ease;
-}
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease;
+    }
 
-.visual-card:hover{
-  transform:translateY(-5px);
+    .visual-card:hover {
+      transform: translateY(-5px);
 
-  box-shadow:
-    0 22px 55px
-    rgba(0,0,0,.07);
-}
+      box-shadow:
+        0 22px 55px rgba(0, 0, 0, .07);
+    }
 
-.visual-card-top{
-  height:52px;
+    .visual-card-top {
+      height: 52px;
 
-  padding:0 18px;
+      padding: 0 18px;
 
-  border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
-  display:flex;
+      display: flex;
 
-  align-items:center;
+      align-items: center;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  font-size:8px;
+      font-size: 8px;
 
-  letter-spacing:.14em;
+      letter-spacing: .14em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  color:#777;
-}
+      color: #777;
+    }
 
-.live-preview{
-  height:360px;
+    .live-preview {
+      height: 360px;
 
-  position:relative;
+      position: relative;
 
-  background:#dfe1db;
+      background: #dfe1db;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  border-bottom:1px solid var(--line);
-}
+      border-bottom: 1px solid var(--line);
+    }
 
-.live-preview iframe{
-  position:absolute;
+    .live-preview iframe {
+      position: absolute;
 
-  inset:0;
+      inset: 0;
 
-  width:100%;
-  height:100%;
+      width: 100%;
+      height: 100%;
 
-  border:0;
+      border: 0;
 
-  background:#e4e3dd;
+      background: #e4e3dd;
 
-  pointer-events:none;
-}
+      pointer-events: none;
+    }
 
-.live-label{
-  position:absolute;
+    .live-label {
+      position: absolute;
 
-  z-index:3;
+      z-index: 3;
 
-  right:13px;
-  top:13px;
+      right: 13px;
+      top: 13px;
 
-  padding:7px 9px;
+      padding: 7px 9px;
 
-  background:rgba(243,240,233,.86);
+      background: rgba(243, 240, 233, .86);
 
-  border:1px solid rgba(0,0,0,.1);
+      border: 1px solid rgba(0, 0, 0, .1);
 
-  font-size:7px;
+      font-size: 7px;
 
-  letter-spacing:.12em;
+      letter-spacing: .12em;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  backdrop-filter:blur(8px);
-}
+      backdrop-filter: blur(8px);
+    }
 
-.visual-card-copy{
-  padding:25px 25px 28px;
+    .visual-card-copy {
+      padding: 25px 25px 28px;
 
-  min-height:190px;
+      min-height: 190px;
 
-  display:flex;
+      display: flex;
 
-  align-items:flex-end;
+      align-items: flex-end;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  gap:30px;
-}
+      gap: 30px;
+    }
 
-.visual-card-copy h3{
-  font:
-    500
-    clamp(32px,3.8vw,50px)
-    /1
-    var(--serif);
+    .visual-card-copy h3 {
+      font:
+        500 clamp(32px, 3.8vw, 50px) /1 var(--serif);
 
-  letter-spacing:-.04em;
+      letter-spacing: -.04em;
 
-  margin:0 0 10px;
-}
+      margin: 0 0 10px;
+    }
 
-.visual-card-copy p{
-  max-width:440px;
+    .visual-card-copy p {
+      max-width: 440px;
 
-  margin:0;
+      margin: 0;
 
-  color:#6d6c67;
+      color: #6d6c67;
 
-  font-size:12px;
+      font-size: 12px;
 
-  line-height:1.6;
-}
+      line-height: 1.6;
+    }
 
 
-/* FUTURE PROJECT */
+    /* FUTURE PROJECT */
 
-.future-preview{
-  height:360px;
+    .future-preview {
+      height: 360px;
 
-  border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 39px,
-      rgba(0,0,0,.055) 40px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 39px,
-      rgba(0,0,0,.055) 40px
-    );
+      background:
+        repeating-linear-gradient(0deg,
+          transparent 0,
+          transparent 39px,
+          rgba(0, 0, 0, .055) 40px),
+        repeating-linear-gradient(90deg,
+          transparent 0,
+          transparent 39px,
+          rgba(0, 0, 0, .055) 40px);
 
-  display:flex;
+      display: flex;
 
-  align-items:center;
+      align-items: center;
 
-  justify-content:center;
+      justify-content: center;
 
-  gap:34px;
+      gap: 34px;
 
-  color:#6e766f;
-}
+      color: #6e766f;
+    }
 
-.future-preview.alt{
-  background:#1a1c1a;
+    .future-preview.alt {
+      background: #1a1c1a;
 
-  color:#aeb9b0;
-}
+      color: #aeb9b0;
+    }
 
-.future-preview span{
-  font:
-    500
-    clamp(64px,9vw,110px)
-    /1
-    var(--serif);
+    .future-preview span {
+      font:
+        500 clamp(64px, 9vw, 110px) /1 var(--serif);
 
-  opacity:.18;
-}
+      opacity: .18;
+    }
 
-.future-preview p{
-  font-size:10px;
+    .future-preview p {
+      font-size: 10px;
 
-  letter-spacing:.2em;
+      letter-spacing: .2em;
 
-  line-height:1.55;
+      line-height: 1.55;
 
-  margin:0;
-}
+      margin: 0;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    PHOTOGRAPHY
 ========================================================= */
 
-.photo{
-  background:#e7e1d8;
-}
+    .photo {
+      background: #e7e1d8;
+    }
 
-.photo-grid{
-  display:grid;
+    .photo-grid {
+      display: grid;
 
-  grid-template-columns:
-    repeat(12,1fr);
+      grid-template-columns:
+        repeat(12, 1fr);
 
-  grid-auto-rows:120px;
+      grid-auto-rows: 120px;
 
-  gap:16px;
-}
+      gap: 16px;
+    }
 
-.ph{
-  position:relative;
+    .ph {
+      position: relative;
 
-  overflow:hidden;
+      overflow: hidden;
 
-  min-height:280px;
+      min-height: 280px;
 
-  background:#d2d0c8;
-}
+      background: #d2d0c8;
 
-.ph:nth-child(1){
-  grid-column:span 7;
-  grid-row:span 4;
-}
+      grid-column: span 4;
+      grid-row: span 3;
+    }
 
-.ph:nth-child(2){
-  grid-column:span 5;
-  grid-row:span 3;
-}
+    .ph:nth-child(1) {
+      grid-column: span 7;
+      grid-row: span 4;
+    }
 
-.ph:nth-child(3){
-  grid-column:span 5;
-  grid-row:span 4;
-}
+    .ph:nth-child(2) {
+      grid-column: span 5;
+      grid-row: span 3;
+    }
 
-.ph:nth-child(4){
-  grid-column:span 7;
-  grid-row:span 3;
-}
+    .ph:nth-child(3) {
+      grid-column: span 5;
+      grid-row: span 4;
+    }
 
-.ph:nth-child(5){
-  grid-column:span 4;
-  grid-row:span 3;
-}
+    .ph:nth-child(4) {
+      grid-column: span 7;
+      grid-row: span 3;
+    }
 
-.ph:nth-child(6){
-  grid-column:span 8;
-  grid-row:span 3;
-}
+    .ph:nth-child(5) {
+      grid-column: span 4;
+      grid-row: span 3;
+    }
 
-.photo-slot{
-  position:absolute;
+    .ph:nth-child(6) {
+      grid-column: span 8;
+      grid-row: span 3;
+    }
 
-  inset:0;
+    .photo-slot {
+      position: absolute;
 
-  background-size:cover;
+      inset: 0;
 
-  background-position:center;
+      background-size: cover;
 
-  background-repeat:no-repeat;
+      background-position: center;
 
-  transition:.5s;
-}
+      background-repeat: no-repeat;
 
-.ph:hover .photo-slot{
-  transform:scale(1.025);
-}
+      transition: .5s;
+    }
 
-.ph-label{
-  position:absolute;
+    .ph:hover .photo-slot {
+      transform: scale(1.025);
+    }
 
-  left:18px;
+    .ph-label {
+      position: absolute;
 
-  bottom:16px;
+      left: 18px;
 
-  font-size:10px;
+      bottom: 16px;
 
-  letter-spacing:.14em;
+      font-size: 10px;
 
-  text-transform:uppercase;
+      letter-spacing: .14em;
 
-  background:rgba(255,255,255,.68);
+      text-transform: uppercase;
 
-  padding:8px 10px;
+      background: rgba(255, 255, 255, .68);
 
-  backdrop-filter:blur(8px);
-}
+      padding: 8px 10px;
+
+      backdrop-filter: blur(8px);
+    }
 
 
-/* =========================================================
+    /* =========================================================
    ABOUT
 ========================================================= */
 
-.about{
-  background:#d9ded8;
-}
+    .about {
+      background: #d9ded8;
+    }
 
-.about-grid{
-  display:grid;
+    .about-grid {
+      display: grid;
 
-  grid-template-columns:
-    1fr
-    .9fr;
+      grid-template-columns:
+        1fr .9fr;
 
-  gap:7vw;
+      gap: 7vw;
 
-  align-items:start;
-}
+      align-items: start;
+    }
 
-.about-statement{
-  font:
-    500
-    clamp(42px,5.4vw,78px)
-    /1.02
-    var(--serif);
+    .about-statement {
+      font:
+        500 clamp(42px, 5.4vw, 78px) /1.02 var(--serif);
 
-  letter-spacing:-.04em;
+      letter-spacing: -.04em;
 
-  margin:0;
+      margin: 0;
 
-  max-width:900px;
-}
+      max-width: 900px;
+    }
 
-.about-second-line{
-  display:block;
+    .about-second-line {
+      display: block;
 
-  margin-top:20px;
+      margin-top: 20px;
 
-  font-size:.72em;
+      font-size: .72em;
 
-  line-height:1.08;
+      line-height: 1.08;
 
-  max-width:720px;
-}
+      max-width: 720px;
+    }
 
-.about-notes{
-  border-top:1px solid var(--line);
-}
+    .about-notes {
+      border-top: 1px solid var(--line);
+    }
 
-.note{
-  padding:24px 0;
+    .note {
+      padding: 24px 0;
 
-  border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
-  display:grid;
+      display: grid;
 
-  grid-template-columns:
-    110px
-    1fr;
+      grid-template-columns:
+        110px 1fr;
 
-  gap:20px;
-}
+      gap: 20px;
+    }
 
-.note b{
-  font-size:10px;
+    .note b {
+      font-size: 10px;
 
-  letter-spacing:.16em;
+      letter-spacing: .16em;
 
-  text-transform:uppercase;
-}
+      text-transform: uppercase;
+    }
 
-.note p{
-  margin:0;
+    .note p {
+      margin: 0;
 
-  color:#545751;
+      color: #545751;
 
-  line-height:1.65;
+      line-height: 1.65;
 
-  font-size:14px;
-}
+      font-size: 14px;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    FOOTER
 ========================================================= */
 
-.footer{
-  background:#141514;
+    .footer {
+      background: #141514;
 
-  color:#d4d2cc;
+      color: #d4d2cc;
 
-  padding:80px 5vw 36px;
-}
+      padding: 80px 5vw 36px;
+    }
 
-.footer-top{
-  display:flex;
+    .footer-top {
+      display: flex;
 
-  align-items:flex-end;
+      align-items: flex-end;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  gap:40px;
+      gap: 40px;
 
-  border-bottom:1px solid #383a37;
+      border-bottom: 1px solid #383a37;
 
-  padding-bottom:70px;
-}
+      padding-bottom: 70px;
+    }
 
-.footer h2{
-  font:
-    500
-    clamp(54px,7vw,100px)
-    /.92
-    var(--serif);
+    .footer h2 {
+      font:
+        500 clamp(54px, 7vw, 100px) /.92 var(--serif);
 
-  letter-spacing:-.045em;
+      letter-spacing: -.045em;
 
-  margin:0;
-}
+      margin: 0;
+    }
 
-.footer .small{
-  color:#7f837c;
+    .footer .small {
+      color: #7f837c;
 
-  max-width:380px;
+      max-width: 380px;
 
-  line-height:1.6;
-}
+      line-height: 1.6;
+    }
 
-.footer-bottom{
-  display:flex;
+    .footer-bottom {
+      display: flex;
 
-  justify-content:space-between;
+      justify-content: space-between;
 
-  padding-top:28px;
+      padding-top: 28px;
 
-  font-size:10px;
+      font-size: 10px;
 
-  text-transform:uppercase;
+      text-transform: uppercase;
 
-  letter-spacing:.13em;
+      letter-spacing: .13em;
 
-  color:#747871;
-}
+      color: #747871;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    SCROLL FADE
 ========================================================= */
 
-.fade{
-  opacity:0;
+    .fade {
+      opacity: 0;
 
-  transform:translateY(24px);
+      transform: translateY(24px);
 
-  transition:
-    opacity .8s ease,
-    transform .8s ease;
-}
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
 
-.fade.show{
-  opacity:1;
+    .fade.show {
+      opacity: 1;
 
-  transform:none;
-}
+      transform: none;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    TABLET
 ========================================================= */
 
-@media(max-width:900px){
+    @media(max-width:900px) {
 
-  .navlinks{
-    gap:14px;
-    font-size:10px;
-  }
+      .navlinks {
+        gap: 14px;
+        font-size: 10px;
+      }
 
-  .hero{
-    grid-template-columns:1fr;
+      .hero {
+        grid-template-columns: 1fr;
 
-    padding-top:118px;
-  }
+        padding-top: 118px;
+      }
 
-  .section-head{
-    grid-template-columns:1fr;
+      .section-head {
+        grid-template-columns: 1fr;
 
-    gap:12px;
-  }
+        gap: 12px;
+      }
 
-  .think-grid,
-  .sport-story,
-  .sport-story.reverse,
-  .work-grid,
-  .about-grid{
-    grid-template-columns:1fr;
-  }
+      .think-grid,
+      .sport-story,
+      .sport-story.reverse,
+      .work-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .sports-loop{
-    grid-template-columns:
-      1fr
-      1fr;
-  }
+      .sports-loop {
+        grid-template-columns:
+          1fr 1fr;
+      }
 
-  .loop-item:nth-child(2){
-    border-right:0;
-  }
+      .loop-item:nth-child(2) {
+        border-right: 0;
+      }
 
-  .loop-item{
-    border-bottom:1px solid #3a3b39;
-  }
+      .loop-item {
+        border-bottom: 1px solid #3a3b39;
+      }
 
-  .sport-two-sides,
-  .visual-project-grid{
-    grid-template-columns:1fr;
-  }
+      .sport-two-sides,
+      .visual-project-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .sport-side + .sport-side{
-    border-left:0;
+      .sport-side+.sport-side {
+        border-left: 0;
 
-    border-top:1px solid #3a3b39;
-  }
+        border-top: 1px solid #3a3b39;
+      }
 
-  .work-subhead{
-    display:block;
-  }
+      .work-subhead {
+        display: block;
+      }
 
-  .work-subhead > p{
-    margin-top:14px;
-  }
+      .work-subhead>p {
+        margin-top: 14px;
+      }
 
-  .photo-grid{
-    grid-template-columns:
-      1fr
-      1fr;
+      .photo-grid {
+        grid-template-columns:
+          1fr 1fr;
 
-    grid-auto-rows:190px;
-  }
+        grid-auto-rows: 190px;
+      }
 
-  .ph{
-    grid-column:auto !important;
+      .ph {
+        grid-column: auto !important;
 
-    grid-row:span 2 !important;
-  }
+        grid-row: span 2 !important;
+      }
 
-  .identity-body{
-    grid-template-columns:
-      .74fr
-      1.26fr;
-  }
+      .identity-body {
+        grid-template-columns:
+          .74fr 1.26fr;
+      }
 
-}
+    }
 
 
-/* =========================================================
+    /* =========================================================
    MOBILE
 ========================================================= */
 
-@media(max-width:600px){
+    @media(max-width:600px) {
 
-  .nav{
-    padding:0 20px;
-  }
+      .nav {
+        padding: 0 20px;
+      }
 
-  .navlinks a:nth-child(2),
-  .navlinks a:nth-child(4){
-    display:none;
-  }
+      .navlinks a:nth-child(2),
+      .navlinks a:nth-child(4) {
+        display: none;
+      }
 
-  .hero,
-  .section{
-    padding-left:22px;
-    padding-right:22px;
-  }
+      .hero,
+      .section {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
 
-  .hero h1{
-    font-size:62px;
-  }
+      .hero h1 {
+        font-size: 62px;
+      }
 
-  .identity-body{
-    grid-template-columns:1fr;
-  }
+      .identity-body {
+        grid-template-columns: 1fr;
+      }
 
-  .identity-menu{
-    border-right:0;
+      .identity-menu {
+        border-right: 0;
 
-    border-bottom:1px solid var(--line);
+        border-bottom: 1px solid var(--line);
 
-    display:grid;
+        display: grid;
 
-    grid-template-columns:
-      1fr
-      1fr;
-  }
+        grid-template-columns:
+          1fr 1fr;
+      }
 
-  .identity-item{
-    min-height:82px;
-  }
+      .identity-item {
+        min-height: 82px;
+      }
 
-  .identity-item:nth-child(odd){
-    border-right:1px solid var(--line);
-  }
+      .identity-item:nth-child(odd) {
+        border-right: 1px solid var(--line);
+      }
 
-  .identity-item:last-child{
-    grid-column:1 / -1;
-  }
+      .identity-item:last-child {
+        grid-column: 1 / -1;
+      }
 
-  .identity-preview{
-    grid-template-rows:
-      260px
-      auto;
-  }
+      .identity-preview {
+        grid-template-rows:
+          260px auto;
+      }
 
-  .identity-top span:last-child{
-    display:none;
-  }
+      .identity-top span:last-child {
+        display: none;
+      }
 
-  .identity-bottom span{
-    display:none;
-  }
+      .identity-bottom span {
+        display: none;
+      }
 
-  .identity-bottom{
-    justify-content:flex-end;
-  }
+      .identity-bottom {
+        justify-content: flex-end;
+      }
 
-  .think-panel{
-    padding:32px 22px;
-  }
+      .think-panel {
+        padding: 32px 22px;
+      }
 
-  .think-panel .mini{
-    grid-template-columns:1fr;
+      .think-panel .mini {
+        grid-template-columns: 1fr;
 
-    gap:16px;
-  }
+        gap: 16px;
+      }
 
-  .sports-loop{
-    grid-template-columns:1fr;
-  }
+      .sports-loop {
+        grid-template-columns: 1fr;
+      }
 
-  .loop-item{
-    border-right:0;
-  }
+      .loop-item {
+        border-right: 0;
+      }
 
-  .sport-copy{
-    padding:44px 24px;
-  }
+      .sport-copy {
+        padding: 44px 24px;
+      }
 
-  .sport-story{
-    min-height:520px;
-  }
+      .sport-story {
+        min-height: 520px;
+      }
 
-  .sport-side{
-    padding:34px 24px;
+      .sport-side {
+        padding: 34px 24px;
 
-    min-height:350px;
-  }
+        min-height: 350px;
+      }
 
-  .event-flow{
-    grid-template-columns:1fr;
+      .event-flow {
+        grid-template-columns: 1fr;
 
-    padding:18px;
-  }
+        padding: 18px;
+      }
 
-  .event-flow i{
-    transform:rotate(90deg);
+      .event-flow i {
+        transform: rotate(90deg);
 
-    justify-self:center;
-  }
+        justify-self: center;
+      }
 
-  .event-slots{
-    grid-template-columns:
-      1fr
-      1fr;
-  }
+      .event-slots {
+        grid-template-columns:
+          1fr 1fr;
+      }
 
-  .project-link-row,
-  .visual-card-copy{
-    align-items:flex-start;
+      .project-link-row,
+      .visual-card-copy {
+        align-items: flex-start;
 
-    flex-direction:column;
-  }
+        flex-direction: column;
+      }
 
-  .live-preview,
-  .future-preview{
-    height:300px;
-  }
+      .live-preview,
+      .future-preview {
+        height: 300px;
+      }
 
-  .photo-grid{
-    grid-template-columns:1fr;
-  }
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
 
-  .footer-top{
-    display:block;
-  }
+      .footer-top {
+        display: block;
+      }
 
-  .footer .small{
-    margin-top:30px;
-  }
+      .footer .small {
+        margin-top: 30px;
+      }
 
-}
-
-</style>
+    }
+  </style>
 </head>
 
 
 <body>
 
 
-<div id="progress"></div>
+  <div id="progress"></div>
 
 
-<!-- ======================================================
+  <!-- ======================================================
      NAVBAR
 ====================================================== -->
 
-<nav class="nav">
+  <nav class="nav">
 
-  <a
-    class="brand"
-    href="#home"
-  >
-    Mandy.
-  </a>
-
-  <div class="navlinks">
-
-    <a href="#home">
-      Home
+    <a class="brand" href="#home">
+      Mandy.
     </a>
 
-    <a href="#sports">
-      Sports
-    </a>
+    <div class="navlinks">
 
-    <a href="#work">
-      Work
-    </a>
+      <a href="#home">
+        Home
+      </a>
 
-    <a href="#photography">
-      Photography
-    </a>
+      <a href="#sports">
+        Sports
+      </a>
 
-    <a href="#about">
-      About
-    </a>
+      <a href="#work">
+        Work
+      </a>
 
-  </div>
+      <a href="#photography">
+        Photography
+      </a>
 
-</nav>
+      <a href="#about">
+        About
+      </a>
+
+    </div>
+
+  </nav>
 
 
-<!-- ======================================================
+  <!-- ======================================================
      HOME
 ====================================================== -->
 
-<section
-  class="hero"
-  id="home"
->
+  <section class="hero" id="home">
 
 
-  <!-- LEFT -->
+    <!-- LEFT -->
 
-  <div class="hero-copy fade">
+    <div class="hero-copy fade">
 
-    <div class="eyebrow">
-      Code · Tennis · Rowing · Economics · Photography
-    </div>
+      <div class="eyebrow">
+        Code · Tennis · Rowing · Economics · Photography
+      </div>
 
-    <h1>
-      Notice.
-      <br>
+      <h1>
+        Notice.
+        <br>
 
-      Build.
-      <br>
+        Build.
+        <br>
 
-      <em>
-        Question.
-      </em>
-    </h1>
+        <em>
+          Question.
+        </em>
+      </h1>
 
-    <p>
-      Things I notice, make, and come back to.
-    </p>
+      <p>
+        Things I notice, make, and come back to.
+      </p>
 
-    <div class="hero-actions">
+      <div class="hero-actions">
 
-      <a
-        class="pill dark"
-        href="#work"
-      >
-        View selected work →
-      </a>
+        <a class="pill dark" href="#work">
+          View selected work →
+        </a>
 
-      <a
-        class="pill"
-        href="#sports"
-      >
-        Explore sport
-      </a>
+        <a class="pill" href="#sports">
+          Explore sport
+        </a>
+
+      </div>
 
     </div>
 
-  </div>
 
-
-  <!-- ====================================================
+    <!-- ====================================================
        PERSONAL INDEX
   ===================================================== -->
 
-  <div
-    class="identity-board fade"
-    id="identityBoard"
-  >
+    <div class="identity-board fade" id="identityBoard">
 
 
-    <div class="identity-top">
+      <div class="identity-top">
 
-      <span>
-        Personal index
-      </span>
+        <span>
+          Personal index
+        </span>
 
-      <span>
-        Sport · Systems · Visuals
-      </span>
-
-    </div>
-
-
-    <div class="identity-body">
-
-
-      <!-- LEFT MENU -->
-
-      <div
-        class="identity-menu"
-        aria-label="Explore Mandy's interests"
-      >
-
-
-        <button
-          class="identity-item active"
-          data-key="tennis"
-        >
-
-          <span>
-            01
-          </span>
-
-          <b>
-            Tennis
-          </b>
-
-          <small>
-            Practice / Focus
-          </small>
-
-        </button>
-
-
-        <button
-          class="identity-item"
-          data-key="rowing"
-        >
-
-          <span>
-            02
-          </span>
-
-          <b>
-            Rowing
-          </b>
-
-          <small>
-            Rhythm / Presence
-          </small>
-
-        </button>
-
-
-        <button
-          class="identity-item"
-          data-key="python"
-        >
-
-          <span>
-            03
-          </span>
-
-          <b>
-            Python + Economics
-          </b>
-
-          <small>
-            Models / Decisions
-          </small>
-
-        </button>
-
-
-        <button
-          class="identity-item"
-          data-key="photo"
-        >
-
-          <span>
-            04
-          </span>
-
-          <b>
-            Photography
-          </b>
-
-          <small>
-            Observation / Framing
-          </small>
-
-        </button>
-
-
-        <button
-          class="identity-item"
-          data-key="code"
-        >
-
-          <span>
-            05
-          </span>
-
-          <b>
-            Creative Coding
-          </b>
-
-          <small>
-            Rules / Behavior
-          </small>
-
-        </button>
+        <span>
+          Sport · Systems · Visuals
+        </span>
 
       </div>
 
 
-      <!-- RIGHT PREVIEW -->
-
-      <div class="identity-preview">
+      <div class="identity-body">
 
 
-        <div class="identity-scenes">
+        <!-- LEFT MENU -->
+
+        <div class="identity-menu" aria-label="Explore Mandy's interests">
 
 
-          <!-- 01 / TENNIS -->
+          <button class="identity-item active" data-key="tennis">
 
-          <div
-            class="identity-scene active"
-            data-scene="tennis"
-          >
+            <span>
+              01
+            </span>
 
-            <div
-              class="scene-photo cover tennis"
-            ></div>
+            <b>
+              Tennis
+            </b>
 
-          </div>
+            <small>
+              Practice / Focus
+            </small>
 
-
-          <!-- 02 / ROWING -->
-
-          <div
-            class="identity-scene"
-            data-scene="rowing"
-          >
-
-            <div
-              class="scene-rowing"
-            ></div>
-
-          </div>
+          </button>
 
 
-          <!-- 03 / PYTHON + ECONOMICS -->
+          <button class="identity-item" data-key="rowing">
 
-          <div
-            class="identity-scene"
-            data-scene="python"
-          >
+            <span>
+              02
+            </span>
 
-            <div class="python-visual">
+            <b>
+              Rowing
+            </b>
+
+            <small>
+              Rhythm / Presence
+            </small>
+
+          </button>
 
 
-              <div class="python-code">
+          <button class="identity-item" data-key="python">
 
-                <b>
-                  TimeValue()
-                </b>
+            <span>
+              03
+            </span>
 
-                <br><br>
+            <b>
+              Python + Economics
+            </b>
 
-                # input
+            <small>
+              Models / Decisions
+            </small>
 
-                <br>
+          </button>
 
-                rate = 5% / 0.05 / 5
 
-                <br>
+          <button class="identity-item" data-key="photo">
 
-                freq = annual / monthly
+            <span>
+              04
+            </span>
 
-                <br><br>
+            <b>
+              Photography
+            </b>
 
-                normalize → validate
+            <small>
+              Observation / Framing
+            </small>
 
-                <br>
+          </button>
 
-                PV · FV · annuity
+
+          <button class="identity-item" data-key="code">
+
+            <span>
+              05
+            </span>
+
+            <b>
+              Creative Coding
+            </b>
+
+            <small>
+              Rules / Behavior
+            </small>
+
+          </button>
+
+        </div>
+
+
+        <!-- RIGHT PREVIEW -->
+
+        <div class="identity-preview">
+
+
+          <div class="identity-scenes">
+
+
+            <!-- 01 / TENNIS -->
+
+            <div class="identity-scene active" data-scene="tennis">
+
+              <div class="scene-photo cover tennis"></div>
+
+            </div>
+
+
+            <!-- 02 / ROWING -->
+
+            <div class="identity-scene" data-scene="rowing">
+
+              <div class="scene-rowing"></div>
+
+            </div>
+
+
+            <!-- 03 / PYTHON + ECONOMICS -->
+
+            <div class="identity-scene" data-scene="python">
+
+              <div class="python-visual">
+
+
+                <div class="python-code">
+
+                  <b>
+                    TimeValue()
+                  </b>
+
+                  <br><br>
+
+                  # input
+
+                  <br>
+
+                  rate = 5% / 0.05 / 5
+
+                  <br>
+
+                  freq = annual / monthly
+
+                  <br><br>
+
+                  normalize → validate
+
+                  <br>
+
+                  PV · FV · annuity
+
+                </div>
+
+
+                <div class="python-chart"></div>
+
 
               </div>
 
+            </div>
 
-              <div class="python-chart"></div>
+
+            <!-- 04 / PHOTOGRAPHY -->
+
+            <div class="identity-scene" data-scene="photo">
+
+              <div class="scene-photo cover photo"></div>
+
+            </div>
 
 
+            <!-- 05 / CREATIVE CODING -->
+
+            <div class="identity-scene" data-scene="code">
+
+              <div class="scene-photo cover creative"></div>
+
+            </div>
+
+
+          </div>
+
+
+          <!-- TEXT BELOW PREVIEW -->
+
+          <div class="identity-copy">
+
+            <span id="identityKicker">
+              SPORT / PRACTICE
+            </span>
+
+            <h3 id="identityTitle">
+              Tennis
+            </h3>
+
+            <p id="identityText">
+              A place where I practice showing up,
+              resetting after mistakes,
+              and staying with what is happening now.
+            </p>
+
+            <div class="identity-tags" id="identityTags">
+              Presence · Repetition · Reset
             </div>
 
           </div>
 
-
-          <!-- 04 / PHOTOGRAPHY -->
-
-          <div
-            class="identity-scene"
-            data-scene="photo"
-          >
-
-            <div
-              class="scene-photo cover photo"
-            ></div>
-
-          </div>
-
-
-          <!-- 05 / CREATIVE CODING -->
-
-          <div
-            class="identity-scene"
-            data-scene="code"
-          >
-
-            <div
-              class="scene-photo cover creative"
-            ></div>
-
-          </div>
-
-
-        </div>
-
-
-        <!-- TEXT BELOW PREVIEW -->
-
-        <div class="identity-copy">
-
-          <span id="identityKicker">
-            SPORT / PRACTICE
-          </span>
-
-          <h3 id="identityTitle">
-            Tennis
-          </h3>
-
-          <p id="identityText">
-            A place where I practice showing up,
-            resetting after mistakes,
-            and staying with what is happening now.
-          </p>
-
-          <div
-            class="identity-tags"
-            id="identityTags"
-          >
-            Presence · Repetition · Reset
-          </div>
-
         </div>
 
       </div>
 
+
+      <div class="identity-bottom">
+
+        <span>
+          Click to explore
+        </span>
+
+        <a href="#sports">
+          Start with sport →
+        </a>
+
+      </div>
+
+
     </div>
 
-
-    <div class="identity-bottom">
-
-      <span>
-        Click to explore
-      </span>
-
-      <a href="#sports">
-        Start with sport →
-      </a>
-
-    </div>
+  </section>
 
 
-  </div>
-
-</section>
-
-
-<!-- ======================================================
+  <!-- ======================================================
      HOW I THINK
 ====================================================== -->
 
-<section
-  class="section"
-  id="thinking"
->
+  <section class="section" id="thinking">
 
 
-  <div class="section-head fade">
+    <div class="section-head fade">
 
-    <div>
+      <div>
 
-      <div class="page-index">
-        01 / How I think
-      </div>
+        <div class="page-index">
+          01 / How I think
+        </div>
 
-    </div>
-
-
-    <div>
-
-      <h2>
-        Different tools,
-        <br>
-
-        <em>
-          same curiosity.
-        </em>
-      </h2>
-
-    </div>
-
-  </div>
-
-
-  <div class="think-grid fade">
-
-
-    <div class="think-menu">
-
-
-      <button
-        class="think-btn active"
-        data-key="observe"
-      >
-
-        <span class="think-word">
-          Observe
-        </span>
-
-        <span class="think-num">
-          01
-        </span>
-
-      </button>
-
-
-      <button
-        class="think-btn"
-        data-key="model"
-      >
-
-        <span class="think-word">
-          Model
-        </span>
-
-        <span class="think-num">
-          02
-        </span>
-
-      </button>
-
-
-      <button
-        class="think-btn"
-        data-key="build"
-      >
-
-        <span class="think-word">
-          Build
-        </span>
-
-        <span class="think-num">
-          03
-        </span>
-
-      </button>
-
-
-      <button
-        class="think-btn"
-        data-key="question"
-      >
-
-        <span class="think-word">
-          Question
-        </span>
-
-        <span class="think-num">
-          04
-        </span>
-
-      </button>
-
-
-    </div>
-
-
-    <div
-      class="think-panel"
-      id="thinkPanel"
-    >
-
-
-      <div class="page-index">
-        Photography / attention
       </div>
 
 
-      <div class="big">
-        I use images to slow down
-        and notice patterns
-        I would normally pass by.
-      </div>
+      <div>
 
-
-      <div class="mini">
-
-
-        <div>
-
-          WHAT IT TRAINS
+        <h2>
+          Different tools,
           <br>
 
-          <b>
-            Attention · Framing · Detail
-          </b>
+          <em>
+            same curiosity.
+          </em>
+        </h2>
 
+      </div>
+
+    </div>
+
+
+    <div class="think-grid fade">
+
+
+      <div class="think-menu">
+
+
+        <button class="think-btn active" data-key="observe">
+
+          <span class="think-word">
+            Observe
+          </span>
+
+          <span class="think-num">
+            01
+          </span>
+
+        </button>
+
+
+        <button class="think-btn" data-key="model">
+
+          <span class="think-word">
+            Model
+          </span>
+
+          <span class="think-num">
+            02
+          </span>
+
+        </button>
+
+
+        <button class="think-btn" data-key="build">
+
+          <span class="think-word">
+            Build
+          </span>
+
+          <span class="think-num">
+            03
+          </span>
+
+        </button>
+
+
+        <button class="think-btn" data-key="question">
+
+          <span class="think-word">
+            Question
+          </span>
+
+          <span class="think-num">
+            04
+          </span>
+
+        </button>
+
+
+      </div>
+
+
+      <div class="think-panel" id="thinkPanel">
+
+
+        <div class="page-index">
+          Photography / attention
         </div>
 
 
-        <div>
+        <div class="big">
+          I use images to slow down
+          and notice patterns
+          I would normally pass by.
+        </div>
 
-          WHERE IT APPEARS
-          <br>
 
-          <b>
-            Photography · Research · Observation
-          </b>
+        <div class="mini">
+
+
+          <div>
+
+            WHAT IT TRAINS
+            <br>
+
+            <b>
+              Attention · Framing · Detail
+            </b>
+
+          </div>
+
+
+          <div>
+
+            WHERE IT APPEARS
+            <br>
+
+            <b>
+              Photography · Research · Observation
+            </b>
+
+          </div>
+
 
         </div>
 
@@ -2934,744 +2778,665 @@ img{max-width:100%;display:block}
 
     </div>
 
-
-  </div>
-
-</section>
+  </section>
 
 
-<!-- ======================================================
+  <!-- ======================================================
      SPORTS
 ====================================================== -->
 
-<section
-  class="section sports"
-  id="sports"
->
+  <section class="section sports" id="sports">
 
 
-  <div class="section-head fade">
-
-
-    <div>
-
-      <div class="page-index">
-        02 / Sport
-      </div>
-
-    </div>
-
-
-    <div>
-
-      <h2>
-        Two sides
-        <br>
-
-        of
-
-        <em>
-          sport.
-        </em>
-      </h2>
-
-
-      <p class="section-intro">
-        I experience sport both by participating in it
-        and by beginning to see what happens behind an event.
-      </p>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- 4 PART LOOP -->
-
-  <div class="sports-loop fade">
-
-
-    <div class="loop-item">
-
-      <span>
-        01
-      </span>
-
-      <h3>
-        Resistance
-      </h3>
-
-      <p>
-        I often hesitate before I start.
-      </p>
-
-    </div>
-
-
-    <div class="loop-item">
-
-      <span>
-        02
-      </span>
-
-      <h3>
-        Presence
-      </h3>
-
-      <p>
-        Movement narrows my attention to the moment.
-      </p>
-
-    </div>
-
-
-    <div class="loop-item">
-
-      <span>
-        03
-      </span>
-
-      <h3>
-        Release
-      </h3>
-
-      <p>
-        I finish physically tired,
-        mentally lighter.
-      </p>
-
-    </div>
-
-
-    <div class="loop-item">
-
-      <span>
-        04
-      </span>
-
-      <h3>
-        Change
-      </h3>
-
-      <p>
-        Small repetitions become visible
-        only over time.
-      </p>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- TENNIS -->
-
-  <div class="sport-story fade">
-
-
-    <div class="sport-art">
-
-      <div
-        class="sport-image tennis-large"
-      ></div>
-
-      <div class="caption">
-        Replace with your tennis photo if needed
-      </div>
-
-    </div>
-
-
-    <div class="sport-copy">
+    <div class="section-head fade">
 
 
       <div>
 
-        <div class="kicker">
-          Tennis / the practice of showing up
+        <div class="page-index">
+          02 / Sport
         </div>
 
-        <h3>
-          Before,
+      </div>
+
+
+      <div>
+
+        <h2>
+          Two sides
           <br>
 
-          I hesitate.
-        </h3>
+          of
 
-        <p>
-          There is usually a moment before practice
-          when I want to stay home or keep studying.
+          <em>
+            sport.
+          </em>
+        </h2>
 
-          I know that feeling well enough now
-          that I try not to treat it as a decision.
 
-          I simply go.
+        <p class="section-intro">
+          I experience sport both by participating in it
+          and by beginning to see what happens behind an event.
         </p>
 
       </div>
 
 
-      <div class="quote">
-        “The hardest part is often just starting.”
-      </div>
-
-
     </div>
 
 
-  </div>
+    <!-- 4 PART LOOP -->
+
+    <div class="sports-loop fade">
 
 
-  <!-- ROWING -->
+      <div class="loop-item">
 
-  <div class="sport-story reverse fade">
-
-
-    <div class="sport-copy">
-
-
-      <div>
-
-        <div class="kicker">
-          Rowing / returning to the present
-        </div>
+        <span>
+          01
+        </span>
 
         <h3>
-          During,
-          <br>
-
-          I return.
+          Resistance
         </h3>
 
         <p>
-          Once I start moving,
-          schoolwork and deadlines move into the background.
-
-          In rowing,
-          repetition and rhythm make my attention settle
-          into the body
-          instead of the noise around it.
+          I often hesitate before I start.
         </p>
 
       </div>
 
 
-      <div class="quote">
-        “Movement gives my mind somewhere to be.”
+      <div class="loop-item">
+
+        <span>
+          02
+        </span>
+
+        <h3>
+          Presence
+        </h3>
+
+        <p>
+          Movement narrows my attention to the moment.
+        </p>
+
+      </div>
+
+
+      <div class="loop-item">
+
+        <span>
+          03
+        </span>
+
+        <h3>
+          Release
+        </h3>
+
+        <p>
+          I finish physically tired,
+          mentally lighter.
+        </p>
+
+      </div>
+
+
+      <div class="loop-item">
+
+        <span>
+          04
+        </span>
+
+        <h3>
+          Change
+        </h3>
+
+        <p>
+          Small repetitions become visible
+          only over time.
+        </p>
+
       </div>
 
 
     </div>
 
 
-    <div class="sport-art">
+    <!-- TENNIS -->
 
-      <div
-        class="sport-image rowing-large"
-      ></div>
+    <div class="sport-story fade">
 
-      <div class="caption">
-        Rowing
+
+      <div class="sport-art">
+
+        <div class="sport-image tennis-large"></div>
+
+        <div class="caption">
+          Replace with your tennis photo if needed
+        </div>
+
       </div>
 
-    </div>
+
+      <div class="sport-copy">
 
 
-  </div>
+        <div>
+
+          <div class="kicker">
+            Tennis / the practice of showing up
+          </div>
+
+          <h3>
+            Before,
+            <br>
+
+            I hesitate.
+          </h3>
+
+          <p>
+            There is usually a moment before practice
+            when I want to stay home or keep studying.
+
+            I know that feeling well enough now
+            that I try not to treat it as a decision.
+
+            I simply go.
+          </p>
+
+        </div>
 
 
-  <!-- PARTICIPATING / ORGANIZING -->
+        <div class="quote">
+          “The hardest part is often just starting.”
+        </div>
 
-  <div class="sport-two-sides fade">
 
-
-    <div class="sport-side">
-
-      <span>
-        01 / PARTICIPATING
-      </span>
-
-      <h3>
-        On the court.
-        <br>
-
-        On the water.
-      </h3>
-
-      <p>
-        Tennis and rowing are where I experience sport
-        from inside the movement:
-
-        effort,
-        focus,
-        routine,
-        recovery,
-
-        and the gradual changes
-        that only appear
-        after staying with something.
-      </p>
-
-      <div class="side-tags">
-        Tennis · Rowing · Presence · Health
       </div>
 
-    </div>
-
-
-    <div class="sport-side organizer-side">
-
-      <span>
-        02 / ORGANIZING
-      </span>
-
-      <h3>
-        Behind
-        <br>
-
-        the event.
-      </h3>
-
-      <p>
-        I am also participating
-        in the behind-the-scenes planning
-        of a sports event.
-
-        This space can later hold
-        planning materials,
-        responsibilities,
-        decisions,
-        changes,
-        and event-day execution.
-      </p>
-
-      <a
-        class="sport-work-link"
-        href="#work"
-      >
-        See it develop in Work →
-      </a>
 
     </div>
 
 
-  </div>
+    <!-- ROWING -->
+
+    <div class="sport-story reverse fade">
 
 
-</section>
+      <div class="sport-copy">
 
 
-<!-- ======================================================
+        <div>
+
+          <div class="kicker">
+            Rowing / returning to the present
+          </div>
+
+          <h3>
+            During,
+            <br>
+
+            I return.
+          </h3>
+
+          <p>
+            Once I start moving,
+            schoolwork and deadlines move into the background.
+
+            In rowing,
+            repetition and rhythm make my attention settle
+            into the body
+            instead of the noise around it.
+          </p>
+
+        </div>
+
+
+        <div class="quote">
+          “Movement gives my mind somewhere to be.”
+        </div>
+
+
+      </div>
+
+
+      <div class="sport-art">
+
+        <div class="sport-image -large"></div>
+
+        <div class="caption">
+          Rowing
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- PARTICIPATING / ORGANIZING -->
+
+    <div class="sport-two-sides fade">
+
+
+      <div class="sport-side">
+
+        <span>
+          01 / PARTICIPATING
+        </span>
+
+        <h3>
+          On the court.
+          <br>
+
+          On the water.
+        </h3>
+
+        <p>
+          Tennis and rowing are where I experience sport
+          from inside the movement:
+
+          effort,
+          focus,
+          routine,
+          recovery,
+
+          and the gradual changes
+          that only appear
+          after staying with something.
+        </p>
+
+        <div class="side-tags">
+          Tennis · Rowing · Presence · Health
+        </div>
+
+      </div>
+
+
+      <div class="sport-side organizer-side">
+
+        <span>
+          02 / ORGANIZING
+        </span>
+
+        <h3>
+          Behind
+          <br>
+
+          the event.
+        </h3>
+
+        <p>
+          I am also participating
+          in the behind-the-scenes planning
+          of a sports event.
+
+          This space can later hold
+          planning materials,
+          responsibilities,
+          decisions,
+          changes,
+          and event-day execution.
+        </p>
+
+        <a class="sport-work-link" href="#work">
+          See it develop in Work →
+        </a>
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+  <!-- ======================================================
      WORK
 ====================================================== -->
 
-<section
-  class="section work"
-  id="work"
->
+  <section class="section work" id="work">
 
 
-  <div class="section-head fade">
+    <div class="section-head fade">
 
 
-    <div>
+      <div>
 
-      <div class="page-index">
-        03 / Selected work
+        <div class="page-index">
+          03 / Selected work
+        </div>
+
       </div>
+
+
+      <div>
+
+        <h2>
+          Things I build,
+          <br>
+
+          test,
+          and
+
+          <em>
+            question.
+          </em>
+        </h2>
+
+        <p class="section-intro">
+          Projects, experiments,
+          and things I return to.
+        </p>
+
+      </div>
+
 
     </div>
 
 
-    <div>
+    <!-- APPLIED -->
 
-      <h2>
-        Things I build,
-        <br>
+    <div class="work-subhead fade">
 
-        test,
-        and
+      <div class="page-index">
+        A / Applied + academic work
+      </div>
 
-        <em>
-          question.
-        </em>
-      </h2>
-
-      <p class="section-intro">
-        Projects, experiments,
-        and things I return to.
+      <p>
+        Larger projects where process,
+        decisions,
+        and context matter.
       </p>
 
     </div>
 
 
-  </div>
-
-
-  <!-- APPLIED -->
-
-  <div class="work-subhead fade">
-
-    <div class="page-index">
-      A / Applied + academic work
-    </div>
-
-    <p>
-      Larger projects where process,
-      decisions,
-      and context matter.
-    </p>
-
-  </div>
-
-
-  <div class="
+    <div class="
     work-grid
     featured-work-grid
   ">
 
 
-    <!-- EVENT PROJECT -->
+      <!-- EVENT PROJECT -->
 
-    <article class="project-card fade">
-
-
-      <div class="project-meta">
-
-        <span>
-          Current activity
-        </span>
-
-        <span>
-          Sport · Event Planning
-        </span>
-
-      </div>
+      <article class="project-card fade">
 
 
-      <div class="project-visual">
-
-
-        <div class="event-board">
-
-
-          <div class="event-board-top">
-
-            <span>
-              BEHIND THE EVENT
-            </span>
-
-            <span>
-              WORK IN PROGRESS
-            </span>
-
-          </div>
-
-
-          <div class="event-flow">
-
-
-            <div>
-
-              <span>
-                01
-              </span>
-
-              <b>
-                PLAN
-              </b>
-
-              <small>
-                before the event
-              </small>
-
-            </div>
-
-
-            <i>
-              →
-            </i>
-
-
-            <div>
-
-              <span>
-                02
-              </span>
-
-              <b>
-                COORDINATE
-              </b>
-
-              <small>
-                people + information
-              </small>
-
-            </div>
-
-
-            <i>
-              →
-            </i>
-
-
-            <div>
-
-              <span>
-                03
-              </span>
-
-              <b>
-                EXECUTE
-              </b>
-
-              <small>
-                event day
-              </small>
-
-            </div>
-
-
-          </div>
-
-
-          <div class="event-slots">
-
-            <span>
-              timeline
-            </span>
-
-            <span>
-              venue
-            </span>
-
-            <span>
-              communication
-            </span>
-
-            <span>
-              changes
-            </span>
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-
-
-      <div class="project-copy">
-
-
-        <h3>
-          Behind the Event
-        </h3>
-
-
-        <p>
-          This will become a case study
-          built from the work you actually do
-          during the event-planning process.
-        </p>
-
-
-        <div class="project-link-row">
+        <div class="project-meta">
 
           <span>
-            CASE STUDY / PROJECT LINK
+            Current activity
           </span>
 
-          <a
-            class="project-link placeholder"
-            href="#"
-            onclick="return false;"
-          >
-            Add link when ready ↗
-          </a>
+          <span>
+            Sport · Event Planning
+          </span>
 
         </div>
 
 
-      </div>
+        <div class="project-visual">
 
 
-    </article>
+          <div class="event-board">
 
 
-    <!-- UCLA -->
-
-    <article class="project-card fade">
-
-
-      <div class="project-meta">
-
-        <span>
-          UCLA Summer Study
-        </span>
-
-        <span>
-          Python + Economics
-        </span>
-
-      </div>
-
-
-      <div class="project-visual">
-
-
-        <div class="ucla-board">
-
-
-          <div class="ucla-code">
-
-            <b>
-              TimeValue()
-            </b>
-
-            <br><br>
-
-            <span class="muted">
-              # input
-            </span>
-
-            <br>
-
-            rate = 5% / 0.05 / 5
-
-            <br>
-
-            freq = annual / monthly
-
-            <br><br>
-
-            <span class="muted">
-              normalize → validate
-            </span>
-
-            <br>
-
-            PV · FV · annuity
-
-            <br><br>
-
-            <span class="ucla-note">
-              formula → usable tool
-            </span>
-
-          </div>
-
-
-          <div class="ucla-chart">
-
-
-            <div class="ucla-chart-top">
+            <div class="event-board-top">
 
               <span>
-                portfolio optimization
+                BEHIND THE EVENT
               </span>
 
               <span>
-                risk / return
+                WORK IN PROGRESS
               </span>
 
             </div>
 
 
-            <svg
-              viewBox="0 0 360 250"
-              aria-label="stylized efficient frontier"
-            >
+            <div class="event-flow">
 
 
-              <line
-                x1="42"
-                y1="212"
+              <div>
 
-                x2="330"
-                y2="212"
+                <span>
+                  01
+                </span>
 
-                stroke="#aeb4ae"
-              />
+                <b>
+                  PLAN
+                </b>
 
+                <small>
+                  before the event
+                </small>
 
-              <line
-                x1="42"
-                y1="212"
-
-                x2="42"
-                y2="25"
-
-                stroke="#aeb4ae"
-              />
+              </div>
 
 
-              <g
-                fill="#9daa9f"
-                opacity=".45"
-              >
-
-                <circle
-                  cx="82"
-                  cy="185"
-                  r="3"
-                />
-
-                <circle
-                  cx="102"
-                  cy="171"
-                  r="3"
-                />
-
-                <circle
-                  cx="124"
-                  cy="164"
-                  r="3"
-                />
-
-                <circle
-                  cx="143"
-                  cy="147"
-                  r="3"
-                />
-
-                <circle
-                  cx="167"
-                  cy="140"
-                  r="3"
-                />
-
-                <circle
-                  cx="191"
-                  cy="118"
-                  r="3"
-                />
-
-                <circle
-                  cx="218"
-                  cy="105"
-                  r="3"
-                />
-
-                <circle
-                  cx="244"
-                  cy="90"
-                  r="3"
-                />
-
-                <circle
-                  cx="272"
-                  cy="77"
-                  r="3"
-                />
-
-              </g>
+              <i>
+                →
+              </i>
 
 
-              <path
-                d="
+              <div>
+
+                <span>
+                  02
+                </span>
+
+                <b>
+                  COORDINATE
+                </b>
+
+                <small>
+                  people + information
+                </small>
+
+              </div>
+
+
+              <i>
+                →
+              </i>
+
+
+              <div>
+
+                <span>
+                  03
+                </span>
+
+                <b>
+                  EXECUTE
+                </b>
+
+                <small>
+                  event day
+                </small>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="event-slots">
+
+              <span>
+                timeline
+              </span>
+
+              <span>
+                venue
+              </span>
+
+              <span>
+                communication
+              </span>
+
+              <span>
+                changes
+              </span>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+        <div class="project-copy">
+
+
+          <h3>
+            Behind the Event
+          </h3>
+
+
+          <p>
+            This will become a case study
+            built from the work you actually do
+            during the event-planning process.
+          </p>
+
+
+          <div class="project-link-row">
+
+            <span>
+              CASE STUDY / PROJECT LINK
+            </span>
+
+            <a class="project-link placeholder" href="#" onclick="return false;">
+              Add link when ready ↗
+            </a>
+
+          </div>
+
+
+        </div>
+
+
+      </article>
+
+
+      <!-- UCLA -->
+
+      <article class="project-card fade">
+
+
+        <div class="project-meta">
+
+          <span>
+            UCLA Summer Study
+          </span>
+
+          <span>
+            Python + Economics
+          </span>
+
+        </div>
+
+
+        <div class="project-visual">
+
+
+          <div class="ucla-board">
+
+
+            <div class="ucla-code">
+
+              <b>
+                TimeValue()
+              </b>
+
+              <br><br>
+
+              <span class="muted">
+                # input
+              </span>
+
+              <br>
+
+              rate = 5% / 0.05 / 5
+
+              <br>
+
+              freq = annual / monthly
+
+              <br><br>
+
+              <span class="muted">
+                normalize → validate
+              </span>
+
+              <br>
+
+              PV · FV · annuity
+
+              <br><br>
+
+              <span class="ucla-note">
+                formula → usable tool
+              </span>
+
+            </div>
+
+
+            <div class="ucla-chart">
+
+
+              <div class="ucla-chart-top">
+
+                <span>
+                  portfolio optimization
+                </span>
+
+                <span>
+                  risk / return
+                </span>
+
+              </div>
+
+
+              <svg viewBox="0 0 360 250" aria-label="stylized efficient frontier">
+
+
+                <line x1="42" y1="212" x2="330" y2="212" stroke="#aeb4ae" />
+
+
+                <line x1="42" y1="212" x2="42" y2="25" stroke="#aeb4ae" />
+
+
+                <g fill="#9daa9f" opacity=".45">
+
+                  <circle cx="82" cy="185" r="3" />
+
+                  <circle cx="102" cy="171" r="3" />
+
+                  <circle cx="124" cy="164" r="3" />
+
+                  <circle cx="143" cy="147" r="3" />
+
+                  <circle cx="167" cy="140" r="3" />
+
+                  <circle cx="191" cy="118" r="3" />
+
+                  <circle cx="218" cy="105" r="3" />
+
+                  <circle cx="244" cy="90" r="3" />
+
+                  <circle cx="272" cy="77" r="3" />
+
+                </g>
+
+
+                <path d="
                 M73 190
                 C116 176
                 154 145
@@ -3679,55 +3444,26 @@ img{max-width:100%;display:block}
                 C225 97
                 260 77
                 306 61
-                "
-
-                fill="none"
-
-                stroke="#647b6c"
-
-                stroke-width="4"
-              />
+                " fill="none" stroke="#647b6c" stroke-width="4" />
 
 
-              <circle
-                cx="236"
-                cy="95"
-
-                r="9"
-
-                fill="#f5f3ed"
-
-                stroke="#27332c"
-
-                stroke-width="3"
-              />
+                <circle cx="236" cy="95" r="9" fill="#f5f3ed" stroke="#27332c" stroke-width="3" />
 
 
-              <text
-                x="250"
-                y="91"
-
-                font-size="9"
-
-                fill="#556159"
-              >
-                max Sharpe
-              </text>
+                <text x="250" y="91" font-size="9" fill="#556159">
+                  max Sharpe
+                </text>
 
 
-              <text
-                x="250"
-                y="104"
-
-                font-size="8"
-
-                fill="#89918b"
-              >
-                one definition of “best”
-              </text>
+                <text x="250" y="104" font-size="8" fill="#89918b">
+                  one definition of “best”
+                </text>
 
 
-            </svg>
+              </svg>
+
+
+            </div>
 
 
           </div>
@@ -3736,774 +3472,865 @@ img{max-width:100%;display:block}
         </div>
 
 
-      </div>
+        <div class="project-copy">
 
 
-      <div class="project-copy">
+          <h3>
+            From Models to Decisions
+          </h3>
 
 
-        <h3>
-          From Models to Decisions
-        </h3>
+          <p>
+            A time-value calculator taught me
+            to turn formulas into usable logic;
+
+            portfolio optimization made me look more closely
+            at what a model is actually optimizing.
+          </p>
 
 
-        <p>
-          A time-value calculator taught me
-          to turn formulas into usable logic;
+          <div class="project-link-row">
 
-          portfolio optimization made me look more closely
-          at what a model is actually optimizing.
-        </p>
+            <span>
+              PROJECT / NOTEBOOK LINK
+            </span>
 
+            <a class="project-link placeholder" href="#" onclick="return false;">
+              Add public link ↗
+            </a>
 
-        <div class="project-link-row">
+          </div>
 
-          <span>
-            PROJECT / NOTEBOOK LINK
-          </span>
-
-          <a
-            class="project-link placeholder"
-            href="#"
-            onclick="return false;"
-          >
-            Add public link ↗
-          </a>
 
         </div>
 
 
-      </div>
+      </article>
 
 
-    </article>
+    </div>
 
 
-  </div>
-
-
-  <!-- ==================================================
+    <!-- ==================================================
        VISUAL PROJECTS
   ================================================== -->
 
-  <div class="
+    <div class="
     work-subhead
     visual-subhead
     fade
   ">
 
 
-    <div>
+      <div>
 
-      <div class="page-index">
-        B / Visual projects
+        <div class="page-index">
+          B / Visual projects
+        </div>
+
+        <h3>
+          Code as a place
+          <br>
+
+          to
+
+          <em>
+            experiment.
+          </em>
+        </h3>
+
       </div>
 
-      <h3>
-        Code as a place
-        <br>
 
-        to
+      <p>
+        Four existing visual projects,
+        plus two open spaces
+        for what comes next.
+      </p>
 
-        <em>
-          experiment.
-        </em>
-      </h3>
 
     </div>
 
 
-    <p>
-      Four existing visual projects,
-      plus two open spaces
-      for what comes next.
-    </p>
+    <div class="visual-project-grid">
+
+      <!-- WALKER -->
+
+      <article class="visual-card fade">
 
 
-  </div>
+        <div class="visual-card-top">
+
+          <span>
+            04 / EXISTING
+          </span>
+
+          <span>
+            CREATIVE CODE
+          </span>
+
+        </div>
 
 
-  <div class="visual-project-grid">
+        <div class="live-preview">
+
+          <iframe src="https://mandyyi09.github.io/walker/" title="Walker preview" loading="lazy"
+            tabindex="-1"></iframe>
+
+          <span class="live-label">
+            LIVE PROJECT PREVIEW
+          </span>
+
+        </div>
 
 
-    <!-- GRID 1 -->
-
-    <article class="visual-card fade">
+        <div class="visual-card-copy">
 
 
-      <div class="visual-card-top">
+          <div>
 
-        <span>
-          01 / EXISTING
-        </span>
+            <h3>
+              Walker
+            </h3>
 
-        <span>
-          CREATIVE CODE
-        </span>
+            <p>
+              Add one sentence explaining
+              the rule,
+              interaction,
+              or idea
+              you were testing.
+            </p>
 
-      </div>
-
-
-      <div class="live-preview">
-
-        <iframe
-          src="https://mandyyi09.github.io/grid-1/"
-          title="Grid-1 preview"
-          loading="lazy"
-          tabindex="-1"
-        ></iframe>
-
-        <span class="live-label">
-          LIVE PROJECT PREVIEW
-        </span>
-
-      </div>
+          </div>
 
 
-      <div class="visual-card-copy">
+          <a class="project-link" href="https://mandyyi09.github.io/walker/" target="_blank" rel="noopener">
+            Open project ↗
+          </a>
 
 
-        <div>
+        </div>
 
-          <h3>
-            Grid-1
-          </h3>
+
+      </article>
+
+
+      <!-- AI HAND -->
+
+      <article class="visual-card fade">
+
+
+        <div class="visual-card-top">
+
+          <span>
+            03 / EXISTING
+          </span>
+
+          <span>
+            AI + VISUAL
+          </span>
+
+        </div>
+
+
+        <div class="live-preview">
+
+          <iframe src="https://mandyyi09.github.io/ai-hands/" title="AI Hand preview" loading="lazy"
+            tabindex="-1"></iframe>
+
+          <span class="live-label">
+            LIVE PROJECT PREVIEW
+          </span>
+
+        </div>
+
+
+        <div class="visual-card-copy">
+
+
+          <div>
+
+            <h3>
+              AI Hand
+            </h3>
+
+            <p>
+              Keep the final description grounded
+              in what the project actually explores.
+            </p>
+
+          </div>
+
+
+          <a class="project-link" href="https://mandyyi09.github.io/ai-hands/" target="_blank" rel="noopener">
+            Open project ↗
+          </a>
+
+
+        </div>
+
+
+      </article>
+
+
+
+      <!-- GRID 1 -->
+
+      <article class="visual-card fade">
+
+
+        <div class="visual-card-top">
+
+          <span>
+            01 / EXISTING
+          </span>
+
+          <span>
+            CREATIVE CODE
+          </span>
+
+        </div>
+
+
+        <div class="live-preview">
+
+          <iframe src="https://mandyyi09.github.io/grid-1/" title="Grid-1 preview" loading="lazy"
+            tabindex="-1"></iframe>
+
+          <span class="live-label">
+            LIVE PROJECT PREVIEW
+          </span>
+
+        </div>
+
+
+        <div class="visual-card-copy">
+
+
+          <div>
+
+            <h3>
+              Grid-1
+            </h3>
+
+            <p>
+              Add the question,
+              rule,
+              or experiment
+              behind the piece.
+            </p>
+
+          </div>
+
+
+          <a class="project-link" href="https://mandyyi09.github.io/grid-1/" target="_blank" rel="noopener">
+            Open project ↗
+          </a>
+
+
+        </div>
+
+
+      </article>
+
+
+      <!-- GRID 2 -->
+
+      <article class="visual-card fade">
+
+
+        <div class="visual-card-top">
+
+          <span>
+            02 / EXISTING
+          </span>
+
+          <span>
+            CREATIVE CODE
+          </span>
+
+        </div>
+
+
+        <div class="live-preview">
+
+          <iframe src="https://mandyyi09.github.io/grid-2/" title="Grid-2 preview" loading="lazy"
+            tabindex="-1"></iframe>
+
+          <span class="live-label">
+            LIVE PROJECT PREVIEW
+          </span>
+
+        </div>
+
+
+        <div class="visual-card-copy">
+
+
+          <div>
+
+            <h3>
+              Grid-2
+            </h3>
+
+            <p>
+              Add the question,
+              rule,
+              or experiment
+              behind the piece.
+            </p>
+
+          </div>
+
+
+          <a class="project-link" href="https://mandyyi09.github.io/grid-2/" target="_blank" rel="noopener">
+            Open project ↗
+          </a>
+
+
+        </div>
+
+
+      </article>
+
+
+      <!-- FUTURE PROJECT -->
+
+      <article class="visual-card fade">
+
+
+        <div class="visual-card-top">
+
+          <span>
+            05 / RESERVED
+          </span>
+
+          <span>
+            FUTURE PROJECT
+          </span>
+
+        </div>
+
+
+        <div class="future-preview">
+
+          <span>
+            05
+          </span>
 
           <p>
-            Add the question,
-            rule,
-            or experiment
-            behind the piece.
+            DROP
+            <br>
+
+            PROJECT
+            <br>
+
+            HERE
           </p>
 
         </div>
 
 
-        <a
-          class="project-link"
-          href="https://mandyyi09.github.io/grid-1/"
-          target="_blank"
-          rel="noopener"
-        >
-          Open project ↗
-        </a>
+        <div class="visual-card-copy">
 
 
-      </div>
+          <div>
+
+            <h3>
+              Future Project
+            </h3>
+
+            <p>
+              Reserved for a future project.
+            </p>
+
+          </div>
 
 
-    </article>
+          <a class="project-link placeholder" href="#" onclick="return false;">
+            Add project link ↗
+          </a>
 
-
-    <!-- GRID 2 -->
-
-    <article class="visual-card fade">
-
-
-      <div class="visual-card-top">
-
-        <span>
-          02 / EXISTING
-        </span>
-
-        <span>
-          CREATIVE CODE
-        </span>
-
-      </div>
-
-
-      <div class="live-preview">
-
-        <iframe
-          src="https://mandyyi09.github.io/grid-2/"
-          title="Grid-2 preview"
-          loading="lazy"
-          tabindex="-1"
-        ></iframe>
-
-        <span class="live-label">
-          LIVE PROJECT PREVIEW
-        </span>
-
-      </div>
-
-
-      <div class="visual-card-copy">
-
-
-        <div>
-
-          <h3>
-            Grid-2
-          </h3>
-
-          <p>
-            Add the question,
-            rule,
-            or experiment
-            behind the piece.
-          </p>
 
         </div>
 
 
-        <a
-          class="project-link"
-          href="https://mandyyi09.github.io/grid-2/"
-          target="_blank"
-          rel="noopener"
-        >
-          Open project ↗
-        </a>
+      </article>
 
 
-      </div>
+      <!-- FUTURE PROJECT -->
+
+      <article class="visual-card fade">
 
 
-    </article>
+        <div class="visual-card-top">
 
+          <span>
+            06 / RESERVED
+          </span>
 
-    <!-- AI HAND -->
-
-    <article class="visual-card fade">
-
-
-      <div class="visual-card-top">
-
-        <span>
-          03 / EXISTING
-        </span>
-
-        <span>
-          AI + VISUAL
-        </span>
-
-      </div>
-
-
-      <div class="live-preview">
-
-        <iframe
-          src="https://mandyyi09.github.io/ai-hands/"
-          title="AI Hand preview"
-          loading="lazy"
-          tabindex="-1"
-        ></iframe>
-
-        <span class="live-label">
-          LIVE PROJECT PREVIEW
-        </span>
-
-      </div>
-
-
-      <div class="visual-card-copy">
-
-
-        <div>
-
-          <h3>
-            AI Hand
-          </h3>
-
-          <p>
-            Keep the final description grounded
-            in what the project actually explores.
-          </p>
+          <span>
+            FUTURE PROJECT
+          </span>
 
         </div>
 
 
-        <a
-          class="project-link"
-          href="https://mandyyi09.github.io/ai-hands/"
-          target="_blank"
-          rel="noopener"
-        >
-          Open project ↗
-        </a>
-
-
-      </div>
-
-
-    </article>
-
-
-    <!-- WALKER -->
-
-    <article class="visual-card fade">
-
-
-      <div class="visual-card-top">
-
-        <span>
-          04 / EXISTING
-        </span>
-
-        <span>
-          CREATIVE CODE
-        </span>
-
-      </div>
-
-
-      <div class="live-preview">
-
-        <iframe
-          src="https://mandyyi09.github.io/walker/"
-          title="Walker preview"
-          loading="lazy"
-          tabindex="-1"
-        ></iframe>
-
-        <span class="live-label">
-          LIVE PROJECT PREVIEW
-        </span>
-
-      </div>
-
-
-      <div class="visual-card-copy">
-
-
-        <div>
-
-          <h3>
-            Walker
-          </h3>
-
-          <p>
-            Add one sentence explaining
-            the rule,
-            interaction,
-            or idea
-            you were testing.
-          </p>
-
-        </div>
-
-
-        <a
-          class="project-link"
-          href="https://mandyyi09.github.io/walker/"
-          target="_blank"
-          rel="noopener"
-        >
-          Open project ↗
-        </a>
-
-
-      </div>
-
-
-    </article>
-
-
-    <!-- FUTURE PROJECT -->
-
-    <article class="visual-card fade">
-
-
-      <div class="visual-card-top">
-
-        <span>
-          05 / RESERVED
-        </span>
-
-        <span>
-          FUTURE PROJECT
-        </span>
-
-      </div>
-
-
-      <div class="future-preview">
-
-        <span>
-          05
-        </span>
-
-        <p>
-          DROP
-          <br>
-
-          PROJECT
-          <br>
-
-          HERE
-        </p>
-
-      </div>
-
-
-      <div class="visual-card-copy">
-
-
-        <div>
-
-          <h3>
-            Future Project
-          </h3>
-
-          <p>
-            Reserved for a future project.
-          </p>
-
-        </div>
-
-
-        <a
-          class="project-link placeholder"
-          href="#"
-          onclick="return false;"
-        >
-          Add project link ↗
-        </a>
-
-
-      </div>
-
-
-    </article>
-
-
-    <!-- FUTURE PROJECT -->
-
-    <article class="visual-card fade">
-
-
-      <div class="visual-card-top">
-
-        <span>
-          06 / RESERVED
-        </span>
-
-        <span>
-          FUTURE PROJECT
-        </span>
-
-      </div>
-
-
-      <div class="
+        <div class="
         future-preview
         alt
       ">
 
-        <span>
-          06
-        </span>
-
-        <p>
-          DROP
-          <br>
-
-          PROJECT
-          <br>
-
-          HERE
-        </p>
-
-      </div>
-
-
-      <div class="visual-card-copy">
-
-
-        <div>
-
-          <h3>
-            Future Project
-          </h3>
+          <span>
+            06
+          </span>
 
           <p>
-            Reserved for another project.
+            DROP
+            <br>
+
+            PROJECT
+            <br>
+
+            HERE
           </p>
 
         </div>
 
 
-        <a
-          class="project-link placeholder"
-          href="#"
-          onclick="return false;"
-        >
-          Add project link ↗
-        </a>
+        <div class="visual-card-copy">
 
 
-      </div>
+          <div>
+
+            <h3>
+              Future Project
+            </h3>
+
+            <p>
+              Reserved for another project.
+            </p>
+
+          </div>
 
 
-    </article>
+          <a class="project-link placeholder" href="#" onclick="return false;">
+            Add project link ↗
+          </a>
 
 
-  </div>
+        </div>
 
 
-</section>
+      </article>
 
 
-<!-- ======================================================
+    </div>
+
+
+  </section>
+
+
+  <!-- ======================================================
      PHOTOGRAPHY
 ====================================================== -->
 
-<section
-  class="section photo"
-  id="photography"
->
+  <section class="section photo" id="photography">
 
 
-  <div class="section-head fade">
+    <div class="section-head fade">
 
 
-    <div>
+      <div>
 
-      <div class="page-index">
-        04 / Photography
+        <div class="page-index">
+          04 / Photography
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h2>
+          Things
+          <br>
+
+          <em>
+            I notice.
+          </em>
+        </h2>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="photo-grid fade">
+
+      <!-- 01 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/sunset-La Jolla.jpg');
+                background-position:center 42%;
+            "></div>
+
+        <div class="ph-label">
+          01 / La Jolla
+        </div>
+      </div>
+
+
+      <!-- 02 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/beach.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          02 / Beach
+        </div>
+      </div>
+
+
+      <!-- 03 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/city-LA.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          03 / Los Angeles
+        </div>
+      </div>
+
+
+      <!-- 04 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/Japan.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          04 / Japan
+        </div>
+      </div>
+
+
+      <!-- 05 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/jiuzhaigou.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          05 / Jiuzhaigou
+        </div>
+      </div>
+
+
+      <!-- 06 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/mountain.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          06 / Mountain
+        </div>
+      </div>
+
+
+      <!-- 07 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/ocean.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          07 / Ocean
+        </div>
+      </div>
+
+
+      <!-- 08 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/lake.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          08 / Lake
+        </div>
+      </div>
+
+
+      <!-- 09 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/hill.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          09 / Hill
+        </div>
+      </div>
+
+
+      <!-- 10 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/fireworks.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          10 / Fireworks
+        </div>
+      </div>
+
+
+      <!-- 11 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/LA.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          11 / LA
+        </div>
+      </div>
+
+
+      <!-- 12 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/La Jolla.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          12 / La Jolla
+        </div>
+      </div>
+
+
+      <!-- 13 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/sunset-2.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          13 / Sunset
+        </div>
+      </div>
+
+
+      <!-- 14 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/sunset.JPG');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          14 / Sunset
+        </div>
+      </div>
+
+
+      <!-- 15 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/IMG_1690.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          15 / Study
+        </div>
+      </div>
+
+
+      <!-- 16 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/IMG_1692.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          16 / Study
+        </div>
+      </div>
+
+
+      <!-- 17 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/IMG_1720.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          17 / Study
+        </div>
+      </div>
+
+
+      <!-- 18 -->
+      <div class="ph">
+        <div class="photo-slot" style="
+                background-image:url('assets/images/photography/boat.jpg');
+                background-position:center;
+            "></div>
+
+        <div class="ph-label">
+          18 / Study
+        </div>
       </div>
 
     </div>
 
 
-    <div>
-
-      <h2>
-        Things
-        <br>
-
-        <em>
-          I notice.
-        </em>
-      </h2>
-
-    </div>
+  </section>
 
 
-  </div>
-
-
-  <div class="photo-grid fade">
-
-
-    <div class="ph">
-
-      <div
-        class="photo-slot"
-        style="
-          background-image:url('assets/images/photography/sunset.jpg');
-          background-position:center 42%;
-        "
-      ></div>
-
-      <div class="ph-label">
-        01 / selected photograph
-      </div>
-
-    </div>
-
-
-    <div class="ph">
-
-      <div
-        class="photo-slot"
-        style="background:#293a36;"
-      ></div>
-
-      <div class="ph-label">
-        02 / replace with photo
-      </div>
-
-    </div>
-
-
-    <div class="ph">
-
-      <div
-        class="photo-slot"
-        style="background:#c8cac3;"
-      ></div>
-
-      <div class="ph-label">
-        03 / replace with photo
-      </div>
-
-    </div>
-
-
-    <div class="ph">
-
-      <div
-        class="photo-slot"
-        style="background:#b2c4ce;"
-      ></div>
-
-      <div class="ph-label">
-        04 / replace with photo
-      </div>
-
-    </div>
-
-
-    <div class="ph">
-
-      <div
-        class="photo-slot"
-        style="background:#b6957d;"
-      ></div>
-
-      <div class="ph-label">
-        05 / replace with photo
-      </div>
-
-    </div>
-
-
-    <div class="ph">
-
-      <div
-        class="photo-slot"
-        style="background:#25292b;"
-      ></div>
-
-      <div class="ph-label">
-        06 / replace with photo
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-</section>
-
-
-<!-- ======================================================
+  <!-- ======================================================
      ABOUT
 ====================================================== -->
 
-<section
-  class="section about"
-  id="about"
->
+  <section class="section about" id="about">
 
 
-  <div class="section-head fade">
+    <div class="section-head fade">
 
 
-    <div>
+      <div>
 
-      <div class="page-index">
-        05 / About
+        <div class="page-index">
+          05 / About
+        </div>
+
       </div>
+
+
+      <div>
+
+        <h2>
+          Not one
+          <br>
+
+          <em>
+            single lane.
+          </em>
+        </h2>
+
+      </div>
+
 
     </div>
 
 
-    <div>
+    <div class="about-grid fade">
 
-      <h2>
-        Not one
-        <br>
+
+      <p class="about-statement">
+
+        I move between the
 
         <em>
-          single lane.
+          analytical
         </em>
-      </h2>
 
-    </div>
+        and the visual.
 
+        <span class="about-second-line">
+          Each catches what the other misses.
+        </span>
 
-  </div>
-
-
-  <div class="about-grid fade">
-
-
-    <p class="about-statement">
-
-      I move between the
-
-      <em>
-        analytical
-      </em>
-
-      and the visual.
-
-      <span class="about-second-line">
-        Each catches what the other misses.
-      </span>
-
-    </p>
+      </p>
 
 
-    <div class="about-notes">
+      <div class="about-notes">
 
 
-      <div class="note">
+        <div class="note">
 
-        <b>
-          I build
-        </b>
+          <b>
+            I build
+          </b>
 
-        <p>
-          Code,
-          small tools,
-          interfaces
-          and prototypes.
-        </p>
+          <p>
+            Code,
+            small tools,
+            interfaces
+            and prototypes.
+          </p>
 
-      </div>
-
-
-      <div class="note">
-
-        <b>
-          I explore
-        </b>
-
-        <p>
-          Photography,
-          creative coding,
-          patterns,
-          systems
-          and questions.
-        </p>
-
-      </div>
+        </div>
 
 
-      <div class="note">
+        <div class="note">
 
-        <b>
-          I practice
-        </b>
+          <b>
+            I explore
+          </b>
 
-        <p>
-          Tennis and rowing —
-          not as credentials,
-          but as places
-          to keep showing up.
-        </p>
+          <p>
+            Photography,
+            creative coding,
+            patterns,
+            systems
+            and questions.
+          </p>
 
-      </div>
+        </div>
 
 
-      <div class="note">
+        <div class="note">
 
-        <b>
-          I think about
-        </b>
+          <b>
+            I practice
+          </b>
 
-        <p>
-          Business decisions,
-          trade-offs,
-          human behavior
-          and what technology changes.
-        </p>
+          <p>
+            Tennis and rowing —
+            not as credentials,
+            but as places
+            to keep showing up.
+          </p>
+
+        </div>
+
+
+        <div class="note">
+
+          <b>
+            I think about
+          </b>
+
+          <p>
+            Business decisions,
+            trade-offs,
+            human behavior
+            and what technology changes.
+          </p>
+
+        </div>
+
 
       </div>
 
@@ -4511,169 +4338,166 @@ img{max-width:100%;display:block}
     </div>
 
 
-  </div>
+  </section>
 
 
-</section>
-
-
-<!-- ======================================================
+  <!-- ======================================================
      FOOTER
 ====================================================== -->
 
-<footer class="footer">
+  <footer class="footer">
 
 
-  <div class="footer-top">
+    <div class="footer-top">
 
 
-    <h2>
-      Keep
-      <br>
+      <h2>
+        Keep
+        <br>
 
-      <em>
-        questioning.
-      </em>
-    </h2>
-
-
-    <p class="small">
-      Things I notice,
-      make,
-      test,
-      and return to.
-    </p>
+        <em>
+          questioning.
+        </em>
+      </h2>
 
 
-  </div>
+      <p class="small">
+        Things I notice,
+        make,
+        test,
+        and return to.
+      </p>
 
 
-  <div class="footer-bottom">
-
-    <span>
-      Mandy · 2026
-    </span>
-
-    <span>
-      Code · Sport · Systems · Visual Thinking
-    </span>
-
-  </div>
+    </div>
 
 
-</footer>
+    <div class="footer-bottom">
+
+      <span>
+        Mandy · 2026
+      </span>
+
+      <span>
+        Code · Sport · Systems · Visual Thinking
+      </span>
+
+    </div>
 
 
-<!-- ======================================================
+  </footer>
+
+
+  <!-- ======================================================
      JAVASCRIPT
 ====================================================== -->
 
-<script>
+  <script>
 
 
-/* =========================================================
-   HOW I THINK
-========================================================= */
+    /* =========================================================
+       HOW I THINK
+    ========================================================= */
 
-const thinkData = {
+    const thinkData = {
 
-  observe: [
+      observe: [
 
-    'Photography / attention',
+        'Photography / attention',
 
-    'I use images to slow down and notice patterns I would normally pass by.',
+        'I use images to slow down and notice patterns I would normally pass by.',
 
-    'Attention · Framing · Detail',
+        'Attention · Framing · Detail',
 
-    'Photography · Research · Observation'
+        'Photography · Research · Observation'
 
-  ],
-
-
-  model: [
-
-    'Economics / systems',
-
-    'I like turning a messy situation into variables, assumptions and relationships I can test.',
-
-    'Abstraction · Quantitative thinking · Assumptions',
-
-    'Economics · Analytics · Systems'
-
-  ],
+      ],
 
 
-  build: [
+      model: [
 
-    'Code / prototyping',
+        'Economics / systems',
 
-    'Building forces an idea to become specific. A prototype tells me what my explanation was still hiding.',
+        'I like turning a messy situation into variables, assumptions and relationships I can test.',
 
-    'Making · Iteration · Debugging',
+        'Abstraction · Quantitative thinking · Assumptions',
 
-    'Python · JavaScript · Interfaces'
+        'Economics · Analytics · Systems'
 
-  ],
-
-
-  question: [
-
-    'Reflection / decisions',
-
-    'The output is rarely the end. I am most interested in what changes when the assumptions or priorities change.',
-
-    'Curiosity · Trade-offs · Reflection',
-
-    'Business · Product · Decision-making'
-
-  ]
-
-};
+      ],
 
 
-const panel =
-  document.getElementById(
-    'thinkPanel'
-  );
+      build: [
+
+        'Code / prototyping',
+
+        'Building forces an idea to become specific. A prototype tells me what my explanation was still hiding.',
+
+        'Making · Iteration · Debugging',
+
+        'Python · JavaScript · Interfaces'
+
+      ],
 
 
-document
-  .querySelectorAll(
-    '.think-btn'
-  )
-  .forEach(
-    btn => {
+      question: [
 
-      btn.addEventListener(
-        'click',
-        () => {
+        'Reflection / decisions',
 
-          document
-            .querySelectorAll(
-              '.think-btn'
-            )
-            .forEach(
-              b =>
-                b.classList.remove(
-                  'active'
+        'The output is rarely the end. I am most interested in what changes when the assumptions or priorities change.',
+
+        'Curiosity · Trade-offs · Reflection',
+
+        'Business · Product · Decision-making'
+
+      ]
+
+    };
+
+
+    const panel =
+      document.getElementById(
+        'thinkPanel'
+      );
+
+
+    document
+      .querySelectorAll(
+        '.think-btn'
+      )
+      .forEach(
+        btn => {
+
+          btn.addEventListener(
+            'click',
+            () => {
+
+              document
+                .querySelectorAll(
+                  '.think-btn'
                 )
-            );
+                .forEach(
+                  b =>
+                    b.classList.remove(
+                      'active'
+                    )
+                );
 
 
-          btn
-            .classList
-            .add(
-              'active'
-            );
+              btn
+                .classList
+                .add(
+                  'active'
+                );
 
 
-          const d =
-            thinkData[
-              btn.dataset.key
-            ];
+              const d =
+                thinkData[
+                btn.dataset.key
+                ];
 
 
-          panel.innerHTML = `
+              panel.innerHTML = `
 
             <div class="page-index">
               ${d[0]}
@@ -4707,304 +4531,305 @@ document
 
           `;
 
-        }
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   PERSONAL INDEX
-========================================================= */
-
-const identityData = {
-
-
-  tennis: {
-
-    kicker:
-      'SPORT / PRACTICE',
-
-    title:
-      'Tennis',
-
-    text:
-      'A place where I practice showing up, resetting after mistakes, and staying with what is happening now.',
-
-    tags:
-      'Presence · Repetition · Reset'
-
-  },
-
-
-  rowing: {
-
-    kicker:
-      'SPORT / RHYTHM',
-
-    title:
-      'Rowing',
-
-    text:
-      'Repetition and rhythm pull my attention away from everyday pressure and toward the movement happening in front of me.',
-
-    tags:
-      'Rhythm · Coordination · Endurance'
-
-  },
-
-
-  python: {
-
-    kicker:
-      'TECH + ECONOMICS',
-
-    title:
-      'Python + Economics',
-
-    text:
-      'I use code to turn economic ideas into models, then look more closely at the assumptions and choices inside the result.',
-
-    tags:
-      'Data · Models · Decisions'
-
-  },
-
-
-  photo: {
-
-    kicker:
-      'VISUAL / OBSERVATION',
-
-    title:
-      'Photography',
-
-    text:
-      'Photography slows me down. It is where I practice noticing small patterns, framing choices, and details I would otherwise pass by.',
-
-    tags:
-      'Attention · Framing · Detail'
-
-  },
-
-
-  code: {
-
-    kicker:
-      'CREATIVE TECHNOLOGY',
-
-    title:
-      'Creative Coding',
-
-    text:
-      'Small rules can create surprising behavior. I use code as a space to test, iterate, and make abstract systems visible.',
-
-    tags:
-      'Rules · Interaction · Experiment'
-
-  }
-
-};
-
-
-/* switch Personal Index */
-
-function setIdentity(key){
-
-  const d =
-    identityData[key];
-
-
-  if(!d){
-    return;
-  }
-
-
-  /* left buttons */
-
-  document
-    .querySelectorAll(
-      '.identity-item'
-    )
-    .forEach(
-      button => {
-
-        button
-          .classList
-          .toggle(
-            'active',
-            button.dataset.key === key
-          );
-
-      }
-    );
-
-
-  /* right scenes */
-
-  document
-    .querySelectorAll(
-      '.identity-scene'
-    )
-    .forEach(
-      scene => {
-
-        scene
-          .classList
-          .toggle(
-            'active',
-            scene.dataset.scene === key
-          );
-
-      }
-    );
-
-
-  /* text */
-
-  document
-    .getElementById(
-      'identityKicker'
-    )
-    .textContent =
-      d.kicker;
-
-
-  document
-    .getElementById(
-      'identityTitle'
-    )
-    .textContent =
-      d.title;
-
-
-  document
-    .getElementById(
-      'identityText'
-    )
-    .textContent =
-      d.text;
-
-
-  document
-    .getElementById(
-      'identityTags'
-    )
-    .textContent =
-      d.tags;
-
-}
-
-
-/* click events */
-
-document
-  .querySelectorAll(
-    '.identity-item'
-  )
-  .forEach(
-    btn => {
-
-      btn.addEventListener(
-        'click',
-        () => {
-
-          setIdentity(
-            btn.dataset.key
+            }
           );
 
         }
       );
 
-    }
-  );
+
+    /* =========================================================
+       PERSONAL INDEX
+    ========================================================= */
+
+    const identityData = {
 
 
-/* =========================================================
-   SCROLL FADE
-========================================================= */
+      tennis: {
 
-const obs =
-  new IntersectionObserver(
+        kicker:
+          'SPORT / PRACTICE',
 
-    entries =>
-      entries.forEach(
-        entry => {
+        title:
+          'Tennis',
 
-          if(
-            entry.isIntersecting
-          ){
+        text:
+          'A place where I practice showing up, resetting after mistakes, and staying with what is happening now.',
 
-            entry
-              .target
+        tags:
+          'Presence · Repetition · Reset'
+
+      },
+
+
+      rowing: {
+
+        kicker:
+          'SPORT / RHYTHM',
+
+        title:
+          'Rowing',
+
+        text:
+          'Repetition and rhythm pull my attention away from everyday pressure and toward the movement happening in front of me.',
+
+        tags:
+          'Rhythm · Coordination · Endurance'
+
+      },
+
+
+      python: {
+
+        kicker:
+          'TECH + ECONOMICS',
+
+        title:
+          'Python + Economics',
+
+        text:
+          'I use code to turn economic ideas into models, then look more closely at the assumptions and choices inside the result.',
+
+        tags:
+          'Data · Models · Decisions'
+
+      },
+
+
+      photo: {
+
+        kicker:
+          'VISUAL / OBSERVATION',
+
+        title:
+          'Photography',
+
+        text:
+          'Photography slows me down. It is where I practice noticing small patterns, framing choices, and details I would otherwise pass by.',
+
+        tags:
+          'Attention · Framing · Detail'
+
+      },
+
+
+      code: {
+
+        kicker:
+          'CREATIVE TECHNOLOGY',
+
+        title:
+          'Creative Coding',
+
+        text:
+          'Small rules can create surprising behavior. I use code as a space to test, iterate, and make abstract systems visible.',
+
+        tags:
+          'Rules · Interaction · Experiment'
+
+      }
+
+    };
+
+
+    /* switch Personal Index */
+
+    function setIdentity(key) {
+
+      const d =
+        identityData[key];
+
+
+      if (!d) {
+        return;
+      }
+
+
+      /* left buttons */
+
+      document
+        .querySelectorAll(
+          '.identity-item'
+        )
+        .forEach(
+          button => {
+
+            button
               .classList
-              .add(
-                'show'
+              .toggle(
+                'active',
+                button.dataset.key === key
               );
 
           }
+        );
 
-        }
-      ),
 
-    {
-      threshold:.08
+      /* right scenes */
+
+      document
+        .querySelectorAll(
+          '.identity-scene'
+        )
+        .forEach(
+          scene => {
+
+            scene
+              .classList
+              .toggle(
+                'active',
+                scene.dataset.scene === key
+              );
+
+          }
+        );
+
+
+      /* text */
+
+      document
+        .getElementById(
+          'identityKicker'
+        )
+        .textContent =
+        d.kicker;
+
+
+      document
+        .getElementById(
+          'identityTitle'
+        )
+        .textContent =
+        d.title;
+
+
+      document
+        .getElementById(
+          'identityText'
+        )
+        .textContent =
+        d.text;
+
+
+      document
+        .getElementById(
+          'identityTags'
+        )
+        .textContent =
+        d.tags;
+
     }
 
-  );
 
+    /* click events */
 
-document
-  .querySelectorAll(
-    '.fade'
-  )
-  .forEach(
-    element =>
-      obs.observe(
-        element
+    document
+      .querySelectorAll(
+        '.identity-item'
       )
-  );
+      .forEach(
+        btn => {
+
+          btn.addEventListener(
+            'click',
+            () => {
+
+              setIdentity(
+                btn.dataset.key
+              );
+
+            }
+          );
+
+        }
+      );
 
 
-/* =========================================================
-   SCROLL PROGRESS
-========================================================= */
+    /* =========================================================
+       SCROLL FADE
+    ========================================================= */
 
-window.addEventListener(
-  'scroll',
-  () => {
+    const obs =
+      new IntersectionObserver(
 
-    const max =
-      document
-        .documentElement
-        .scrollHeight
-      -
-      innerHeight;
+        entries =>
+          entries.forEach(
+            entry => {
 
+              if (
+                entry.isIntersecting
+              ) {
 
-    const percentage =
-      max > 0
-      ?
-      scrollY / max * 100
-      :
-      0;
+                entry
+                  .target
+                  .classList
+                  .add(
+                    'show'
+                  );
+
+              }
+
+            }
+          ),
+
+        {
+          threshold: .08
+        }
+
+      );
 
 
     document
-      .getElementById(
-        'progress'
+      .querySelectorAll(
+        '.fade'
       )
-      .style
-      .width =
-        percentage + '%';
+      .forEach(
+        element =>
+          obs.observe(
+            element
+          )
+      );
 
-  }
-);
+
+    /* =========================================================
+       SCROLL PROGRESS
+    ========================================================= */
+
+    window.addEventListener(
+      'scroll',
+      () => {
+
+        const max =
+          document
+            .documentElement
+            .scrollHeight
+          -
+          innerHeight;
 
 
-</script>
+        const percentage =
+          max > 0
+            ?
+            scrollY / max * 100
+            :
+            0;
+
+
+        document
+          .getElementById(
+            'progress'
+          )
+          .style
+          .width =
+          percentage + '%';
+
+      }
+    );
+
+
+  </script>
 
 
 </body>
+
 </html>
