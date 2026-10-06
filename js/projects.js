@@ -16,6 +16,12 @@
     'grid-2': 'assets/images/projects/grid-2.jpg',
     'walker': 'assets/images/projects/walkerCard.png'
   };
+  const livePreviews = {
+    'walker': 'https://mandyyi09.github.io/walker/',
+    'ai-hands': 'https://mandyyi09.github.io/ai-hands/',
+    'grid-1': 'https://mandyyi09.github.io/grid-1/',
+    'grid-2': 'https://mandyyi09.github.io/grid-2/'
+  };
 
   const element = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -42,6 +48,7 @@
 
   function card(project) {
     const article = element('article', 'project-card');
+    article.dataset.project = project.slug;
     const art = element('div', `project-art art-${project.collectionIndex % 7}`);
     // Prefer catalog artwork, then an existing project screenshot.
     art.append(element('span', 'art-label', 'Project study'), element('span', 'art-number', String(project.collectionIndex + 1).padStart(2, '0')));
@@ -55,6 +62,16 @@
       image.addEventListener('error', () => { image.remove(); art.classList.remove('has-image'); });
       image.src = imageUrl;
       art.append(image);
+    }
+    if (project.screenshotUrl) art.classList.add('notebook-cover');
+    if (livePreviews[project.slug]) {
+      const preview = element('iframe', 'project-live-preview');
+      preview.title = `${project.title} live preview`;
+      preview.loading = 'lazy';
+      preview.tabIndex = -1;
+      preview.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+      preview.src = livePreviews[project.slug];
+      art.append(preview, element('span', 'preview-label', 'Live preview'));
     }
     const meta = element('div', 'card-meta');
     meta.append(element('span', '', project.category || 'Other projects'));
@@ -76,6 +93,8 @@
     const demo = safeUrl(project.demoUrl);
     if (repo) links.append(link('View source ↗', repo));
     if (demo) links.append(link('Try it live ↗', demo, 'demo-link'));
+    const screenshot = safeUrl(project.screenshotUrl);
+    if (screenshot) links.append(link('View project screenshot ↗', screenshot));
     article.append(links);
     if (project.longDescription || list(project.domainTags).length || list(project.schoolSubjects).length || list(project.limitations).length) {
       const details = element('details');
@@ -143,9 +162,14 @@
     grid.setAttribute('aria-busy', 'true');
     count.textContent = 'Loading the collection…';
     try {
-      const response = await fetch('data/git-projects.json', { cache: 'no-cache' });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
+      const collections = await Promise.all(['data/git-projects.json', 'data/study-projects.json'].map(async url => {
+        const response = await fetch(url, { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const collection = await response.json();
+        if (!Array.isArray(collection)) throw new Error('Invalid project collection');
+        return collection;
+      }));
+      const data = collections.flat();
       if (!Array.isArray(data) || data.some(project => !project || typeof project.title !== 'string')) throw new Error('Invalid project collection');
       projects = [...data].sort((a, b) => (a.sortOrder ?? Infinity) - (b.sortOrder ?? Infinity)).map((project, collectionIndex) => ({ ...project, category: project.category || 'Other projects', collectionIndex }));
       setup();

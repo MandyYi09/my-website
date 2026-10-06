@@ -1,10 +1,15 @@
 (() => {
   const nav = document.querySelector('.site-nav');
   const showcase = document.querySelector('.work-showcase');
-  if (!nav || !showcase) return;
+  if (!nav) return;
   const toggle = nav.querySelector('.nav-toggle');
   const links = [...nav.querySelectorAll('.navlinks a')];
-  const sections = links.map(link => ({ link, section: link.hash ? document.querySelector(link.hash) : null })).filter(item => item.section);
+  const currentPage = location.pathname.split('/').pop() || 'index.html';
+  const pageForHash = { '#sports': 'sports.html', '#work': 'work.html', '#photography': 'photography.html', '#about': 'about.html', '#introduction': 'about.html' };
+  if (currentPage === 'index.html' && pageForHash[location.hash]) {
+    location.replace(pageForHash[location.hash]);
+    return;
+  }
   const mobile = window.matchMedia('(max-width: 700px)');
 
   function closeMenu(restoreFocus = false) {
@@ -35,14 +40,10 @@
   mobile.addEventListener('change', () => closeMenu());
 
   function updateNavigation() {
-    const offset = nav.offsetHeight + 30;
-    nav.classList.toggle('is-scrolled', showcase.getBoundingClientRect().bottom <= nav.offsetHeight);
-    let current = sections[0];
-    sections.forEach(item => {
-      if (item.section.getBoundingClientRect().top <= offset) current = item;
-    });
+    nav.classList.toggle('is-scrolled', !showcase || showcase.getBoundingClientRect().bottom <= nav.offsetHeight);
     links.forEach(link => {
-      if (link === current?.link) link.setAttribute('aria-current', 'location');
+      const target = link.getAttribute('href');
+      if (target === currentPage || (currentPage === 'work.html' && target === 'projects.html')) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
   }

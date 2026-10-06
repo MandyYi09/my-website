@@ -21,8 +21,8 @@
 .showcase-top span:last-child { color: #d0d4ca; }
 .showcase-copy { position: absolute; z-index: 1; left: 8vw; bottom: 160px; max-width: 630px; width: calc(100% - 16vw); }
 .showcase-kicker { margin: 0 0 24px; color: var(--showcase-accent); font-size: 10px; line-height: 1.5; letter-spacing: .2em; text-transform: uppercase; }
-.showcase-copy h2 { margin: 0; font: 400 clamp(70px, 8.5vw, 136px)/.9 'Instrument Serif', Georgia, serif; letter-spacing: -.045em; }
-.showcase-copy h2 em { display: block; color: #d9e6bd; font-weight: 400; }
+.showcase-copy :is(h1, h2) { margin: 0; font: 400 clamp(70px, 8.5vw, 136px)/.9 'Instrument Serif', Georgia, serif; letter-spacing: -.045em; }
+.showcase-copy :is(h1, h2) em { display: block; color: #d9e6bd; font-weight: 400; }
 .showcase-description { max-width: 360px; margin: 26px 0; color: #e0e2d9; font-size: 14px; line-height: 1.8; }
 .showcase-link { display: inline-flex; align-items: center; gap: 34px; padding: 14px 0; border-bottom: 1px solid #b9c5a2; font-size: 12px; }
 .showcase-link span { font-size: 24px; line-height: 1; transition: transform .2s; }
@@ -45,7 +45,7 @@
   .showcase-top { top: 26px; left: 22px; right: 22px; }
   .showcase-top span:last-child { display: none; }
   .showcase-copy { left: 22px; width: calc(100% - 44px); bottom: 158px; }
-  .showcase-copy h2 { font-size: clamp(64px, 14vw, 96px); }
+  .showcase-copy :is(h1, h2) { font-size: clamp(64px, 14vw, 96px); }
   .showcase-description { max-width: 300px; font-size: 13px; margin: 20px 0 14px; }
   .showcase-kicker { margin-bottom: 18px; }
   .showcase-bottom { left: 22px; right: 22px; bottom: 22px; display: grid; gap: 16px; }
@@ -58,17 +58,17 @@
   .showcase-slide::after { background: linear-gradient(0deg, rgba(8,12,10,.94), rgba(8,12,10,.35) 70%, rgba(8,12,10,.3)); }
 }
 @media (max-height: 820px) and (min-width: 701px) {
-  .showcase-copy h2 { font-size: clamp(70px, 7vw, 104px); }
+  .showcase-copy :is(h1, h2) { font-size: clamp(70px, 7vw, 104px); }
 }
 @media (max-height: 700px) and (max-width: 700px) {
-  .showcase-copy h2 { font-size: 52px; }
+  .showcase-copy :is(h1, h2) { font-size: 52px; }
   .showcase-kicker { margin-bottom: 12px; }
   .showcase-description { margin: 16px 0 10px; line-height: 1.65; }
 }
 @media (max-height: 650px) and (min-width: 701px) {
   .work-showcase { min-height: 460px; }
   .showcase-copy { bottom: 110px; }
-  .showcase-copy h2 { font-size: 70px; }
+  .showcase-copy :is(h1, h2) { font-size: 70px; }
   .showcase-description { margin: 16px 0 10px; }
   .showcase-kicker { margin-bottom: 14px; }
 }

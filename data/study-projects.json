@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ucla:time-value",
+    "slug": "ucla-time-value",
+    "title": "Time Value Calculator",
+    "category": "UCLA Summer Study",
+    "shortDescription": "A Python time-value calculator for present value, future value, annuities, and perpetuities.",
+    "longDescription": "UCLA summer project 1: a TimeValue class that turns financial formulas into reusable Python methods. The project explores translating economic models into usable calculations.",
+    "technologies": ["Python", "Jupyter Notebook"],
+    "schoolSubjects": ["Economics", "Computer Science"],
+    "domainTags": ["time-value-of-money", "financial-modeling"],
+    "imageUrl": "assets/images/python-UCLA/project1.png",
+    "screenshotUrl": "assets/images/python-UCLA/project1.png",
+    "sortOrder": -2
+  },
+  {
+    "id": "ucla:portfolio-analysis",
+    "slug": "ucla-portfolio-analysis",
+    "title": "Portfolio Analysis & Optimization",
+    "category": "UCLA Summer Study",
+    "shortDescription": "A Python notebook exploring daily-return correlations, diversification, and portfolio optimization.",
+    "longDescription": "UCLA summer project 2: exploring the relationships between assets and what an optimization model defines as the best portfolio. The notebook screenshot shows a correlation matrix of daily returns.",
+    "technologies": ["Python", "Jupyter Notebook"],
+    "schoolSubjects": ["Economics", "Mathematics"],
+    "domainTags": ["portfolio-analysis", "correlation", "diversification"],
+    "imageUrl": "assets/images/python-UCLA/截屏2026-10-05 17.41.38.png",
+    "screenshotUrl": "assets/images/python-UCLA/截屏2026-10-05 17.41.38.png",
+    "sortOrder": -1
+  }
+]
