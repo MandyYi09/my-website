@@ -1,0 +1,64 @@
+/* Shared editorial palette and type across the independently laid-out pages. */
+:root { --paper:#f3f0e9; --cream:#f7f5ef; --ink:#20251f; --muted:#6e7169; --line:rgba(32,37,31,.17); --sage:#7b8b80; --acid:#c7d6b7; --serif:Georgia,'Times New Roman',serif; --page-gutter:5vw; }
+body.edition-page { background:var(--paper); color:var(--ink); }
+.nav.site-nav,.edition-page .site-nav { height:76px; padding:0 var(--page-gutter); }
+.site-nav .brand,.edition-page .site-nav .brand { font:400 34px/1 'Instrument Serif',Georgia,serif; letter-spacing:-.04em; }
+.site-nav .navlinks,.edition-page .site-nav .navlinks { gap:32px; }
+.site-nav .navlinks a,.edition-page .site-nav .navlinks a { font:10px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.15em; }
+body:not(.motion-home) .site-nav { background:rgba(243,240,233,.96); color:var(--ink); --nav-accent:#53664b; border-color:var(--line); }
+.motion-home:not(.intro-playing) .site-nav,.motion-home:not(.intro-playing) .site-nav .navlinks { background:#111411; }
+.motion-home .work-showcase { margin-top:76px; height:calc(100svh - 76px); }
+.motion-home .showcase-top { top:34px; }
+.motion-home .showcase-copy { left:var(--page-gutter); width:calc(100% - 10vw); max-width:820px; }
+.motion-home .showcase-copy :is(h1,h2) { font:600 clamp(60px,7vw,110px)/.98 Georgia,'Times New Roman',serif; letter-spacing:-.045em; }
+.motion-home .showcase-copy em { font-family:'Instrument Serif',Georgia,serif; font-weight:400; color:#c7d6b7; }
+.motion-home .showcase-description { color:#dedfd7; }
+.motion-home .home-mandy-section { background:var(--paper); }
+.workbench-heading,.journal-heading { padding:146px var(--page-gutter) 44px; }
+.workbench-title h1,.journal-heading h1 { font:600 clamp(48px,6.3vw,92px)/.98 Georgia,'Times New Roman',serif; letter-spacing:-.04em; }
+.workbench-title h1>span,.journal-heading h1 em { font-family:'Instrument Serif',Georgia,serif; font-weight:400; color:#7b8b80; }
+.workbench-title { padding:26px 0; }
+.motion-projects .collection { margin:0 var(--page-gutter); }
+.project-index-button h3 { font:400 25px/1.2 Georgia,'Times New Roman',serif; letter-spacing:-.035em; }
+.project-index-button[aria-pressed=true] { background:#dce3d9; }
+.project-index-button:hover { background:#e5e8df; }
+.project-stage h3 { font:500 36px/1.1 Georgia,'Times New Roman',serif; }
+.journal-pages { margin:0 var(--page-gutter) 70px; }
+.journal-entry>summary>h2 { font:500 34px/1.1 Georgia,'Times New Roman',serif; }
+.journal-entry-body>.project-card,.journal-entry-body>.visual-card { background:var(--cream); }
+.page-footer { display:flex; justify-content:space-between; align-items:center; gap:24px; padding:28px var(--page-gutter); border-top:1px solid var(--line); background:var(--paper); color:var(--ink); font:11px/1.5 Arial,sans-serif; }
+.page-footer a:first-child { font:30px 'Instrument Serif',Georgia,serif; }
+@media(max-width:700px) {
+ :root { --page-gutter:22px; }
+ .nav.site-nav,.edition-page .site-nav { height:76px; padding:0 22px; }
+ .site-nav .brand,.edition-page .site-nav .brand { font-size:32px; }
+ .edition-page .site-nav .navlinks { top:76px; gap:0; }
+ body:not(.motion-home) .site-nav .navlinks { background:var(--paper); color:var(--ink); }
+ .site-nav .navlinks a,.edition-page .site-nav .navlinks a { font-size:13px; padding:16px 0; }
+ .motion-home .work-showcase { margin-top:76px; height:calc(100svh - 76px); }
+ .motion-home .showcase-top { top:26px; }
+ .motion-home .showcase-copy { width:calc(100% - 44px); }
+ .motion-home .showcase-copy :is(h1,h2) { font-size:clamp(46px,11.5vw,74px); }
+ .motion-home .showcase-copy em { font-size:1.12em; }
+ .workbench-heading,.journal-heading { padding:120px 22px 32px; }
+ .workbench-title h1,.journal-heading h1 { font-size:52px; }
+ .project-index-button h3 { font-size:24px; }
+ .project-stage h3 { font-size:30px; }
+ .journal-entry>summary>h2 { font-size:28px; }
+ .page-footer { flex-wrap:wrap; padding:24px 22px; gap:14px; }
+ .page-footer>span { display:none; }
+}
+/* The opening has its own three-beat title choreography. */
+.motion-opening .opening-type { bottom:230px; }
+.motion-opening .opening-type h2 { font-size:clamp(82px,8.5vw,138px); }
+.motion-opening[data-phase=serve] .opening-type { animation:opening-arrive .7s both; }
+.motion-opening[data-phase=surge] .opening-type { animation:opening-splash .65s both; }
+.motion-opening[data-phase=flow] .opening-type { animation:opening-flow .9s both; }
+@keyframes opening-arrive { from { opacity:0; transform:translateY(35px) rotate(-3deg); } to { opacity:1; transform:none; } }
+@keyframes opening-splash { 0% { opacity:0; transform:translateY(20px) scale(.95); } 45% { opacity:1; transform:translateY(-6px) scale(1.025); } 100% { transform:none; } }
+@keyframes opening-flow { from { opacity:0; transform:translateX(-30px); } to { opacity:1; transform:none; } }
+@media(max-width:700px) {
+ .motion-opening .opening-type { bottom:235px; }
+ .motion-opening .opening-type h2 { font-size:clamp(65px,17vw,100px); }
+}
+@media(prefers-reduced-motion:reduce) { .motion-opening .opening-type { animation:none!important; } }

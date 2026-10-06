@@ -1,6 +1,6 @@
 (() => {
   const nav = document.querySelector('.site-nav');
-  const showcase = document.querySelector('.work-showcase');
+  const showcase = document.querySelector('.motion-opening, .sports-stage, .work-showcase');
   if (!nav) return;
   const toggle = nav.querySelector('.nav-toggle');
   const links = [...nav.querySelectorAll('.navlinks a')];

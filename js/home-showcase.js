@@ -3,9 +3,10 @@
   if (!root || typeof Swiper === 'undefined') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
-  const titles = ['Grid 1', 'Walker', 'Grid 2', 'Photography'];
+  const titles = ['Little Mandy', 'Grid 1', 'Walker', 'Grid 2', 'Photography'];
   let paused = reducedMotion.matches;
   let inView = true;
+  const openingActive = () => document.body.classList.contains('intro-playing');
 
   function updateSlides(swiper) {
     swiper.slides.forEach((slide, index) => {
@@ -58,15 +59,20 @@
   new IntersectionObserver(([entry]) => {
     inView = entry.isIntersecting;
     if (!inView) swiper.autoplay.stop();
-    else if (!paused && !document.hidden) swiper.autoplay.start();
+    else if (!paused && !document.hidden && !openingActive()) swiper.autoplay.start();
   }, { threshold: .25 }).observe(root);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) swiper.autoplay.stop();
-    else if (!paused && inView) swiper.autoplay.start();
+    else if (!paused && inView && !openingActive()) swiper.autoplay.start();
   });
   reducedMotion.addEventListener('change', event => {
     swiper.params.speed = event.matches ? 0 : 850;
     if (event.matches) stopPlayback();
+  });
+  document.addEventListener('opening-start', () => swiper.autoplay.stop());
+  document.addEventListener('opening-complete', () => {
+    swiper.update();
+    if (!paused && inView && !document.hidden) swiper.autoplay.start();
   });
   updatePlayback();
 

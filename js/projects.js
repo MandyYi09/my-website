@@ -2,6 +2,7 @@
   'use strict';
 
   const grid = document.querySelector('#project-grid');
+  const stage = document.querySelector('#project-stage');
   const count = document.querySelector('#result-count');
   const search = document.querySelector('#search');
   const sort = document.querySelector('#sort');
@@ -10,11 +11,17 @@
   const error = document.querySelector('#error-state');
   let projects = [];
   let category = '';
+  let selectedSlug = '';
   const projectCovers = {
-    'ai-hands': 'assets/images/projects/handsCard.png',
-    'grid-1': 'assets/images/projects/grid-1.jpg',
-    'grid-2': 'assets/images/projects/grid-2.jpg',
-    'walker': 'assets/images/projects/walkerCard.png'
+    'ai-hands': 'assets/images/projects/ai-hands/handsCard.png',
+    'grid-1': 'assets/images/projects/grid-1/grid-1.jpg',
+    'grid-2': 'assets/images/projects/grid-2/grid-2.jpg',
+    'walker': 'assets/images/projects/walker/walkerCard.png',
+    'ai-hands-exp-2': 'assets/images/projects/ai-hands-exp-2/截屏2026-10-05 15.57.15.png',
+    'fitai': 'assets/images/projects/fitAi/fitAI.png',
+    'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
+    'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/3D-trad-art.png',
+    'p5-polar-curve': 'assets/images/projects/p5-polar-curve/截屏2026-10-05 15.50.56.png'
   };
   const livePreviews = {
     'walker': 'https://mandyyi09.github.io/walker/',
@@ -120,6 +127,33 @@
     return article;
   }
 
+  function selectProject(project, scroll = false) {
+    selectedSlug = project.slug;
+    const note = element('p', 'project-stage-note', 'On the viewing table / ' + project.title);
+    stage.replaceChildren(note, card(project));
+    grid.querySelectorAll('button[data-project]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.project === selectedSlug));
+    });
+    if (scroll && window.matchMedia('(max-width: 700px)').matches) {
+      stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+    }
+  }
+
+  function indexRow(project) {
+    const row = element('article', 'project-index-row');
+    const button = element('button', 'project-index-button');
+    button.type = 'button';
+    button.dataset.project = project.slug;
+    button.setAttribute('aria-controls', 'project-stage');
+    button.setAttribute('aria-pressed', String(project.slug === selectedSlug));
+    const title = element('span');
+    title.append(element('h3', '', project.title), element('small', '', project.category));
+    button.append(element('span', '', String(project.collectionIndex + 1).padStart(2, '0')), title, element('i', '', '↗'));
+    button.addEventListener('click', () => selectProject(project, true));
+    row.append(button);
+    return row;
+  }
+
   function render() {
     const query = search.value.trim().toLocaleLowerCase();
     const visible = projects.filter(project => {
@@ -128,7 +162,12 @@
     });
     if (sort.value === 'recent') visible.sort((a, b) => dateValue(b) - dateValue(a));
     if (sort.value === 'title') visible.sort((a, b) => a.title.localeCompare(b.title));
-    grid.replaceChildren(...visible.map(card));
+    if (stage) {
+      grid.replaceChildren(...visible.map(indexRow));
+      const selected = visible.find(project => project.slug === selectedSlug) || visible[0];
+      if (selected) selectProject(selected);
+      else stage.replaceChildren();
+    } else grid.replaceChildren(...visible.map(card));
     count.textContent = `${visible.length} of ${projects.length} projects${category ? ` / ${category}` : ''}`;
     empty.hidden = visible.length !== 0;
     filters.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === category)));
