@@ -3,7 +3,7 @@
   if (!root || typeof Swiper === 'undefined') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
-  const titles = ['Grid 1', 'Walker', 'FitAI', 'Photography'];
+  const titles = ['FitAI', 'Zhong Art', 'Walker', 'Grid 1', 'Photography'];
   let paused = reducedMotion.matches;
   let inView = true;
   const openingActive = () => document.body.classList.contains('intro-playing');
@@ -27,13 +27,20 @@
   }
   root.querySelectorAll('.showcase-live').forEach(frame=>{
     frame.addEventListener('load',()=>{
-      if(frame.hasAttribute('src') && frame.closest('[data-project]')?.dataset.project !== 'fitai') frame.closest('.showcase-slide').classList.add('is-live');
+      if(frame.hasAttribute('src') && !['fitai','zhong-art'].includes(frame.closest('[data-project]')?.dataset.project)) frame.closest('.showcase-slide').classList.add('is-live');
     });
   });
   window.addEventListener('message',event=>{
     const frame=root.querySelector('[data-project="fitai"] .showcase-live');
     if(event.origin === location.origin && event.source === frame?.contentWindow &&
        event.data?.type === 'fitai-preview' && event.data.event === 'ready' && frame.hasAttribute('src')) {
+      frame.closest('.showcase-slide').classList.add('is-live');
+    }
+  });
+  window.addEventListener('message',event=>{
+    const frame=root.querySelector('[data-project="zhong-art"] .showcase-live');
+    if(event.origin === location.origin && event.source === frame?.contentWindow &&
+       event.data?.type === 'zhong-art-preview' && event.data.event === 'ready' && frame.hasAttribute('src')) {
       frame.closest('.showcase-slide').classList.add('is-live');
     }
   });

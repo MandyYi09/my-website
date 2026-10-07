@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Cloud Court · Interactive guardians</title><script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.classList.add('embed')</script><link rel="stylesheet" href="scene.css"><script src="scene.js" defer></script></head><body><main>    <section class="scroll" aria-label="Interactive guardian painting">
+      <div class="scene-top"><span><i class="live-dot"></i> <span id="scene-status">THE COURT IS DREAMING</span></span><span class="scene-index">雲 庭 · 一</span></div>
+      <canvas id="scene" tabindex="0" aria-label="Three animated painted figures among clouds. Drag a figure to move it. Click to awaken it. Use the buttons below for keyboard access."></canvas>
+      <div class="loading" id="loading"><span class="seal">雲</span><p>Unrolling the clouds…</p></div>
+      <div class="vertical-poem" aria-hidden="true">雲起時 · 萬象生</div>
+      <div class="scene-bottom"><span id="hint">DRAG A FIGURE <b>·</b> TAP TO AWAKEN <b>·</b> STIR THE SKY</span><button id="fullscreen" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button></div>
+      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    </section>
+    <section class="controls" aria-label="Scene controls">
+      <div class="characters" aria-label="Awaken a guardian">
+        <button class="guardian-button" data-guardian="0"><span class="character-symbol celestial">☾</span><span><small>FIGURE I</small>Look at the face</span><span class="key">1</span></button>
+        <button class="guardian-button" data-guardian="1"><span class="character-symbol jade">❋</span><span><small>FIGURE II</small>Look at the robe</span><span class="key">2</span></button>
+        <button class="guardian-button" data-guardian="2"><span class="character-symbol flame">☼</span><span><small>FIGURE III</small>Look at the object</span><span class="key">3</span></button>
+      </div>
+      <div class="world-controls"><label class="wind-control" for="wind"><span>WIND <output id="wind-value">Gentle</output></span><input type="range" id="wind" min="0" max="100" value="35" aria-label="Wind strength"></label><button id="sound" class="icon-button" aria-label="Enable ambient sound" aria-pressed="false" title="Ambient sound">♫<span class="off-dot"></span></button><button id="pause" class="icon-button" aria-label="Pause animation" aria-pressed="false" title="Pause animation">Ⅱ</button><button id="reset" class="icon-button" aria-label="Reset the scene" title="Reset the scene">↺</button></div>
+    </section>
+</main><div class="announcement" id="announcement" role="status" aria-live="polite"></div></body></html>

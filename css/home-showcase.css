@@ -18,6 +18,8 @@
 .showcase-slide--fitai .showcase-image { inset:0; width:100%; height:100%; object-position:center; mask-image:none; }
 .showcase-slide--fitai .showcase-live { inset:0; width:100%; height:100%; mask-image:none; }
 .showcase-slide--fitai::after { background:linear-gradient(90deg,rgba(13,25,21,.96),rgba(13,25,21,.82) 30%,rgba(13,25,21,.28) 68%,rgba(13,25,21,.05)),linear-gradient(0deg,rgba(13,25,21,.8),transparent 34%); }
+.showcase-slide--zhong-art { background:#183f44; }
+.showcase-slide--zhong-art::after { background:linear-gradient(90deg,rgba(13,32,43,.94),rgba(13,32,43,.7) 28%,rgba(13,32,43,.15) 72%),linear-gradient(0deg,rgba(13,32,43,.78),transparent 34%); }
 .showcase-slide--photo .showcase-image { object-position: center 42%; }
 .showcase-top { position: absolute; z-index: 2; top: 34px; left: 5vw; right: 5vw; display: flex; justify-content: space-between; gap: 20px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; pointer-events: none; }
 .showcase-top span:first-child::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 12px; border-radius: 50%; background: var(--showcase-accent); vertical-align: 1px; }
@@ -87,4 +89,5 @@
 @media(max-width:700px) {
   .showcase-live-toggle { top:66px; right:22px; font-size:10px!important; }
   .showcase-slide--fitai::after { background:linear-gradient(0deg,rgba(13,25,21,.97),rgba(13,25,21,.9) 21%,rgba(13,25,21,.45) 58%,rgba(13,25,21,.08)); }
+  .showcase-slide--zhong-art::after { background:linear-gradient(0deg,rgba(13,32,43,.96),rgba(13,32,43,.7) 37%,rgba(13,32,43,.08)); }
 }
