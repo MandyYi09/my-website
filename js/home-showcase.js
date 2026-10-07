@@ -3,12 +3,39 @@
   if (!root || typeof Swiper === 'undefined') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
-  const titles = ['Little Mandy', 'Grid 1', 'Walker', 'Grid 2', 'Photography'];
+  const titles = ['Grid 1', 'Walker', 'Grid 2', 'Photography'];
   let paused = reducedMotion.matches;
   let inView = true;
   const openingActive = () => document.body.classList.contains('intro-playing');
 
+  let livePaused = reducedMotion.matches;
+  let activeSwiper;
+  function updateLive() {
+    if (!activeSwiper) return;
+    activeSwiper.slides.forEach((slide,index) => {
+      const frame=slide.querySelector('.showcase-live');
+      if (!frame) return;
+      const playing=index===activeSwiper.activeIndex && !livePaused && inView && !document.hidden && !openingActive();
+      const button=slide.querySelector('.showcase-live-toggle');
+      button.textContent=livePaused?'▶ Play background':'Ⅱ Pause background';
+      button.setAttribute('aria-label',livePaused?'Play live background':'Pause live background');
+      if(playing && !frame.hasAttribute('src')) frame.src=frame.dataset.src;
+      else if(!playing && frame.hasAttribute('src')) {
+        frame.removeAttribute('src'); slide.classList.remove('is-live');
+      }
+    });
+  }
+  root.querySelectorAll('.showcase-live').forEach(frame=>{
+    frame.addEventListener('load',()=>{
+      if(frame.hasAttribute('src')) frame.closest('.showcase-slide').classList.add('is-live');
+    });
+  });
+  root.querySelectorAll('.showcase-live-toggle').forEach(button=>{
+    button.addEventListener('click',()=>{livePaused=!livePaused;updateLive();});
+  });
   function updateSlides(swiper) {
+    activeSwiper=swiper;
+    updateLive();
     swiper.slides.forEach((slide, index) => {
       const active = index === swiper.activeIndex;
       slide.inert = !active;
@@ -58,21 +85,33 @@
   });
   new IntersectionObserver(([entry]) => {
     inView = entry.isIntersecting;
+    updateLive();
     if (!inView) swiper.autoplay.stop();
     else if (!paused && !document.hidden && !openingActive()) swiper.autoplay.start();
   }, { threshold: .25 }).observe(root);
   document.addEventListener('visibilitychange', () => {
+    updateLive();
     if (document.hidden) swiper.autoplay.stop();
     else if (!paused && inView && !openingActive()) swiper.autoplay.start();
   });
   reducedMotion.addEventListener('change', event => {
     swiper.params.speed = event.matches ? 0 : 850;
+    livePaused=event.matches;updateLive();
     if (event.matches) stopPlayback();
   });
-  document.addEventListener('opening-start', () => swiper.autoplay.stop());
+  document.addEventListener('opening-start', () => {swiper.autoplay.stop();updateLive();});
   document.addEventListener('opening-complete', () => {
     swiper.update();
+    updateLive();
     if (!paused && inView && !document.hidden) swiper.autoplay.start();
+  });
+  let resizeTimer;
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(()=>{
+      root.querySelectorAll('.showcase-live[src]').forEach(frame=>{frame.closest('.showcase-slide').classList.remove('is-live');frame.removeAttribute('src');});
+      updateLive();
+    },250);
   });
   updatePlayback();
 
