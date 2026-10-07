@@ -10,6 +10,59 @@
 
   let livePaused = reducedMotion.matches;
   let activeSwiper;
+  const photoSlide = root.querySelector('.showcase-slide--photo');
+  const photoGallery = photoSlide?.querySelector('.showcase-photo-gallery');
+  const photoToggle = photoSlide?.querySelector('.showcase-photo-toggle');
+  const photoSources = [
+    'assets/images/photography/LA.jpg',
+    'assets/images/photography/La Jolla.jpg',
+    'assets/images/photography/mountain.jpg'
+  ];
+  let photoSwiper;
+  let photoPaused = reducedMotion.matches;
+  function updatePhotoPlayback() {
+    if (!photoSwiper) return;
+    const playing = activeSwiper?.slides[activeSwiper.activeIndex] === photoSlide &&
+      photoSlide.classList.contains('is-photo-ready') && !photoPaused && inView &&
+      !document.hidden && !openingActive();
+    photoToggle.textContent = photoPaused ? '▶ Play photos' : 'Ⅱ Pause photos';
+    photoToggle.setAttribute('aria-label', photoPaused ? 'Play photo background' : 'Pause photo background');
+    if (playing && !photoSwiper.autoplay.running) photoSwiper.autoplay.start();
+    else if (!playing && photoSwiper.autoplay.running) photoSwiper.autoplay.stop();
+  }
+  function loadNearbyPhotos(swiper) {
+    for (const index of [swiper.activeIndex, (swiper.activeIndex + 1) % swiper.slides.length]) {
+      const image = swiper.slides[index]?.querySelector('img[data-src]');
+      if (image) { image.src = image.dataset.src; image.removeAttribute('data-src'); }
+    }
+  }
+  function ensurePhotoGallery() {
+    if (photoSwiper) return;
+    const wrapper = photoGallery.querySelector('.swiper-wrapper');
+    photoSources.forEach(src => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      const image = document.createElement('img');
+      image.alt = '';
+      image.decoding = 'async';
+      image.dataset.src = src;
+      slide.append(image);
+      wrapper.append(slide);
+    });
+    wrapper.querySelector('img').addEventListener('load', () => {
+      photoSlide.classList.add('is-photo-ready');
+      updatePhotoPlayback();
+    }, { once: true });
+    photoSwiper = new Swiper(photoGallery, {
+      effect: 'slide',
+      speed: reducedMotion.matches ? 0 : 900,
+      loop: true,
+      allowTouchMove: false,
+      autoplay: { enabled: false, delay: 2800, disableOnInteraction: false },
+      on: { init: loadNearbyPhotos, slideChangeTransitionStart: loadNearbyPhotos }
+    });
+    updatePhotoPlayback();
+  }
   function updateLive() {
     if (!activeSwiper) return;
     activeSwiper.slides.forEach((slide,index) => {
@@ -50,6 +103,8 @@
   function updateSlides(swiper) {
     activeSwiper=swiper;
     updateLive();
+    if (swiper.slides[swiper.activeIndex] === photoSlide) ensurePhotoGallery();
+    else updatePhotoPlayback();
     swiper.slides.forEach((slide, index) => {
       const active = index === swiper.activeIndex;
       slide.inert = !active;
@@ -92,6 +147,7 @@
     else swiper.autoplay.start();
   });
   root.addEventListener('focusin', event => { if (!pause.contains(event.target)) stopPlayback(); });
+  photoToggle.addEventListener('click', () => { photoPaused = !photoPaused; updatePhotoPlayback(); });
   root.addEventListener('keydown', event => {
     if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
     event.preventDefault(); stopPlayback();
@@ -100,23 +156,29 @@
   new IntersectionObserver(([entry]) => {
     inView = entry.isIntersecting;
     updateLive();
+    updatePhotoPlayback();
     if (!inView) swiper.autoplay.stop();
     else if (!paused && !document.hidden && !openingActive()) swiper.autoplay.start();
   }, { threshold: .25 }).observe(root);
   document.addEventListener('visibilitychange', () => {
     updateLive();
+    updatePhotoPlayback();
     if (document.hidden) swiper.autoplay.stop();
     else if (!paused && inView && !openingActive()) swiper.autoplay.start();
   });
   reducedMotion.addEventListener('change', event => {
     swiper.params.speed = event.matches ? 0 : 850;
     livePaused=event.matches;updateLive();
+    photoPaused = event.matches;
+    if (photoSwiper) photoSwiper.params.speed = event.matches ? 0 : 900;
+    updatePhotoPlayback();
     if (event.matches) stopPlayback();
   });
-  document.addEventListener('opening-start', () => {swiper.autoplay.stop();updateLive();});
+  document.addEventListener('opening-start', () => {swiper.autoplay.stop();updateLive();updatePhotoPlayback();});
   document.addEventListener('opening-complete', () => {
     swiper.update();
     updateLive();
+    updatePhotoPlayback();
     if (!paused && inView && !document.hidden) swiper.autoplay.start();
   });
   let resizeTimer;
@@ -137,7 +199,7 @@
       root.querySelectorAll('[data-project]').forEach(slide => {
         const project = projects.find(item => item.slug === slide.dataset.project);
         if (!project) return;
-        if (project.slug !== 'fitai' && project.shortDescription) slide.querySelector('.showcase-description').textContent = project.shortDescription;
+        if (project.slug !== 'fitai' && !slide.hasAttribute('data-editorial-copy') && project.shortDescription) slide.querySelector('.showcase-description').textContent = project.shortDescription;
         const destination = project.demoUrl || project.repositoryUrl;
         if (project.slug !== 'fitai' && destination && /^https?:\/\//i.test(destination)) slide.querySelector('.showcase-link').href = destination;
       });

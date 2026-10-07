@@ -62,3 +62,23 @@ body:not(.motion-home) .site-nav { background:rgba(243,240,233,.96); color:var(-
  .motion-opening .opening-type h2 { font-size:clamp(65px,17vw,100px); }
 }
 @media(prefers-reduced-motion:reduce) { .motion-opening .opening-type { animation:none!important; } }
+
+:root {
+  --title-font: Georgia, "Times New Roman", serif; /* Notice. Build. */
+  --accent-font: "Instrument Serif", Georgia, serif; /* Question. */
+}
+
+.content-page .section-head h1,
+.motion-home .showcase-copy :is(h1, h2),
+.motion-opening .opening-type h2,
+.workbench-title h1,
+.journal-heading h1 {
+  font-family: var(--title-font);
+}
+
+.content-page .section-head h1 em,
+.motion-home .showcase-copy em,
+.workbench-title h1 > span,
+.journal-heading h1 em {
+  font-family: var(--accent-font);
+}

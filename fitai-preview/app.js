@@ -7,6 +7,7 @@ import { comparePose, projectReference, normalizedLive } from './comparison.mjs'
 const $ = id => document.getElementById(id);
 const previewParams = new URLSearchParams(location.search);
 const rowingPreview = previewParams.get('mode') === 'rowing';
+const yogaPreview = previewParams.get('mode') === 'yoga';
 const embeddedPreview = previewParams.get('embed') === '1';
 import { poses } from './exercises.mjs';
 import { categoryLabels, practiceModes, sequenceFor } from './practice-modes.mjs';
@@ -20,7 +21,7 @@ let lastPoseFrame=0;
 let flipped = false;
 let wristMode = 'aligned';
 let guideUnavailable = false;
-let current = rowingPreview ? 'rowing-catch' : 'reach', filter = rowingPreview ? 'rowing' : 'all', stream = null, landmarker = null, starting = false, runId = 0, lastVideo = -1, lastDetect = 0, lastFeedback = 0, remaining = 30, timerId = null, sceneApi = null;
+let current = rowingPreview ? 'rowing-catch' : yogaPreview ? 'warrior' : 'reach', filter = rowingPreview ? 'rowing' : yogaPreview ? 'yoga' : 'all', stream = null, landmarker = null, starting = false, runId = 0, lastVideo = -1, lastDetect = 0, lastFeedback = 0, remaining = 30, timerId = null, sceneApi = null;
 function setWristMode(mode) {
  wristMode = selectedPose().wristStudy && wristExamples[mode] ? mode : 'aligned';
  document.querySelectorAll('[data-wrist]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.wrist===wristMode)));
@@ -185,7 +186,7 @@ document.querySelectorAll('[data-language]').forEach(button => button.onclick = 
  refreshLocalization();
 });
 selectPose(current);
-if (rowingPreview) document.querySelectorAll('[data-filter]').forEach(button => button.classList.toggle('selected', button.dataset.filter === 'rowing'));
+if (rowingPreview || yogaPreview) document.querySelectorAll('[data-filter]').forEach(button => button.classList.toggle('selected', button.dataset.filter === filter));
 startLocalization();
 async function initThree() {
     try {
@@ -286,13 +287,13 @@ async function initThree() {
     } catch (e) { guideUnavailable = true; $('stage-note').hidden = false; $('stage-note').innerHTML = '3D guide could not load.<small>You can still follow the written cues or enable your camera.</small>'; $('rotate').disabled = true; }
 }
 initThree();
-if (embeddedPreview && rowingPreview) {
-    const stroke = ['rowing-catch', 'rowing-drive', 'rowing-finish', 'rowing-recovery'];
+if (embeddedPreview && (rowingPreview || yogaPreview)) {
+    const sequence = rowingPreview ? ['rowing-catch', 'rowing-drive', 'rowing-finish', 'rowing-recovery'] : ['warrior', 'tree', 'goddess', 'star'];
     let step = 0;
     setInterval(() => {
         if (document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        step = (step + 1) % stroke.length;
-        selectPose(stroke[step]);
-    }, 2500);
+        step = (step + 1) % sequence.length;
+        selectPose(sequence[step]);
+    }, rowingPreview ? 2500 : 3200);
 }
 const lifecycle = new AbortController(); if (document.modelContext?.registerTool) { try { Promise.resolve(document.modelContext.registerTool({ name: 'select_stretch', description: 'Select a movement reference without activating the camera.', inputSchema: { type: 'object', properties: { id: { type: 'string', enum: poses.map(p => p.id) } }, required: ['id'], additionalProperties: false }, annotations: { readOnlyHint: false }, execute(input) { if (!input || typeof input.id !== 'string' || !poses.some(p => p.id === input.id)) throw Error('Unknown movement'); selectPose(input.id); return { selected: current, cameraActive: !!stream } } }, { signal: lifecycle.signal })).catch(() => { }); } catch { } } window.addEventListener('pagehide', () => lifecycle.abort());

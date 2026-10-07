@@ -2,32 +2,34 @@
   'use strict';
 
   const grid = document.querySelector('#project-grid');
-  const stage = document.querySelector('#project-stage');
   const count = document.querySelector('#result-count');
   const search = document.querySelector('#search');
   const sort = document.querySelector('#sort');
-  const filters = document.querySelector('#filters');
   const empty = document.querySelector('#empty-state');
   const error = document.querySelector('#error-state');
   let projects = [];
-  let category = '';
-  let selectedSlug = '';
+  let previewObserver;
   const projectCovers = {
     'ai-hands': 'assets/images/projects/ai-hands/handsCard.png',
     'grid-1': 'assets/images/projects/grid-1/grid-1.jpg',
     'grid-2': 'assets/images/projects/grid-2/grid-2.jpg',
     'walker': 'assets/images/projects/walker/walkerCard.png',
     'ai-hands-exp-2': 'assets/images/projects/ai-hands-exp-2/截屏2026-10-05 15.57.15.png',
-    'fitai': 'assets/images/projects/fitAi/fitAI.png',
+    'fitai': 'assets/images/projects/fitAi/yoga-cover.jpg',
     'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
     'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/3D-trad-art.png',
-    'p5-polar-curve': 'assets/images/projects/p5-polar-curve/截屏2026-10-05 15.50.56.png'
+    'p5-polar-curve': 'assets/images/projects/p5-polar-curve/截屏2026-10-05 15.50.56.png',
+    'p5-polar-curve-interactive': 'assets/images/projects/p5-polar-curve/截屏2026-10-05 15.50.56.png',
+    'my-website': 'assets/images/projects/my-website/homepage.jpg'
   };
   const livePreviews = {
     'walker': 'https://mandyyi09.github.io/walker/',
     'ai-hands': 'https://mandyyi09.github.io/ai-hands/',
     'grid-1': 'https://mandyyi09.github.io/grid-1/',
-    'grid-2': 'https://mandyyi09.github.io/grid-2/'
+    'grid-2': 'https://mandyyi09.github.io/grid-2/',
+    'fitai': 'fitai-preview/index.html?mode=yoga&embed=1&layout=full',
+    'moderized-china-art-2d': 'zhong-art-preview/scene.html?embed=1',
+    'p5-polar-curve': 'https://mandyyi09.github.io/p5-polar-curve/'
   };
 
   const element = (tag, className, text) => {
@@ -52,13 +54,24 @@
     return node;
   };
   const dateValue = project => Date.parse(project.updatedAt) || 0;
-
+  const categoryOrder = [
+    'Interactive Art',
+    'Movement & Fitness',
+    '3D Art & Visualization',
+    'Creative Coding',
+    'UCLA Summer Study',
+    'Mathematical Visualization'
+  ];
+  const categoryRank = category => {
+    const index = categoryOrder.indexOf(category);
+    return index === -1 ? categoryOrder.length : index;
+  };
   function card(project) {
     const article = element('article', 'project-card');
     article.dataset.project = project.slug;
     const art = element('div', `project-art art-${project.collectionIndex % 7}`);
     // Prefer catalog artwork, then an existing project screenshot.
-    art.append(element('span', 'art-label', 'Project study'), element('span', 'art-number', String(project.collectionIndex + 1).padStart(2, '0')));
+    art.append(element('span', 'art-label', project.title), element('span', 'art-number', String(project.collectionIndex + 1).padStart(2, '0')));
     art.setAttribute('aria-hidden', 'true');
     const imageUrl = safeUrl(project.imageUrl) || safeUrl(projectCovers[project.slug]);
     if (imageUrl) {
@@ -71,17 +84,21 @@
       art.append(image);
     }
     if (project.screenshotUrl) art.classList.add('notebook-cover');
-    if (livePreviews[project.slug]) {
+    if (livePreviews[project.slug] && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const preview = element('iframe', 'project-live-preview');
       preview.title = `${project.title} live preview`;
       preview.loading = 'lazy';
       preview.tabIndex = -1;
+      preview.setAttribute('aria-hidden', 'true');
       preview.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-      preview.src = livePreviews[project.slug];
+      preview.dataset.src = livePreviews[project.slug];
+      preview.dataset.project = project.slug;
+      preview.addEventListener('load', () => {
+        if (preview.hasAttribute('src') && !['fitai', 'moderized-china-art-2d'].includes(project.slug)) art.classList.add('preview-ready');
+      });
       art.append(preview, element('span', 'preview-label', 'Live preview'));
     }
     const meta = element('div', 'card-meta');
-    meta.append(element('span', '', project.category || 'Other projects'));
     if (dateValue(project)) {
       const date = new Date(dateValue(project));
       const time = element('time', '', date.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }));
@@ -89,7 +106,8 @@
       time.title = 'Last updated';
       meta.append(time);
     }
-    article.append(art, meta, element('h3', '', project.title), element('p', 'description', project.shortDescription || 'Explore this project on GitHub.'));
+    article.append(art, element('h3', '', project.title), element('p', 'description', project.shortDescription || 'Explore this project on GitHub.'));
+    if (meta.childNodes.length) article.append(meta);
     const tags = element('ul', 'tags');
     tags.setAttribute('aria-label', 'Technologies');
     const technologies = list(project.technologies);
@@ -100,6 +118,8 @@
     const demo = safeUrl(project.demoUrl);
     if (repo) links.append(link('View source ↗', repo));
     if (demo) links.append(link('Try it live ↗', demo, 'demo-link'));
+    if (!demo && project.slug === 'fitai') links.append(link('Explore live preview ↗', new URL('fitai-preview/index.html?mode=yoga', document.baseURI).href, 'demo-link'));
+    if (!demo && project.slug === 'moderized-china-art-2d') links.append(link('Explore live preview ↗', new URL(livePreviews[project.slug], document.baseURI).href, 'demo-link'));
     const screenshot = safeUrl(project.screenshotUrl);
     if (screenshot) links.append(link('View project screenshot ↗', screenshot));
     article.append(links);
@@ -127,66 +147,45 @@
     return article;
   }
 
-  function selectProject(project, scroll = false) {
-    selectedSlug = project.slug;
-    const note = element('p', 'project-stage-note', 'On the viewing table / ' + project.title);
-    stage.replaceChildren(note, card(project));
-    grid.querySelectorAll('button[data-project]').forEach(button => {
-      button.setAttribute('aria-pressed', String(button.dataset.project === selectedSlug));
-    });
-    if (scroll && window.matchMedia('(max-width: 700px)').matches) {
-      stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
-    }
-  }
+  window.addEventListener('message', event => {
+    if (event.origin !== location.origin || !['fitai-preview', 'zhong-art-preview'].includes(event.data?.type) || event.data.event !== 'ready') return;
+    const frame = [...grid.querySelectorAll('.project-live-preview[src]')].find(node => node.contentWindow === event.source);
+    frame?.closest('.project-art')?.classList.add('preview-ready');
+  });
 
-  function indexRow(project) {
-    const row = element('article', 'project-index-row');
-    const button = element('button', 'project-index-button');
-    button.type = 'button';
-    button.dataset.project = project.slug;
-    button.setAttribute('aria-controls', 'project-stage');
-    button.setAttribute('aria-pressed', String(project.slug === selectedSlug));
-    const title = element('span');
-    title.append(element('h3', '', project.title), element('small', '', project.category));
-    button.append(element('span', '', String(project.collectionIndex + 1).padStart(2, '0')), title, element('i', '', '↗'));
-    button.addEventListener('click', () => selectProject(project, true));
-    row.append(button);
-    return row;
+  function watchPreviews() {
+    previewObserver?.disconnect();
+    previewObserver = new IntersectionObserver(entries => {
+      entries.forEach(({ target: frame, isIntersecting }) => {
+        if (isIntersecting && !frame.hasAttribute('src')) frame.src = frame.dataset.src;
+        else if (!isIntersecting && frame.hasAttribute('src')) {
+          frame.removeAttribute('src');
+          frame.closest('.project-art').classList.remove('preview-ready');
+        }
+      });
+    }, { rootMargin: '120px 0px' });
+    grid.querySelectorAll('.project-live-preview').forEach(frame => previewObserver.observe(frame));
   }
 
   function render() {
     const query = search.value.trim().toLocaleLowerCase();
     const visible = projects.filter(project => {
-      const text = [project.title, project.shortDescription, project.longDescription, project.category, ...list(project.technologies), ...list(project.programmingLanguages), ...list(project.domainTags), ...list(project.schoolSubjects), ...list(project.topics)].join(' ').toLocaleLowerCase();
-      return (!category || project.category === category) && (!query || text.includes(query));
+      const text = [project.title, project.shortDescription, project.longDescription, ...list(project.technologies), ...list(project.programmingLanguages), ...list(project.domainTags), ...list(project.schoolSubjects), ...list(project.topics)].join(' ').toLocaleLowerCase();
+      return !query || text.includes(query);
     });
     if (sort.value === 'recent') visible.sort((a, b) => dateValue(b) - dateValue(a));
     if (sort.value === 'title') visible.sort((a, b) => a.title.localeCompare(b.title));
-    if (stage) {
-      grid.replaceChildren(...visible.map(indexRow));
-      const selected = visible.find(project => project.slug === selectedSlug) || visible[0];
-      if (selected) selectProject(selected);
-      else stage.replaceChildren();
-    } else grid.replaceChildren(...visible.map(card));
-    count.textContent = `${visible.length} of ${projects.length} projects${category ? ` / ${category}` : ''}`;
+    previewObserver?.disconnect();
+    grid.replaceChildren(...visible.map(card));
+    watchPreviews();
+    count.textContent = `${visible.length} of ${projects.length} projects`;
     empty.hidden = visible.length !== 0;
-    filters.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === category)));
   }
 
   function setup() {
-    const categories = [...new Set(projects.map(project => project.category))];
-    filters.replaceChildren();
-    ['', ...categories].forEach(value => {
-      const button = element('button', '', value || 'All projects');
-      button.type = 'button';
-      button.dataset.category = value;
-      button.append(element('span', 'filter-count', String(value ? projects.filter(project => project.category === value).length : projects.length)));
-      button.addEventListener('click', () => { category = value; render(); });
-      filters.append(button);
-    });
     const stats = document.querySelector('#collection-stats');
     stats.replaceChildren();
-    [[projects.length, 'Projects'], [categories.length, 'Categories'], [projects.filter(project => safeUrl(project.demoUrl)).length, 'Live demos']].forEach(([value, label]) => {
+    [[projects.length, 'Projects'], [projects.filter(project => safeUrl(project.demoUrl)).length, 'Live demos']].forEach(([value, label]) => {
       const stat = element('div', 'stat');
       stat.append(element('strong', '', String(value).padStart(2, '0')), element('span', '', label));
       stats.append(stat);
@@ -210,7 +209,10 @@
       }));
       const data = collections.flat();
       if (!Array.isArray(data) || data.some(project => !project || typeof project.title !== 'string')) throw new Error('Invalid project collection');
-      projects = [...data].sort((a, b) => (a.sortOrder ?? Infinity) - (b.sortOrder ?? Infinity)).map((project, collectionIndex) => ({ ...project, category: project.category || 'Other projects', collectionIndex }));
+      projects = [...data].sort((a, b) =>
+        categoryRank(a.category) - categoryRank(b.category) ||
+        (a.sortOrder ?? Infinity) - (b.sortOrder ?? Infinity)
+      ).map((project, collectionIndex) => ({ ...project, category: project.category || 'Other projects', collectionIndex }));
       setup();
     } catch {
       count.textContent = 'Collection unavailable';
@@ -223,7 +225,7 @@
 
   search.addEventListener('input', render);
   sort.addEventListener('change', render);
-  document.querySelector('#reset').addEventListener('click', () => { search.value = ''; category = ''; render(); search.focus(); });
+  document.querySelector('#reset').addEventListener('click', () => { search.value = ''; render(); search.focus(); });
   document.querySelector('#retry').addEventListener('click', load);
   load();
 })();
