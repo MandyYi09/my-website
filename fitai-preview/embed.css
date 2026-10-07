@@ -1,0 +1,23 @@
+/* Homepage background: the original FitAI 3D rowing guide, without practice UI. */
+.embed-mode, .embed-mode body, .embed-mode main, .embed-mode .workspace,
+.embed-mode .studio, .embed-mode .stage-layout, .embed-mode .stage-home, .embed-mode .stage {
+  width:100%; height:100%; min-height:0; max-width:none; margin:0; padding:0;
+}
+.embed-mode, .embed-mode body { overflow:hidden; }
+.embed-mode .workspace { display:block; }
+.embed-mode .language-bar, .embed-mode .library, .embed-mode .details,
+.embed-mode main>footer, .embed-mode dialog,
+.embed-mode .studio>:not(.stage-layout),
+.embed-mode .stage-layout>:not(.stage-home):not(.stage),
+.embed-mode .stage>:not(#three) { display:none!important; }
+.embed-mode .stage, .embed-mode .stage.live {
+  height:100%; border-radius:0; background:#cbd7ce;
+  background-image:radial-gradient(ellipse at 50% 45%,#eef4e7,#bdcbc1);
+}
+.embed-mode #three { position:absolute; inset:0; }
+@media(min-width:701px) {
+  .embed-mode #three canvas { transform:translateX(12%) scale(1.05); }
+}
+@media(max-width:700px) {
+  .embed-mode #three canvas { transform:translateY(-15%) scale(1.08); }
+}

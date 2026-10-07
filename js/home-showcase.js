@@ -3,7 +3,7 @@
   if (!root || typeof Swiper === 'undefined') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
-  const titles = ['Grid 1', 'Walker', 'Grid 2', 'Photography'];
+  const titles = ['Grid 1', 'Walker', 'FitAI', 'Photography'];
   let paused = reducedMotion.matches;
   let inView = true;
   const openingActive = () => document.body.classList.contains('intro-playing');
@@ -27,8 +27,15 @@
   }
   root.querySelectorAll('.showcase-live').forEach(frame=>{
     frame.addEventListener('load',()=>{
-      if(frame.hasAttribute('src')) frame.closest('.showcase-slide').classList.add('is-live');
+      if(frame.hasAttribute('src') && frame.closest('[data-project]')?.dataset.project !== 'fitai') frame.closest('.showcase-slide').classList.add('is-live');
     });
+  });
+  window.addEventListener('message',event=>{
+    const frame=root.querySelector('[data-project="fitai"] .showcase-live');
+    if(event.origin === location.origin && event.source === frame?.contentWindow &&
+       event.data?.type === 'fitai-preview' && event.data.event === 'ready' && frame.hasAttribute('src')) {
+      frame.closest('.showcase-slide').classList.add('is-live');
+    }
   });
   root.querySelectorAll('.showcase-live-toggle').forEach(button=>{
     button.addEventListener('click',()=>{livePaused=!livePaused;updateLive();});
@@ -123,9 +130,9 @@
       root.querySelectorAll('[data-project]').forEach(slide => {
         const project = projects.find(item => item.slug === slide.dataset.project);
         if (!project) return;
-        if (project.shortDescription) slide.querySelector('.showcase-description').textContent = project.shortDescription;
+        if (project.slug !== 'fitai' && project.shortDescription) slide.querySelector('.showcase-description').textContent = project.shortDescription;
         const destination = project.demoUrl || project.repositoryUrl;
-        if (destination && /^https?:\/\//i.test(destination)) slide.querySelector('.showcase-link').href = destination;
+        if (project.slug !== 'fitai' && destination && /^https?:\/\//i.test(destination)) slide.querySelector('.showcase-link').href = destination;
       });
     }).catch(() => {});
 })();
