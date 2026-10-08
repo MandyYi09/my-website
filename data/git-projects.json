@@ -754,10 +754,10 @@
   {
     "schemaVersion": 1,
     "id": "github:1390171247",
-    "slug": "p5-polar-curve",
+    "slug": "p5-circle-multiplication",
     "title": "Circle Multiplication — Generative Study",
-    "repositoryName": "p5-polar-curve",
-    "fullName": "MandyYi09/p5-polar-curve",
+    "repositoryName": "p5-circle-multiplication",
+    "fullName": "MandyYi09/p5-circle-multiplication",
     "owner": "MandyYi09",
     "shortDescription": "A fullscreen p5.js artwork that evolves circular multiplication patterns automatically.",
     "longDescription": "This generative sketch places evenly spaced points around a circle and connects each point i to (i × m) mod N. Each page load randomizes the point count, initial multiplier, palette, and animation speed. As the multiplier increases, the straight chords form changing curve envelopes and woven patterns. The responsive canvas fills the viewport, and returning from a background tab resumes the composition without fast-forwarding.",
@@ -786,10 +786,10 @@
     ],
     "category": "Mathematical Visualization",
     "topics": [],
-    "repositoryUrl": "https://github.com/MandyYi09/p5-polar-curve",
+    "repositoryUrl": "https://github.com/MandyYi09/p5-circle-multiplication",
     "homepageUrl": null,
-    "demoUrl": "https://mandyyi09.github.io/p5-polar-curve/",
-    "readmeUrl": "https://github.com/MandyYi09/p5-polar-curve/blob/main/README.md",
+    "demoUrl": "https://mandyyi09.github.io/p5-circle-multiplication/",
+    "readmeUrl": "https://github.com/MandyYi09/p5-circle-multiplication/blob/main/README.md",
     "imageUrl": null,
     "defaultBranch": "main",
     "visibility": "public",
@@ -824,8 +824,8 @@
       "The animation runs automatically; this minimal version has no on-screen controls."
     ],
     "source": {
-      "metadataUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve",
-      "languagesUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve/languages",
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/p5-circle-multiplication",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/p5-circle-multiplication/languages",
       "fetchedAt": "2026-09-27T05:30:01Z",
       "demoCheckedAt": "2026-09-27T05:26:33Z",
       "readmeStatus": "available",
@@ -833,15 +833,15 @@
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
       "evidence": [
         {
-          "url": "https://github.com/MandyYi09/p5-polar-curve/blob/main/README.md",
+          "url": "https://github.com/MandyYi09/p5-circle-multiplication/blob/main/README.md",
           "note": "Circle multiplication rule, randomized parameters, and fullscreen behavior."
         },
         {
-          "url": "https://github.com/MandyYi09/p5-polar-curve/blob/main/sketch.js",
+          "url": "https://github.com/MandyYi09/p5-circle-multiplication/blob/main/sketch.js",
           "note": "Seeded initialization, modular chord drawing, and time-based animation."
         },
         {
-          "url": "https://github.com/MandyYi09/p5-polar-curve/blob/main/index.html",
+          "url": "https://github.com/MandyYi09/p5-circle-multiplication/blob/main/index.html",
           "note": "Local p5.js bundle and fullscreen canvas entry point."
         }
       ]
@@ -850,10 +850,10 @@
   {
     "schemaVersion": 1,
     "id": "github:1390177271",
-    "slug": "p5-polar-curve-interactive",
-    "title": "Math Garden — Circle Multiplication",
-    "repositoryName": "p5-polar-curve-interactive",
-    "fullName": "MandyYi09/p5-polar-curve-interactive",
+    "slug": "p5-circle-multiplication-interactive",
+    "title": "Circle Multiplication — Interactive Math Garden",
+    "repositoryName": "p5-circle-multiplication-interactive",
+    "fullName": "MandyYi09/p5-circle-multiplication-interactive",
     "owner": "MandyYi09",
     "shortDescription": "An interactive p5.js math garden for exploring multiplication patterns around a circle.",
     "longDescription": "This Chinese-language visualization connects each circle point i to (i × m) mod N, revealing cardioid-like envelopes, two-lobed curves, and woven patterns. Visitors can adjust the multiplier and point count, select three presets and four palettes, inspect individual connections near the circle, start or pause the animation, and export the canvas as a PNG. Explanatory text connects the geometric patterns to modular arithmetic, and the initial canvas remains still until animation is enabled.",
@@ -882,10 +882,10 @@
     ],
     "category": "Mathematical Visualization",
     "topics": [],
-    "repositoryUrl": "https://github.com/MandyYi09/p5-polar-curve-interactive",
+    "repositoryUrl": "https://github.com/MandyYi09/p5-circle-multiplication-interactive",
     "homepageUrl": null,
     "demoUrl": null,
-    "readmeUrl": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/README.md",
+    "readmeUrl": "https://github.com/MandyYi09/p5-circle-multiplication-interactive/blob/main/README.md",
     "imageUrl": null,
     "defaultBranch": "main",
     "visibility": "public",
@@ -916,8 +916,8 @@
       "Curve envelopes are finite chord approximations; the sketch draws straight connections."
     ],
     "source": {
-      "metadataUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve-interactive",
-      "languagesUrl": "https://api.github.com/repos/MandyYi09/p5-polar-curve-interactive/languages",
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/p5-circle-multiplication-interactive",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/p5-circle-multiplication-interactive/languages",
       "fetchedAt": "2026-09-27T05:30:01Z",
       "demoCheckedAt": null,
       "readmeStatus": "available",
@@ -925,19 +925,19 @@
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
       "evidence": [
         {
-          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/README.md",
+          "url": "https://github.com/MandyYi09/p5-circle-multiplication-interactive/blob/main/README.md",
           "note": "Mathematical explanation, controls, and offline setup."
         },
         {
-          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/sketch.js",
+          "url": "https://github.com/MandyYi09/p5-circle-multiplication-interactive/blob/main/sketch.js",
           "note": "Parameter controls, presets, hover inspection, animation, and PNG export."
         },
         {
-          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/index.html",
+          "url": "https://github.com/MandyYi09/p5-circle-multiplication-interactive/blob/main/index.html",
           "note": "Chinese-language explanations and interaction controls."
         },
         {
-          "url": "https://github.com/MandyYi09/p5-polar-curve-interactive/blob/main/style.css",
+          "url": "https://github.com/MandyYi09/p5-circle-multiplication-interactive/blob/main/style.css",
           "note": "Responsive CSS layout and palettes."
         }
       ]

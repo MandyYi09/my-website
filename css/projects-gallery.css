@@ -24,7 +24,7 @@
 .motion-projects .project-card details { order:6; margin:0 22px 15px; }
 .motion-projects .project-card details summary { padding:10px 0; }
 .motion-projects .project-card[data-project="my-website"] .project-art { background:radial-gradient(circle at 52% 40%,#406a63,#142d31 65%,#0c1619); color:#dce8c7; }
-.motion-projects .project-card[data-project="p5-polar-curve-interactive"] .project-art img { filter:hue-rotate(45deg); }
+.motion-projects .project-card[data-project="p5-circle-multiplication-interactive"] .project-art img { filter:hue-rotate(45deg); }
 @keyframes project-cover-drift { from { transform:scale(1.03) translate(-1%,0); } to { transform:scale(1.13) translate(1%,-1%); } }
 @keyframes project-notebook-drift { from { transform:scale(1.03) translateY(1%); } to { transform:scale(1.03) translateY(-1%); } }
 @keyframes project-shape-drift { from { transform:rotate(-30deg) scale(1); } to { transform:rotate(35deg) scale(1.2); } }
