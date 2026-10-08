@@ -18,8 +18,8 @@
     'fitai': 'assets/images/projects/fitAi/yoga-cover.jpg',
     'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
     'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/3D-trad-art.png',
-    'p5-polar-curve': 'assets/images/projects/p5-polar-curve/截屏2026-10-05 15.50.56.png',
-    'p5-polar-curve-interactive': 'assets/images/projects/p5-polar-curve/截屏2026-10-05 15.50.56.png',
+    'p5-circle-multiplication': 'assets/images/projects/p5-circle-multiplication/截屏2026-10-05 15.50.56.png',
+    'p5-circle-multiplication-interactive': 'assets/images/projects/p5-circle-multiplication/截屏2026-10-05 15.50.56.png',
     'my-website': 'assets/images/projects/my-website/homepage.jpg'
   };
   const livePreviews = {
@@ -29,7 +29,7 @@
     'grid-2': 'https://mandyyi09.github.io/grid-2/',
     'fitai': 'fitai-preview/index.html?mode=yoga&embed=1&layout=full',
     'moderized-china-art-2d': 'zhong-art-preview/scene.html?embed=1',
-    'p5-polar-curve': 'https://mandyyi09.github.io/p5-polar-curve/'
+    'p5-circle-multiplication': 'https://mandyyi09.github.io/p5-circle-multiplication/'
   };
 
   const element = (tag, className, text) => {

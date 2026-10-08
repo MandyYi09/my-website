@@ -1,4 +1,14 @@
 (() => {
+  if (location.protocol === 'file:') {
+    const notice = document.createElement('p');
+    notice.setAttribute('role', 'alert');
+    notice.textContent = 'This portfolio needs a local web server. Double-click “Preview Portfolio.command” in the my-website folder, then use the page it opens.';
+    Object.assign(notice.style, {
+      position: 'relative', zIndex: '10001', margin: '0', padding: '14px 22px',
+      background: '#e8d9a9', color: '#20251f', font: '14px/1.5 Arial, sans-serif'
+    });
+    document.body.prepend(notice);
+  }
   const nav = document.querySelector('.site-nav');
   const showcase = document.querySelector('.motion-opening, .sports-stage, .work-showcase');
   if (!nav) return;
