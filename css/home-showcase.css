@@ -30,9 +30,7 @@
 .showcase-slide--photo.is-photo-ready .showcase-photo-gallery { opacity:1; }
 .showcase-photo-gallery .swiper-slide img { display:block; width:100%; height:100%; object-fit:cover; }
 .showcase-photo-toggle { position:absolute; z-index:2; top:82px; right:5vw; color:#f7f5ef; }
-.showcase-top { position: absolute; z-index: 2; top: 34px; left: 5vw; right: 5vw; display: flex; justify-content: space-between; gap: 20px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; pointer-events: none; }
-.showcase-top span:first-child::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 12px; border-radius: 50%; background: var(--showcase-accent); vertical-align: 1px; }
-.showcase-top span:last-child { color: #d0d4ca; }
+.showcase-top { position: absolute; z-index: 2; top: 34px; left: 5vw; right: 5vw; display: flex; justify-content: flex-end; gap: 20px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; pointer-events: none; }
 .showcase-copy { position: absolute; z-index: 1; left: 8vw; bottom: 160px; max-width: 630px; width: calc(100% - 16vw); }
 .showcase-copy :is(h1, h2) { margin: 0; font: 400 clamp(70px, 8.5vw, 136px)/.9 'Instrument Serif', Georgia, serif; letter-spacing: -.045em; }
 .showcase-copy :is(h1, h2) em { display: block; color: #d9e6bd; font-weight: 400; }
@@ -57,7 +55,6 @@
   .work-showcase { min-height: 560px; }
   .showcase-top { top: 26px; left: 22px; right: 22px; }
   .showcase-photo-toggle { top:66px; right:22px; font-size:10px!important; }
-  .showcase-top span:last-child { display: none; }
   .showcase-copy { left: 22px; width: calc(100% - 44px); bottom: 158px; }
   .showcase-copy :is(h1, h2) { font-size: clamp(64px, 14vw, 96px); }
   .showcase-description { max-width: 300px; font-size: 13px; margin: 20px 0 14px; }
