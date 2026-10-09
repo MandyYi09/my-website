@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#092b36"><title>The workbench — Mandy</title>
+<meta name="theme-color" content="#092b36"><title>Projects — Mandy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/projects.css?v=20261006-motion"><link rel="stylesheet" href="css/home-navigation.css?v=motion-1"><link rel="stylesheet" href="css/edition.css?v=motion-1">
-<script src="js/home-navigation.js?v=motion-1" defer></script><script src="js/edition.js?v=motion-1" defer></script><script src="js/projects.js?v=fitai-yoga-1" defer></script><link rel="stylesheet" href="css/site-cohesion.css?v=1"><link rel="stylesheet" href="css/projects-gallery.css?v=all-projects-1"></head>
+<script src="js/home-navigation.js?v=motion-1" defer></script><script src="js/edition.js?v=motion-1" defer></script><script src="js/projects.js?v=simple-2" defer></script><link rel="stylesheet" href="css/site-cohesion.css?v=1"><link rel="stylesheet" href="css/projects-gallery.css?v=simple-2"></head>
 <body class="edition-page motion-projects"><a class="edition-skip" href="#main">Skip to content</a><nav class="nav site-nav" aria-label="Main navigation">
 <a class="brand" href="index.html">Mandy<span class="brand-period">.</span></a>
 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="home-nav-links"><span class="nav-toggle-label">Menu</span><span class="nav-toggle-icon" aria-hidden="true"></span></button>
-<div class="navlinks" id="home-nav-links"><a href="index.html">Home</a><a href="sports.html">Sports</a><a href="projects.html">Projects</a><a href="photography.html">Photography</a><a href="about.html">About</a></div>
-</nav><main id="main"><section class="workbench-heading"><div class="micro-label">Projects / Selected work</div><div class="workbench-title"><h1>Projects<span>.</span></h1><div><p>From interactive art and movement tools to creative code and mathematical visualization, these are ideas made to explore.</p><div id="collection-stats" class="collection-stats" aria-label="Collection summary"></div></div></div><a class="inline-arrow" href="work.html">Open the process journal ↗</a></section>
-<section class="collection" id="collection" aria-label="Project collection">
-      <p class="result-count" id="result-count" role="status" aria-live="polite">Loading the collection…</p>
-      <div class="projects-listing">
-        <div class="projects-listing-heading"><h2>All projects</h2><p>Explore the complete collection of experiments, artworks, and studies.</p></div>
-        <div class="controls" id="controls" hidden><div class="search-sort">
-          <label class="search"><span class="sr-only">Search projects</span><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search projects, tools, ideas…"></label>
-          <label class="sort"><span>Sort by</span><select id="sort"><option value="collection">Collection order</option><option value="recent">Recently updated</option><option value="title">Name: A–Z</option></select></label>
-        </div></div>
-        <div class="project-grid" id="project-grid" aria-busy="true" aria-label="Projects in this category"></div>
-      </div>
-      <div class="empty-state" id="empty-state" hidden><h3>No projects found.</h3><p>Try another keyword or explore the full collection.</p><button id="reset" type="button">Clear filters ↗</button></div>
-      <div class="empty-state" id="error-state" hidden><h3>The collection couldn’t load.</h3><p>Please try again in a moment.</p><button id="retry" type="button">Try again ↗</button></div>
-      <noscript><p>Please enable JavaScript to explore the project collection, or <a href="https://github.com/MandyYi09">view my projects on GitHub</a>.</p></noscript>
-    </section></main><footer class="page-footer"><a href="index.html">Mandy.</a><span>Code · Sport · Visual Thinking</span><a href="projects.html">Explore projects ↗</a></footer></body></html>
+<div class="navlinks" id="home-nav-links"><a href="index.html">Home</a><a href="sports.html">Sports</a><a href="projects.html" aria-current="page">Projects</a><a href="photography.html">Photography</a><a href="about.html">About</a></div>
+</nav>
+<main id="main">
+  <header class="projects-intro">
+    <span class="micro-label">Selected work</span>
+    <h1>Projects<span>.</span></h1>
+    <p>A collection of things I’ve made, explored, and learned along the way.</p>
+  </header>
+  <section class="collection" id="collection" aria-label="Projects">
+    <div class="collection-toolbar">
+      <p class="result-count" id="result-count" role="status" aria-live="polite">Loading projects…</p>
+      <label class="search"><span class="sr-only">Search projects</span><input id="search" type="search" placeholder="Search projects" autocomplete="off"><span aria-hidden="true">⌕</span></label>
+    </div>
+    <div class="project-grid" id="project-grid" aria-busy="true"></div>
+    <div class="empty-state" id="empty-state" hidden><h2>No projects found.</h2><p>Try another search.</p><button id="reset" type="button">Clear search</button></div>
+    <div class="empty-state" id="error-state" hidden><h2>Projects couldn’t load.</h2><p>Please try again in a moment.</p><button id="retry" type="button">Try again</button></div>
+    <noscript><p>Please enable JavaScript to explore the projects, or <a href="https://github.com/MandyYi09">view my work on GitHub</a>.</p></noscript>
+  </section>
+</main>
+<dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title">
+  <div class="dialog-top"><span class="micro-label" id="dialog-category"></span><button class="dialog-close" id="dialog-close" type="button" aria-label="Close project details">×</button></div>
+  <div class="dialog-content" id="dialog-content"></div>
+</dialog>
+<footer class="page-footer"><a href="index.html">Mandy.</a><span>Code · Sport · Visual Thinking</span><a href="work.html">Process journal ↗</a></footer></body></html>
