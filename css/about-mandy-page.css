@@ -1,7 +1,11 @@
 /* Complete Little Mandy experience within the portfolio About page. */
+html {
+  background: #171817;
+}
+
 body.mandy-about {
-  background: #f6f3eb;
-  color: #303d29;
+  background: #171817;
+  color: #f5f1ea;
 }
 
 .mandy-about .nav.site-nav {
@@ -19,6 +23,133 @@ body.mandy-about {
 
 .mandy-about main {
   padding-top: calc(76px + clamp(24px, 3vw, 44px));
+}
+
+.mandy-about .eyebrow,
+.mandy-about .chapter-kicker {
+  color: #a9b7a4;
+}
+
+.mandy-about .intro h1 em {
+  color: #c7d6c7;
+}
+
+.mandy-about .intro p,
+.mandy-about .chapter-copy > span:last-child {
+  color: #b4b9b0;
+}
+
+.mandy-about .world {
+  border-color: #475449;
+  background: #252c27;
+}
+
+.mandy-about .world-glow {
+  background: radial-gradient(ellipse 29% 67% at 50% 48%, rgba(205, 221, 194, .34), rgba(133, 161, 133, .16) 52%, transparent 100%);
+}
+
+.mandy-about .world-grid {
+  opacity: .45;
+  background-image: linear-gradient(rgba(181, 201, 178, .12) 1px, transparent 1px), linear-gradient(90deg, rgba(181, 201, 178, .12) 1px, transparent 1px);
+}
+
+.mandy-about .scene-label div > span,
+.mandy-about .live-tag,
+.mandy-about .side-note,
+.mandy-about .orbit-hint,
+.mandy-about .player-copy > span,
+.mandy-about .player-time {
+  color: #b1bea9;
+}
+
+.mandy-about .scene-label strong,
+.mandy-about .player-copy strong {
+  color: #f5f1ea;
+}
+
+.mandy-about .tiny-star,
+.mandy-about .scribble,
+.mandy-about .footer-flower {
+  color: #c7d6b7;
+}
+
+.mandy-about .scribble svg {
+  stroke: #c7d6b7;
+}
+
+.mandy-about .live-tag > span {
+  background: #c7d6b7;
+}
+
+.mandy-about .view-controls .round-button {
+  border-color: #778774;
+  background: rgba(38, 47, 40, .9);
+  color: #f5f1ea;
+}
+
+.mandy-about .view-controls .round-button:hover {
+  border-color: #c7d6b7;
+  background: #3a493c;
+}
+
+.mandy-about .player {
+  border-color: #475449;
+  background: rgba(28, 34, 29, .92);
+}
+
+.mandy-about .play-button {
+  background: #c7d6b7;
+  color: #20251f;
+}
+
+.mandy-about .sequence-button {
+  border-color: #778774;
+  color: #f5f1ea;
+}
+
+.mandy-about .sequence-button.active {
+  background: #384639;
+}
+
+.mandy-about .progress-track {
+  background: #465247;
+}
+
+.mandy-about .progress-track > span {
+  background: #c7d6b7;
+}
+
+.mandy-about .chapter {
+  border-color: #3c473e;
+  background: #222522;
+}
+
+.mandy-about .chapter:hover {
+  background: #2b332c;
+}
+
+.mandy-about .chapter.active {
+  border-color: #9dae96;
+  background: #303b31;
+}
+
+.mandy-about .chapter-icon {
+  border-color: #71836d;
+  color: #c7d6b7;
+}
+
+.mandy-about .chapter-arrow,
+.mandy-about footer {
+  color: #aab7a6;
+}
+
+.mandy-about .loader {
+  background: #252c27;
+}
+
+.mandy-about .loader-flower,
+.mandy-about .loader p {
+  color: #c7d6b7;
 }
 
 .about-skip {
