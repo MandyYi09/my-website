@@ -3,7 +3,7 @@
   if (!root || typeof Swiper === 'undefined') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
-  const titles = ['FitAI', 'Zhong Art', 'Walker', 'Grid 1', 'Photography'];
+  const titles = ['Walker', 'Grid 1', 'Zhong Art', 'FitAI', 'Photography'];
   let paused = reducedMotion.matches;
   let inView = true;
   const openingActive = () => document.body.classList.contains('intro-playing');
