@@ -1,0 +1,191 @@
+/* Shared white navigation and Sports-inspired charcoal page palette. */
+body {
+  background: #171817;
+}
+
+body .nav.site-nav,
+body .nav.site-nav.is-scrolled,
+.motion-home:not(.intro-playing) .site-nav {
+  --nav-ink: #20251f;
+  --nav-accent: #53664b;
+  --nav-border: rgba(20, 25, 20, .13);
+  background: #f3f0e9;
+  color: var(--nav-ink);
+  border-color: var(--nav-border);
+}
+
+body .site-nav .navlinks,
+.motion-home:not(.intro-playing) .site-nav .navlinks {
+  background: #f3f0e9;
+  color: #20251f;
+}
+
+/* The carousel and opening artwork remain visible below the light navigation. */
+body.motion-home,
+body.motion-projects,
+body.motion-journal,
+body.content-page {
+  --ink: #f5f1ea;
+  --muted: #a2a59e;
+  --line: rgba(245, 241, 234, .23);
+  --sage: #c7d6c7;
+  background: #171817;
+  color: #f5f1ea;
+}
+
+.motion-home .motion-opening {
+  background: radial-gradient(ellipse at 75% 30%, #303b34, #171817 70%);
+}
+
+.content-page .section.photo,
+.content-page .section.about,
+.motion-projects,
+.motion-journal {
+  background: #171817;
+  color: #f5f1ea;
+}
+
+.content-page .page-index,
+.content-page .section-intro,
+.content-page .photo-hint {
+  color: #a2a59e;
+}
+
+.content-page .section-head h1 em,
+.projects-intro h1 span,
+.journal-heading h1 em {
+  color: #c7d6c7;
+}
+
+.page-footer {
+  border-color: rgba(245, 241, 234, .23);
+  background: #171817;
+  color: #f5f1ea;
+}
+
+/* Photography and About sit directly on the same dark canvas as Sports. */
+.photography-page .ph {
+  background: #292c29;
+}
+
+.photography-page .ph-label {
+  background: rgba(23, 24, 23, .82);
+  color: #f5f1ea;
+}
+
+.content-page .about-interests a {
+  border-color: rgba(245, 241, 234, .23);
+  background: #222522;
+}
+
+.content-page .about-interests a:hover {
+  background: #2b302b;
+}
+
+.content-page .home-mandy-section {
+  background: radial-gradient(ellipse at 50% 42%, #2b352b, #1e241e 70%);
+  color: #f5f1ea;
+}
+
+.content-page .home-mandy figcaption a,
+.content-page .home-mandy-toggle {
+  border-color: rgba(199, 214, 199, .42);
+}
+
+.content-page .home-mandy figcaption a span {
+  color: #c7d6c7;
+}
+
+/* Projects: keep the images vivid, with light text and dark controls. */
+.motion-projects .projects-intro .micro-label,
+.motion-projects .project-category,
+.motion-projects .result-count,
+.motion-projects .project-card .description,
+.motion-projects .projects-intro p,
+.motion-projects .project-actions .more-link {
+  color: #a2a59e;
+}
+
+.motion-projects .search {
+  border-color: rgba(245, 241, 234, .4);
+}
+
+.motion-projects .project-actions a,
+.motion-projects .project-actions button {
+  color: #f5f1ea;
+}
+
+.motion-projects .project-actions .visit-link {
+  background: #d6e2d0;
+  color: #171817;
+}
+
+.motion-projects .project-actions .visit-link:hover {
+  background: #e8efe3;
+  color: #171817;
+}
+
+.motion-projects .empty-state button {
+  background: #d6e2d0;
+  color: #171817;
+}
+
+.motion-projects .project-dialog,
+.motion-projects .dialog-top {
+  background: #222522;
+  color: #f5f1ea;
+}
+
+.motion-projects .project-dialog {
+  border-color: rgba(245, 241, 234, .23);
+}
+
+.motion-projects .dialog-close {
+  border-color: rgba(245, 241, 234, .35);
+  color: #f5f1ea;
+}
+
+.motion-projects .dialog-close:hover {
+  background: #343934;
+}
+
+.motion-projects .dialog-description,
+.motion-projects .dialog-fact dt,
+.motion-projects .project-dialog .micro-label {
+  color: #a2a59e;
+}
+
+.motion-projects .dialog-fact dd {
+  color: #f5f1ea;
+}
+
+.motion-projects .dialog-fact,
+.motion-projects .dialog-content .project-actions {
+  border-color: rgba(245, 241, 234, .23);
+}
+
+/* Journal entries use the same dark canvas, with slightly raised panels. */
+.motion-journal .journal-entry-body > .project-card,
+.motion-journal .journal-entry-body > .visual-card {
+  background: #222522;
+  color: #f5f1ea;
+}
+
+.motion-journal .project-copy p,
+.motion-journal .visual-card-copy p,
+.motion-journal .visual-card-top {
+  color: #a2a59e;
+}
+
+.motion-journal .project-visual,
+.motion-journal .live-label {
+  color: #20251f;
+}
+
+@media (max-width: 700px) {
+  body .site-nav .navlinks,
+  body.motion-home .site-nav .navlinks {
+    background: #f3f0e9;
+    color: #20251f;
+  }
+}
