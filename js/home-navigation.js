@@ -15,6 +15,18 @@
   const toggle = nav.querySelector('.nav-toggle');
   const links = [...nav.querySelectorAll('.navlinks a')];
   const currentPage = location.pathname.split('/').pop() || 'index.html';
+  const localPreview = ['127.0.0.1', 'localhost'].includes(location.hostname);
+  const freshPreviewUrl = value => {
+    const url = new URL(value, location.href);
+    url.searchParams.set('_preview', String(Date.now()));
+    return url.href;
+  };
+  if (localPreview) {
+    // A restored preview tab can contain an older HTML snapshot after a file edit.
+    window.addEventListener('pageshow', event => {
+      if (event.persisted) location.replace(freshPreviewUrl(location.href));
+    });
+  }
   const pageForHash = { '#sports': 'sports.html', '#work': 'work.html', '#photography': 'photography.html', '#about': 'about.html', '#introduction': 'about.html' };
   if (currentPage === 'index.html' && pageForHash[location.hash]) {
     location.replace(pageForHash[location.hash]);
@@ -36,7 +48,22 @@
     toggle.querySelector('.nav-toggle-label').textContent = open ? 'Close' : 'Menu';
   });
   nav.addEventListener('click', event => {
-    if (event.target.closest('a')) closeMenu(mobile.matches);
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+    closeMenu(mobile.matches);
+  });
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+    if (!localPreview || event.defaultPrevented || event.button !== 0 ||
+        event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+        link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+    const destination = new URL(link.href, location.href);
+    const page = destination.pathname.split('/').pop();
+    if (destination.origin !== location.origin ||
+        !['index.html', 'sports.html', 'projects.html', 'photography.html', 'about.html', 'work.html'].includes(page)) return;
+    event.preventDefault();
+    location.assign(freshPreviewUrl(destination.href));
   });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && nav.classList.contains('menu-open')) closeMenu(true);
