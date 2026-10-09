@@ -46,13 +46,11 @@ body.content-page {
 }
 
 .content-page .page-index,
-.content-page .section-intro,
-.content-page .photo-hint {
+.content-page .section-intro {
   color: #a2a59e;
 }
 
 .content-page .section-head h1 em,
-.projects-intro h1 span,
 .journal-heading h1 em {
   color: #c7d6c7;
 }
@@ -73,15 +71,6 @@ body.content-page {
   color: #f5f1ea;
 }
 
-.content-page .about-interests a {
-  border-color: rgba(245, 241, 234, .23);
-  background: #222522;
-}
-
-.content-page .about-interests a:hover {
-  background: #2b302b;
-}
-
 .content-page .home-mandy-section {
   background: radial-gradient(ellipse at 50% 42%, #2b352b, #1e241e 70%);
   color: #f5f1ea;
@@ -97,11 +86,9 @@ body.content-page {
 }
 
 /* Projects: keep the images vivid, with light text and dark controls. */
-.motion-projects .projects-intro .micro-label,
 .motion-projects .project-category,
 .motion-projects .result-count,
 .motion-projects .project-card .description,
-.motion-projects .projects-intro p,
 .motion-projects .project-actions .more-link {
   color: #a2a59e;
 }

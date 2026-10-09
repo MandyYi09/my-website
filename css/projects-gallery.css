@@ -1,18 +1,13 @@
 /* A quiet gallery: the work first, details on request. */
 .motion-projects { background: #f3f0e9; }
 .motion-projects main { max-width: 1600px; padding: 0; }
-.projects-intro { padding: clamp(118px, 13vw, 190px) var(--page-gutter) 62px; }
-.projects-intro .micro-label,
 .project-category,
 .project-dialog .micro-label {
   display: block; color: #74796f; font: 600 10px/1.4 Arial, sans-serif;
   letter-spacing: .17em; text-transform: uppercase;
 }
-.projects-intro h1 { margin: 18px 0 17px; font: 500 clamp(72px, 10vw, 150px)/.9 Georgia, serif; letter-spacing: -.075em; }
-.projects-intro h1 span { color: #7b8b80; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
-.projects-intro p { max-width: 520px; margin: 0; color: #666b62; font-size: clamp(15px, 1.35vw, 18px); line-height: 1.65; }
-.motion-projects .collection { margin: 0 var(--page-gutter); padding: 0 0 110px; }
-.collection-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 0 24px; border-top: 1px solid var(--line); }
+.motion-projects .collection { margin: 0 var(--page-gutter); padding: 116px 0 110px; }
+.collection-toolbar { display: flex; align-items: center; justify-content: flex-end; gap: 24px; padding: 16px 0 24px; border-top: 1px solid var(--line); }
 .motion-projects .result-count { margin: 0; color: #74796f; font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
 .motion-projects .search { display: flex; align-items: center; gap: 9px; width: min(100%, 230px); border-bottom: 1px solid #aeb5a8; }
 .motion-projects .search input { order: 1; padding: 8px 0; font-size: 12px; }
@@ -53,9 +48,7 @@
   .motion-projects .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 700px) {
-  .projects-intro { padding: 120px 22px 48px; }
-  .projects-intro h1 { font-size: clamp(64px, 16vw, 100px); }
-  .motion-projects .collection { margin: 0 22px; padding-bottom: 70px; }
+  .motion-projects .collection { margin: 0 22px; padding-top: 96px; padding-bottom: 70px; }
   .collection-toolbar { align-items: flex-start; flex-direction: column; gap: 8px; }
   .motion-projects .search { width: 100%; }
   .motion-projects .project-grid { grid-template-columns: 1fr; gap: 42px; }

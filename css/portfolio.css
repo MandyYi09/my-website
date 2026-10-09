@@ -1855,12 +1855,6 @@
       outline-offset: 4px;
     }
 
-    .photo-hint {
-      margin: 0 0 24px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
     .pswp__photo-caption {
       position: absolute;
       bottom: 20px;
