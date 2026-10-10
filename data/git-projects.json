@@ -94,12 +94,12 @@
   {
     "schemaVersion": 1,
     "id": "github:1383373817",
-    "slug": "ai-hands-exp-2",
-    "title": "AI Hands Experiment 2",
-    "repositoryName": "ai-hands-exp-2",
-    "fullName": "MandyYi09/ai-hands-exp-2",
+    "slug": "finger-wand",
+    "title": "Finger Wand",
+    "repositoryName": "finger-wand",
+    "fullName": "MandyYi09/finger-wand",
     "owner": "MandyYi09",
-    "shortDescription": "A hand-tracking experiment with fading finger trails and movement-triggered effects.",
+    "shortDescription": "An interactive hand-tracking experiment that transforms fingertip movement into fading light trails.",
     "longDescription": "This p5.js and ml5.js experiment draws a mirrored webcam view across the browser window and follows the first detected index fingertip. A fading trail records its path, while smoothed movement speed changes the size of the finger marker. Faster movements trigger an expanding impact ring. The source resets tracking coordinates after a resize and starts a new trail when a hand reappears.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
@@ -128,7 +128,7 @@
     ],
     "category": "Creative Coding",
     "topics": [],
-    "repositoryUrl": "https://github.com/MandyYi09/ai-hands-exp-2",
+    "repositoryUrl": "https://github.com/MandyYi09/finger-wand",
     "homepageUrl": null,
     "demoUrl": null,
     "readmeUrl": null,
@@ -166,8 +166,8 @@
       "Requires camera access and an externally loaded hand-pose library; live tracking was not tested during catalog creation."
     ],
     "source": {
-      "metadataUrl": "https://api.github.com/repos/MandyYi09/ai-hands-exp-2",
-      "languagesUrl": "https://api.github.com/repos/MandyYi09/ai-hands-exp-2/languages",
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/finger-wand",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/finger-wand/languages",
       "fetchedAt": "2026-09-27T05:30:01Z",
       "demoCheckedAt": null,
       "readmeStatus": "missing",
@@ -175,11 +175,11 @@
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
       "evidence": [
         {
-          "url": "https://github.com/MandyYi09/ai-hands-exp-2/blob/main/sketch.js",
+          "url": "https://github.com/MandyYi09/finger-wand/blob/main/sketch.js",
           "note": "Implemented sketch behavior, algorithms, and interactive features."
         },
         {
-          "url": "https://github.com/MandyYi09/ai-hands-exp-2/blob/main/index.html",
+          "url": "https://github.com/MandyYi09/finger-wand/blob/main/index.html",
           "note": "Browser entry point and library imports."
         }
       ]
