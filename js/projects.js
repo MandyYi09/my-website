@@ -14,7 +14,7 @@
     'grid-1': 'assets/images/projects/grid-1/grid-1.jpg',
     'grid-2': 'assets/images/projects/grid-2/grid-2.jpg',
     'walker': 'assets/images/projects/walker/walkerCard.png',
-    'ai-hands-exp-2': 'assets/images/projects/ai-hands-exp-2/截屏2026-10-05 15.57.15.png',
+    'finger-wand': 'assets/images/projects/finger-wand/截屏2026-10-05 15.57.15.png',
     'fitai': 'assets/images/projects/fitAi/yoga-cover.jpg',
     'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
     'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/3D-trad-art.png',

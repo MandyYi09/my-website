@@ -3,19 +3,17 @@
   const clamp = n => Math.max(0, Math.min(1, n));
   const smooth = n => { n = clamp(n); return n * n * (3 - 2 * n); };
   const mix = (a, b, n) => a + (b - a) * n;
+  const introDuration = 7.4;
   document.querySelectorAll('[data-motion-scene]').forEach(canvas => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const intro = canvas.dataset.motionScene === 'intro';
     const root = canvas.parentElement;
-    let width = 0, height = 0, time = reduce.matches ? 8 : 0, last = null, frame = 0;
-    let paused = reduce.matches, visible = true, phase = -1;
-    let finished = false;
+    let width = 0, height = 0, time = reduce.matches ? introDuration : 0, last = null, frame = 0;
+    let paused = reduce.matches, visible = true;
+    let finished = reduce.matches;
     const showcase = intro ? document.querySelector('.work-showcase') : null;
-    let seen = false;
-    try { seen = sessionStorage.getItem('mandy-opening-seen') === '1'; } catch (_) {}
     if (intro) {
-      finished = reduce.matches || seen;
       root.hidden = finished;
       showcase.inert = !finished;
       document.body.classList.toggle('intro-playing', !finished);
@@ -24,19 +22,13 @@
     function finishIntro() {
       if (!intro || finished) return;
       finished = true; stop();
-      try { sessionStorage.setItem('mandy-opening-seen', '1'); } catch (_) {}
-      const restoreFocus = root.contains(document.activeElement);
       root.classList.add('is-leaving'); root.inert = true;
       showcase.inert = false;
       document.body.classList.remove('intro-playing');
       document.dispatchEvent(new Event('opening-complete'));
-      if (restoreFocus) document.querySelector('.replay-opening').focus({preventScroll:true});
       setTimeout(() => { if (finished) root.hidden = true; }, reduce.matches ? 0 : 650);
     }
     let pointer = { x: 0, y: 0 };
-    const skip = document.querySelector('#skip-intro');
-    const replay = document.querySelector('#replay-intro');
-    const pause = document.querySelector('#pause-motion');
 
     function resize() {
       const rect = root.getBoundingClientRect(); width = rect.width; height = rect.height;
@@ -171,13 +163,13 @@
     function boat(t,arrival) {
       const mobile=width<700;
       const x=mix(width*1.25,width*(mobile?.69:.73),smooth(arrival))+pointer.x*9;
-      const y=height*(mobile?.30:.56)-smooth((t-5.5)/2.5)*height*.12+Math.sin(t*1.8)*4+pointer.y*6;
+      const y=height*(mobile?.30:.56)-smooth((t-5.3)/2)*height*.12+Math.sin(t*2.2)*4+pointer.y*6;
       const scale=Math.min(mobile?width/740:width/1500,1.1);
-      ctx.save();ctx.translate(x,y);ctx.rotate(-.45+Math.sin(t*1.8)*.025);ctx.scale(scale,scale);ctx.globalAlpha=smooth(arrival);
+      ctx.save();ctx.translate(x,y);ctx.rotate(-.45+Math.sin(t*2.2)*.025);ctx.scale(scale,scale);ctx.globalAlpha=smooth(arrival);
       // Wake: nested V shapes, spreading behind the narrow shell.
       for(let i=0;i<8;i++){
         ctx.strokeStyle=`rgba(189,231,216,${.15-i*.016})`;ctx.lineWidth=1;
-        const drift=(t*12+i*24)%180;
+        const drift=(t*14+i*24)%180;
         ctx.beginPath();ctx.moveTo(-15-drift*.28,140+drift);ctx.quadraticCurveTo(0,130+drift,15+drift*.28,140+drift);ctx.stroke();
       }
       ctx.shadowColor='#001d2aa0';ctx.shadowBlur=20;ctx.shadowOffsetX=13;ctx.shadowOffsetY=15;
@@ -185,7 +177,7 @@
       ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
       ctx.fillStyle='#eee9c7';ctx.beginPath();ctx.moveTo(0,-193);ctx.bezierCurveTo(17,-110,22,106,0,193);ctx.bezierCurveTo(-20,101,-16,-111,0,-193);ctx.fill();
       ctx.fillStyle='#263f43';ctx.fillRect(-15,-42,30,123);ctx.strokeStyle='#9cac91';ctx.lineWidth=2;ctx.strokeRect(-11,-31,22,101);
-      const stroke=Math.sin(t*1.8)*.38;
+      const stroke=Math.sin(t*2.2)*.38;
       for(const side of [-1,1]){
         ctx.save();ctx.translate(side*23,8);ctx.rotate(side*stroke);
         ctx.strokeStyle='#b9c3b4';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(side*53,-12);ctx.lineTo(side*55,15);ctx.stroke();
@@ -196,7 +188,7 @@
       // Oar splashes and widening ripples follow each stroke.
       for(const side of [-1,1]){
         for(let i=0;i<14;i++){
-          const life=(t*.9+i/14)%1;
+          const life=(t*1.05+i/14)%1;
           ctx.globalAlpha=smooth(arrival)*(1-life)*.65;
           ctx.fillStyle='#d4eee3';ctx.beginPath();
           ctx.arc(side*(164+life*35+Math.sin(i*7)*life*17),-40+life*65+Math.cos(i*4)*life*16,1.2+life*1.5,0,Math.PI*2);ctx.fill();
@@ -211,23 +203,6 @@
       ctx.fillStyle='#322f27';ctx.beginPath();ctx.ellipse(0,73,10,12,0,0,Math.PI*2);ctx.fill();
       ctx.restore();
     }
-    function updatePhase() {
-      if(!intro)return;
-      const next=time<2?0:time<4.6?1:2;
-      if(next!==phase){
-        phase=next;root.dataset.phase=['serve','surge','flow'][phase];
-        document.querySelector('#scene-number').textContent=['01','02','03'][phase];
-        document.querySelector('#scene-caption').innerHTML=['It starts with<br>a little impact.','Then one thing<br>becomes another.','Find a rhythm.<br>Make your own way.'][phase];
-        root.classList.toggle('is-impact',phase===1);
-        const title=root.querySelector('.opening-type h2');
-        title.innerHTML=['Ready<br><em>for anything.</em>','Make<br><em>a splash.</em>','Find<br><em>your flow.</em>'][phase];
-        document.querySelector('#opening-description').innerHTML=['A little curiosity.<br>A whole lot of momentum.','One small spark.<br>A different direction.','Sport. Code. A closer look.<br>Welcome to my world.'][phase];
-      }
-      root.style.setProperty('--intro-progress',Math.min(time/7.5,1));
-      skip.hidden=time>=7.5;
-      pause.textContent=paused?'▶ Resume motion':'Ⅱ Pause motion';
-      pause.setAttribute('aria-label',paused?'Resume animation':'Pause animation');
-    }
     function draw() {
       if(!width||!height)return;
       ctx.clearRect(0,0,width,height);
@@ -241,16 +216,13 @@
       }
       if(time>2.05)water(time,clamp((time-2.05)/2.9));
       splash(time);
-      if(time>4.2)boat(time,clamp((time-4.2)/2.1));
-      // Keep type readable without flattening the water on the right.
-      const shade=ctx.createLinearGradient(0,0,width*.8,0);shade.addColorStop(0,'#021c3299');shade.addColorStop(1,'#041c2900');ctx.fillStyle=shade;ctx.fillRect(0,0,width,height);
-      updatePhase();
+      if(time>4.2)boat(time,clamp((time-4.2)/1.7));
     }
     function tick(now) {
       frame=0;
       if(last!==null)time+=Math.min((now-last)/1000,.06);
       last=now;draw();
-      if(intro && time >= 8) { finishIntro(); return; }
+      if(intro && time >= introDuration) { finishIntro(); return; }
       if(!paused&&visible&&!document.hidden&&!(intro&&finished))frame=requestAnimationFrame(tick);
     }
     function start(){if(!frame&&!paused&&visible&&!document.hidden&&!(intro&&finished)){last=null;frame=requestAnimationFrame(tick);}}
@@ -259,7 +231,7 @@
     new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(visible)start();else stop();},{threshold:.01}).observe(root);
     document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start();});
     root.addEventListener('pointermove',event=>{const r=root.getBoundingClientRect();pointer={x:(event.clientX-r.left)/r.width-.5,y:(event.clientY-r.top)/r.height-.5};},{passive:true});
-    reduce.addEventListener('change',event=>{paused=event.matches;if(paused){time=8;stop();draw();if(intro)finishIntro();}else start();});
+    reduce.addEventListener('change',event=>{paused=event.matches;if(paused){time=introDuration;stop();draw();if(intro)finishIntro();}else start();});
     if (!intro) {
       const control = root.querySelector('.sports-motion-toggle');
       const updateControl = () => {
@@ -273,17 +245,14 @@
       }
     }
     if(intro){
-      skip.addEventListener('click',finishIntro);
-      function replayOpening() {
+      function restartIntro() {
         finished=false; root.hidden=false; root.inert=false; root.classList.remove('is-leaving');
         showcase.inert=true; document.body.classList.add('intro-playing');
         document.dispatchEvent(new Event('opening-start'));
-        time=0;phase=-1;paused=false;visible=true;resize();updatePhase();start();
-        skip.focus({preventScroll:true});
+        time=0;paused=false;visible=true;resize();start();
       }
-      replay.addEventListener('click',replayOpening);
-      document.querySelector('.replay-opening').addEventListener('click',replayOpening);
-      pause.addEventListener('click',()=>{paused=!paused;if(paused)stop();else start();updatePhase();});
+      window.addEventListener('pageshow',event=>{if(event.persisted&&!reduce.matches)restartIntro();});
+      document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!finished)finishIntro();});
       // A stable final scene remains available if motion is reduced.
       window.addEventListener('pagehide',stop);
     }
