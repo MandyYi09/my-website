@@ -21,6 +21,7 @@
   transition: background .25s, color .25s, border-color .25s;
 }
 .site-nav .brand { font: 400 34px/1 'Instrument Serif', Georgia, serif; letter-spacing: -.04em; text-transform: none; color: inherit; }
+.site-nav .brand.carousel-return { font: 400 13px/1.4 Arial, sans-serif; letter-spacing: 0; }
 .site-nav .navlinks { display: flex; align-items: center; gap: 32px; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; }
 .site-nav .navlinks a { position: relative; display: block; padding: 15px 0; opacity: .78; border-bottom: 0; color: inherit; font-size: inherit; letter-spacing: inherit; }
 .site-nav .navlinks a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 6px; height: 1px; background: var(--nav-accent); transform: scaleX(0); transform-origin: left; transition: transform .2s; }
