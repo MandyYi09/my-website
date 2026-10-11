@@ -4,14 +4,20 @@
   const smooth = n => { n = clamp(n); return n * n * (3 - 2 * n); };
   const mix = (a, b, n) => a + (b - a) * n;
   const introDuration = 7.4;
+  const restoringCarousel = () => {
+    const returnSlide = new URLSearchParams(location.search).get('slide');
+    return [...document.querySelectorAll('.showcase-slide')]
+      .some(slide => slide.dataset.carouselId === returnSlide);
+  };
   document.querySelectorAll('[data-motion-scene]').forEach(canvas => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const intro = canvas.dataset.motionScene === 'intro';
     const root = canvas.parentElement;
-    let width = 0, height = 0, time = reduce.matches ? introDuration : 0, last = null, frame = 0;
-    let paused = reduce.matches, visible = true;
-    let finished = reduce.matches;
+    const skipIntro = intro && restoringCarousel();
+    let width = 0, height = 0, time = reduce.matches || skipIntro ? introDuration : 0, last = null, frame = 0;
+    let paused = reduce.matches || skipIntro, visible = true;
+    let finished = reduce.matches || skipIntro;
     const showcase = intro ? document.querySelector('.work-showcase') : null;
     if (intro) {
       root.hidden = finished;
@@ -251,7 +257,7 @@
         document.dispatchEvent(new Event('opening-start'));
         time=0;paused=false;visible=true;resize();start();
       }
-      window.addEventListener('pageshow',event=>{if(event.persisted&&!reduce.matches)restartIntro();});
+      window.addEventListener('pageshow',event=>{if(event.persisted&&!reduce.matches&&!restoringCarousel())restartIntro();});
       document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!finished)finishIntro();});
       // A stable final scene remains available if motion is reduced.
       window.addEventListener('pagehide',stop);

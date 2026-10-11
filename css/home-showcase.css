@@ -38,11 +38,7 @@
 .showcase-link { display: inline-flex; align-items: center; gap: 34px; padding: 14px 0; border-bottom: 1px solid #b9c5a2; font-size: 12px; }
 .showcase-link span { font-size: 24px; line-height: 1; transition: transform .2s; }
 .showcase-link:hover span { transform: translate(3px, -3px); }
-.showcase-bottom { position: absolute; z-index: 3; left: 5vw; right: 5vw; bottom: 30px; display: flex; align-items: center; gap: 40px; }
-.showcase-pagination { display: flex; flex: 1; gap: 24px; min-width: 0; }
-.showcase-pagination .swiper-pagination-bullet { flex: 1; height: auto; width: auto; margin: 0 !important; padding: 17px 0 7px; border: 0; border-top: 1px solid rgba(255,255,255,.3); border-radius: 0; background: none; color: #d4d7cd; opacity: 1; text-align: left; font: 11px/1.4 Arial, sans-serif; cursor: pointer; transition: border-color .25s, color .25s; }
-.showcase-pagination .swiper-pagination-bullet span { margin-right: 15px; opacity: .65; font-size: 9px; }
-.showcase-pagination .swiper-pagination-bullet-active { border-color: var(--showcase-accent); color: var(--showcase-accent); }
+.showcase-bottom { position: absolute; z-index: 3; left: 5vw; right: 5vw; bottom: 30px; display: flex; align-items: center; justify-content: flex-end; }
 .showcase-buttons { display: flex; gap: 8px; align-items: center; }
 .showcase-control { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; background: transparent; color: #f7f5ef; cursor: pointer; font-size: 20px; }
 .showcase-control:hover { background: rgba(255,255,255,.12); border-color: #d9e6bd; }
@@ -58,10 +54,7 @@
   .showcase-copy { left: 22px; width: calc(100% - 44px); bottom: 158px; }
   .showcase-copy :is(h1, h2) { font-size: clamp(64px, 14vw, 96px); }
   .showcase-description { max-width: 300px; font-size: 13px; margin: 20px 0 14px; }
-  .showcase-bottom { left: 22px; right: 22px; bottom: 22px; display: grid; gap: 16px; }
-  .showcase-pagination { gap: 14px; }
-  .showcase-pagination .swiper-pagination-bullet { font-size: 10px; padding-top: 10px; }
-  .showcase-pagination .swiper-pagination-bullet span { display: block; margin: 0 0 4px; }
+  .showcase-bottom { left: 22px; right: 22px; bottom: 22px; }
   .showcase-buttons { justify-content: flex-end; }
   .showcase-more { writing-mode: horizontal-tb; left: 22px; right: auto; bottom: 38px; }
   .showcase-more span { margin: 0 0 0 10px; }

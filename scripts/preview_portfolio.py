@@ -6,6 +6,8 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.error import URLError
 from urllib.request import urlopen
+import argparse
+import json
 import sys
 import webbrowser
 
@@ -38,11 +40,21 @@ def existing_preview():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--no-browser', action='store_true', help='Start the preview without opening a browser')
+    args = parser.parse_args()
+    def remember_origin(port):
+        origin = 'http://127.0.0.1:{}/'.format(port)
+        (SITE_ROOT / 'js' / 'local-preview-origin.js').write_text(
+            'window.portfolioPreviewOrigin = ' + json.dumps(origin) + ';\n', encoding='utf-8'
+        )
     running_port = existing_preview()
     if running_port is not None:
+        remember_origin(running_port)
         url = "http://127.0.0.1:{}/index.html".format(running_port)
         print("Using the existing local preview: {}".format(url), flush=True)
-        webbrowser.open(url)
+        if not args.no_browser:
+            webbrowser.open(url)
         return 0
 
     handler = partial(PreviewHandler, directory=str(SITE_ROOT))
@@ -61,11 +73,13 @@ def main():
             return 1
 
     url = "http://127.0.0.1:{}/index.html".format(server.server_port)
+    remember_origin(server.server_port)
     print("Local preview: {}".format(url), flush=True)
     print("Little Mandy: http://127.0.0.1:{}/little-mandy/".format(server.server_port), flush=True)
     print("Keep this Terminal window open while previewing. Press Control-C to stop.", flush=True)
     print("Public portfolio link for applications: {}".format(PUBLIC_URL), flush=True)
-    webbrowser.open(url)
+    if not args.no_browser:
+        webbrowser.open(url)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

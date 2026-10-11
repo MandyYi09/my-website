@@ -3,8 +3,10 @@
   if (!root || typeof Swiper === 'undefined') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
-  const titles = ['Walker', 'Grid 1', 'Zhong Art', 'FitAI', 'Photography'];
-  let paused = reducedMotion.matches;
+  const returnSlide = new URLSearchParams(location.search).get('slide');
+  const returnIndex = [...root.querySelectorAll('.showcase-slide')]
+    .findIndex(slide => slide.dataset.carouselId === returnSlide);
+  let paused = reducedMotion.matches || returnIndex >= 0;
   let inView = true;
   const openingActive = () => document.body.classList.contains('intro-playing');
 
@@ -110,12 +112,10 @@
       slide.inert = !active;
       slide.setAttribute('aria-hidden', String(!active));
     });
-    root.querySelectorAll('.swiper-pagination-bullet').forEach((button, index) => {
-      button.setAttribute('aria-current', index === swiper.activeIndex ? 'true' : 'false');
-    });
   }
 
   const swiper = new Swiper(root.querySelector('.showcase-swiper'), {
+    initialSlide: Math.max(0, returnIndex),
     effect: 'slide',
     direction: 'horizontal',
     speed: reducedMotion.matches ? 0 : 850,
@@ -123,12 +123,7 @@
     grabCursor: true,
     autoplay: { enabled: !paused, delay: 7000, disableOnInteraction: true, pauseOnMouseEnter: true },
     navigation: { nextEl: root.querySelector('.showcase-next'), prevEl: root.querySelector('.showcase-prev') },
-    pagination: {
-      el: root.querySelector('.showcase-pagination'),
-      clickable: true,
-      renderBullet: (index, className) => `<button class="${className}" type="button"><span>0${index + 1}</span>${titles[index]}</button>`
-    },
-    a11y: { containerMessage: 'Selected work slideshow', paginationBulletMessage: 'Show project {{index}}', prevSlideMessage: 'Previous project', nextSlideMessage: 'Next project' },
+    a11y: { containerMessage: 'Selected work slideshow', prevSlideMessage: 'Previous project', nextSlideMessage: 'Next project' },
     on: { init: updateSlides, slideChange: updateSlides }
   });
 
@@ -138,6 +133,15 @@
     pause.querySelector('span').textContent = playing ? 'Ⅱ' : '▶';
   }
   function stopPlayback() { paused = true; swiper.autoplay.stop(); }
+  root.querySelectorAll('.showcase-link').forEach(link => {
+    link.addEventListener('click', () => {
+      stopPlayback();
+      const home = new URL(location.href);
+      home.searchParams.set('slide', link.closest('.showcase-slide').dataset.carouselId);
+      home.hash = 'home';
+      history.replaceState(history.state, '', home);
+    });
+  });
   swiper.on('autoplayStart', updatePlayback);
   swiper.on('autoplayStop', updatePlayback);
   swiper.on('sliderFirstMove', stopPlayback);
@@ -201,7 +205,7 @@
         if (!project) return;
         if (project.slug !== 'fitai' && !slide.hasAttribute('data-editorial-copy') && project.shortDescription) slide.querySelector('.showcase-description').textContent = project.shortDescription;
         const destination = project.demoUrl || project.repositoryUrl;
-        if (project.slug !== 'fitai' && destination && /^https?:\/\//i.test(destination)) slide.querySelector('.showcase-link').href = destination;
+        if (project.slug !== 'fitai' && !slide.hasAttribute('data-editorial-copy') && destination && /^https?:\/\//i.test(destination)) slide.querySelector('.showcase-link').href = destination;
       });
     }).catch(() => {});
 })();

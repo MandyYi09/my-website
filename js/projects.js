@@ -38,7 +38,9 @@
     if (typeof value !== 'string' || !value.trim()) return null;
     try {
       const url = new URL(value, document.baseURI);
-      return ['http:', 'https:'].includes(url.protocol) ? url.href : null;
+      const localFile = location.protocol === 'file:' && url.protocol === 'file:' &&
+        url.href.startsWith(new URL('./', document.baseURI).href);
+      return ['http:', 'https:'].includes(url.protocol) || localFile ? url.href : null;
     } catch { return null; }
   };
   const visitUrl = project => safeUrl(project.demoUrl) || safeUrl(project.homepageUrl) || safeUrl(localProjects[project.slug]);
@@ -125,19 +127,39 @@
     count.textContent = query ? visible.length + ' of ' + projects.length + ' projects' : projects.length + ' projects';
     empty.hidden = visible.length !== 0;
   }
+  async function loadCollections() {
+    if (location.protocol === 'file:') {
+      // Classic scripts can read bundled data from disk; fetch cannot on file URLs.
+      if (!window.portfolioProjectCatalog) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'data/project-catalog.js';
+          script.onload = resolve;
+          script.onerror = () => { script.remove(); reject(new Error('Project catalog unavailable')); };
+          document.head.append(script);
+        });
+      }
+      const collections = window.portfolioProjectCatalog;
+      if (!Array.isArray(collections) || collections.some(collection => !Array.isArray(collection))) {
+        throw new Error('Invalid project catalog');
+      }
+      return collections;
+    }
+    return Promise.all(['data/git-projects.json', 'data/study-projects.json'].map(async path => {
+      const response = await fetch(path, { cache: 'no-cache' });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const collection = await response.json();
+      if (!Array.isArray(collection)) throw new Error('Invalid project collection');
+      return collection;
+    }));
+  }
   async function load() {
     error.hidden = true;
     empty.hidden = true;
     grid.setAttribute('aria-busy', 'true');
     count.textContent = 'Loading projects…';
     try {
-      const collections = await Promise.all(['data/git-projects.json', 'data/study-projects.json'].map(async path => {
-        const response = await fetch(path, { cache: 'no-cache' });
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const collection = await response.json();
-        if (!Array.isArray(collection)) throw new Error('Invalid project collection');
-        return collection;
-      }));
+      const collections = await loadCollections();
       const data = collections.flat();
       if (data.some(project => !project || typeof project.title !== 'string')) throw new Error('Invalid project collection');
       const rank = category => {
@@ -150,7 +172,7 @@
     } catch {
       count.textContent = 'Projects unavailable';
       error.hidden = false;
-      if (location.protocol === 'file:') error.querySelector('p').textContent = 'Open this page through a local web server to load the project data.';
+      if (location.protocol === 'file:') error.querySelector('p').textContent = 'Project data is missing. Open “Preview Portfolio.command” from the website folder to try the local preview.';
     } finally {
       grid.setAttribute('aria-busy', 'false');
     }
