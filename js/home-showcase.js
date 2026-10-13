@@ -121,7 +121,7 @@
     speed: reducedMotion.matches ? 0 : 850,
     rewind: true,
     grabCursor: true,
-    autoplay: { enabled: !paused, delay: 7000, disableOnInteraction: true, pauseOnMouseEnter: true },
+    autoplay: { enabled: !paused, delay: 6000, disableOnInteraction: true, pauseOnMouseEnter: true },
     navigation: { nextEl: root.querySelector('.showcase-next'), prevEl: root.querySelector('.showcase-prev') },
     a11y: { containerMessage: 'Selected work slideshow', prevSlideMessage: 'Previous project', nextSlideMessage: 'Next project' },
     on: { init: updateSlides, slideChange: updateSlides }
