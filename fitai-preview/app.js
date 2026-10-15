@@ -272,7 +272,7 @@ async function initThree() {
             const minX=Math.min(...projected)-.18,maxX=Math.max(...projected)+.18;
             const full=$('stage').classList.contains('focus-active');
             const area=host.getBoundingClientRect();
-            const usableHeight=Math.max(.3,1-(full?230:190)/Math.max(area.height,1));
+            const usableHeight=previewParams.get('layout') === 'card' ? .85 : Math.max(.3,1-(full?230:190)/Math.max(area.height,1));
             const usableWidth=full?.88:.85;
             const nearDepth=Math.max(0,...boundPoints.map(v=>-v.x*Math.sin(group.rotation.y)+v.z*Math.cos(group.rotation.y)));
             const distance=Math.max((maxY-minY)/(2*Math.tan(34*Math.PI/360)*usableHeight),(maxX-minX)/(2*Math.tan(34*Math.PI/360)*camera.aspect*usableWidth))+nearDepth+.12;
