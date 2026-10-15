@@ -8,7 +8,6 @@
     .findIndex(slide => slide.dataset.carouselId === returnSlide);
   let paused = reducedMotion.matches || returnIndex >= 0;
   let inView = true;
-  const openingActive = () => document.body.classList.contains('intro-playing');
 
   let livePaused = reducedMotion.matches;
   let activeSwiper;
@@ -26,7 +25,7 @@
     if (!photoSwiper) return;
     const playing = activeSwiper?.slides[activeSwiper.activeIndex] === photoSlide &&
       photoSlide.classList.contains('is-photo-ready') && !photoPaused && inView &&
-      !document.hidden && !openingActive();
+      !document.hidden;
     photoToggle.textContent = photoPaused ? '▶ Play photos' : 'Ⅱ Pause photos';
     photoToggle.setAttribute('aria-label', photoPaused ? 'Play photo background' : 'Pause photo background');
     if (playing && !photoSwiper.autoplay.running) photoSwiper.autoplay.start();
@@ -70,7 +69,7 @@
     activeSwiper.slides.forEach((slide,index) => {
       const frame=slide.querySelector('.showcase-live');
       if (!frame) return;
-      const playing=index===activeSwiper.activeIndex && !livePaused && inView && !document.hidden && !openingActive();
+      const playing=index===activeSwiper.activeIndex && !livePaused && inView && !document.hidden;
       const button=slide.querySelector('.showcase-live-toggle');
       button.textContent=livePaused?'▶ Play background':'Ⅱ Pause background';
       button.setAttribute('aria-label',livePaused?'Play live background':'Pause live background');
@@ -162,13 +161,13 @@
     updateLive();
     updatePhotoPlayback();
     if (!inView) swiper.autoplay.stop();
-    else if (!paused && !document.hidden && !openingActive()) swiper.autoplay.start();
+    else if (!paused && !document.hidden) swiper.autoplay.start();
   }, { threshold: .25 }).observe(root);
   document.addEventListener('visibilitychange', () => {
     updateLive();
     updatePhotoPlayback();
     if (document.hidden) swiper.autoplay.stop();
-    else if (!paused && inView && !openingActive()) swiper.autoplay.start();
+    else if (!paused && inView) swiper.autoplay.start();
   });
   reducedMotion.addEventListener('change', event => {
     swiper.params.speed = event.matches ? 0 : 850;
@@ -177,13 +176,6 @@
     if (photoSwiper) photoSwiper.params.speed = event.matches ? 0 : 900;
     updatePhotoPlayback();
     if (event.matches) stopPlayback();
-  });
-  document.addEventListener('opening-start', () => {swiper.autoplay.stop();updateLive();updatePhotoPlayback();});
-  document.addEventListener('opening-complete', () => {
-    swiper.update();
-    updateLive();
-    updatePhotoPlayback();
-    if (!paused && inView && !document.hidden) swiper.autoplay.start();
   });
   let resizeTimer;
   window.addEventListener('resize',()=>{
