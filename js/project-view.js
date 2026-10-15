@@ -3,6 +3,7 @@
     ['walker', { title: 'Walking Code', src: 'https://mandyyi09.github.io/walker/' }],
     ['grid-1', { title: 'Grid 1', src: 'https://mandyyi09.github.io/grid-1/' }],
     ['zhong-art', { title: 'Zhong Art', src: 'zhong-art-project/' }],
+    ['align-studio', { title: 'Align Studio', src: 'align-studio-project/index.html' }],
     ['fitai', { title: 'FitAI', src: 'fitai-project/index.html' }]
   ]);
   const id = new URLSearchParams(location.search).get('project');
@@ -13,6 +14,10 @@
   home.searchParams.set('slide', id);
   home.hash = 'home';
   back.href = home.href;
+  if (new URLSearchParams(location.search).get('from') === 'projects') {
+    back.href = 'projects.html';
+    back.textContent = '← Back to projects';
+  }
   document.title = `${project.title} — Mandy`;
   document.getElementById('project-name').textContent = project.title;
   const frame = document.getElementById('project-frame');
@@ -43,6 +48,7 @@
         settled = true;
         const viewer = new URL('project.html', origin);
         viewer.searchParams.set('project', id);
+        if (new URLSearchParams(location.search).get('from') === 'projects') viewer.searchParams.set('from', 'projects');
         location.replace(viewer.href);
       };
       document.head.append(probe);

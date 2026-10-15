@@ -21,3 +21,5 @@
 @media(max-width:700px) {
   .embed-mode #three canvas { transform:translateY(-15%) scale(1.08); }
 }
+
+.card-embed #three canvas { transform:none; }

@@ -7,8 +7,8 @@
     "repositoryName": "ai-hands",
     "fullName": "MandyYi09/ai-hands",
     "owner": "MandyYi09",
-    "shortDescription": "A webcam hand-tracking sketch that turns finger distance into color.",
-    "longDescription": "This browser sketch uses ml5.js hand-pose detection with p5.js to track the thumb and index fingertips. Their distance controls the red intensity of the canvas background, while blue circles mark both fingertips. The sketch hides the original camera element and displays a minimal visual response to the detected hand positions.",
+    "shortDescription": "The first gesture study: turn the distance between two fingertips into color.",
+    "longDescription": "This browser sketch uses ml5.js hand-pose detection with p5.js to track the thumb and index fingertips. Their distance controls the red intensity of the canvas background, while blue circles mark both fingertips. The sketch hides the original camera element and displays a minimal visual response to the detected hand positions. This begins the development sequence AI Hands → Finger Wand → Align Studio: first detect a gesture, then give movement a visual trace, then apply tracking to a movement-practice interface.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
     "isFavorite": false,
@@ -51,7 +51,7 @@
     "createdAt": "2026-07-23T11:24:19Z",
     "updatedAt": "2026-07-23T11:29:21Z",
     "pushedAt": "2026-07-23T11:29:17Z",
-    "sortOrder": 0,
+    "sortOrder": 3,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -99,8 +99,8 @@
     "repositoryName": "finger-wand",
     "fullName": "MandyYi09/finger-wand",
     "owner": "MandyYi09",
-    "shortDescription": "An interactive hand-tracking experiment that transforms fingertip movement into fading light trails.",
-    "longDescription": "This p5.js and ml5.js experiment draws a mirrored webcam view across the browser window and follows the first detected index fingertip. A fading trail records its path, while smoothed movement speed changes the size of the finger marker. Faster movements trigger an expanding impact ring. The source resets tracking coordinates after a resize and starts a new trail when a hand reappears.",
+    "shortDescription": "Building on AI Hands, fingertip movement becomes a trail of light with speed-responsive effects.",
+    "longDescription": "This p5.js and ml5.js experiment draws a mirrored webcam view across the browser window and follows the first detected index fingertip. A fading trail records its path, while smoothed movement speed changes the size of the finger marker. Faster movements trigger an expanding impact ring. The source resets tracking coordinates after a resize and starts a new trail when a hand reappears. Following AI Hands, this study moves from a single finger-distance signal to continuous motion and visual feedback. Align Studio carries that exploration of camera-based interaction into full-body movement practice.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
     "isFavorite": false,
@@ -145,7 +145,7 @@
     "createdAt": "2026-09-23T12:08:49Z",
     "updatedAt": "2026-09-23T12:09:02Z",
     "pushedAt": "2026-09-23T12:08:58Z",
-    "sortOrder": 1,
+    "sortOrder": 4,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -189,12 +189,12 @@
     "schemaVersion": 1,
     "id": "github:1374415221",
     "slug": "fitai",
-    "title": "Align Stretching Studio",
+    "title": "FitAI",
     "repositoryName": "fitAi",
     "fullName": "MandyYi09/fitAi",
     "owner": "MandyYi09",
-    "shortDescription": "A browser stretching prototype with 3D pose references and camera-based comparison.",
-    "longDescription": "Align Stretching Studio presents 32 stretching and yoga movements with rotatable Three.js references and optional MediaPipe pose tracking. It compares detected joint angles with reference geometry, offers front and side inspection views, and includes a manual hold timer. The README describes local frame processing and a focus view that responds to stable tracking. This is a prototype: its 2D landmark comparisons estimate reference similarity and do not establish safe form or clinical correctness.",
+    "shortDescription": "The expanded movement studio: 48 references across Mobility, Yoga, Rowing, Tennis, and Clay Shooting.",
+    "longDescription": "FitAI is the more complex movement-practice project, bringing 48 movements across Mobility, Yoga, Rowing, Tennis, and Clay Shooting into one browser studio. Rotatable 3D references, optional camera-based pose comparison, and a manual hold timer support exploration and practice. This entry opens the complete application, rather than the portfolio background preview. Pose feedback estimates reference similarity; it is not a safety assessment.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
     "isFavorite": false,
@@ -226,9 +226,9 @@
     "topics": [],
     "repositoryUrl": "https://github.com/MandyYi09/fitAi",
     "homepageUrl": null,
-    "demoUrl": null,
+    "demoUrl": "project.html?project=fitai&from=projects",
     "readmeUrl": "https://github.com/MandyYi09/fitAi/blob/main/README.md",
-    "imageUrl": null,
+    "imageUrl": "assets/images/projects/fitAi/full-studio.jpg",
     "defaultBranch": "main",
     "visibility": "public",
     "isArchived": false,
@@ -241,7 +241,7 @@
     "createdAt": "2026-09-17T12:38:22Z",
     "updatedAt": "2026-09-19T08:23:24Z",
     "pushedAt": "2026-09-19T08:23:19Z",
-    "sortOrder": 2,
+    "sortOrder": 6,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -333,7 +333,7 @@
     "createdAt": "2026-07-29T12:13:33Z",
     "updatedAt": "2026-07-29T12:14:49Z",
     "pushedAt": "2026-07-29T12:13:40Z",
-    "sortOrder": 3,
+    "sortOrder": 2,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -423,7 +423,7 @@
     "createdAt": "2026-07-30T03:48:16Z",
     "updatedAt": "2026-09-14T07:24:43Z",
     "pushedAt": "2026-09-14T07:24:40Z",
-    "sortOrder": 4,
+    "sortOrder": 13,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -469,8 +469,8 @@
     "repositoryName": "moderized-china-art-2d",
     "fullName": "MandyYi09/moderized-china-art-2d",
     "owner": "MandyYi09",
-    "shortDescription": "An interactive living scroll with animated guardians, drifting clouds, and synthesized chimes.",
-    "longDescription": "This Canvas 2D artwork transforms three reference paintings into textured paper puppets in an animated sky. Visitors can drag the guardians, awaken their elemental effects, scatter particles, adjust the wind, and enable synthesized pentatonic chimes. The scene includes keyboard controls, fullscreen mode, a reference gallery, and a reduced-motion preference that starts the animation paused.",
+    "shortDescription": "A 2D Shuilu painting experiment, later brought into Zhong Art as a carousel experience.",
+    "longDescription": "The Cloud Court is the 2D branch of an exploration of Shuilu (Water and Land) paintings, alongside the 3D study The Keeper of the Cloud Gate. Painted figures become an interactive scene with pointer-driven motion, puppet animation, and synthesized sound. This 2D direction was ultimately selected for the carousel on the Zhong Art website. This Canvas 2D artwork transforms three reference paintings into textured paper puppets in an animated sky. Visitors can drag the guardians, awaken their elemental effects, scatter particles, adjust the wind, and enable synthesized pentatonic chimes. The scene includes keyboard controls, fullscreen mode, a reference gallery, and a reduced-motion preference that starts the animation paused.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
     "isFavorite": false,
@@ -514,7 +514,7 @@
     "createdAt": "2026-09-25T13:14:53Z",
     "updatedAt": "2026-09-25T13:15:21Z",
     "pushedAt": "2026-09-25T13:15:17Z",
-    "sortOrder": 5,
+    "sortOrder": 8,
     "primaryLanguage": "HTML",
     "languageBreakdown": [
       {
@@ -563,8 +563,8 @@
     "repositoryName": "moderized-china-art-3d",
     "fullName": "MandyYi09/moderized-china-art-3d",
     "owner": "MandyYi09",
-    "shortDescription": "An explorable Three.js guardian sculpture inspired by traditional Chinese paintings.",
-    "longDescription": "This browser gallery presents a procedural celestial guardian with layered armor, a crown, staff, pearl, ribbons, and a lotus pedestal. Three.js orbit controls and five camera presets reveal the sculpture from different angles, while gallery, moonlit, and dawn lighting change its atmosphere. Visitors can toggle rotation, floating clouds, and wireframe, save a PNG view, or download a static GLB model. The project includes reference-inspired concept artwork and editable modeling source.",
+    "shortDescription": "The 3D Shuilu painting experiment: exploring a guardian as a sculpture, alongside The Cloud Court’s 2D direction.",
+    "longDescription": "A parallel 3D experiment related to Zhong Art and The Cloud Court, inspired by Shuilu (Water and Land) paintings. It explores how a painted guardian can become an object with volume, lighting, and viewpoints. The 2D Cloud Court direction was ultimately used in Zhong Art’s carousel. This browser gallery presents a procedural celestial guardian with layered armor, a crown, staff, pearl, ribbons, and a lotus pedestal. Three.js orbit controls and five camera presets reveal the sculpture from different angles, while gallery, moonlit, and dawn lighting change its atmosphere. Visitors can toggle rotation, floating clouds, and wireframe, save a PNG view, or download a static GLB model. The project includes reference-inspired concept artwork and editable modeling source.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
     "isFavorite": false,
@@ -608,7 +608,7 @@
     "createdAt": "2026-09-25T13:19:16Z",
     "updatedAt": "2026-09-25T13:19:40Z",
     "pushedAt": "2026-09-25T13:19:36Z",
-    "sortOrder": 6,
+    "sortOrder": 9,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -698,7 +698,7 @@
     "homepageUrl": null,
     "demoUrl": "https://mandyyi09.github.io/my-website/",
     "readmeUrl": null,
-    "imageUrl": null,
+    "imageUrl": "assets/images/projects/my-website/portfolio-home.jpg",
     "defaultBranch": "main",
     "visibility": "public",
     "isArchived": false,
@@ -711,7 +711,7 @@
     "createdAt": "2026-07-24T10:10:36Z",
     "updatedAt": "2026-09-27T04:56:35Z",
     "pushedAt": "2026-09-27T04:56:30Z",
-    "sortOrder": 7,
+    "sortOrder": 12,
     "primaryLanguage": "HTML",
     "languageBreakdown": [
       {
@@ -803,7 +803,7 @@
     "createdAt": "2026-09-27T05:16:40Z",
     "updatedAt": "2026-09-27T05:16:49Z",
     "pushedAt": "2026-09-27T05:16:45Z",
-    "sortOrder": 8,
+    "sortOrder": 1,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -899,7 +899,7 @@
     "createdAt": "2026-09-27T05:21:19Z",
     "updatedAt": "2026-09-27T05:21:28Z",
     "pushedAt": "2026-09-27T05:21:24Z",
-    "sortOrder": 9,
+    "sortOrder": 1,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {
@@ -994,7 +994,7 @@
     "createdAt": "2026-07-23T11:32:37Z",
     "updatedAt": "2026-07-24T09:49:17Z",
     "pushedAt": "2026-07-24T09:48:29Z",
-    "sortOrder": 10,
+    "sortOrder": 0,
     "primaryLanguage": "JavaScript",
     "languageBreakdown": [
       {

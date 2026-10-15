@@ -11,12 +11,12 @@ SITE_ROOT = Path(__file__).resolve().parent.parent
 def build_catalog():
     collections = [
         json.loads((SITE_ROOT / 'data' / name).read_text(encoding='utf-8'))
-        for name in ('git-projects.json', 'study-projects.json')
+        for name in ('git-projects.json', 'study-projects.json', 'curated-projects.json')
     ]
     if any(not isinstance(collection, list) for collection in collections):
         raise ValueError('Project collections must be JSON arrays')
     output = (
-        '// Generated from git-projects.json and study-projects.json.\n'
+        '// Generated from git-projects.json, study-projects.json, and curated-projects.json.\n'
         '// Regenerate with: python3 scripts/build_project_catalog.py\n'
         'window.portfolioProjectCatalog = '
         + json.dumps(collections, ensure_ascii=True, separators=(',', ':'))
