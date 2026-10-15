@@ -6,7 +6,7 @@ body.edition-page { background:var(--paper); color:var(--ink); }
 .site-nav .navlinks,.edition-page .site-nav .navlinks { gap:32px; }
 .site-nav .navlinks a,.edition-page .site-nav .navlinks a { font:10px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.15em; }
 body:not(.motion-home) .site-nav { background:rgba(243,240,233,.96); color:var(--ink); --nav-accent:#53664b; border-color:var(--line); }
-.motion-home:not(.intro-playing) .site-nav,.motion-home:not(.intro-playing) .site-nav .navlinks { background:#111411; }
+.motion-home .site-nav,.motion-home .site-nav .navlinks { background:#111411; }
 .motion-home .work-showcase { margin-top:76px; height:calc(100svh - 76px); }
 .motion-home .showcase-top { top:34px; }
 .motion-home .showcase-copy { left:var(--page-gutter); width:calc(100% - 10vw); max-width:820px; }
@@ -48,21 +48,6 @@ body:not(.motion-home) .site-nav { background:rgba(243,240,233,.96); color:var(-
  .page-footer { flex-wrap:wrap; padding:24px 22px; gap:14px; }
  .page-footer>span { display:none; }
 }
-/* The opening has its own three-beat title choreography. */
-.motion-opening .opening-type { bottom:230px; }
-.motion-opening .opening-type h2 { font-size:clamp(82px,8.5vw,138px); }
-.motion-opening[data-phase=serve] .opening-type { animation:opening-arrive .7s both; }
-.motion-opening[data-phase=surge] .opening-type { animation:opening-splash .65s both; }
-.motion-opening[data-phase=flow] .opening-type { animation:opening-flow .9s both; }
-@keyframes opening-arrive { from { opacity:0; transform:translateY(35px) rotate(-3deg); } to { opacity:1; transform:none; } }
-@keyframes opening-splash { 0% { opacity:0; transform:translateY(20px) scale(.95); } 45% { opacity:1; transform:translateY(-6px) scale(1.025); } 100% { transform:none; } }
-@keyframes opening-flow { from { opacity:0; transform:translateX(-30px); } to { opacity:1; transform:none; } }
-@media(max-width:700px) {
- .motion-opening .opening-type { bottom:235px; }
- .motion-opening .opening-type h2 { font-size:clamp(65px,17vw,100px); }
-}
-@media(prefers-reduced-motion:reduce) { .motion-opening .opening-type { animation:none!important; } }
-
 :root {
   --title-font: Georgia, "Times New Roman", serif; /* Notice. Build. */
   --accent-font: "Instrument Serif", Georgia, serif; /* Question. */
@@ -70,7 +55,6 @@ body:not(.motion-home) .site-nav { background:rgba(243,240,233,.96); color:var(-
 
 .content-page .section-head h1,
 .motion-home .showcase-copy :is(h1, h2),
-.motion-opening .opening-type h2,
 .workbench-title h1,
 .journal-heading h1 {
   font-family: var(--title-font);

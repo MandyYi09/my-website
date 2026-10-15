@@ -5,7 +5,7 @@ body {
 
 body .nav.site-nav,
 body .nav.site-nav.is-scrolled,
-.motion-home:not(.intro-playing) .site-nav {
+.motion-home .site-nav {
   --nav-ink: #20251f;
   --nav-accent: #53664b;
   --nav-border: rgba(20, 25, 20, .13);
@@ -15,12 +15,12 @@ body .nav.site-nav.is-scrolled,
 }
 
 body .site-nav .navlinks,
-.motion-home:not(.intro-playing) .site-nav .navlinks {
+.motion-home .site-nav .navlinks {
   background: #f3f0e9;
   color: #20251f;
 }
 
-/* The carousel and opening artwork remain visible below the light navigation. */
+/* The carousel remains visible below the light navigation. */
 body.motion-home,
 body.motion-projects,
 body.motion-journal,
@@ -31,10 +31,6 @@ body.content-page {
   --sage: #c7d6c7;
   background: #171817;
   color: #f5f1ea;
-}
-
-.motion-home .motion-opening {
-  background: radial-gradient(ellipse at 75% 30%, #303b34, #171817 70%);
 }
 
 .content-page .section.photo,
