@@ -1,13 +1,13 @@
-import { c as createExperience } from '../little-mandy/assets/experience-f4yhIQOI.js';
+import { c as createExperience } from '../little-mandy/assets/experience-f4yhIQOI.js?v=chapter-order-2';
 
 // Portfolio copy lives here and in about.html; the standalone Little Mandy stays independent.
 const $ = (selector) => document.querySelector(selector);
 const chapters = {
   hello: { number: '01 / THE EVERYDAY ME', title: 'Mandy Yi' },
-  tennis: { number: '02 / ON THE COURT', title: 'Tennis' },
+  rowing: { number: '02 / ON THE WATER', title: 'Rowing' },
   teach: { number: '03 / IN MY ELEMENT', title: 'Academic Passion' },
-  rowing: { number: '04 / ON THE WATER', title: 'Rowing' },
-  photography: { number: '05 / THROUGH MY LENS', title: 'Photography' },
+  photography: { number: '04 / THROUGH MY LENS', title: 'Photography' },
+  tennis: { number: '05 / ON THE COURT', title: 'Tennis' },
 };
 const pauseIcon = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>';
 const playIcon = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg>';
@@ -34,6 +34,7 @@ function showChapter(chapter) {
 async function init() {
   try {
     const experience = await createExperience($('#viewer'), {
+      chapterOrder: Object.keys(chapters),
       onProgress: ({ time, duration, playing, chapter }) => {
         $('#progress-fill').style.width = `${time / duration * 100}%`;
         $('#player-time').textContent = `${timeLabel(time)} / ${timeLabel(duration)}`;
@@ -64,7 +65,7 @@ async function init() {
       $('#sequence-button').classList.add('active');
       $('#sequence-button').setAttribute('aria-pressed', 'true');
       $('#player-title').textContent = 'A day in my little world';
-      $('#player-caption').textContent = 'HELLO → TENNIS → LEARN → ROWING → PHOTO';
+      $('#player-caption').textContent = 'HELLO → ROWING → LEARN → PHOTO → TENNIS';
     });
     $('#play-toggle').addEventListener('click', () => experience.toggle());
     $('#reset-view').addEventListener('click', experience.resetCamera);
