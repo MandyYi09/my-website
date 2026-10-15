@@ -168,7 +168,89 @@ body.mandy-about {
 }
 
 @media (max-width: 700px) {
+  .mandy-about h1 .heading-star { display: none; }
   .mandy-about main {
     padding-top: 100px;
   }
 }
+
+/* Copy and character share a scene, with a clear reading area beside the model. */
+.mandy-about .intro p { max-width: 300px; }
+.mandy-about .world { height: 610px; overflow: clip; }
+.mandy-about #viewer { left: 30%; bottom: 64px; }
+.mandy-about .world-glow { background: radial-gradient(ellipse 29% 67% at 68% 48%, #cdddc24d, #85a18522 52%, transparent 100%); }
+.mandy-about .live-tag { right: 27px; }
+.scene-copy { position: absolute; z-index: 2; top: 112px; left: 34px; width: 30%; max-width: 340px; }
+.scene-panel[hidden] { display: none; }
+.scene-panel { animation: scene-copy-in .4s ease both; }
+.scene-panel h2 { font: 400 clamp(27px, 2.6vw, 39px)/1.05 Georgia, serif; letter-spacing: -.04em; margin: 0 0 23px; }
+.scene-panel h2 em { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; color: #c7d6b7; }
+.scene-panel > p { font-size: 14px; line-height: 1.85; color: #ccd4c6; margin: 0; }
+.scene-panel .scene-quote { font: 400 clamp(24px, 2.7vw, 38px)/1.25 'Instrument Serif', Georgia, serif; color: #e0e8d6; }
+.scene-read-link { display: inline-flex; gap: 30px; padding: 9px 0; margin-top: 26px; border-bottom: 1px solid #6f8069; font-size: 11px; color: #c7d6b7; }
+.scene-read-link:hover { color: #fff; }
+.profile-note { background: #d9dfb7; color: #303b2a; padding: 30px 27px 36px; max-width: 286px; transform: rotate(-4deg); box-shadow: 5px 12px 30px #10151040; position: relative; }
+.note-pin { position: absolute; width: 66px; height: 22px; left: calc(50% - 33px); top: -10px; background: #cad2b8b3; transform: rotate(6deg); border: 1px solid #e3e6cc33; }
+.profile-note .note-heading { font: 400 42px/1.2 'Instrument Serif', Georgia, serif; margin: 0 0 22px; }
+.profile-note dl { display: grid; gap: 14px; margin: 0; }
+.profile-note dl > div { display: grid; grid-template-columns: 90px 1fr; gap: 8px; align-items: baseline; }
+.profile-note dt { font-size: 11px; color: #576249; }
+.profile-note dd { font-size: 14px; margin: 0; }
+.note-star { position: absolute; bottom: 6px; right: 14px; font-size: 30px; color: #6c7951; }
+.scene-panel .course-label { font-size: 9px; letter-spacing: .13em; text-transform: uppercase; color: #a9b7a4; }
+.course-list { list-style: none; padding: 0; margin: 12px 0 18px; display: flex; flex-wrap: wrap; gap: 7px; }
+.course-list li { border: 1px solid #5c6b56; background: #273128; padding: 6px 9px; font-size: 10px; color: #e2e6d9; line-height: 1.5; }
+.scene-panel .academic-caption { font-size: 12px; line-height: 1.7; color: #b4bfae; }
+.mandy-about .orbit-hint { left: auto; right: 93px; bottom: 91px; }
+.mandy-about .chapters { margin-bottom: 66px; }
+.about-stories { border-top: 1px solid #465044; }
+.about-story { padding: 55px 0 58px; display: grid; grid-template-columns: .9fr 1.1fr; gap: 9%; border-bottom: 1px solid #3c473e; scroll-margin-top: 110px; }
+.about-story-heading { position: relative; }
+.about-story-heading h2 { margin: 13px 0 30px; color: #e7ebdc; font: 400 clamp(38px, 4vw, 56px)/1.1 'Instrument Serif', Georgia, serif; letter-spacing: -.025em; }
+.about-story-heading > a { display: inline-flex; gap: 40px; padding-bottom: 7px; border-bottom: 1px solid #65755e; font-size: 11px; color: #b9c8ad; }
+.story-motif { position: absolute; right: 20px; top: 62px; font: 60px/1 Georgia, serif; color: #62745a; }
+.tennis-motif { font-size: 47px; transform: rotate(-30deg); color: #a8b586; }
+.about-story-prose p { margin: 0; max-width: 610px; color: #bfc7b8; font-size: 15px; line-height: 1.95; }
+.about-story-prose p::first-letter { float: left; font: 400 56px/.9 'Instrument Serif', Georgia, serif; padding: 7px 8px 0 0; color: #d6e1c7; }
+.scene-unavailable .loader { background: transparent; align-items: flex-end; padding: 25px; pointer-events: none; z-index: 1; }
+.scene-unavailable .loader p { max-width: 230px; }
+@keyframes scene-copy-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 1100px) and (min-width: 701px) {
+  .scene-copy { left: 26px; width: 34%; }
+  .mandy-about #viewer { left: 32%; }
+  .scene-panel > p { font-size: 13px; line-height: 1.75; }
+  .profile-note { padding: 27px 18px 31px; }
+  .profile-note dl > div { grid-template-columns: 77px 1fr; }
+  .profile-note dd { font-size: 12px; }
+  .mandy-about .intro p { max-width: 250px; }
+  .story-motif { display: none; }
+}
+@media (max-width: 700px) {
+  .mandy-about .intro p { position: static; max-width: none; font-size: 12px; }
+  .mandy-about .world { display: flex; flex-direction: column; height: auto; min-height: 790px; padding: 86px 0 64px; }
+  .mandy-about .scene-label { top: 23px; left: 22px; }
+  .mandy-about .live-tag { display: none; }
+  .scene-copy { position: relative; order: 0; left: auto; right: auto; top: auto; width: auto; max-width: none; min-height: 230px; margin: 0 23px 10px; }
+  .scene-panel h2 { font-size: 31px; margin-bottom: 14px; }
+  .scene-panel > p { font-size: 13px; line-height: 1.75; max-width: 420px; }
+  .scene-panel .scene-quote { font-size: 31px; max-width: 320px; }
+  .scene-read-link { margin-top: 12px; }
+  .profile-note { width: 245px; padding: 21px 24px 27px; transform: rotate(-3deg); margin: 4px 0 0 5px; }
+  .profile-note .note-heading { font-size: 32px; margin-bottom: 14px; }
+  .profile-note dl { gap: 9px; }
+  .profile-note dd { font-size: 13px; }
+  .course-list { max-width: 440px; margin-bottom: 12px; gap: 6px; }
+  .course-list li { font-size: 10px; padding: 5px 8px; }
+  .scene-panel .academic-caption { font-size: 11px; max-width: 370px; }
+  .mandy-about #viewer { position: relative; order: 1; flex: none; width: calc(100% + 70px); height: 400px; margin-left: -35px; top: auto; left: auto; right: auto; bottom: auto; }
+  .mandy-about .orbit-hint { left: 16px; right: auto; bottom: 82px; }
+  .mandy-about .view-controls { right: 13px; bottom: 80px; }
+  .mandy-about .view-controls .round-button { width: 35px; height: 35px; font-size: 21px; }
+  .mandy-about .chapters { margin-bottom: 38px; }
+  .about-story { grid-template-columns: 1fr; gap: 24px; padding: 34px 4px 39px; }
+  .about-story-heading h2 { font-size: 43px; margin: 10px 0 17px; }
+  .story-motif { right: 11px; top: 35px; font-size: 50px; }
+  .about-story-prose p { font-size: 14px; line-height: 1.9; }
+  .scene-unavailable .loader { padding-bottom: 180px; }
+}
+@media (prefers-reduced-motion: reduce) { .scene-panel { animation: none; } }
