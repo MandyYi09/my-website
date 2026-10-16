@@ -77,7 +77,7 @@
     {
       id: 'painting',
       title: 'From painting to interaction',
-      description: 'Two experiments inspired by Shuilu (Water and Land) paintings explore 2D animation and 3D sculpture. The 2D Cloud Court became the carousel on the Zhong Art website.',
+      description: 'Two experiments inspired by Shuilu paintings explore 2D animation and 3D sculpture. The 2D Cloud Court became the carousel on the Zhong Art website.',
       projects: ['zhong-art', 'moderized-china-art-2d', 'moderized-china-art-3d'],
       stages: ['The website / Final context', '2D study / Adopted in the carousel', '3D study / Parallel exploration'],
       notes: ['Brings the 2D experiment into the website.', 'The animated scene selected for Zhong Art.', 'A sculptural approach to the same inspiration.']

@@ -29,7 +29,7 @@
     "title": "Zhong Art",
     "category": "Interactive Art",
     "shortDescription": "A website for exploring Chinese painting, bringing the 2D Cloud Court experiment into its carousel.",
-    "longDescription": "Zhong Art brings Chinese painting into an interactive website, with an atlas, daily draw, and composition experiences. The Cloud Court and The Keeper of the Cloud Gate are related experiments inspired by Shuilu (Water and Land) paintings: one explores a 2D animated scene, the other a 3D guardian sculpture. The 2D version was ultimately brought into Zhong Art as a carousel, connecting the earlier artwork exploration to the final website.",
+    "longDescription": "Zhong Art brings Chinese painting into an interactive website, with an atlas, daily draw, and composition experiences. The Cloud Court and The Keeper of the Cloud Gate are related experiments inspired by Shuilu paintings: one explores a 2D animated scene, the other a 3D guardian sculpture. The 2D version was ultimately brought into Zhong Art as a carousel, connecting the earlier artwork exploration to the final website.",
     "technologies": [
       "JavaScript",
       "Interactive web design"
