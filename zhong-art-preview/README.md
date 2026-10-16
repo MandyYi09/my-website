@@ -1,4 +1,4 @@
-The Cloud Court canvas, styles, script, and three painted guardian images come from
+Shuilu in Motion canvas, styles, script, and three painted guardian images come from
 MandyYi09/zhong-art at `apps/web/public/artwork/cloud-court`.
 
 The local scene is used for the homepage's live carousel background and as a

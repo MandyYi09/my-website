@@ -1,7 +1,7 @@
 (() => {
   const atlas = new URLSearchParams(location.search).get('project') === 'zhong-art';
   const frame = document.querySelector('iframe');
-  frame.title = atlas ? 'Zhong Art painting atlas' : 'Mandy’s Portfolio homepage';
+  frame.title = atlas ? 'Shuilu: A Closer Look painting atlas' : 'Mandy’s Portfolio homepage';
   const resize = () => {
     const scale = innerWidth / 1280;
     frame.style.height = innerHeight / scale + 'px';

@@ -38,8 +38,8 @@
     return data.filter(project => project !== interactive).map(project => project === generative ? {
       ...generative,
       title: 'Circle Multiplication',
-      shortDescription: 'From an interactive math garden to a continuously evolving generative artwork.',
-      longDescription: 'One circle, one multiplication rule, two ways to experience it. The Interactive Math Garden makes the parameters visible; the Generative Study turns the same construction into a fullscreen, continuously evolving artwork.',
+      shortDescription: generative.shortDescription,
+      longDescription: generative.longDescription,
       demoUrl: circleDemos.generative,
       imageUrl: 'assets/images/projects/p5-circle-multiplication/color-cover.jpg',
       domainTags: [...new Set([...items(generative.domainTags), ...items(interactive.domainTags)])],
@@ -69,7 +69,7 @@
     {
       id: 'gesture',
       title: 'From gesture to movement',
-      description: 'AI Hands → Finger Wand → Align Studio. Each experiment builds on the last: detecting a gesture, tracing movement, then turning tracking into a practice interface.',
+      description: 'AI Hands → Finger Wand → Align Studio. My curiosity about camera-based interaction grew from locating fingertips, to drawing with movement, to exploring how full-body tracking could support stretching.',
       projects: ['ai-hands', 'finger-wand', 'align-studio'],
       stages: ['01 / Detect a gesture', '02 / Trace movement', '03 / Build a practice'],
       notes: ['Finger distance becomes color.', 'Motion becomes a trail of light.', 'Full-body tracking meets a 3D guide.']
@@ -77,10 +77,10 @@
     {
       id: 'painting',
       title: 'From painting to interaction',
-      description: 'Two experiments inspired by Shuilu paintings explore 2D animation and 3D sculpture. The 2D Cloud Court became the carousel on the Zhong Art website.',
+      description: 'My interest in Chinese art meets technology and vibe coding in three related experiments. Shuilu in Motion explores a 2D interactive environment; The Keeper of the Cloud Gate explores a 3D character. Shuilu: A Closer Look brings the 2D study into its carousel, keeping the paintings and their cultural significance at the center.',
       projects: ['zhong-art', 'moderized-china-art-2d', 'moderized-china-art-3d'],
       stages: ['The website / Final context', '2D study / Adopted in the carousel', '3D study / Parallel exploration'],
-      notes: ['Brings the 2D experiment into the website.', 'The animated scene selected for Zhong Art.', 'A sculptural approach to the same inspiration.']
+      notes: ['Brings the 2D experiment into the website.', 'The animated scene selected for Shuilu: A Closer Look.', 'A sculptural approach to the same inspiration.']
     }
   ];
   const projectSeries = project => series.find(group => group.projects.includes(project.slug));
@@ -168,7 +168,7 @@
     const title = node('h2', '', 'Circle Multiplication');
     title.id = 'dialog-title';
     content.append(eyebrow, title, node('p', 'dialog-description',
-      'Exploring how a simple multiplication rule can become both a tool for understanding and a moving visual experience.'));
+      project.longDescription));
 
     const hero = node('figure', 'study-hero');
     const artwork = node('div', 'study-artwork');

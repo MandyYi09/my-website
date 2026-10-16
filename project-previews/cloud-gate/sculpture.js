@@ -294,6 +294,6 @@ export function createSculpture(){
   const parts={pedestal:buildBase(),guardian:buildGuardian(),halo:buildHalo(),staff:buildStaff(),ribbons:buildRibbons(),clouds:buildClouds()};
   Object.values(parts).forEach(p=>root.add(p));
   root.scale.x=-1; // Match the concept: staff on the viewer’s right, offering pearl on the left.
-  root.userData={revision:2,stabilityRevision:1,headRevision:'3.0',title:'The Keeper of the Cloud Gate',description:'An original celestial guardian inspired by the supplied Chinese guardian paintings. Procedurally sculpted as real 3D geometry.',author:'Original project artwork',units:'meters (artistic scale)'};
+  root.userData={revision:2,stabilityRevision:1,headRevision:'3.0',title:'The Keeper of the Cloud Gate',description:'A 3D character experiment inspired by Shuilu paintings, using Astra for image rendering and 3D generation, with editable procedural geometry.',author:'Original project artwork',units:'meters (artistic scale)'};
   return {root,parts,materials};
 }

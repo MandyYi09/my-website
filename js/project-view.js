@@ -1,8 +1,8 @@
 (() => {
   const projects = new Map([
-    ['walker', { title: 'Walking Code', src: 'https://mandyyi09.github.io/walker/' }],
-    ['grid-1', { title: 'Grid 1', src: 'https://mandyyi09.github.io/grid-1/' }],
-    ['zhong-art', { title: 'Zhong Art', src: 'https://mandyyi09.github.io/zhong-art/' }],
+    ['walker', { title: 'Walker', src: 'https://mandyyi09.github.io/walker/' }],
+    ['grid-1', { title: 'Glitch', src: 'https://mandyyi09.github.io/grid-1/' }],
+    ['zhong-art', { title: 'Shuilu: A Closer Look', src: 'https://mandyyi09.github.io/zhong-art/' }],
     ['align-studio', { title: 'Align Studio', src: 'https://mandyyi09.github.io/Align-Studio/' }],
     ['fitai', { title: 'FitAI', src: 'https://mandyyi09.github.io/fitAi/' }]
   ]);

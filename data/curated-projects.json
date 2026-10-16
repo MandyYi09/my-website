@@ -4,8 +4,8 @@
     "slug": "align-studio",
     "title": "Align Studio",
     "category": "Movement & Fitness",
-    "shortDescription": "From fingertip experiments to full-body interaction: a focused studio for 32 stretches and yoga movements.",
-    "longDescription": "Align Studio develops the camera-based interaction explored in AI Hands and Finger Wand into a full-body movement-practice interface. The browser prototype offers 32 stretching and yoga references, a rotatable 3D guide, optional MediaPipe tracking, approximate joint-angle feedback, front and side reference views, and a manual hold timer. Camera frames are processed locally. FitAI is shown separately as the more complex movement studio. Reference similarity is not a guarantee of safe form.",
+    "shortDescription": "An experiment using body-pose recognition and AI camera models to support safer stretching.",
+    "longDescription": "Align Studio connects my interest in movement with the camera experiments I began in AI Hands and Finger Wand. I moved from tracking fingertips to recognizing body poses, exploring how AI camera models could help people stretch more safely. A 3D guide and approximate pose feedback offer ways to compare movements and practice with greater awareness.",
     "technologies": [
       "Three.js",
       "MediaPipe Tasks Vision",
@@ -26,10 +26,10 @@
   {
     "id": "local:zhong-art",
     "slug": "zhong-art",
-    "title": "Zhong Art",
+    "title": "Shuilu: A Closer Look",
     "category": "Interactive Art",
-    "shortDescription": "A website for exploring Chinese painting, bringing the 2D Cloud Court experiment into its carousel.",
-    "longDescription": "Zhong Art brings Chinese painting into an interactive website, with an atlas, daily draw, and composition experiences. The Cloud Court and The Keeper of the Cloud Gate are related experiments inspired by Shuilu paintings: one explores a 2D animated scene, the other a 3D guardian sculpture. The 2D version was ultimately brought into Zhong Art as a carousel, connecting the earlier artwork exploration to the final website.",
+    "shortDescription": "An experiment connecting my interest in Chinese art with technology, inviting a closer look at Shuilu paintings.",
+    "longDescription": "Shuilu: A Closer Look brings my interest in Chinese art together with technology and vibe coding. Through an atlas, a daily draw, and composition experiments, I explore how ancient paintings can feel approachable today while retaining their cultural significance. The project focuses on images identified in its source material as Shuilu paintings. Its carousel grew from Shuilu in Motion, while The Keeper of the Cloud Gate explores a related character in 3D.",
     "technologies": [
       "JavaScript",
       "Interactive web design"
@@ -44,7 +44,16 @@
     "imageUrl": "assets/images/projects/zhong-art/atlas-cover.jpg",
     "sortOrder": 7,
     "hasPages": true,
-    "repositoryUrl": "https://github.com/MandyYi09/zhong-art"
+    "repositoryUrl": "https://github.com/MandyYi09/zhong-art",
+    "source": {
+      "artworkTradition": "Shuilu painting (water-and-land ritual painting)",
+      "backgroundUrl": "https://www.ihchina.cn/project_details/14249/",
+      "localEvidence": [
+        "zhong-art-project/assets/index-Bv4gribC.js",
+        "zhong-art-project/artwork/cloud-court/README.md"
+      ],
+      "provenanceNote": "Project text identifies Shuilu paintings and links to this official background source. The individual images have no verified artist, date, temple, or collection attribution in the available evidence."
+    }
   },
   {
     "id": "local:behind-the-event",
