@@ -17,9 +17,11 @@
       "stretching",
       "yoga"
     ],
-    "demoUrl": "project.html?project=align-studio&from=projects",
+    "demoUrl": "https://mandyyi09.github.io/Align-Studio/",
     "imageUrl": "assets/images/projects/align-studio/studio.jpg",
-    "sortOrder": 5
+    "sortOrder": 5,
+    "hasPages": true,
+    "repositoryUrl": "https://github.com/MandyYi09/Align-Studio"
   },
   {
     "id": "local:zhong-art",
@@ -38,9 +40,11 @@
       "interactive-art",
       "visual-storytelling"
     ],
-    "demoUrl": "project.html?project=zhong-art&from=projects",
+    "demoUrl": "https://mandyyi09.github.io/zhong-art/",
     "imageUrl": "assets/images/projects/zhong-art/atlas-cover.jpg",
-    "sortOrder": 7
+    "sortOrder": 7,
+    "hasPages": true,
+    "repositoryUrl": "https://github.com/MandyYi09/zhong-art"
   },
   {
     "id": "local:behind-the-event",

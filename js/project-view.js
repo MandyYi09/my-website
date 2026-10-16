@@ -2,9 +2,9 @@
   const projects = new Map([
     ['walker', { title: 'Walking Code', src: 'https://mandyyi09.github.io/walker/' }],
     ['grid-1', { title: 'Grid 1', src: 'https://mandyyi09.github.io/grid-1/' }],
-    ['zhong-art', { title: 'Zhong Art', src: 'zhong-art-project/' }],
-    ['align-studio', { title: 'Align Studio', src: 'align-studio-project/index.html' }],
-    ['fitai', { title: 'FitAI', src: 'fitai-project/index.html' }]
+    ['zhong-art', { title: 'Zhong Art', src: 'https://mandyyi09.github.io/zhong-art/' }],
+    ['align-studio', { title: 'Align Studio', src: 'https://mandyyi09.github.io/Align-Studio/' }],
+    ['fitai', { title: 'FitAI', src: 'https://mandyyi09.github.io/fitAi/' }]
   ]);
   const id = new URLSearchParams(location.search).get('project');
   const project = projects.get(id);

@@ -22,7 +22,7 @@
     'p5-circle-multiplication': 'circle-multiplication/index.html?embed=1',
     'grid-1': 'project-previews/grid-1/index.html',
     'grid-2': 'project-previews/grid-2/index.html',
-    'align-studio': 'align-studio-project/index.html?embed=1',
+    'align-studio': 'https://mandyyi09.github.io/Align-Studio/?embed=1',
     fitai: 'fitai-preview/index.html?mode=rowing&embed=1&layout=card',
     'zhong-art': 'project-previews/website.html?project=zhong-art',
     'moderized-china-art-2d': 'zhong-art-preview/scene.html?embed=1',
