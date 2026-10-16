@@ -11,6 +11,7 @@
   resize();
   frame.addEventListener('load', () => {
     const doc = frame.contentDocument;
+    if (!doc) { parent.postMessage({ type: 'portfolio-preview', event: 'ready' }, location.origin); return; }
     let announced = false;
     const inspect = () => {
       if (atlas) {
@@ -40,5 +41,5 @@
     doc.addEventListener('load', inspect, true);
     inspect();
   });
-  frame.src = atlas ? '../zhong-art-project/' : '../index.html?slide=walker';
+  frame.src = atlas ? 'https://mandyyi09.github.io/zhong-art/' : '../index.html?slide=walker';
 })();
