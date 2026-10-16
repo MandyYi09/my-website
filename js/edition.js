@@ -19,7 +19,7 @@
   });
   const atlas = {
     move: { image:'assets/images/sports/rowing/rowing.JPG', alt:'Rowing on the water at sunset', caption:'01 / Finding a rhythm', story:'Tennis and rowing: effort, focus, routine, and the changes that come from staying with something.', href:'sports.html', link:'Explore sport ↗' },
-    make: { image:'assets/images/projects/grid-1/grid-1.jpg', alt:'A colorful generative line pattern from Grid 1', caption:'02 / An idea made visible', story:'Creative coding, interactive art, and the process of turning an idea into something I can test. Small rules can lead somewhere unexpected.', href:'projects.html', link:'Explore my projects ↗' },
+    make: { image:'assets/images/projects/grid-1/grid-1.jpg', alt:'A colorful generative line pattern from Glitch', caption:'02 / An idea made visible', story:'Creative coding, interactive art, and the process of turning an idea into something I can test. Small rules can lead somewhere unexpected.', href:'projects.html', link:'Explore my projects ↗' },
     notice: { image:'assets/images/photography/sunset-La Jolla.jpg', alt:'Sunset photographed in La Jolla', caption:'03 / A moment worth keeping', story:'Photography is a way to slow down and notice light, places, and small details. A practice in looking a little closer.', href:'photography.html', link:'View photographs ↗' }
   };
   document.querySelectorAll('[data-atlas]').forEach(button => {

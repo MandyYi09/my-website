@@ -1,16 +1,15 @@
-# Full Zhong Art public project
+# Shuilu: A Closer Look project entry
 
-Synced from the latest local Zhong Art `pages-dist` build on 2026-10-11.
-This version opens in English and retains the Chinese language switch.
-The complete public app includes Home, Daily Draw, Atlas, My Path, and Compose.
+The portfolio uses the display name **Shuilu: A Closer Look**. Its canonical
+application remains at <https://mandyyi09.github.io/zhong-art/>; technical paths
+and repository names are retained so existing links keep working.
 
-To update it after building Zhong Art:
+`index.html` redirects to that application. The retained compiled files are a
+historical snapshot, not the source to edit. See `DEPLOYMENT.md` for the update
+workflow. Portfolio display-name changes do not rename the independently hosted
+application.
 
-```sh
-python3 scripts/sync_zhong_art.py /path/to/zhong-art/pages-dist
-```
-
-The sync script copies the public build and resolves its asset and router base
-from the local module URL, so it works both in local previews and under a
-portfolio hosting subdirectory. The carousel's animated scene remains in
-`zhong-art-preview/`.
+The local homepage and project-card scene lives in `zhong-art-preview/`.
+Project text identifies the inspiration as Shuilu paintings, but the supplied
+images have no verified individual artist, date, temple, or collection attribution.
+Background on the tradition: <https://www.ihchina.cn/project_details/14249/>.
