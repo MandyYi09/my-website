@@ -81,22 +81,8 @@
   }
   root.querySelectorAll('.showcase-live').forEach(frame=>{
     frame.addEventListener('load',()=>{
-      if(frame.hasAttribute('src') && !['fitai','zhong-art'].includes(frame.closest('[data-project]')?.dataset.project)) frame.closest('.showcase-slide').classList.add('is-live');
+      if(frame.hasAttribute('src')) frame.closest('.showcase-slide').classList.add('is-live');
     });
-  });
-  window.addEventListener('message',event=>{
-    const frame=root.querySelector('[data-project="fitai"] .showcase-live');
-    if(event.origin === location.origin && event.source === frame?.contentWindow &&
-       event.data?.type === 'fitai-preview' && event.data.event === 'ready' && frame.hasAttribute('src')) {
-      frame.closest('.showcase-slide').classList.add('is-live');
-    }
-  });
-  window.addEventListener('message',event=>{
-    const frame=root.querySelector('[data-project="zhong-art"] .showcase-live');
-    if(event.origin === location.origin && event.source === frame?.contentWindow &&
-       event.data?.type === 'zhong-art-preview' && event.data.event === 'ready' && frame.hasAttribute('src')) {
-      frame.closest('.showcase-slide').classList.add('is-live');
-    }
   });
   root.querySelectorAll('.showcase-live-toggle').forEach(button=>{
     button.addEventListener('click',()=>{livePaused=!livePaused;updateLive();});
@@ -195,9 +181,9 @@
       root.querySelectorAll('[data-project]').forEach(slide => {
         const project = projects.find(item => item.slug === slide.dataset.project);
         if (!project) return;
-        if (project.slug !== 'fitai' && !slide.hasAttribute('data-editorial-copy') && project.shortDescription) slide.querySelector('.showcase-description').textContent = project.shortDescription;
+        if (!slide.hasAttribute('data-editorial-copy') && project.shortDescription) slide.querySelector('.showcase-description').textContent = project.shortDescription;
         const destination = project.demoUrl || project.repositoryUrl;
-        if (project.slug !== 'fitai' && !slide.hasAttribute('data-editorial-copy') && destination && /^https?:\/\//i.test(destination)) slide.querySelector('.showcase-link').href = destination;
+        if (!slide.hasAttribute('data-editorial-copy') && destination && /^https?:\/\//i.test(destination)) slide.querySelector('.showcase-link').href = destination;
       });
     }).catch(() => {});
 })();

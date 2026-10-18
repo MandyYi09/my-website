@@ -77,10 +77,10 @@
     {
       id: 'painting',
       title: 'From painting to interaction',
-      description: 'My interest in Chinese art meets technology and vibe coding in three related experiments. Shuilu in Motion explores a 2D interactive environment; The Keeper of the Cloud Gate explores a 3D character. Shuilu: A Closer Look brings the 2D study into its carousel, keeping the paintings and their cultural significance at the center.',
+      description: 'My interest in Chinese art meets technology and vibe coding in three related experiments. Shuilu in Motion explores a 2D interactive environment; 3D Shuilu experiment explores a 3D character. Modern Shuilu brings the 2D study into its carousel, keeping the paintings and their cultural significance at the center.',
       projects: ['zhong-art', 'moderized-china-art-2d', 'moderized-china-art-3d'],
       stages: ['The website / Final context', '2D study / Adopted in the carousel', '3D study / Parallel exploration'],
-      notes: ['Brings the 2D experiment into the website.', 'The animated scene selected for Shuilu: A Closer Look.', 'A sculptural approach to the same inspiration.']
+      notes: ['Brings the 2D experiment into the website.', 'The animated scene selected for Modern Shuilu.', 'A sculptural approach to the same inspiration.']
     }
   ];
   const projectSeries = project => series.find(group => group.projects.includes(project.slug));
