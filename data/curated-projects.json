@@ -26,10 +26,10 @@
   {
     "id": "local:zhong-art",
     "slug": "zhong-art",
-    "title": "Shuilu: A Closer Look",
+    "title": "Modern Shuilu",
     "category": "Interactive Art",
     "shortDescription": "An experiment connecting my interest in Chinese art with technology, inviting a closer look at Shuilu paintings.",
-    "longDescription": "Shuilu: A Closer Look brings my interest in Chinese art together with technology and vibe coding. Through an atlas, a daily draw, and composition experiments, I explore how ancient paintings can feel approachable today while retaining their cultural significance. The project focuses on images identified in its source material as Shuilu paintings. Its carousel grew from Shuilu in Motion, while The Keeper of the Cloud Gate explores a related character in 3D.",
+    "longDescription": "Modern Shuilu brings my interest in Chinese art together with technology and vibe coding. Through an atlas, a daily draw, and composition experiments, I explore how ancient paintings can feel approachable today while retaining their cultural significance. The project focuses on images identified in its source material as Shuilu paintings. Its carousel grew from Shuilu in Motion, while 3D Shuilu experiment explores a related character in 3D.",
     "technologies": [
       "JavaScript",
       "Interactive web design"
