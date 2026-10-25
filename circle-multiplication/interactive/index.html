@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,31 +10,31 @@
   <script defer src="sketch.js"></script>
 </head>
 <body>
-  <header class="masthead"><a class="brand" href="./"><span class="brand-mark">✳</span> 数学花园 <span class="brand-en">MATH GARDEN</span></a><span class="edition">一间可以动手的数学实验室 <b>001 / 圆与乘法</b></span></header>
+  <header class="masthead"><a class="brand" href="./"><span class="brand-mark">✳</span> Math Garden</a><span class="edition">A hands-on math lab <b>001 / Circles & Multiplication</b></span></header>
   <main>
-    <section class="intro"><div><p class="eyebrow">SMALL RULES. INFINITE BEAUTY.</p><h1>让乘法，<span>开一朵花。</span></h1><p class="subtitle">一个圆，一条简单的规则。<br class="mobile-break">在数字之间，发现意想不到的形状。</p></div><a class="learn-link" href="#how-it-works">背后的数学 <span>↘</span></a></section>
-    <section class="lab" aria-label="圆上的乘法交互实验">
+    <section class="intro"><div><p class="eyebrow">SMALL RULES. INFINITE BEAUTY.</p><h1>Let multiplication <span>bloom.</span></h1><p class="subtitle">One circle. One simple rule. <br class="mobile-break">Discover unexpected shapes between the numbers.</p></div><a class="learn-link" href="#how-it-works">The math behind it <span>↘</span></a></section>
+    <section class="lab" aria-label="Interactive circle multiplication experiment">
       <div class="art-panel">
-        <div class="art-heading"><span><i></i> LIVE EXPERIMENT</span><span id="art-title">01 — 心形的诞生</span></div>
-        <div id="canvas-container" role="img" aria-label="圆上的乘法连线图。使用右侧参数探索图形。"></div>
-        <div class="art-footer"><span id="canvas-equation">i → (i × 2.00) mod 240</span><span>移动到圆周，观察一条连线</span></div>
+        <div class="art-heading"><span><i></i> LIVE EXPERIMENT</span><span id="art-title">01 — A heart takes shape</span></div>
+        <div id="canvas-container" role="img" aria-label="Circle multiplication diagram. Use the controls to explore the pattern."></div>
+        <div class="art-footer"><span id="canvas-equation">i → (i × 2.00) mod 240</span><span>Hover near the circle to trace a connection</span></div>
       </div>
       <aside class="controls">
         <div class="section-label">YOUR PLAYGROUND <span>✳</span></div>
-        <h2>从一个数字开始</h2><p class="control-intro">轻轻调整，图形就会发生变化。</p>
-        <div class="field"><label for="multiplier">乘数 <span>Multiplier</span></label><div class="number-row"><output id="multiplier-value" for="multiplier">2.00</output><span>×</span></div><input id="multiplier" type="range" min="0" max="100" step="0.01" value="2"><div class="range-labels"><span>0</span><span>100</span></div></div>
-        <div class="field points-field"><label for="points">圆上的点 <span>Points</span><output id="points-value" for="points">240</output></label><input id="points" type="range" min="20" max="600" step="1" value="240"><div class="range-labels"><span>20 · 简单</span><span>600 · 细腻</span></div></div>
-        <div class="palette-row"><span>花园的颜色</span><div class="swatches" role="group" aria-label="连线配色"><button class="swatch selected" data-palette="mint" aria-label="薄荷绿" aria-pressed="true" style="--swatch:#b9d5b1"></button><button class="swatch" data-palette="peach" aria-label="日落橙" aria-pressed="false" style="--swatch:#eab18e"></button><button class="swatch" data-palette="lavender" aria-label="薰衣草紫" aria-pressed="false" style="--swatch:#b5b0e0"></button><button class="swatch" data-palette="rainbow" aria-label="彩虹" aria-pressed="false" style="--swatch:conic-gradient(#e8a082,#bfcf9c,#8dc8d1,#c0a4da,#e8a082)"></button></div></div>
-        <button id="play" class="primary" aria-pressed="false"><span id="play-icon">▶</span> <span id="play-text">让它生长</span><span class="button-end">自动演化</span></button>
-        <div class="secondary-actions"><button id="reset">↺ 重置</button><button id="save">↓ 保存图片</button></div>
-        <p class="keyboard-tip">空格键 · 播放 / 暂停</p>
+        <h2>Start with a number</h2><p class="control-intro">Make a small change. Watch the pattern shift.</p>
+        <div class="field"><label for="multiplier">Multiplier</label><div class="number-row"><output id="multiplier-value" for="multiplier">2.00</output><span>×</span></div><input id="multiplier" type="range" min="0" max="100" step="0.01" value="2"><div class="range-labels"><span>0</span><span>100</span></div></div>
+        <div class="field points-field"><label for="points">Points on the circle<output id="points-value" for="points">240</output></label><input id="points" type="range" min="20" max="600" step="1" value="240"><div class="range-labels"><span>20 · Simple</span><span>600 · Detailed</span></div></div>
+        <div class="palette-row"><span>Garden colors</span><div class="swatches" role="group" aria-label="Line colors"><button class="swatch selected" data-palette="mint" aria-label="Mint green" aria-pressed="true" style="--swatch:#b9d5b1"></button><button class="swatch" data-palette="peach" aria-label="Sunset orange" aria-pressed="false" style="--swatch:#eab18e"></button><button class="swatch" data-palette="lavender" aria-label="Lavender" aria-pressed="false" style="--swatch:#b5b0e0"></button><button class="swatch" data-palette="rainbow" aria-label="Rainbow" aria-pressed="false" style="--swatch:conic-gradient(#e8a082,#bfcf9c,#8dc8d1,#c0a4da,#e8a082)"></button></div></div>
+        <button id="play" class="primary" aria-pressed="false"><span id="play-icon">▶</span> <span id="play-text">Let it grow</span><span class="button-end">Auto-play</span></button>
+        <div class="secondary-actions"><button id="reset">↺ Reset</button><button id="save">↓ Save image</button></div>
+        <p class="keyboard-tip">Space · Play / Pause</p>
       </aside>
     </section>
-    <section class="presets" aria-label="图形预设"><div class="preset-label">试试这些种子 <span>CHOOSE A SEED →</span></div><button class="preset active" data-multiplier="2" data-points="240" data-title="01 — 心形的诞生" aria-pressed="true"><span class="seed-icon">♡</span><span><b>心形的诞生</b><small>× 2 · 温柔的起点</small></span><span class="preset-arrow">↗</span></button><button class="preset" data-multiplier="3" data-points="300" data-title="02 — 双叶的回响" aria-pressed="false"><span class="seed-icon">∞</span><span><b>双叶的回响</b><small>× 3 · 对称的秩序</small></span><span class="preset-arrow">↗</span></button><button class="preset" data-multiplier="51" data-points="300" data-title="03 — 编织一颗星" aria-pressed="false"><span class="seed-icon">✳</span><span><b>编织一颗星</b><small>× 51 · 错综的惊喜</small></span><span class="preset-arrow">↗</span></button></section>
-    <section class="explanation" id="how-it-works"><div><p class="eyebrow">THE BEAUTY BEHIND IT</p><h2>没有画曲线。<br>曲线自己出现了。</h2></div><div class="explanation-body"><p>在圆周上均匀放置 <b>N 个点</b>，从 0 开始编号。选择一个乘数 m，把每个点 i 连接到 <b>(i × m) mod N</b> 的位置。超出一圈时，就从头继续数。</p><div class="formula">i <span>⟶</span> (i × m) <em>mod</em> N</div><p>比如 N = 240、m = 2 时，点 10 连到点 20，点 130 连到点 20。许多直线叠在一起，会勾勒出心脏线的轮廓。乘数不是整数时，终点沿圆周连续移动，图形也随之变化。</p><div class="challenge"><span>↗ 小挑战</span>把点数调到 20，数一数连线；再增加到 600，看看轮廓如何浮现。</div></div></section>
+    <section class="presets" aria-label="Pattern presets"><div class="preset-label">Try these seeds <span>CHOOSE A SEED →</span></div><button class="preset active" data-multiplier="2" data-points="240" data-title="01 — A heart takes shape" aria-pressed="true"><span class="seed-icon">♡</span><span><b>A heart takes shape</b><small>× 2 · A gentle beginning</small></span><span class="preset-arrow">↗</span></button><button class="preset" data-multiplier="3" data-points="300" data-title="02 — Twin petals" aria-pressed="false"><span class="seed-icon">∞</span><span><b>Twin petals</b><small>× 3 · Order in symmetry</small></span><span class="preset-arrow">↗</span></button><button class="preset" data-multiplier="51" data-points="300" data-title="03 — Weave a star" aria-pressed="false"><span class="seed-icon">✳</span><span><b>Weave a star</b><small>× 51 · Intricate surprises</small></span><span class="preset-arrow">↗</span></button></section>
+    <section class="explanation" id="how-it-works"><div><p class="eyebrow">THE BEAUTY BEHIND IT</p><h2>No curves drawn.<br>Yet curves emerge.</h2></div><div class="explanation-body"><p>Place <b>N points</b> evenly around a circle, numbered from 0. Choose a multiplier m, then connect each point i to <b>(i × m) mod N</b>. When the count goes beyond one full turn, wrap around to the beginning.</p><div class="formula">i <span>⟶</span> (i × m) <em>mod</em> N</div><p>For example, with N = 240 and m = 2, point 10 connects to point 20, and point 130 also connects to point 20. Together, the straight lines trace the outline of a cardioid. When the multiplier is not a whole number, the endpoints move smoothly around the circle and the pattern changes with them.</p><div class="challenge"><span>↗ A small challenge</span>Set the point count to 20 and count the connections. Then increase it to 600 and watch the outline emerge.</div></div></section>
   </main>
-  <footer><span>数学花园 <span class="footer-star">✳</span> 把抽象，变成看得见的美。</span><span>MADE WITH p5.js & CURIOSITY</span></footer>
+  <footer><span>Math Garden <span class="footer-star">✳</span> Making abstract ideas visibly beautiful.</span><span>MADE WITH p5.js & CURIOSITY</span></footer>
   <div id="toast" role="status" aria-live="polite"></div>
-  <noscript><p>请启用 JavaScript 来探索这个数学实验。</p></noscript>
+  <noscript><p>Enable JavaScript to explore this math experiment.</p></noscript>
 </body>
 </html>

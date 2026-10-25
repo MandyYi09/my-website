@@ -174,11 +174,11 @@ body.mandy-about {
   }
 }
 
-/* Copy and character share a scene, with a clear reading area beside the model. */
+/* Give the animation the full panel without text or control overlays. */
 .mandy-about .intro p { max-width: 300px; }
 .mandy-about .world { height: 610px; overflow: clip; }
-.mandy-about #viewer { left: 30%; bottom: 64px; }
-.mandy-about .world-glow { background: radial-gradient(ellipse 29% 67% at 68% 48%, #cdddc24d, #85a18522 52%, transparent 100%); }
+.mandy-about #viewer { inset: 0; }
+.mandy-about .world-glow { background: radial-gradient(ellipse 29% 67% at 50% 48%, #cdddc24d, #85a18522 52%, transparent 100%); }
 .mandy-about .live-tag { right: 27px; }
 .scene-copy { position: absolute; z-index: 2; top: 112px; left: 34px; width: 30%; max-width: 340px; }
 .scene-panel[hidden] { display: none; }
@@ -217,7 +217,7 @@ body.mandy-about {
 @keyframes scene-copy-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (max-width: 1100px) and (min-width: 701px) {
   .scene-copy { left: 26px; width: 34%; }
-  .mandy-about #viewer { left: 32%; }
+
   .scene-panel > p { font-size: 13px; line-height: 1.75; }
   .profile-note { padding: 27px 18px 31px; }
   .profile-note dl > div { grid-template-columns: 77px 1fr; }
@@ -227,7 +227,7 @@ body.mandy-about {
 }
 @media (max-width: 700px) {
   .mandy-about .intro p { position: static; max-width: none; font-size: 12px; }
-  .mandy-about .world { display: flex; flex-direction: column; height: auto; min-height: 790px; padding: 86px 0 64px; }
+  .mandy-about .world { height: 500px; }
   .mandy-about .scene-label { top: 23px; left: 22px; }
   .mandy-about .live-tag { display: none; }
   .scene-copy { position: relative; order: 0; left: auto; right: auto; top: auto; width: auto; max-width: none; min-height: 230px; margin: 0 23px 10px; }
@@ -242,7 +242,7 @@ body.mandy-about {
   .course-list { max-width: 440px; margin-bottom: 12px; gap: 6px; }
   .course-list li { font-size: 10px; padding: 5px 8px; }
   .scene-panel .academic-caption { font-size: 11px; max-width: 370px; }
-  .mandy-about #viewer { position: relative; order: 1; flex: none; width: calc(100% + 70px); height: 400px; margin-left: -35px; top: auto; left: auto; right: auto; bottom: auto; }
+  .mandy-about #viewer { position: absolute; inset: 0; }
   .mandy-about .orbit-hint { left: 16px; right: auto; bottom: 82px; }
   .mandy-about .view-controls { right: 13px; bottom: 80px; }
   .mandy-about .view-controls .round-button { width: 35px; height: 35px; font-size: 21px; }

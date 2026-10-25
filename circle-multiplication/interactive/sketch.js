@@ -1,4 +1,4 @@
-/* 圆上的乘法：i → (i × m) mod N。p5.js instance mode. */
+/* Circle multiplication: i → (i × m) mod N. p5.js instance mode. */
 (() => {
   'use strict';
   const $ = (selector) => document.querySelector(selector);
@@ -19,8 +19,8 @@
     $('#canvas-equation').textContent = `i → (i × ${state.multiplier.toFixed(2)}) mod ${state.points}`;
     $('#play').setAttribute('aria-pressed', String(state.playing));
     $('#play-icon').textContent = state.playing ? 'Ⅱ' : '▶';
-    $('#play-text').textContent = state.playing ? '暂停生长' : '让它生长';
-    let title = '自由探索 — 你的数学花园';
+    $('#play-text').textContent = state.playing ? 'Pause growth' : 'Let it grow';
+    let title = 'Free exploration — Your Math Garden';
     document.querySelectorAll('.preset').forEach((button) => {
       const selected = Math.abs(Number(button.dataset.multiplier) - state.multiplier) < 0.005 && Number(button.dataset.points) === state.points;
       button.classList.toggle('active', selected);
@@ -33,7 +33,7 @@
       button.classList.toggle('selected', selected);
       button.setAttribute('aria-pressed', String(selected));
     });
-    container.setAttribute('aria-label', `乘法连线图：${state.points} 个点，乘数 ${state.multiplier.toFixed(2)}。连线规则为 i 连接到 (i × 乘数) mod ${state.points}。`);
+    container.setAttribute('aria-label', `Multiplication diagram: ${state.points} points, multiplier ${state.multiplier.toFixed(2)}. Each point i connects to (i × multiplier) mod ${state.points}.`);
   }
 
   function update() {
@@ -72,14 +72,14 @@
   $('#save').addEventListener('click', () => {
     if (!sketch) return;
     sketch.saveCanvas(`math-garden-m${state.multiplier.toFixed(2)}-n${state.points}`, 'png');
-    $('#toast').textContent = '已生成图片，请在浏览器下载中查看';
+    $('#toast').textContent = 'Image created. Check your browser downloads.';
     $('#toast').classList.add('visible');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => $('#toast').classList.remove('visible'), 3000);
   });
 
   if (typeof p5 === 'undefined') {
-    container.textContent = 'p5.js 加载失败，请确认 vendor/p5.min.js 文件存在后刷新。';
+    container.textContent = 'The artwork could not load. Please refresh the page to try again.';
     $('#play').disabled = true;
     $('#save').disabled = true;
     return;

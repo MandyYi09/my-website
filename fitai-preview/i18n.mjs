@@ -8,7 +8,7 @@ export function setLanguage(value) {
 
 // English remains the source copy. These strings are only used when Chinese is selected.
 const zh = {
-  'fitAI — Movement practice prototype': 'fitAI — 动作练习原型',
+  'Sports Form — Movement practice prototype': 'Sports Form — 动作练习原型',
   'Language': '语言',
   'An interactive movement practice prototype with 3D demonstrations and optional on-device pose feedback.': '互动动作练习原型，提供 3D 示范和可选的设备端姿态反馈。',
   'Your practice': '你的练习', 'How it works ↗': '使用说明 ↗',

@@ -1,4 +1,4 @@
-/* 圆上的乘法：i → (i × m) mod N。p5.js instance mode. */
+/* Circle multiplication: i → (i × m) mod N. p5.js instance mode. */
 (() => {
   'use strict';
 

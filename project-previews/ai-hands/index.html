@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Hands color preview</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #181818; }
+    video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline poster="../../assets/images/projects/ai-hands/color-poster.jpg" aria-label="Fingertip distance changes the background color in AI Hands">
+    <source src="../../assets/images/projects/ai-hands/color-preview.mp4" type="video/mp4">
+  </video>
+  <script>
+    const video = document.querySelector('video');
+    video.addEventListener('playing', () => {
+      parent.postMessage({ type: 'portfolio-preview', event: 'ready' }, location.origin);
+    });
+  </script>
+</body>
+</html>

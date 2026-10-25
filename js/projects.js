@@ -18,6 +18,7 @@
     interactive: 'circle-multiplication/interactive/index.html'
   };
   const liveCovers = {
+    'ai-hands': 'project-previews/ai-hands/index.html',
     walker: 'project-previews/walker/index.html',
     'p5-circle-multiplication': 'circle-multiplication/index.html?embed=1',
     'grid-1': 'project-previews/grid-1/index.html',
@@ -49,7 +50,7 @@
   const isCircleStudy = project => project.slug === circleSlug && Array.isArray(project.versions);
 
   const covers = {
-    'ai-hands': 'assets/images/projects/ai-hands/handsCard.png',
+    'ai-hands': 'assets/images/projects/ai-hands/color-poster.jpg',
     'grid-1': 'assets/images/projects/grid-1/grid-1.jpg',
     'grid-2': 'assets/images/projects/grid-2/grid-2.jpg',
     'walker': 'assets/images/projects/walker/walkerCard.png',
@@ -68,10 +69,10 @@
   const series = [
     {
       id: 'gesture',
-      title: 'From gesture to movement',
-      description: 'AI Hands → Finger Wand → Align Studio. My curiosity about camera-based interaction grew from locating fingertips, to drawing with movement, to exploring how full-body tracking could support stretching.',
+      title: 'From fingertip tracking to full-body practice',
+      description: 'AI Hands → Finger Wand → Align Studio → Sports Form. Each project grew from the last: I started by detecting fingertips, turned their movement into light, then explored full-body tracking for stretching. Sports Form expands that exploration into 48 movements, connecting camera-based interaction with my interest in rowing and yoga.',
       projects: ['ai-hands', 'finger-wand', 'align-studio'],
-      stages: ['01 / Detect a gesture', '02 / Trace movement', '03 / Build a practice'],
+      stages: ['01 / Track fingertips', '02 / Draw with movement', '03 / Explore full-body tracking'],
       notes: ['Finger distance becomes color.', 'Motion becomes a trail of light.', 'Full-body tracking meets a 3D guide.']
     },
     {
@@ -112,8 +113,8 @@
     const result = node('div', 'project-actions');
     const visit = visitUrl(project);
     const repo = safeUrl(project.repositoryUrl);
-    if (visit) result.append(externalLink(isCircleStudy(project) ? 'Experience artwork ↗' : 'Visit project ↗', visit, 'visit-link'));
-    if (repo && !isCircleStudy(project)) result.append(externalLink('GitHub ↗', repo, 'github-link'));
+    if (visit) result.append(externalLink(isCircleStudy(project) ? 'View project ↗' : 'Visit project ↗', visit, 'visit-link'));
+    if (repo) result.append(externalLink('GitHub ↗', repo, 'github-link'));
     return result;
   }
   function liveArtwork(project) {
@@ -194,7 +195,7 @@
     const explore = section('02 / INTERACTIVE EXPLORATION', 'Make the relationship visible',
       'The Math Garden exposes the multiplier, point count and color. Presets, a highlighted connection and a mathematical explanation help connect each adjustment to the resulting shape.');
     const labImage = node('img', 'study-lab-image');
-    labImage.src = 'assets/images/projects/p5-circle-multiplication/interactive.jpg';
+    labImage.src = 'assets/images/projects/p5-circle-multiplication/interactive-en.png';
     labImage.alt = 'The interactive Math Garden: a circle diagram alongside multiplier and point-count sliders, color choices and playback controls.';
     labImage.loading = 'lazy';
     explore.append(labImage, node('p', 'study-takeaway', 'Design focus: let the viewer ask “what changes when I change this number?”'));
@@ -270,7 +271,18 @@
     content.append(title);
     content.append(node('p', 'dialog-description', project.longDescription || project.shortDescription || ''));
     const imageUrl = safeUrl(project.imageUrl) || safeUrl(project.screenshotUrl) || safeUrl(covers[project.slug]);
-    if (imageUrl) {
+    if (project.slug === 'ai-hands') {
+      const video = node('video', 'dialog-image');
+      video.src = 'assets/images/projects/ai-hands/color-preview.mp4';
+      video.poster = covers['ai-hands'];
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.controls = true;
+      video.autoplay = !motionPreference.matches && !previewsPaused;
+      video.setAttribute('aria-label', 'AI Hands recording: fingertip distance changes the background color');
+      content.append(video);
+    } else if (imageUrl) {
       const image = node('img', 'dialog-image');
       image.src = imageUrl;
       image.alt = project.title + ' project preview';
@@ -334,12 +346,12 @@
     body.append(node('h2', '', project.title));
     const group = projectSeries(project);
     if (group) body.append(node('p', 'project-development-stage', group.stages[group.projects.indexOf(project.slug)]));
-    if (project.slug === 'fitai') body.append(node('p', 'project-development-stage', 'Expanded version / 48 movements'));
+    if (project.slug === 'fitai') body.append(node('p', 'project-development-stage', '04 / Expand the practice · 48 movements'));
     body.append(node('p', 'description', project.shortDescription || 'Explore the details of this project.'));
     const links = actions(project);
-    const more = node('button', 'more-link', isCircleStudy(project) ? 'Development ↗' : 'More information ↗');
+    const more = node('button', 'more-link', 'More information ↗');
     more.type = 'button';
-    more.setAttribute('aria-label', (isCircleStudy(project) ? 'Development of ' : 'More information about ') + project.title);
+    more.setAttribute('aria-label', 'More information about ' + project.title);
     more.addEventListener('click', () => openDetails(project));
     links.append(more);
     body.append(links);

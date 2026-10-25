@@ -4,7 +4,7 @@
     ['grid-1', { title: 'Glitch', src: 'https://mandyyi09.github.io/grid-1/' }],
     ['zhong-art', { title: 'Modern Shuilu', src: 'https://mandyyi09.github.io/zhong-art/' }],
     ['align-studio', { title: 'Align Studio', src: 'https://mandyyi09.github.io/Align-Studio/' }],
-    ['fitai', { title: 'FitAI', src: 'https://mandyyi09.github.io/fitAi/' }]
+    ['fitai', { title: 'Sports Form', src: 'https://mandyyi09.github.io/fitAi/' }]
   ]);
   const id = new URLSearchParams(location.search).get('project');
   const project = projects.get(id);
