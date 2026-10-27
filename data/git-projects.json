@@ -188,13 +188,13 @@
   {
     "schemaVersion": 1,
     "id": "github:1374415221",
-    "slug": "fitai",
-    "title": "Sports Form",
-    "repositoryName": "fitAi",
-    "fullName": "MandyYi09/fitAi",
+    "slug": "sportx",
+    "title": "SportX",
+    "repositoryName": "SportX",
+    "fullName": "MandyYi09/SportX",
     "owner": "MandyYi09",
-    "shortDescription": "Building on Align Studio, Sports Form expands the exploration to 48 movements, with 3D references and optional camera-based pose comparison for practice, including rowing and yoga.",
-    "longDescription": "Sports Form connects my sporting interests with my curiosity about AI: how could technology help athletes train more safely and improve their fitness? I focus especially on rowing and yoga, using 3D movement references and optional camera-based pose comparison to explore form and practice. The experiment aims to support more informed movement; its pose feedback estimates similarity to a reference rather than assessing injury risk.",
+    "shortDescription": "Building on Align Studio, SportX expands the exploration to 48 movements, with 3D references and optional camera-based pose comparison for practice, including rowing and yoga.",
+    "longDescription": "SportX connects my sporting interests with my curiosity about AI: how could technology help athletes train more safely and improve their fitness? I focus especially on rowing and yoga, using 3D movement references and optional camera-based pose comparison to explore form and practice. The experiment aims to support more informed movement; its pose feedback estimates similarity to a reference rather than assessing injury risk.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
     "isFavorite": false,
@@ -224,11 +224,11 @@
     ],
     "category": "Movement & Fitness",
     "topics": [],
-    "repositoryUrl": "https://github.com/MandyYi09/fitAi",
+    "repositoryUrl": "https://github.com/MandyYi09/SportX",
     "homepageUrl": null,
-    "demoUrl": "https://mandyyi09.github.io/fitAi/",
-    "readmeUrl": "https://github.com/MandyYi09/fitAi/blob/main/README.md",
-    "imageUrl": "assets/images/projects/fitAi/full-studio.jpg",
+    "demoUrl": "https://mandyyi09.github.io/SportX/",
+    "readmeUrl": "https://github.com/MandyYi09/SportX/blob/main/README.md",
+    "imageUrl": "assets/images/projects/SportX/full-studio.jpg",
     "defaultBranch": "main",
     "visibility": "public",
     "isArchived": false,
@@ -259,8 +259,8 @@
       "Camera angle, occlusion, and low-confidence landmarks can affect comparisons; live webcam behavior was not tested during catalog creation."
     ],
     "source": {
-      "metadataUrl": "https://api.github.com/repos/MandyYi09/fitAi",
-      "languagesUrl": "https://api.github.com/repos/MandyYi09/fitAi/languages",
+      "metadataUrl": "https://api.github.com/repos/MandyYi09/SportX",
+      "languagesUrl": "https://api.github.com/repos/MandyYi09/SportX/languages",
       "fetchedAt": "2026-09-27T05:30:01Z",
       "demoCheckedAt": null,
       "readmeStatus": "available",
@@ -268,15 +268,15 @@
       "classificationNote": "Domain tags and school subjects are suggested topical associations based on the reviewed source, not repository-provided topics or claims of school coursework.",
       "evidence": [
         {
-          "url": "https://github.com/MandyYi09/fitAi/blob/main/README.md",
+          "url": "https://github.com/MandyYi09/SportX/blob/main/README.md",
           "note": "Project purpose, movement library, runtime, and stated limitations."
         },
         {
-          "url": "https://github.com/MandyYi09/fitAi/blob/main/src/app.js",
+          "url": "https://github.com/MandyYi09/SportX/blob/main/src/app.js",
           "note": "Three.js rendering, MediaPipe pose tracking, and opt-in camera capture."
         },
         {
-          "url": "https://github.com/MandyYi09/fitAi/blob/main/src/index.html",
+          "url": "https://github.com/MandyYi09/SportX/blob/main/src/index.html",
           "note": "Movement count, browser entry point, and linked CSS stylesheet."
         }
       ]

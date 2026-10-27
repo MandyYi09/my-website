@@ -24,7 +24,7 @@
     'grid-1': 'project-previews/grid-1/index.html',
     'grid-2': 'project-previews/grid-2/index.html',
     'align-studio': 'https://mandyyi09.github.io/Align-Studio/?embed=1',
-    fitai: 'fitai-preview/index.html?mode=rowing&embed=1&layout=card',
+    sportx: 'sportx-preview/index.html?mode=rowing&embed=1&layout=card',
     'zhong-art': 'project-previews/website.html?project=zhong-art',
     'moderized-china-art-2d': 'zhong-art-preview/scene.html?embed=1',
     'moderized-china-art-3d': 'project-previews/cloud-gate/index.html',
@@ -55,7 +55,7 @@
     'grid-2': 'assets/images/projects/grid-2/grid-2.jpg',
     'walker': 'assets/images/projects/walker/walkerCard.png',
     'finger-wand': 'assets/images/projects/finger-wand/截屏2026-10-05 15.57.15.png',
-    'fitai': 'assets/images/projects/fitAi/yoga-cover.jpg',
+    'sportx': 'assets/images/projects/SportX/yoga-cover.jpg',
     'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
     'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/3D-trad-art.png',
     'p5-circle-multiplication': 'assets/images/projects/p5-circle-multiplication/截屏2026-10-05 15.50.56.png',
@@ -63,14 +63,14 @@
     'my-website': 'assets/images/projects/my-website/homepage.jpg'
   };
   const localProjects = {
-    fitai: 'fitai-preview/index.html?mode=yoga',
+    sportx: 'sportx-preview/index.html?mode=yoga',
     'moderized-china-art-2d': 'zhong-art-preview/scene.html'
   };
   const series = [
     {
       id: 'gesture',
       title: 'From fingertip tracking to full-body practice',
-      description: 'AI Hands → Finger Wand → Align Studio → Sports Form. Each project grew from the last: I started by detecting fingertips, turned their movement into light, then explored full-body tracking for stretching. Sports Form expands that exploration into 48 movements, connecting camera-based interaction with my interest in rowing and yoga.',
+      description: 'AI Hands → Finger Wand → Align Studio → SportX. Each project grew from the last: I started by detecting fingertips, turned their movement into light, then explored full-body tracking for stretching. SportX expands that exploration into 48 movements, connecting camera-based interaction with my interest in rowing and yoga.',
       projects: ['ai-hands', 'finger-wand', 'align-studio'],
       stages: ['01 / Track fingertips', '02 / Draw with movement', '03 / Explore full-body tracking'],
       notes: ['Finger distance becomes color.', 'Motion becomes a trail of light.', 'Full-body tracking meets a 3D guide.']
@@ -130,7 +130,7 @@
   }
   window.addEventListener('message', event => {
     if (event.origin !== location.origin || event.data?.event !== 'ready' ||
-        !['portfolio-preview', 'fitai-preview', 'zhong-art-preview'].includes(event.data?.type)) return;
+        !['portfolio-preview', 'sportx-preview', 'zhong-art-preview'].includes(event.data?.type)) return;
     const frame = [...document.querySelectorAll('.project-live-preview[src]')]
       .find(candidate => candidate.contentWindow === event.source);
     if (!frame) return;
@@ -346,7 +346,7 @@
     body.append(node('h2', '', project.title));
     const group = projectSeries(project);
     if (group) body.append(node('p', 'project-development-stage', group.stages[group.projects.indexOf(project.slug)]));
-    if (project.slug === 'fitai') body.append(node('p', 'project-development-stage', '04 / Expand the practice · 48 movements'));
+    if (project.slug === 'sportx') body.append(node('p', 'project-development-stage', '04 / Expand the practice · 48 movements'));
     body.append(node('p', 'description', project.shortDescription || 'Explore the details of this project.'));
     const links = actions(project);
     const more = node('button', 'more-link', 'More information ↗');
@@ -378,7 +378,7 @@
         renderedGroups.add(group.id);
       }
       const article = card(project);
-      if (!query && project.slug === 'fitai') article.classList.add('project-card-feature');
+      if (!query && project.slug === 'sportx') article.classList.add('project-card-feature');
       grid.append(article);
     });
     watchCardPreviews();

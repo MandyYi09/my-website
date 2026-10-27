@@ -3,7 +3,8 @@
   if (!root || typeof Swiper === 'undefined') return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
-  const returnSlide = new URLSearchParams(location.search).get('slide');
+  const requestedSlide = new URLSearchParams(location.search).get('slide');
+  const returnSlide = requestedSlide === 'fitai' ? 'sportx' : requestedSlide;
   const returnIndex = [...root.querySelectorAll('.showcase-slide')]
     .findIndex(slide => slide.dataset.carouselId === returnSlide);
   let paused = reducedMotion.matches || returnIndex >= 0;

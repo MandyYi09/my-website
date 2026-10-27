@@ -279,9 +279,9 @@ async function initThree() {
             const centerY=(minY+maxY)/2;
             camera.position.lerp(new THREE.Vector3((minX+maxX)/2,centerY,distance),.12);camera.lookAt(camera.position.x,centerY,0);
             renderer.render(scene, camera);
-            if (embeddedPreview && !window.fitaiPreviewReady) {
-                window.fitaiPreviewReady = true;
-                window.parent.postMessage({ type:'fitai-preview', event:'ready' }, location.origin);
+            if (embeddedPreview && !window.sportxPreviewReady) {
+                window.sportxPreviewReady = true;
+                window.parent.postMessage({ type:'sportx-preview', event:'ready' }, location.origin);
             }
         });
     } catch (e) { guideUnavailable = true; $('stage-note').hidden = false; $('stage-note').innerHTML = '3D guide could not load.<small>You can still follow the written cues or enable your camera.</small>'; $('rotate').disabled = true; }

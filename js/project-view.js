@@ -4,9 +4,10 @@
     ['grid-1', { title: 'Glitch', src: 'https://mandyyi09.github.io/grid-1/' }],
     ['zhong-art', { title: 'Modern Shuilu', src: 'https://mandyyi09.github.io/zhong-art/' }],
     ['align-studio', { title: 'Align Studio', src: 'https://mandyyi09.github.io/Align-Studio/' }],
-    ['fitai', { title: 'Sports Form', src: 'https://mandyyi09.github.io/fitAi/' }]
+    ['sportx', { title: 'SportX', src: 'https://mandyyi09.github.io/SportX/' }]
   ]);
-  const id = new URLSearchParams(location.search).get('project');
+  const requestedId = new URLSearchParams(location.search).get('project');
+  const id = requestedId === 'fitai' ? 'sportx' : requestedId;
   const project = projects.get(id);
   if (!project) return;
   const back = document.getElementById('project-back');
