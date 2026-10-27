@@ -1,6 +1,6 @@
 # Full SportX project
 
-This is the complete browser application copied from `/Users/mandy/Documents/zx/fitAi/src`
+This is the complete browser application copied from `/Users/mandy/Documents/zx/SportX/src`
 on 2026-10-11. The homepage's View project link opens this version through `project.html`.
 It starts with all 48 movements and includes Mobility, Yoga, Rowing, Tennis, and Clay Shooting.
 
