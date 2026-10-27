@@ -193,8 +193,8 @@
     "repositoryName": "SportX",
     "fullName": "MandyYi09/SportX",
     "owner": "MandyYi09",
-    "shortDescription": "Building on Align Studio, SportX expands the exploration to 48 movements, with 3D references and optional camera-based pose comparison for practice, including rowing and yoga.",
-    "longDescription": "SportX connects my sporting interests with my curiosity about AI: how could technology help athletes train more safely and improve their fitness? I focus especially on rowing and yoga, using 3D movement references and optional camera-based pose comparison to explore form and practice. The experiment aims to support more informed movement; its pose feedback estimates similarity to a reference rather than assessing injury risk.",
+    "shortDescription": "SportX explores tennis, rowing, and clay shooting through 3D movement demonstrations and optional camera-based pose comparison for rowing practice.",
+    "longDescription": "SportX connects my sporting interests with my curiosity about AI through three sports: tennis, rowing, and clay shooting. It uses 3D movement demonstrations to explore technique, with step-by-step rowing practice and optional camera-based pose comparison. Align Studio is a separate project focused on stretching and yoga. SportX is an experiment in movement learning; its pose feedback estimates similarity to a reference rather than assessing injury risk.",
     "isFeaturedOnHomePage": false,
     "isFeaturedOnSection": false,
     "isFavorite": false,
@@ -212,9 +212,9 @@
     "domainTags": [
       "pose-estimation",
       "computer-vision",
-      "stretching",
-      "yoga",
-      "fitness",
+      "tennis",
+      "rowing",
+      "clay-shooting",
       "3d-visualization"
     ],
     "schoolSubjects": [

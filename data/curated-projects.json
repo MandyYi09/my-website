@@ -4,8 +4,8 @@
     "slug": "align-studio",
     "title": "Align Studio",
     "category": "Movement & Fitness",
-    "shortDescription": "Taking the camera experiments beyond the hands, I explored full-body pose tracking, pairing a 3D guide with approximate feedback for stretching.",
-    "longDescription": "Align Studio connects my interest in movement with the camera experiments I began in AI Hands and Finger Wand. I moved from tracking fingertips to recognizing body poses, exploring how AI camera models could help people stretch more safely. A 3D guide and approximate pose feedback offer ways to compare movements and practice with greater awareness.",
+    "shortDescription": "Align Studio explores stretching and yoga with a 3D movement guide and optional camera-based pose comparison.",
+    "longDescription": "Align Studio connects my interest in movement with the camera experiments I began in AI Hands and Finger Wand. I moved from tracking fingertips to recognizing body poses, exploring camera-based pose comparison for stretching and yoga. A 3D guide and approximate pose feedback offer ways to compare movements and practice with greater awareness.",
     "technologies": [
       "Three.js",
       "MediaPipe Tasks Vision",

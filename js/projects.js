@@ -55,7 +55,7 @@
     'grid-2': 'assets/images/projects/grid-2/grid-2.jpg',
     'walker': 'assets/images/projects/walker/walkerCard.png',
     'finger-wand': 'assets/images/projects/finger-wand/截屏2026-10-05 15.57.15.png',
-    'sportx': 'assets/images/projects/SportX/yoga-cover.jpg',
+    'sportx': 'assets/images/projects/SportX/full-studio.jpg',
     'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
     'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/3D-trad-art.png',
     'p5-circle-multiplication': 'assets/images/projects/p5-circle-multiplication/截屏2026-10-05 15.50.56.png',
@@ -63,14 +63,14 @@
     'my-website': 'assets/images/projects/my-website/homepage.jpg'
   };
   const localProjects = {
-    sportx: 'sportx-preview/index.html?mode=yoga',
+    sportx: 'sportx-preview/index.html?mode=rowing',
     'moderized-china-art-2d': 'zhong-art-preview/scene.html'
   };
   const series = [
     {
       id: 'gesture',
       title: 'From fingertip tracking to full-body practice',
-      description: 'AI Hands → Finger Wand → Align Studio → SportX. Each project grew from the last: I started by detecting fingertips, turned their movement into light, then explored full-body tracking for stretching. SportX expands that exploration into 48 movements, connecting camera-based interaction with my interest in rowing and yoga.',
+      description: 'AI Hands → Finger Wand → Align Studio → SportX. Each project grew from the last: I started by detecting fingertips, turned their movement into light, then explored full-body tracking for stretching. Align Studio focuses on stretching and yoga; SportX explores tennis, rowing, and clay shooting.',
       projects: ['ai-hands', 'finger-wand', 'align-studio'],
       stages: ['01 / Track fingertips', '02 / Draw with movement', '03 / Explore full-body tracking'],
       notes: ['Finger distance becomes color.', 'Motion becomes a trail of light.', 'Full-body tracking meets a 3D guide.']
@@ -346,7 +346,7 @@
     body.append(node('h2', '', project.title));
     const group = projectSeries(project);
     if (group) body.append(node('p', 'project-development-stage', group.stages[group.projects.indexOf(project.slug)]));
-    if (project.slug === 'sportx') body.append(node('p', 'project-development-stage', '04 / Expand the practice · 48 movements'));
+    if (project.slug === 'sportx') body.append(node('p', 'project-development-stage', '04 / SportX · Tennis, rowing & clay shooting'));
     body.append(node('p', 'description', project.shortDescription || 'Explore the details of this project.'));
     const links = actions(project);
     const more = node('button', 'more-link', 'More information ↗');
