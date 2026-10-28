@@ -5,14 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111411">
   <title>Project — Mandy</title>
-  <link rel="stylesheet" href="css/project-view.css">
-  <script src="js/project-view.js?v=canonical-release-20261016" defer></script>
+  <link rel="stylesheet" href="css/project-view.css?v=shuilu-notes-1">
+  <script src="js/project-view.js?v=shuilu-notes-1" defer></script>
 </head>
 <body>
   <header class="project-toolbar">
     <a class="project-back" id="project-back" href="index.html#home"><span aria-hidden="true">←</span> Back to home</a>
     <span class="project-name" id="project-name"></span>
   </header>
+  <details class="project-design-notes" id="shuilu-design-notes" hidden>
+    <summary><span>Design notes</span><span class="design-notes-teaser">Modern Shuilu · Returning without an account</span></summary>
+    <div class="design-notes-body">
+      <p class="design-notes-intro">I wanted visitors to start looking at the paintings straight away. Instead of putting registration before exploration, I used a daily encounter and a locally saved viewing path to give people a way to return.</p>
+      <div class="design-notes-grid">
+        <section>
+          <span class="design-notes-label">01 / A daily encounter</span>
+          <h2>One figure for each day</h2>
+          <p>The draw converts the device’s time to a date in Beijing time and selects a figure from a fixed rotation. Reopening or refreshing reveals the same figure that day; everyone shares that day’s card.</p>
+          <p>This creates a daily rhythm. It does not track whether an individual has drawn already: visitors can reveal the card again, but the result stays the same.</p>
+        </section>
+        <section>
+          <span class="design-notes-label">02 / A personal viewing path</span>
+          <h2>Keep a detail, come back to it</h2>
+          <p>When a visitor saves a detail, Path stores the painting ID, the chosen detail—headwear, hands or clothing—and any attached note in the browser’s <code>localStorage</code>. It saves these references rather than image files.</p>
+          <p>On the next visit in the same browser, the site reads those records and rebuilds the collection. Closing the page normally does not erase it.</p>
+        </section>
+      </div>
+      <p class="design-notes-flow" aria-label="Saved-detail journey"><span>Notice a detail</span><span aria-hidden="true">→</span><span>Save it to Path</span><span aria-hidden="true">→</span><span>Return in the same browser</span><span aria-hidden="true">→</span><span>Continue exploring</span></p>
+      <section class="design-notes-tradeoff">
+        <h2>The tradeoff</h2>
+        <p>This lets visitors begin without creating an account. The collection belongs to that browser profile, not a signed-in identity: it does not sync across devices or browsers, clearing site data removes it, and private browsing normally keeps it only for that session. Cross-device continuity would need a separate sync or export feature.</p>
+      </section>
+    </div>
+  </details>
   <main class="project-content">
     <iframe class="project-frame" id="project-frame" title="Project" allow="camera 'self'; fullscreen" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
     <p class="project-message" id="project-message">Choose a project from the homepage.</p>

@@ -10,6 +10,8 @@
   const id = requestedId === 'fitai' ? 'sportx' : requestedId;
   const project = projects.get(id);
   if (!project) return;
+  const designNotes = document.getElementById('shuilu-design-notes');
+  if (designNotes) designNotes.hidden = id !== 'zhong-art';
   const back = document.getElementById('project-back');
   const home = new URL('index.html', location.href);
   home.searchParams.set('slide', id);
