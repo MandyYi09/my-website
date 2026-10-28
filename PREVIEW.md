@@ -4,4 +4,4 @@
 
 **网站公开地址：<https://mandyyi09.github.io/my-website/>。** Little Mandy 的独立地址是 <https://mandyyi09.github.io/my-website/little-mandy/>。这两个 HTTPS 地址不依赖你的电脑开机，也不需要本地预览服务。分享前，在手机或另一个浏览器的无痕窗口打开公开地址，逐页检查 Home、Sports、Projects、Photography、About 和 Little Mandy。
 
-分享网站时请使用公开地址。`file:///...` 或 `http://localhost:...` 不适合作为分享链接：前者会阻止 3D 模块和项目数据加载，后者只能在你自己的电脑上使用。修改网站后，先提交并推送到 GitHub，等待 GitHub Pages 更新，再检查公开地址；本地预览不会自动更新线上网站。
+分享网站时请使用公开地址。`file:///...` 可能阻止 3D 模块和项目数据加载，`http://localhost:...` 只能在你自己的电脑上使用。修改网站后，先提交并推送到 GitHub，等待 GitHub Pages 更新，再检查公开地址；本地预览不会自动更新线上网站。
