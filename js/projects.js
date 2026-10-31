@@ -37,7 +37,7 @@
     'grid-2': 'project-previews/grid-2/index.html',
     'align-studio': 'project-previews/align-studio/index.html',
     sportx: 'project-previews/sportx/index.html',
-    'zhong-art': 'project-previews/zhong-art/index.html',
+    'modern-shuilu': 'project-previews/zhong-art/index.html',
     'moderized-china-art-2d': 'zhong-art-preview/scene.html?embed=1',
     'moderized-china-art-3d': 'project-previews/cloud-gate/index.html',
     'my-website': 'project-previews/website.html?project=my-website'
@@ -69,7 +69,7 @@
     'finger-wand': 'assets/images/projects/finger-wand/截屏2026-10-05 15.57.15.png',
     'sportx': 'assets/images/projects/SportX/rowing-studio.png',
     'align-studio': 'assets/images/projects/align-studio/studio.jpg',
-    'zhong-art': 'assets/images/projects/zhong-art/atlas-cover.jpg',
+    'modern-shuilu': 'assets/images/projects/zhong-art/atlas-cover.jpg',
     'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
     'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/sculpture-cover.png',
     'p5-circle-multiplication': 'assets/images/projects/p5-circle-multiplication/截屏2026-10-05 15.50.56.png',
@@ -93,7 +93,7 @@
       id: 'painting',
       title: 'From painting to interaction',
       description: 'My interest in Chinese art meets technology and vibe coding in three related experiments. Shuilu in Motion explores a 2D interactive environment; 3D Shuilu experiment explores a 3D character. Modern Shuilu brings the 2D study into its carousel, keeping the paintings and their cultural significance at the center.',
-      projects: ['zhong-art', 'moderized-china-art-2d', 'moderized-china-art-3d'],
+      projects: ['modern-shuilu', 'moderized-china-art-2d', 'moderized-china-art-3d'],
       stages: ['The website / Final context', '2D study / Adopted in the carousel', '3D study / Parallel exploration'],
       notes: ['Brings the 2D experiment into the website.', 'The animated scene selected for Modern Shuilu.', 'A sculptural approach to the same inspiration.']
     }

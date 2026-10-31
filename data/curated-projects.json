@@ -24,8 +24,8 @@
     "repositoryUrl": "https://github.com/MandyYi09/Align-Studio"
   },
   {
-    "id": "local:zhong-art",
-    "slug": "zhong-art",
+    "id": "local:modern-shuilu",
+    "slug": "modern-shuilu",
     "title": "Modern Shuilu",
     "category": "Interactive Art",
     "shortDescription": "An experiment connecting my interest in Chinese art with technology, inviting a closer look at Shuilu paintings.",
@@ -40,11 +40,11 @@
       "interactive-art",
       "visual-storytelling"
     ],
-    "demoUrl": "https://mandyyi09.github.io/zhong-art/",
+    "demoUrl": "https://mandyyi09.github.io/modern-shuilu/",
     "imageUrl": "assets/images/projects/zhong-art/atlas-cover.jpg",
     "sortOrder": 7,
     "hasPages": true,
-    "repositoryUrl": "https://github.com/MandyYi09/zhong-art",
+    "repositoryUrl": "https://github.com/MandyYi09/modern-shuilu",
     "source": {
       "artworkTradition": "Shuilu painting (water-and-land ritual painting)",
       "backgroundUrl": "https://www.ihchina.cn/project_details/14249/",

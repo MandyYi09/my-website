@@ -1,5 +1,5 @@
 (() => {
-  const atlas = new URLSearchParams(location.search).get('project') === 'zhong-art';
+  const atlas = ['modern-shuilu', 'zhong-art'].includes(new URLSearchParams(location.search).get('project'));
   if (atlas) { location.replace(new URL('zhong-art/index.html', location.href)); return; }
   const frame = document.querySelector('iframe');
   frame.title = atlas ? 'Modern Shuilu painting atlas' : 'Mandy’s Portfolio homepage';
@@ -42,5 +42,5 @@
     doc.addEventListener('load', inspect, true);
     inspect();
   });
-  frame.src = atlas ? 'https://mandyyi09.github.io/zhong-art/' : '../index.html?slide=walker';
+  frame.src = atlas ? 'https://mandyyi09.github.io/modern-shuilu/' : '../index.html?slide=walker';
 })();

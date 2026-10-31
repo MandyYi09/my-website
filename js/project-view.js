@@ -2,16 +2,16 @@
   const projects = new Map([
     ['walker', { title: 'Walker', src: 'https://mandyyi09.github.io/walker/' }],
     ['grid-1', { title: 'Glitch', src: 'https://mandyyi09.github.io/grid-1/' }],
-    ['zhong-art', { title: 'Modern Shuilu', src: 'https://mandyyi09.github.io/zhong-art/' }],
+    ['modern-shuilu', { title: 'Modern Shuilu', src: 'https://mandyyi09.github.io/modern-shuilu/' }],
     ['align-studio', { title: 'Align Studio', src: 'https://mandyyi09.github.io/Align-Studio/' }],
     ['sportx', { title: 'SportX', src: 'https://mandyyi09.github.io/SportX/' }]
   ]);
   const requestedId = new URLSearchParams(location.search).get('project');
-  const id = requestedId === 'fitai' ? 'sportx' : requestedId;
+  const id = ({ fitai: 'sportx', 'zhong-art': 'modern-shuilu' })[requestedId] || requestedId;
   const project = projects.get(id);
   if (!project) return;
   const designNotes = document.getElementById('shuilu-design-notes');
-  if (designNotes) designNotes.hidden = id !== 'zhong-art';
+  if (designNotes) designNotes.hidden = id !== 'modern-shuilu';
   const back = document.getElementById('project-back');
   const home = new URL('index.html', location.href);
   home.searchParams.set('slide', id);

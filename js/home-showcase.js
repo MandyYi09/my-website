@@ -5,7 +5,7 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
   const requestedSlide = new URLSearchParams(location.search).get('slide');
-  const returnSlide = requestedSlide === 'fitai' ? 'sportx' : requestedSlide;
+  const returnSlide = ({ fitai: 'sportx', 'zhong-art': 'modern-shuilu' })[requestedSlide] || requestedSlide;
   const returnIndex = [...root.querySelectorAll('.showcase-slide')]
     .findIndex(slide => slide.dataset.carouselId === returnSlide);
   let paused = reducedMotion.matches || returnIndex >= 0;
