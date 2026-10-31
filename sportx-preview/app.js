@@ -9,6 +9,7 @@ const previewParams = new URLSearchParams(location.search);
 const rowingPreview = previewParams.get('mode') === 'rowing';
 const yogaPreview = previewParams.get('mode') === 'yoga';
 const embeddedPreview = previewParams.get('embed') === '1';
+const previewPixelRatio = embeddedPreview ? 1 : Math.min(devicePixelRatio, 2);
 import { poses } from './exercises.mjs';
 import { categoryLabels, practiceModes, sequenceFor } from './practice-modes.mjs';
 import {createHand, orientHand, createWristDetail, wristExamples} from './hand-guide.mjs';
@@ -190,14 +191,15 @@ if (rowingPreview || yogaPreview) document.querySelectorAll('[data-filter]').for
 startLocalization();
 async function initThree() {
     try {
-        const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js'); const host = $('three'); const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(34, 1, .1, 100); camera.position.set(0, 1.65, 6.8); camera.lookAt(0, 1.15, 0); const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true; host.append(renderer.domElement); scene.add(new THREE.HemisphereLight(0xffffff, 0x6f7d59, 2.5)); const light = new THREE.DirectionalLight(0xffffff, 3); light.position.set(-3, 5, 4); scene.add(light); const group = new THREE.Group(); scene.add(group); const mat = new THREE.MeshStandardMaterial({ color: 0x6c8058, roughness: .65, metalness: .05 }); const jointmat = new THREE.MeshStandardMaterial({ color: 0xd8ecad, roughness: .55 }); const headmat = new THREE.MeshStandardMaterial({ color: 0x869974, roughness: .55 }); const floor = new THREE.Mesh(new THREE.CircleGeometry(1.4, 80), new THREE.MeshBasicMaterial({ color: 0xafbda1, transparent: true, opacity: .28 })); floor.rotation.x = -Math.PI / 2; floor.position.y = .02; scene.add(floor); const rings = new THREE.Mesh(new THREE.RingGeometry(1.18, 1.19, 100), new THREE.MeshBasicMaterial({ color: 0x96aa81, side: THREE.DoubleSide, transparent: true, opacity: .5 })); rings.rotation.x = -Math.PI / 2; rings.position.y = .03; scene.add(rings);
+        const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js'); const host = $('three'); const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(34, 1, .1, 100); camera.position.set(0, 1.65, 6.8); camera.lookAt(0, 1.15, 0); const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); renderer.setPixelRatio(previewPixelRatio); renderer.shadowMap.enabled = true; host.append(renderer.domElement); scene.add(new THREE.HemisphereLight(0xffffff, 0x6f7d59, 2.5)); const light = new THREE.DirectionalLight(0xffffff, 3); light.position.set(-3, 5, 4); scene.add(light); const group = new THREE.Group(); scene.add(group); const mat = new THREE.MeshStandardMaterial({ color: 0x6c8058, roughness: .65, metalness: .05 }); const jointmat = new THREE.MeshStandardMaterial({ color: 0xd8ecad, roughness: .55 }); const headmat = new THREE.MeshStandardMaterial({ color: 0x869974, roughness: .55 }); const floor = new THREE.Mesh(new THREE.CircleGeometry(1.4, 80), new THREE.MeshBasicMaterial({ color: 0xafbda1, transparent: true, opacity: .28 })); floor.rotation.x = -Math.PI / 2; floor.position.y = .02; scene.add(floor); const rings = new THREE.Mesh(new THREE.RingGeometry(1.18, 1.19, 100), new THREE.MeshBasicMaterial({ color: 0x96aa81, side: THREE.DoubleSide, transparent: true, opacity: .5 })); rings.rotation.x = -Math.PI / 2; rings.position.y = .03; scene.add(rings);
         const links = [[0, 1], [0, 2], [2, 4], [1, 3], [3, 5], [0, 6], [1, 7], [6, 7], [6, 8], [8, 10], [7, 9], [9, 11]]; let target = getReference(current, flipped), neutralCoords = target.map(p => new THREE.Vector3(...p)), coords = neutralCoords.map(p=>p.clone()); const joints = coords.map(() => { const m = new THREE.Mesh(new THREE.SphereGeometry(.075, 20, 16), jointmat); group.add(m); return m }); const bones = links.map(() => { const m = new THREE.Mesh(new THREE.CylinderGeometry(.058, .067, 1, 16), mat); group.add(m); return m }); const head = new THREE.Mesh(new THREE.SphereGeometry(.145, 32, 24), headmat); head.scale.y = 1.18; group.add(head); const neck = new THREE.Mesh(new THREE.CylinderGeometry(.055, .07, .18, 16), mat); group.add(neck); const torso = new THREE.Mesh(new THREE.SphereGeometry(1, 28, 20), mat); torso.scale.set(.22, .35, .12); group.add(torso); const liveGroup=new THREE.Group();group.add(liveGroup);liveGroup.visible=false;
         const liveBones=links.map(()=>{const material=new THREE.MeshBasicMaterial({color:0x243950,depthTest:false});const mesh=new THREE.Mesh(new THREE.CylinderGeometry(.022,.022,1,10),material);mesh.renderOrder=3;liveGroup.add(mesh);return mesh;});
         const liveJoints=landmarkIds.map(()=>{const mesh=new THREE.Mesh(new THREE.SphereGeometry(.038,12,10),new THREE.MeshBasicMaterial({color:0x243950,depthTest:false}));mesh.renderOrder=4;liveGroup.add(mesh);return mesh;});
         const handMaterial=new THREE.MeshStandardMaterial({color:0x91a979,roughness:.65});
         const wristMaterial=new THREE.MeshStandardMaterial({color:0xd8ecad,roughness:.55});
         const hands=[-1,1].map(side=>{const hand=createHand(THREE,handMaterial,side);group.add(hand.root);return {...hand,side,gripPoint:new THREE.Vector3()};});
-        const wristDetail=createWristDetail(THREE,$('wrist-detail'));wristDetail.setMode(wristMode);
+        // The embedded cover never shows the wrist panel; avoid its extra WebGL context.
+        const wristDetail=embeddedPreview?{setMode(){}}:createWristDetail(THREE,$('wrist-detail'));wristDetail.setMode(wristMode);
         const propMaterial=new THREE.MeshStandardMaterial({color:0x9c8060,roughness:.8});
         const chairGroup=new THREE.Group();group.add(chairGroup);
         const seat=new THREE.Mesh(new THREE.BoxGeometry(.67,.07,.62),propMaterial);seat.position.set(0,.64,.08);chairGroup.add(seat);
@@ -256,14 +258,23 @@ async function initThree() {
             const pts=values.map(v=>v?new THREE.Vector3(...v):null);liveJoints.forEach((m,i)=>{m.visible=!!pts[i];if(pts[i])m.position.copy(pts[i]);});
             links.forEach(([a,b],i)=>{const m=liveBones[i];m.visible=!!pts[a]&&!!pts[b];if(!m.visible)return;const d=pts[b].clone().sub(pts[a]);m.position.copy(pts[a]).add(pts[b]).multiplyScalar(.5);m.scale.y=d.length();m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());m.material.color.set(adjust.includes(landmarkIds[a])||adjust.includes(landmarkIds[b])?0x854316:0x243950);});
         } }; new ResizeObserver(() => { const { width, height } = host.getBoundingClientRect(); if (!width || !height) return; renderer.setSize(width, height); camera.aspect = width / height; camera.position.z = Math.max(6.8, 4.6 / camera.aspect); camera.updateProjectionMatrix(); }).observe(host);
-        renderer.setAnimationLoop(() => { if (document.hidden || host.hidden) return; neutralCoords.forEach((v,i)=>v.lerp(new THREE.Vector3(...target[i]),.08));
+        let lastRenderTime;
+        renderer.setAnimationLoop(now => {
+            if (document.hidden || host.hidden) return;
+            const elapsed=lastRenderTime===undefined?1000/60:now-lastRenderTime;
+            if(embeddedPreview&&lastRenderTime!==undefined&&elapsed<1000/30-.5)return;
+            lastRenderTime=now;
+            // Preserve transition speed when the cover renders at 30 rather than 60 fps.
+            const ticks=embeddedPreview?Math.min(elapsed,100)/(1000/60):1;
+            const poseBlend=1-Math.pow(.92,ticks),rotationBlend=1-Math.pow(.94,ticks),cameraBlend=1-Math.pow(.88,ticks);
+            neutralCoords.forEach((v,i)=>v.lerp(new THREE.Vector3(...target[i]),poseBlend));
             coords.forEach((v,i)=>v.copy(neutralCoords[i]));
             if(selectedPose().type==='rowing'){
                 const example=wristExamples[wristMode];
                 for(const i of [4,5])coords[i].y+=example.wristLift;
                 for(const i of [2,3])coords[i].y+=example.elbowLift;
             }
-            coords.forEach((v,i)=>joints[i].position.copy(v)); links.forEach(([a, b], i) => { const d = new THREE.Vector3().subVectors(coords[b], coords[a]); bones[i].position.copy(coords[a]).add(coords[b]).multiplyScalar(.5); bones[i].scale.y = d.length(); bones[i].quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()) }); const shoulder = coords[0].clone().add(coords[1]).multiplyScalar(.5); const hip=coords[6].clone().add(coords[7]).multiplyScalar(.5);const axis=shoulder.clone().sub(hip).normalize();head.position.copy(shoulder).addScaledVector(axis,.31);neck.position.copy(shoulder).addScaledVector(axis,.12);head.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),axis);neck.quaternion.copy(head.quaternion); torso.position.copy(shoulder).add(coords[6].clone().add(coords[7]).multiplyScalar(.5)).multiplyScalar(.5); torso.rotation.z = -Math.atan2((coords[0].x+coords[1].x-coords[6].x-coords[7].x)/2,(coords[0].y+coords[1].y-coords[6].y-coords[7].y)/2); group.rotation.y += (rotation - group.rotation.y) * .06;updateProps();
+            coords.forEach((v,i)=>joints[i].position.copy(v)); links.forEach(([a, b], i) => { const d = new THREE.Vector3().subVectors(coords[b], coords[a]); bones[i].position.copy(coords[a]).add(coords[b]).multiplyScalar(.5); bones[i].scale.y = d.length(); bones[i].quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()) }); const shoulder = coords[0].clone().add(coords[1]).multiplyScalar(.5); const hip=coords[6].clone().add(coords[7]).multiplyScalar(.5);const axis=shoulder.clone().sub(hip).normalize();head.position.copy(shoulder).addScaledVector(axis,.31);neck.position.copy(shoulder).addScaledVector(axis,.12);head.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),axis);neck.quaternion.copy(head.quaternion); torso.position.copy(shoulder).add(coords[6].clone().add(coords[7]).multiplyScalar(.5)).multiplyScalar(.5); torso.rotation.z = -Math.atan2((coords[0].x+coords[1].x-coords[6].x-coords[7].x)/2,(coords[0].y+coords[1].y-coords[6].y-coords[7].y)/2); group.rotation.y += (rotation - group.rotation.y) * rotationBlend;updateProps();
             const boundPoints=[...coords,head.position.clone().add(new THREE.Vector3(0,.2,0))];
             if(racket.visible)boundPoints.push(new THREE.Vector3(0,.75,0).applyQuaternion(racket.quaternion).add(racket.position));
             if(hull.visible)for(const item of sculls)for(const sign of [-1,1])boundPoints.push(item.end.clone().add(new THREE.Vector3(.24*sign,.06*sign,.13*sign)));
@@ -277,7 +288,7 @@ async function initThree() {
             const nearDepth=Math.max(0,...boundPoints.map(v=>-v.x*Math.sin(group.rotation.y)+v.z*Math.cos(group.rotation.y)));
             const distance=Math.max((maxY-minY)/(2*Math.tan(34*Math.PI/360)*usableHeight),(maxX-minX)/(2*Math.tan(34*Math.PI/360)*camera.aspect*usableWidth))+nearDepth+.12;
             const centerY=(minY+maxY)/2;
-            camera.position.lerp(new THREE.Vector3((minX+maxX)/2,centerY,distance),.12);camera.lookAt(camera.position.x,centerY,0);
+            camera.position.lerp(new THREE.Vector3((minX+maxX)/2,centerY,distance),cameraBlend);camera.lookAt(camera.position.x,centerY,0);
             renderer.render(scene, camera);
             if (embeddedPreview && !window.sportxPreviewReady) {
                 window.sportxPreviewReady = true;

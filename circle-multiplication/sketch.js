@@ -34,7 +34,7 @@
         return [Math.cos(angle), Math.sin(angle)];
       });
 
-      p.pixelDensity(Math.min(window.devicePixelRatio || 1, 2));
+      p.pixelDensity(coverMode ? 1 : Math.min(window.devicePixelRatio || 1, 2));
       const canvas = p.createCanvas(container.clientWidth, container.clientHeight);
       canvas.parent(container);
       canvas.elt.setAttribute('aria-hidden', 'true');
@@ -53,6 +53,7 @@
       document.addEventListener('visibilitychange', () => {
         lastTick = undefined;
       });
+      window.addEventListener('portfolio-preview-visibility', () => { lastTick = undefined; });
     };
 
     p.draw = () => {

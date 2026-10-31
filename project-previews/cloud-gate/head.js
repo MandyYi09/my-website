@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { segments as detail } from './detail.js';
 import { tendril, scroll, patch, flame } from './carving.js';
 const TAU=Math.PI*2;
 // Original concept landmarks, in the unmodified 1024 × 1536 reference image.
@@ -27,7 +28,7 @@ export function referenceHead(b){
  b.rod([0,5.9,-.13],[0,6.61,-.13],.29,'skin');
  b.ball([0,6.73,-.10],[.54,.62,.46],'headHair',48);
  // A dense curved facial shell; it is not a billboard or a flat image plane.
- const NX=112,NY=144,pos=[],uv=[],idx=[];
+ const NX=detail(112,32),NY=detail(144,40),pos=[],uv=[],idx=[];
  for(let j=0;j<=NY;j++){
   const py=209+j/NY*104,[l,r]=limits(py);
   for(let i=0;i<=NX;i++){

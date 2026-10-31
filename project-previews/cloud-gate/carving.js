@@ -1,16 +1,18 @@
 import * as THREE from 'three';
+import { segments as detail } from './detail.js';
 const TAU=Math.PI*2;
 const v=p=>new THREE.Vector3(...p);
 
 // Swept tapered locks and tendrils: continuous surfaces, with pointed ends.
 export function tendril(b,points,r,mat='gold',groove=0){
- const curve=new THREE.CatmullRomCurve3(points.map(v));const N=r<.02?16:30,R=r<.02?5:7,frames=curve.computeFrenetFrames(N,false),p=[],idx=[];
+ const curve=new THREE.CatmullRomCurve3(points.map(v));const N=detail(r<.02?16:30,6),R=detail(r<.02?5:7,3),frames=curve.computeFrenetFrames(N,false),p=[],idx=[];
  for(let i=0;i<=N;i++){const t=i/N,c=curve.getPoint(t),rad=r*Math.pow(Math.max(.008,Math.sin((.08+t*.92)*Math.PI)),.65);
   for(let j=0;j<=R;j++){const a=j/R*TAU,rr=rad*(1+groove*Math.cos(a*5));const pt=c.clone().addScaledVector(frames.normals[i],Math.cos(a)*rr).addScaledVector(frames.binormals[i],Math.sin(a)*rr);p.push(...pt);if(i<N&&j<R){const k=i*(R+1)+j;idx.push(k,k+R+1,k+1,k+1,k+R+1,k+R+2);}}}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setIndex(idx);g.computeVertexNormals();b.add(g,mat);
 }
 
 export function patch(b,fn,nu,nv,mat){
+ nu=detail(nu,6);nv=detail(nv,3);
  const p=[],idx=[];for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++){p.push(...fn(i/nu,j/nv));if(i<nu&&j<nv){const k=i*(nv+1)+j;idx.push(k,k+1,k+nv+1,k+1,k+nv+2,k+nv+1);}}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setIndex(idx);g.computeVertexNormals();b.add(g,mat);
 }

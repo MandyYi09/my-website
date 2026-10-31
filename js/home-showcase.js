@@ -1,6 +1,7 @@
 (() => {
   const root = document.querySelector('.work-showcase');
   if (!root || typeof Swiper === 'undefined') return;
+  const isLocalCover = frame => ['project-previews/zhong-art/', 'project-previews/align-studio/'].some(path => frame.dataset.src?.includes(path));
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const pause = root.querySelector('.showcase-pause');
   const requestedSlide = new URLSearchParams(location.search).get('slide');
@@ -72,9 +73,15 @@
       if (!frame) return;
       const playing=index===activeSwiper.activeIndex && !livePaused && inView && !document.hidden;
       const button=slide.querySelector('.showcase-live-toggle');
-      button.textContent=livePaused?'▶ Play background':'Ⅱ Pause background';
-      button.setAttribute('aria-label',livePaused?'Play live background':'Pause live background');
+      if (button) {
+        button.textContent=livePaused?'▶ Play background':'Ⅱ Pause background';
+        button.setAttribute('aria-label',livePaused?'Play live background':'Pause live background');
+      }
+      const localShuilu=isLocalCover(frame);
       if(playing && !frame.hasAttribute('src')) frame.src=frame.dataset.src;
+      else if(localShuilu && frame.hasAttribute('src')) {
+        frame.contentWindow.postMessage({type:'portfolio-lifecycle',paused:!playing},location.origin);
+      }
       else if(!playing && frame.hasAttribute('src')) {
         frame.removeAttribute('src'); slide.classList.remove('is-live');
       }
@@ -82,8 +89,16 @@
   }
   root.querySelectorAll('.showcase-live').forEach(frame=>{
     frame.addEventListener('load',()=>{
-      if(frame.hasAttribute('src')) frame.closest('.showcase-slide').classList.add('is-live');
+      if(frame.hasAttribute('src') && !isLocalCover(frame)) frame.closest('.showcase-slide').classList.add('is-live');
+      updateLive();
     });
+  });
+  window.addEventListener('message',event=>{
+    if(event.origin!==location.origin || event.data?.type!=='portfolio-preview') return;
+    const frame=[...root.querySelectorAll('.showcase-live[src]')].find(item=>item.contentWindow===event.source);
+    if(!frame || !isLocalCover(frame)) return;
+    if(event.data.event==='ready') frame.closest('.showcase-slide').classList.add('is-live');
+    if(event.data.event==='lifecycle-ready') updateLive();
   });
   root.querySelectorAll('.showcase-live-toggle').forEach(button=>{
     button.addEventListener('click',()=>{livePaused=!livePaused;updateLive();});
@@ -168,7 +183,10 @@
   window.addEventListener('resize',()=>{
     clearTimeout(resizeTimer);
     resizeTimer=setTimeout(()=>{
-      root.querySelectorAll('.showcase-live[src]').forEach(frame=>{frame.closest('.showcase-slide').classList.remove('is-live');frame.removeAttribute('src');});
+      root.querySelectorAll('.showcase-live[src]').forEach(frame=>{
+        if(isLocalCover(frame)) return;
+        frame.closest('.showcase-slide').classList.remove('is-live');frame.removeAttribute('src');
+      });
       updateLive();
     },250);
   });

@@ -4,7 +4,8 @@
   const originalDraw = window.draw;
   let ready = false;
   window.setup = () => {
-    pixelDensity(Math.min(devicePixelRatio || 1, 1.5));
+    // These canvases are card-sized; retina buffers multiply the work of every cover.
+    pixelDensity(1);
     originalSetup();
     frameRate(30);
   };

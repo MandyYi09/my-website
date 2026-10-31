@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { cardDetail, segments as detail } from './detail.js';
 import { referenceHead, referenceCrown } from './head.js';
 import { textureMaterials } from './materials.js';
 import { sculptFace, crown, drapery, enrichArmor, flame, scroll, tendril, patch, patina } from './carving.js';
@@ -42,17 +43,17 @@ class Sculptor {
     if(mat!=='referenceFace')geo.deleteAttribute('uv');geo.deleteAttribute('color');
     (this.parts[mat] ||= []).push(geo);
   }
-  ball(pos,scale,mat='gold',segments=20) { this.add(new THREE.SphereGeometry(1,segments,14),mat,pos,scale); }
-  torus(pos,r,t,mat='gold',rot=[0,0,0],arc=TAU) { this.add(new THREE.TorusGeometry(r,t,8,Math.max(20,Math.round(r*45)),arc),mat,pos,[1,1,1],rot); }
+  ball(pos,scale,mat='gold',segments=20) { this.add(new THREE.SphereGeometry(1,detail(segments,6),detail(14,5)),mat,pos,scale); }
+  torus(pos,r,t,mat='gold',rot=[0,0,0],arc=TAU) { this.add(new THREE.TorusGeometry(r,t,detail(8),detail(Math.max(20,Math.round(r*45)),8),arc),mat,pos,[1,1,1],rot); }
   rod(a,b,r,mat='gold',r2=r) {
     const p=V(...a),q=V(...b),d=q.clone().sub(p);
-    const g=new THREE.CylinderGeometry(r2,r,d.length(),12);
+    const g=new THREE.CylinderGeometry(r2,r,d.length(),detail(12,6));
     g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(V(0,1,0),d.normalize()));
     this.add(g,mat,p.add(q).multiplyScalar(.5).toArray());
   }
   tube(points,r,mat='gold',segments=48) {
     const curve=new THREE.CatmullRomCurve3(points.map(p=>V(...p)));
-    this.add(new THREE.TubeGeometry(curve,segments,r,7,false),mat);
+    this.add(new THREE.TubeGeometry(curve,detail(segments,8),r,detail(7),false),mat);
   }
   shape(points,depth,mat,pos=[0,0,0],scale=[1,1,1],rot=[0,0,0]) {
     const s=new THREE.Shape();s.moveTo(...points[0]);points.slice(1).forEach(p=>s.lineTo(...p));s.closePath();
@@ -60,7 +61,7 @@ class Sculptor {
     this.add(g,mat,pos,scale,rot);
   }
   lathe(profile,mat,pos=[0,0,0],scale=[1,1,1]) {
-    this.add(new THREE.LatheGeometry(profile.map(p=>new THREE.Vector2(...p)),80),mat,pos,scale);
+    this.add(new THREE.LatheGeometry(profile.map(p=>new THREE.Vector2(...p)),detail(80,20)),mat,pos,scale);
   }
   finish() {
     const group=new THREE.Group();group.name=this.name;
@@ -268,7 +269,7 @@ function cloud(b,x,y,z,size,mat,flip=1) {
  form.bezierCurveTo(.04,.77,.68,.53,.55,.16);
  form.bezierCurveTo(1.02,.33,1.08,-.23,.65,-.25);
  form.bezierCurveTo(.41,-.53,-.32,-.53,-.70,-.23);
- const g=new THREE.ExtrudeGeometry(form,{depth:.13,bevelEnabled:true,bevelSize:.10,bevelThickness:.09,bevelSegments:4,curveSegments:18});
+ const g=new THREE.ExtrudeGeometry(form,{depth:.13,bevelEnabled:true,bevelSize:.10,bevelThickness:.09,bevelSegments:cardDetail?1:4,curveSegments:detail(18,6)});
  b.add(g,mat,[x,y,z],[size,size,size],[0,flip<0?Math.PI:0,0]);
  for(let face of [-1,1]){
   scroll(b,x-.33*size,y+.12*size,z+face*.24*size,.24*size,'paleGold',flip);

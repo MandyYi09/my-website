@@ -1,5 +1,6 @@
 (() => {
   const atlas = new URLSearchParams(location.search).get('project') === 'zhong-art';
+  if (atlas) { location.replace(new URL('zhong-art/index.html', location.href)); return; }
   const frame = document.querySelector('iframe');
   frame.title = atlas ? 'Modern Shuilu painting atlas' : 'Mandy’s Portfolio homepage';
   const resize = () => {

@@ -9,6 +9,18 @@
   const content = document.querySelector('#dialog-content');
   let projects = [];
   let previewObserver;
+  let collectionsLoading = false;
+  let previewTask;
+  let previewTaskIsIdle = false;
+  let loadingPreview;
+  let previewTimeout;
+  const visiblePreviews = new Set();
+  const cardCache = new Map();
+  const loadedCollections = new Map();
+  const retainedPreviews = new Map();
+  // Keep all normal desktop cards warm; trim least-recently-used frozen frames
+  // conservatively on smaller devices or when the browser exposes heap pressure.
+  const retentionLimit = navigator.deviceMemory <= 2 ? 4 : navigator.deviceMemory <= 4 ? 8 : 12;
   const circleSlug = 'p5-circle-multiplication';
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const previewToggle = document.querySelector('#preview-toggle');
@@ -23,9 +35,9 @@
     'p5-circle-multiplication': 'circle-multiplication/index.html?embed=1',
     'grid-1': 'project-previews/grid-1/index.html',
     'grid-2': 'project-previews/grid-2/index.html',
-    'align-studio': 'https://mandyyi09.github.io/Align-Studio/?embed=1',
-    sportx: 'sportx-preview/index.html?mode=rowing&embed=1&layout=card',
-    'zhong-art': 'project-previews/website.html?project=zhong-art',
+    'align-studio': 'project-previews/align-studio/index.html',
+    sportx: 'project-previews/sportx/index.html',
+    'zhong-art': 'project-previews/zhong-art/index.html',
     'moderized-china-art-2d': 'zhong-art-preview/scene.html?embed=1',
     'moderized-china-art-3d': 'project-previews/cloud-gate/index.html',
     'my-website': 'project-previews/website.html?project=my-website'
@@ -56,8 +68,10 @@
     'walker': 'assets/images/projects/walker/walkerCard.png',
     'finger-wand': 'assets/images/projects/finger-wand/截屏2026-10-05 15.57.15.png',
     'sportx': 'assets/images/projects/SportX/rowing-studio.png',
+    'align-studio': 'assets/images/projects/align-studio/studio.jpg',
+    'zhong-art': 'assets/images/projects/zhong-art/atlas-cover.jpg',
     'moderized-china-art-2d': 'assets/images/projects/moderized-china-art-2d/截屏2026-10-05 16.03.14.png',
-    'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/3D-trad-art.png',
+    'moderized-china-art-3d': 'assets/images/projects/3D-trad-art/sculpture-cover.png',
     'p5-circle-multiplication': 'assets/images/projects/p5-circle-multiplication/截屏2026-10-05 15.50.56.png',
     'p5-circle-multiplication-interactive': 'assets/images/projects/p5-circle-multiplication/截屏2026-10-05 15.50.56.png',
     'my-website': 'assets/images/projects/my-website/homepage.jpg'
@@ -126,40 +140,184 @@
     frame.setAttribute('aria-hidden', 'true');
     frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
     frame.setAttribute('allow', "camera 'none'; microphone 'none'");
+    frame.addEventListener('error', () => failPreview(frame));
+    frame.addEventListener('load', () => {
+      if (!frame.hasAttribute('src')) return;
+      try {
+        const doc = frame.contentDocument;
+        if (!doc || doc.querySelector('script[data-preview-lifecycle]')) return;
+        const script = doc.createElement('script');
+        script.dataset.previewLifecycle = 'true';
+        script.src = new URL('project-previews/preview-lifecycle.js?v=freeze-1', document.baseURI).href;
+        doc.head.append(script);
+      } catch { /* Remote documents keep their context and use native iframe throttling. */ }
+    });
     return frame;
   }
+  function previewStatus(frame, state, data = {}) {
+    const art = frame.closest('.project-art');
+    const status = art?.querySelector('.preview-loading');
+    if (!status) return;
+    const loading = state === 'loading';
+    art.setAttribute('aria-busy', String(loading));
+    status.hidden = state === 'ready' || state === 'stopped';
+    const progress = status.querySelector('progress');
+    progress.hidden = state === 'error';
+    progress.removeAttribute('value');
+    let label = state === 'error' ? 'Preview unavailable · showing screenshot' : 'Loading preview…';
+    if (data.stage === 'download' && Number.isFinite(data.total) && data.total > 0 &&
+        Number.isFinite(data.loaded) && data.loaded >= 0) {
+      const percent = Math.min(100, Math.floor(data.loaded / data.total * 100));
+      progress.value = percent;
+      label = 'Loading preview · ' + percent + '%';
+    } else if (data.stage === 'prepare') label = 'Preparing preview…';
+    else if (data.stage === 'render') label = 'Preparing first frame…';
+    status.querySelector('span').textContent = label;
+  }
+  function failPreview(frame) {
+    frame.dataset.failed = 'true';
+    stopPreview(frame);
+    previewStatus(frame, 'error');
+    schedulePreview();
+  }
   window.addEventListener('message', event => {
-    if (event.origin !== location.origin || event.data?.event !== 'ready' ||
+    if (!['ready', 'progress', 'error', 'lifecycle-ready'].includes(event.data?.event) ||
         !['portfolio-preview', 'sportx-preview', 'zhong-art-preview'].includes(event.data?.type)) return;
     const frame = [...document.querySelectorAll('.project-live-preview[src]')]
       .find(candidate => candidate.contentWindow === event.source);
-    if (!frame) return;
+    if (!frame || event.origin !== new URL(frame.dataset.src, document.baseURI).origin) return;
+    if (event.data.event === 'lifecycle-ready') {
+      frame.dataset.canFreeze = 'true';
+      setPreviewFrozen(frame, frame.dataset.frozen === 'true');
+      updatePreviewBudgets();
+      return;
+    }
+    if (event.data.event === 'error') { failPreview(frame); return; }
+    if (event.data.event === 'progress') {
+      if (!frame.classList.contains('is-ready') && frame.dataset.frozen !== 'true') previewStatus(frame, 'loading', event.data);
+      return;
+    }
     frame.classList.add('is-ready');
+    previewStatus(frame, 'ready');
     frame.closest('.project-art')?.classList.add('is-live');
+    if (frame === loadingPreview) finishPreviewLoad();
   });
+  const canPlayPreviews = () => !previewsPaused && !dialog.open && !document.hidden;
+  function cancelPreviewTask() {
+    if (previewTaskIsIdle) window.cancelIdleCallback(previewTask);
+    else clearTimeout(previewTask);
+    previewTask = undefined;
+  }
+  function finishPreviewLoad() {
+    clearTimeout(previewTimeout);
+    loadingPreview = null;
+    schedulePreview();
+  }
+  function schedulePreview() {
+    if (previewTask !== undefined || loadingPreview || !canPlayPreviews()) return;
+    if (![...visiblePreviews].some(frame => !frame.hasAttribute('src') && !frame.dataset.failed)) return;
+    // Give input and painting priority; start only one expensive cover at a time.
+    const start = () => {
+      previewTask = undefined;
+      if (!canPlayPreviews()) return;
+      const frame = [...visiblePreviews].find(candidate => candidate.isConnected &&
+        !candidate.hasAttribute('src') && !candidate.dataset.failed);
+      if (!frame) return;
+      loadingPreview = frame;
+      retainedPreviews.delete(frame); retainedPreviews.set(frame, true);
+      setPreviewFrozen(frame, false);
+      previewStatus(frame, 'loading');
+      // A slow cover must not hold the queue or lose its chance to become live.
+      previewTimeout = setTimeout(finishPreviewLoad, 4000);
+      frame.src = frame.dataset.src;
+      trimPreviews();
+    };
+    // A short gap also prevents a batch of cached previews starting in one frame.
+    previewTask = setTimeout(() => {
+      previewTaskIsIdle = typeof window.requestIdleCallback === 'function';
+      previewTask = previewTaskIsIdle ? window.requestIdleCallback(start, { timeout: 1000 }) : setTimeout(start, 0);
+    }, 120);
+    previewTaskIsIdle = false;
+  }
   function stopPreview(frame) {
-    frame.removeAttribute('src');
+    retainedPreviews.delete(frame);
+    delete frame.dataset.frozen;
+    previewStatus(frame, 'stopped');
+    if (frame === loadingPreview) {
+      clearTimeout(previewTimeout);
+      loadingPreview = null;
+    }
+    if (frame.hasAttribute('src')) frame.removeAttribute('src');
     frame.classList.remove('is-ready');
     frame.closest('.project-art')?.classList.remove('is-live');
   }
+  function setPreviewFrozen(frame, frozen) {
+    frame.dataset.frozen = String(frozen);
+    // Unsupported remote documents are kept loaded; hiding the iframe lets the
+    // browser suspend its animation rendering without discarding its document.
+    frame.style.visibility = frozen && !frame.dataset.canFreeze ? 'hidden' : '';
+    if (frame.hasAttribute('src')) {
+      try { frame.contentWindow.postMessage({ type: 'portfolio-lifecycle', paused: frozen }, new URL(frame.dataset.src, document.baseURI).origin); } catch {}
+    }
+  }
+  function freezePreview(frame) {
+    previewStatus(frame, 'stopped');
+    if (!frame.hasAttribute('src')) return;
+    setPreviewFrozen(frame, true);
+    if (frame === loadingPreview) { clearTimeout(previewTimeout); loadingPreview = null; }
+  }
+  function resumePreview(frame) {
+    if (!frame.hasAttribute('src')) return;
+    retainedPreviews.delete(frame); retainedPreviews.set(frame, true);
+    setPreviewFrozen(frame, false);
+  }
+  function trimPreviews() {
+    const heap = performance.memory;
+    const pressured = heap && heap.usedJSHeapSize / heap.jsHeapSizeLimit > .8;
+    const limit = pressured ? Math.min(retentionLimit, 4) : retentionLimit;
+    for (const frame of retainedPreviews.keys()) {
+      if (retainedPreviews.size <= limit) break;
+      if (frame.dataset.frozen === 'true' && !visiblePreviews.has(frame)) stopPreview(frame);
+    }
+  }
+  function updatePreviewBudgets() {
+    const fps = visiblePreviews.size >= 3 ? 15 : 24;
+    for (const frame of visiblePreviews) {
+      if (frame.hasAttribute('src')) frame.contentWindow.postMessage({ type: 'portfolio-budget', fps }, new URL(frame.dataset.src, document.baseURI).origin);
+    }
+  }
   function pauseCardPreviews() {
     previewObserver?.disconnect();
-    grid.querySelectorAll('.project-live-preview').forEach(stopPreview);
+    visiblePreviews.clear();
+    cancelPreviewTask();
+    grid.querySelectorAll('.project-live-preview').forEach(freezePreview);
+    trimPreviews();
   }
   function watchCardPreviews() {
     previewObserver?.disconnect();
+    visiblePreviews.clear();
+    cancelPreviewTask();
     previewToggle.textContent = previewsPaused ? '▶ Play live covers' : 'Ⅱ Pause live covers';
     previewToggle.setAttribute('aria-pressed', String(previewsPaused));
     if (previewsPaused || dialog.open || document.hidden) {
-      grid.querySelectorAll('.project-live-preview').forEach(stopPreview);
+      grid.querySelectorAll('.project-live-preview').forEach(freezePreview);
+      trimPreviews();
       return;
     }
     previewObserver = new IntersectionObserver(entries => {
       entries.forEach(({ target, isIntersecting }) => {
         if (isIntersecting && !previewsPaused && !dialog.open && !document.hidden) {
-          if (!target.hasAttribute('src')) target.src = target.dataset.src;
-        } else stopPreview(target);
+          visiblePreviews.add(target);
+          resumePreview(target);
+          if (!target.classList.contains('is-ready')) previewStatus(target, target.dataset.failed ? 'error' : 'loading');
+        } else {
+          visiblePreviews.delete(target);
+          freezePreview(target);
+        }
       });
+      trimPreviews();
+      updatePreviewBudgets();
+      schedulePreview();
     }, { threshold: 0.08 });
     grid.querySelectorAll('.project-live-preview').forEach(frame => previewObserver.observe(frame));
   }
@@ -315,11 +473,13 @@
     article.id = 'project-' + project.slug;
     const art = node('div', 'project-art art-' + project.collectionIndex % 7);
     if (project.slug === 'walker') art.classList.add('walker-cover');
-    const imageUrl = safeUrl(project.imageUrl) || safeUrl(project.screenshotUrl) || safeUrl(covers[project.slug]);
+    const imageUrl = project.slug === 'sportx' ? safeUrl('assets/images/projects/SportX/rowing-full-cover.png?v=quarter-4') :
+      safeUrl(project.imageUrl) || safeUrl(project.screenshotUrl) || safeUrl(covers[project.slug]);
     if (imageUrl) {
       const image = node('img');
       image.alt = '';
       image.loading = 'lazy';
+      image.decoding = 'async';
       image.src = imageUrl;
       art.append(image);
       if (project.screenshotUrl) art.classList.add('notebook-cover');
@@ -340,6 +500,14 @@
       art.classList.add('live-cover');
       if (isCircleStudy(project)) art.classList.add('circle-study-cover');
       art.append(liveArtwork(project));
+      const status = node('div', 'preview-loading');
+      status.hidden = true;
+      status.setAttribute('role', 'status');
+      const progress = node('progress');
+      progress.max = 100;
+      progress.setAttribute('aria-label', project.title + ' preview loading');
+      status.append(node('span', '', 'Loading preview…'), progress);
+      art.append(status);
     }
     const body = node('div', 'project-card-body');
     body.append(node('span', 'project-category', project.category || 'Project'));
@@ -363,8 +531,7 @@
     const visible = projects.filter(project => [project.title, project.shortDescription, project.longDescription, project.category,
       ...items(project.technologies), ...items(project.programmingLanguages), ...items(project.domainTags)]
       .join(' ').toLocaleLowerCase().includes(query));
-    pauseCardPreviews();
-    grid.replaceChildren();
+    const children = [];
     const renderedGroups = new Set();
     visible.forEach(project => {
       const group = projectSeries(project);
@@ -374,18 +541,36 @@
         const title = node('h2', '', group.title);
         title.id = 'series-' + group.id;
         heading.append(title, node('p', 'series-description', group.description));
-        grid.append(heading);
+        children.push(heading);
         renderedGroups.add(group.id);
       }
-      const article = card(project);
-      if (!query && project.slug === 'sportx') article.classList.add('project-card-feature');
-      grid.append(article);
+      const key = project.slug || project.id || project.title;
+      let article = cardCache.get(key);
+      if (!article || article.project !== project) {
+        article = card(project);
+        article.project = project;
+        cardCache.set(key, article);
+      }
+      article.classList.toggle('project-card-feature', !query && project.slug === 'sportx');
+      children.push(article);
+    });
+    // Reconcile in place so arriving data and search do not reload existing frames.
+    const retained = new Set(children);
+    [...grid.children].forEach(child => {
+      if (!retained.has(child)) {
+        child.querySelectorAll('.project-live-preview').forEach(stopPreview);
+        child.remove();
+      }
+    });
+    children.forEach((child, index) => {
+      if (grid.children[index] !== child) grid.insertBefore(child, grid.children[index] || null);
     });
     watchCardPreviews();
-    count.textContent = query ? visible.length + ' of ' + projects.length + ' projects' : projects.length + ' projects';
-    empty.hidden = visible.length !== 0;
+    count.textContent = (query ? visible.length + ' of ' + projects.length + ' projects' : projects.length + ' projects') +
+      (collectionsLoading ? ' · Loading…' : '');
+    empty.hidden = collectionsLoading || visible.length !== 0 || !error.hidden;
   }
-  async function loadCollections() {
+  async function loadCollections(onCollection) {
     if (location.protocol === 'file:') {
       // Classic scripts can read bundled data from disk; fetch cannot on file URLs.
       if (!window.portfolioProjectCatalog) {
@@ -401,39 +586,63 @@
       if (!Array.isArray(collections) || collections.some(collection => !Array.isArray(collection))) {
         throw new Error('Invalid project catalog');
       }
-      return collections;
+      collections.forEach((collection, index) => onCollection(collection, index));
+      return [];
     }
-    return Promise.all(['data/git-projects.json', 'data/study-projects.json', 'data/curated-projects.json'].map(async path => {
-      const response = await fetch(path, { cache: 'no-cache' });
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      const collection = await response.json();
-      if (!Array.isArray(collection)) throw new Error('Invalid project collection');
-      return collection;
+    return Promise.allSettled(['data/git-projects.json', 'data/study-projects.json', 'data/curated-projects.json'].map(async path => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(path, { cache: 'no-cache', signal: controller.signal });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const collection = await response.json();
+        if (!Array.isArray(collection)) throw new Error('Invalid project collection');
+        onCollection(collection, path);
+      } finally {
+        clearTimeout(timeout);
+      }
     }));
   }
   async function load() {
+    if (collectionsLoading) return;
+    collectionsLoading = true;
     error.hidden = true;
     empty.hidden = true;
     grid.setAttribute('aria-busy', 'true');
     count.textContent = 'Loading projects…';
     try {
-      const collections = await loadCollections();
-      const data = groupProjects(collections.flat());
-      if (data.some(project => !project || typeof project.title !== 'string')) throw new Error('Invalid project collection');
-      projects = data.sort((a, b) => (a.sortOrder ?? Infinity) - (b.sortOrder ?? Infinity))
-        .map((project, collectionIndex) => ({ ...project, collectionIndex }));
-      render();
+      const results = await loadCollections((collection, key) => {
+        if (collection.some(project => !project || typeof project.title !== 'string')) throw new Error('Invalid project collection');
+        loadedCollections.set(key, collection);
+        const previous = new Map(projects.map(project => [project.slug || project.id || project.title, project]));
+        projects = groupProjects([...loadedCollections.values()].flat()).sort((a, b) => (a.sortOrder ?? Infinity) - (b.sortOrder ?? Infinity))
+          .map((project, collectionIndex) => {
+            const existing = previous.get(project.slug || project.id || project.title);
+            const { collectionIndex: previousIndex, ...previousData } = existing || {};
+            return existing && JSON.stringify(previousData) === JSON.stringify(project) ? existing : { ...project, collectionIndex };
+          });
+        render();
+      });
+      if (results.some(result => result.status === 'rejected')) throw new Error('Project collection unavailable');
     } catch {
-      count.textContent = 'Projects unavailable';
       error.hidden = false;
+      error.querySelector('h2').textContent = projects.length ? 'Some projects couldn’t load.' : 'Projects couldn’t load.';
       if (location.protocol === 'file:') error.querySelector('p').textContent = 'Project data is missing. Open “Preview Portfolio.command” from the website folder to try the local preview.';
     } finally {
+      collectionsLoading = false;
       grid.setAttribute('aria-busy', 'false');
+      render();
     }
   }
   search.addEventListener('input', render);
+  // Defer new cover work while the visitor scrolls, types, or clicks.
+  ['scroll', 'pointerdown', 'keydown'].forEach(type => window.addEventListener(type, () => {
+    cancelPreviewTask();
+    schedulePreview();
+  }, { passive: true }));
   previewToggle.addEventListener('click', () => {
     previewsPaused = !previewsPaused;
+    if (!previewsPaused) grid.querySelectorAll('.project-live-preview').forEach(frame => delete frame.dataset.failed);
     watchCardPreviews();
   });
   document.addEventListener('visibilitychange', watchCardPreviews);

@@ -2,6 +2,8 @@
   'use strict';
   const $ = s => document.querySelector(s);
   const canvas = $('#scene'), ctx = canvas.getContext('2d');
+  const embeddedPreview = document.documentElement.classList.contains('embed');
+  window.addEventListener('portfolio-preview-visibility', () => { last=performance.now(); });
   const TAU = Math.PI * 2, reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let width = 1200, height = 600, dpr = 1, time = 0, last = 0, paused = reducedMotion.matches, wind = .35;
   let pointer = { x: 0, y: 0, active: false }, drag = null, hovered = -1, particles = [], ripples = [];
@@ -32,24 +34,26 @@
     const c=document.createElement('canvas'); c.width=480;c.height=270;const g=c.getContext('2d');
     const shape=new Path2D('M49 197 C-13 192 1 144 43 140 C9 107 48 67 87 82 C78 36 137 14 172 50 C179 -1 262 -3 279 46 C317 11 372 42 365 79 C425 56 463 93 438 123 C501 137 478 185 441 188 C457 220 390 242 353 223 C334 273 255 254 240 230 C200 270 137 251 131 224 C93 245 53 226 49 197 Z');
     let grad=g.createLinearGradient(0,0,0,265);grad.addColorStop(0,color);grad.addColorStop(.5,color);grad.addColorStop(1,['#599c80','#b09c4a','#9e536c','#408e83'][palette.indexOf(color)]);g.fillStyle=grad;g.fill(shape);g.strokeStyle='#233d3bc7';g.lineWidth=2.2;g.stroke(shape);
-    g.save();g.clip(shape);g.globalAlpha=.09;const r=seeded(47);for(let i=0;i<15000;i++){g.fillStyle=r()>.5?'#fff3b1':'#10293b';g.fillRect(r()*480,r()*270,r()*2+.4,r()*3+.3);}g.restore();
+    g.save();g.clip(shape);g.globalAlpha=.09;const r=seeded(47);for(let i=0;i<(embeddedPreview?300:15000);i++){g.fillStyle=r()>.5?'#fff3b1':'#10293b';g.fillRect(r()*480,r()*270,r()*2+.4,r()*3+.3);}g.restore();
     g.strokeStyle='#283c3ddd';g.lineWidth=2;g.lineCap='round';
     const lines=['M67 141 C34 116 93 93 121 110 C149 123 114 145 97 129','M88 82 C98 104 136 102 146 84','M166 53 C135 83 184 107 214 87 C247 64 223 45 202 58 C185 71 205 76 213 65','M284 50 C269 79 311 104 333 87','M374 85 C333 96 344 138 375 131 C396 126 385 111 374 117','M439 143 C415 161 381 150 371 172 C362 193 404 198 418 182','M52 180 C91 202 142 166 169 185 C196 206 160 222 145 207','M184 147 C157 117 213 104 244 118 C285 137 244 170 219 153 C206 143 222 132 230 140','M270 200 C238 167 285 145 319 165 C348 184 325 213 299 202 C286 196 296 183 306 188','M87 219 C121 216 124 195 116 184','M196 231 C226 243 249 223 243 209','M288 94 C310 127 343 117 352 105'];
     for(const d of lines)g.stroke(new Path2D(d));return c;
   }
-  const cloudTextures=palette.map(makeCloud);
+  const cloudTextures=embeddedPreview?[]:palette.map(makeCloud);
   const paper=document.createElement('canvas');paper.width=256;paper.height=256;
   const pg=paper.getContext('2d'),pd=pg.createImageData(256,256);for(let i=0;i<pd.data.length;i+=4){const n=random()>.5?230:17;pd.data.set([n,n,n,Math.floor(random()*23)],i);}pg.putImageData(pd,0,0);
   const paperPattern=ctx.createPattern(paper,'repeat');
   function loadImage(src) {return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error(`Could not load ${src}`));im.src=src;});}
   async function init() {
     try {
+      if(embeddedPreview)for(const color of palette){cloudTextures.push(makeCloud(color));await new Promise(resolve=>setTimeout(resolve,16));}
       await Promise.all(guardians.map(async g=>{
         const im=await loadImage(g.file);const [x,y,w,h]=g.bounds;
-        const c=document.createElement('canvas');c.width=w;c.height=h;const p=c.getContext('2d');
+        const c=document.createElement('canvas'),scale=embeddedPreview?Math.min(1,320/w):1;c.width=Math.round(w*scale);c.height=Math.round(h*scale);const p=c.getContext('2d');p.scale(scale,scale);
         p.translate(-x,-y);p.save();p.clip(new Path2D(g.outline));p.drawImage(im,0,0);p.restore();
         p.globalCompositeOperation='destination-out';for(const path of g.holes)p.fill(new Path2D(path));
-        g.texture=c;g.home={x:g.x,y:g.y};g.burst=0;g.box={x:0,y:0,w:0,h:0};
+        g.texture=c;
+        g.home={x:g.x,y:g.y};g.burst=0;g.box={x:0,y:0,w:0,h:0};
       }));
       ready=true;$('#loading').classList.add('loaded');resize();syncPause();requestAnimationFrame(now=>{
         frame(now);
@@ -57,7 +61,7 @@
       });
     } catch(error) {$('#loading').replaceChildren(Object.assign(document.createElement('p'),{textContent:'The scroll could not open. Please check the assets folder and reload.'}));console.error(error);}
   }
-  function resize(){const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
+  function resize(){const rect=canvas.getBoundingClientRect();width=rect.width;height=rect.height;dpr=embeddedPreview?1:Math.min(devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
   new ResizeObserver(resize).observe(canvas);
   function cloud(c, foreground=false) {
     let x=((c.x+time*c.speed*(.1+wind))%1.5+1.5)%1.5-.25;
@@ -91,7 +95,7 @@
     ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(time*.55+g.phase)*(.016+wind*.012)+dance*.035);
     if(hovered===index || (drag&&drag.index===index)){ctx.shadowColor=g.color;ctx.shadowBlur=14;}
     // Overlapping strips make the head, cloth, and legs flex continuously.
-    const strips=76,sh=g.texture.height/strips;
+    const strips=embeddedPreview?24:76,sh=g.texture.height/strips;
     for(let j=0;j<strips;j++){
       const v=j/strips,flex=Math.sin(v*7-time*(1.1+wind)+g.phase)*(1.6+wind*3.8)*(Math.pow(Math.abs(v-.48)*2,1.5));
       const gesture=energy>0?Math.sin(v*9+(4-energy)*6)*energy*(index===2?1.9:1.2):0;
@@ -106,7 +110,9 @@
     for(const r of ripples){if(!paused)r.life-=dt;ctx.globalAlpha=Math.max(0,r.life*.35);ctx.strokeStyle=r.color;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(r.x,r.y,(2-r.life)*75+10,(2-r.life)*32+5,0,0,TAU);ctx.stroke();}ripples=ripples.filter(r=>r.life>0);ctx.globalAlpha=1;
   }
   function frame(now){
-    const dt=Math.min((now-last)/1000||0,.05);last=now;if(!paused)time+=dt;
+    // Keep the painting moving throughout interaction, with a thumbnail render budget.
+    if(embeddedPreview&&now-last<1000/(window.__portfolioPreviewFPS||20)-.5){requestAnimationFrame(frame);return;}
+    const dt=Math.min((now-last)/1000||0,embeddedPreview?.1:.05);last=now;if(!paused)time+=dt;
     ctx.setTransform(dpr,0,0,dpr,0,0);sky();
     for(const index of [0,2,1]){const g=guardians[index];if(!paused)g.burst=Math.max(0,g.burst-dt);drawGuardian(g,index);}
     clouds.filter(c=>c.front).forEach(c=>cloud(c,true));drawEffects(dt);
